@@ -13,10 +13,10 @@
                     <div class="row justify-content-center" >                          
                         <div class="col-lg-5 col-md-6">
                             <router-link slot="brand" class="navbar-brand  mb-5" to="/">
-                                <img src="../assets/logo.png" width="98%"/>
+                                <img src="../assets/logo.png" width="50%"/>
                             </router-link>
                             <h1 class="text-white">Welcome!</h1>
-                            <p class="text-lead text-white">Skala is your task estimation buddy</p>
+                            <p class="text-lead text-white">skala is your task estimation buddy</p>
                         </div>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
             </div>
         </div>
         <!-- Page content -->
-        <div class="container mt--8 pb-4">
+        <div class="container mt--8 pb-3 ">
             <slide-y-up-transition mode="out-in" origin="center top">
                 <router-view></router-view>
             </slide-y-up-transition>
         </div>
         <footer class="py-1 ">
-            <div class="container  pb-3 " id="footer">
+            <div class="container pb-1" id="footer">
                 <div class="row justify-content-center">
                     <div class="">
                         <div class="text-muted">
@@ -66,9 +66,6 @@
   }
 </script>
 <style>
-.navbar-brand{
-    padding-left:140px; 
-}
 #header{
     background-color: #d10572;
 }
