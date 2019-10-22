@@ -20,7 +20,7 @@
                                         v-model="model.password">
                             </base-input>
 
-                            <base-checkbox class="custom-control-alternative">
+                            <base-checkbox class="custom-control-alternative text-left" >
                                 <span class="text-muted">Remember me</span>
                             </base-checkbox>
                             <div class="text-center">

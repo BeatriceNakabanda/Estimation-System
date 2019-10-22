@@ -6,11 +6,14 @@
             {[`bg-${type}`]: type}
          ]">
         <div :class="containerClasses">
-            <slot name="brand">
+            <slot name="brand" >
+              <h1 >
                 <router-link :to="$route.path"
-                             class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">
+                    class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" id="page-header">
                     {{$route.name}}
                 </router-link>
+              </h1>
+                
             </slot>
             <navbar-toggle-button v-if="showToggleButton"
                                   :toggled="toggled"
@@ -86,4 +89,8 @@
   };
 </script>
 <style>
+#page-header{
+  font-weight: bold;
+  font-size: 25px;
+}
 </style>
