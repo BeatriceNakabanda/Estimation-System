@@ -7,39 +7,31 @@ Vue.use(Router)
 export default new Router({
   linkExactActiveClass: 'active',
   routes: [
-    {
-      path: '/',
-      redirect: 'dashboard',
-      component: DashboardLayout,
-      children: [
         {
-          path: '/dashboard',
-          name: 'dashboard',
+          path: '/',
+          redirect: 'estimates',
+          component: DashboardLayout,
+          children: [
+        {
+          path: '/estimates',
+          name: 'estimates',
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
+          component: () => import(/* webpackChunkName: "demo" */ './views/Estimates.vue')
         },
         {
-          path: '/icons',
-          name: 'icons',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Icons.vue')
+          path: '/projects',
+          name: 'projects',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Projects.vue')
         },
         {
-          path: '/profile',
-          name: 'profile',
-          component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue')
+          path: '/developers',
+          name: 'developers',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Developers.vue')
         },
-        {
-          path: '/maps',
-          name: 'maps',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Maps.vue')
-        },
-        {
-          path: '/tables',
-          name: 'estimates',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
-        }
+       
+        
       ]
     },
     {
@@ -52,11 +44,7 @@ export default new Router({
           name: 'login',
           component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
         },
-        {
-          path: '/register',
-          name: 'register',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Register.vue')
-        }
+       
       ]
     }
   ]

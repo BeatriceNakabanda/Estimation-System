@@ -1,10 +1,10 @@
 <template>
     <div class="main-content bg-default">
-        <div class="justify-content-center text-center py-1" id="header">   
-            <router-link slot="brand" class="navbar-brand" to="/">
-                <img src="../assets/logo1.png"/>
+        <!-- <div class="justify-content-center text-center py-1" id="header">   
+            <router-link slot="brand" class="navbar-brand " to="/">
+                <img src="../assets/logo.png" width="30%"/>
             </router-link>
-        </div>
+        </div> -->
         <div class="header py-6 py-lg-5" id="header">
             <div class="container">
                 
@@ -12,6 +12,9 @@
 
                     <div class="row justify-content-center" >                          
                         <div class="col-lg-5 col-md-6">
+                            <router-link slot="brand" class="navbar-brand  mb-5" to="/">
+                                <img src="../assets/logo.png" width="98%"/>
+                            </router-link>
                             <h1 class="text-white">Welcome!</h1>
                             <p class="text-lead text-white">Skala is your task estimation buddy</p>
                         </div>
@@ -31,11 +34,11 @@
                 <router-view></router-view>
             </slide-y-up-transition>
         </div>
-        <footer class="py-1">
-            <div class="container mt--1 pb-2" id="footer">
-                <div class="row align-items-center justify-content-xl-between">
-                    <div class="col-xl-12">
-                        <div class="copyright text-center  text-muted">
+        <footer class="py-1 ">
+            <div class="container  pb-3 " id="footer">
+                <div class="row justify-content-center">
+                    <div class="">
+                        <div class="text-muted">
                             &copy; {{year}} <b>skala</b>
                         </div>
                     </div>
@@ -64,20 +67,11 @@
 </script>
 <style>
 .navbar-brand{
-    margin-top: 60px;    
+    padding-left:140px; 
 }
 #header{
     background-color: #d10572;
 }
-.main-content{
-    margin-bottom: 0px;
-    
-}
-#footer{
-    margin-bottom: 0px;
-}
-/* .copyright{
-    align-items: center;
-} */
+
 
 </style>
