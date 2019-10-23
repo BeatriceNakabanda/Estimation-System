@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive table-hover">
       <base-table class="table  table-flush "
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
@@ -28,6 +28,7 @@
         </template>
 
         <template slot-scope="{row}">
+          
           <th scope="row">
             <div class="media">
               
@@ -36,6 +37,7 @@
               </div>
             </div>
           </th>
+          
           <td class="developer">
             {{row.developer}}
           </td>
@@ -61,7 +63,6 @@
             </router-link>
             
           </td>
-
         </template>
 
       </base-table>
@@ -87,30 +88,30 @@
       return {
         tableData: [
           {
+            id: 1,
             title: 'Dashboard',
             developer: 'Benjamin',
             project: 'Refactory',
             dateCreated: '17-07-2018',
             dateEstimated: '18-07-2018',
             status: 'Estimated',
-            action: '',
             statusType: 'success',
           },
           {
-            
+            id: 2,
             title: 'SDK',
-            developer: 'Sunday',
+            developer: 'Beatrice',
             project: 'Xente',
             dateCreated: '17-07-2018',
             dateEstimated: '',
             status: 'Created',
-            action: '',
             statusType: 'warning',
            
           },
           {
+            id: 3,
             title: 'Registration',
-            developer: 'Benjamin',
+            developer: 'Ronnie',
             project: 'Refactory',
             dateCreated: '17-07-2018',
             dateEstimated: '18-07-2018',
@@ -119,9 +120,9 @@
             statusType: 'success',
           },
           {
-            
+            id: 4,
             title: 'Onboarding',
-            developer: 'Sunday',
+            developer: 'Olive',
             project: 'Xente',
             dateCreated: '17-07-2018',
             dateEstimated: '',
@@ -131,7 +132,7 @@
            
           },
           {
-            
+            id: 5,
             title: 'Login',
             developer: 'Sunday',
             project: 'Xente',
@@ -152,11 +153,14 @@
 </script>
 <style>
 #view{
-  color: #636162;
+  color: #747273;
   padding-left: 10px;
 }
 #left{
   text-align: left;
+}
+.table-row{
+  cursor:pointer;
 }
 
 
