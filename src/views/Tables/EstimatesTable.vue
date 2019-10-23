@@ -27,7 +27,7 @@
           <th>Action</th>
         </template>
 
-        <template slot-scope="{row}" class="table-row" data-href="http://tutorialsplane.com">
+        <template slot-scope="{row}">
           
           <th scope="row">
             <div class="media">

@@ -10,10 +10,10 @@
                 
                 <div class="header-body text-center mb-7">
 
-                    <div class="row justify-content-center" >                          
-                        <div class="col-lg-5 col-md-6">
-                            <router-link slot="brand" class="navbar-brand  mb-5" to="/">
-                                <img src="../assets/logo.png" width="50%"/>
+                    <div class="row justify-content-md-center" >                          
+                        <div class="col-md-auto">
+                            <router-link slot="brand" class="navbar-brand ml-8 mb-5" to="/">
+                                <img src="../assets/logo.png" width="40%"/>
                             </router-link>
                             <h1 class="text-white">Welcome!</h1>
                             <p class="text-lead text-white">skala is your task estimation buddy</p>
@@ -29,13 +29,13 @@
             </div>
         </div>
         <!-- Page content -->
-        <div class="container mt--8 pb-3 ">
+        <div class="container mt--8 pb-2 ">
             <slide-y-up-transition mode="out-in" origin="center top">
                 <router-view></router-view>
             </slide-y-up-transition>
         </div>
         <footer class="py-1 ">
-            <div class="container pb-1" id="footer">
+            <div class="container pb-0" id="footer">
                 <div class="row justify-content-center">
                     <div class="">
                         <div class="text-muted">
@@ -68,6 +68,9 @@
 <style>
 #header{
     background-color: #d10572;
+}
+.navbar-brand{
+    
 }
 
 
