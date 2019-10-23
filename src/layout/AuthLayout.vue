@@ -5,10 +5,10 @@
                 <img src="../assets/logo.png" width="30%"/>
             </router-link>
         </div> -->
-        <div class="header py-6 py-lg-5" id="header">
+        <div class="header py-6  mh-100" id="header">
             <div class="container">
                 
-                <div class="header-body text-center mb-7">
+                <div class="header-body text-center mb-5">
 
                     <div class="row justify-content-md-center" >                          
                         <div class="col-md-auto">
@@ -34,10 +34,10 @@
                 <router-view></router-view>
             </slide-y-up-transition>
         </div>
-        <footer class="py-1 ">
-            <div class="container pb-0" id="footer">
+        <footer >
+            <div class="container " id="footer">
                 <div class="row justify-content-center">
-                    <div class="">
+                    <div >
                         <div class="text-muted">
                             &copy; {{year}} <b>skala</b>
                         </div>
@@ -68,10 +68,9 @@
 <style>
 #header{
     background-color: #d10572;
+    margin-bottom: 5px; 
 }
-.navbar-brand{
-    
-}
+
 
 
 </style>
