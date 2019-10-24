@@ -10,19 +10,19 @@
       <template slot="links">
         <sidebar-item
           :link="{
-            name: 'Estimates',
+            name: 'pending-estimates',
             icon: 'ni ni-bullet-list-67 text-primary',
-            path: '/estimates'
+            path: '/pending-estimates'
           }"
         />
-        <sidebar-item :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
-        <sidebar-item :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
+        <sidebar-item :link="{name: 'drafts-estimates', icon: 'ni ni-books text-blue', path: '/drafts-estimates'}"/>
+        <sidebar-item :link="{name: 'submitted-estimates', icon: 'fa fa-users text-blue', path: '/submitted-estimates'}"/>
         <!-- <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/> -->
 
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
-      <project-manager-navbar></project-manager-navbar>
+      <developer-navbar></developer-navbar>
 
       <div @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">
