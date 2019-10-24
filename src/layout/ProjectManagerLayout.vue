@@ -22,7 +22,7 @@
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
-      <dashboard-navbar></dashboard-navbar>
+      <project-manager-navbar></project-manager-navbar>
 
       <div @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">
@@ -35,13 +35,13 @@
   </div>
 </template>
 <script>
-  import DashboardNavbar from './DashboardNavbar.vue';
+  import ProjectManagerNavbar from './ProjectManagerNavbar.vue';
   import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
 
   export default {
     components: {
-      DashboardNavbar,
+      ProjectManagerNavbar,
       ContentFooter,
       FadeTransition
     },
