@@ -4,22 +4,21 @@
       :background-color="sidebarBackground"
       short-title="skala"
       title="skala"
-      id="sidenav"
-      
+      id="sidenav"   
     >
       <template slot="links">
         <sidebar-item
           :link="{
-            name: 'pending-estimates',
+            name: 'Pending',
             icon: 'ni ni-bullet-list-67 text-primary',
-            path: '/pending-estimates'
+            path: '/pending'
           }"
         />
-        <sidebar-item :link="{name: 'drafts-estimates', icon: 'ni ni-books text-blue', path: '/drafts-estimates'}"/>
-        <sidebar-item :link="{name: 'submitted-estimates', icon: 'fa fa-users text-blue', path: '/submitted-estimates'}"/>
+        <sidebar-item :link="{name: 'Drafts', icon: 'ni ni-books text-blue', path: '/drafts'}"/>
+        <sidebar-item :link="{name: 'Submitted', icon: 'ni ni-archive-2 text-blue', path: '/submitted'}"/>
         <!-- <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/> -->
 
-      </template>
+      </template> 
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
       <developer-navbar></developer-navbar>

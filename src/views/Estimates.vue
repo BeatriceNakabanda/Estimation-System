@@ -28,7 +28,5 @@
 <style>
 #table-head{
     background-color: #d10572;
-  
-    
 }
 </style>
