@@ -17,7 +17,7 @@
     </div>
 </template>
 <script>
-  import EstimatesTable from './Tables/EstimatesTable'
+  import EstimatesTable from './Tables/ListOfEstimatesTable'
   export default {
     name: 'estimates',
     components: {
