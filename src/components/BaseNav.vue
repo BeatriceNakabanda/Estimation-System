@@ -9,7 +9,7 @@
             <slot name="brand" >
               <h1 >
                 <router-link :to="$route.path"
-                    class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" id="page-header">
+                    class="h4 mb-0 text-white d-none d-lg-inline-block" id="page-header">
                     {{$route.name}}
                 </router-link>
               </h1>

@@ -14,11 +14,11 @@
                   <img alt="Image placeholder" src="../assets/avatar image.png">
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block" id="left">
-                            <span class="mb-0 text-sm font-weight-bold" >David Pereira
+                            <span class="mb-0 text-sm font-weight-bold">David Pereira
                             </span>
                             <p>
                             <span class="mb-0 text-sm font-weight-bold">
-                             <small>Project Manager</small>
+                              <small>Project Manager</small>
                             </span>
                             </p>
                         </div>
