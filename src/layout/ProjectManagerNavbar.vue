@@ -16,11 +16,9 @@
                         <div class="media-body ml-2 d-none d-lg-block" id="left">
                             <span class="mb-0 text-sm font-weight-bold">David Pereira
                             </span>
-                            <p>
                             <span class="mb-0 text-sm font-weight-bold">
-                              <small>Project Manager</small>
+                              <small><br>Project Manager</small>
                             </span>
-                            </p>
                         </div>
                     </div>
 

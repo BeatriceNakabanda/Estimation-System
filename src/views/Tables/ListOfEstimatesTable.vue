@@ -6,7 +6,7 @@
       <div class="row ">
         
         <div class="col text-right">
-          <base-button type="primary" size="sm">Create Estimate</base-button>
+          <base-button type="primary" size="sm" class="spacing">Create Estimate</base-button>
         </div>
       </div>
     </div>
@@ -104,7 +104,7 @@
             project: 'Xente',
             dateCreated: '17-07-2018',
             dateEstimated: '',
-            status: 'Created',
+            status: 'Draft',
             statusType: 'warning',
            
           },
@@ -126,7 +126,7 @@
             project: 'Xente',
             dateCreated: '17-07-2018',
             dateEstimated: '',
-            status: 'Created',
+            status: 'Draft',
             action: '',
             statusType: 'warning',
            
@@ -161,6 +161,10 @@
 }
 .table-row{
   cursor:pointer;
+}
+.spacing{
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 
