@@ -7,6 +7,7 @@ Vue.use(Router)
 export default new Router({
   linkExactActiveClass: 'active',
   routes: [
+    // routes for project manager 
         {
           path: '/',
           redirect: 'estimates',
@@ -34,6 +35,7 @@ export default new Router({
         
       ]
     },
+    // routes for login
     {
       path: '/',
       redirect: 'login',
@@ -46,6 +48,33 @@ export default new Router({
         },
        
       ]
-    }
+    },
+    //routes for developer
+    {
+      path: '/',
+      redirect: 'pending-estimates',
+      component: ProjectManagerLayout,
+      children: [
+    {
+      path: '/pending-estimates',
+      name: 'pending-estimates',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "demo" */ './views/PendingEstimates.vue')
+    },
+    {
+      path: '/drafts-estimates',
+      name: 'drafts-estimates',
+      component: () => import(/* webpackChunkName: "demo" */ './views/DraftedEstimates.vue')
+    },
+    {
+      path: '/submitted-estimates',
+      name: 'submitted-estimates',
+      component: () => import(/* webpackChunkName: "demo" */ './views/SubmittedEstimates.vue')
+    },
+    
+  ]
+},
   ]
 })
