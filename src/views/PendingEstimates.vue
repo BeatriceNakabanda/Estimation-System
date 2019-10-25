@@ -8,7 +8,8 @@
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                    <estimates-table title="Light Table"></estimates-table>
+                  <!-- table for displaying details of a single pending estimate -->
+                    <pending-table title="Dashboard"></pending-table>
                 </div>
             </div>
             
@@ -17,11 +18,11 @@
     </div>
 </template>
 <script>
-  import EstimatesTable from './Tables/ListOfEstimatesTable'
+  import PendingTable from './Tables/PendingEstimateTable'
   export default {
-    name: 'estimates',
+    name: 'pending-estimate',
     components: {
-      EstimatesTable
+      PendingTable
     }
   };
 </script>
