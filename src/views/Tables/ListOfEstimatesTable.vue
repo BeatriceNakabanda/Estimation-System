@@ -59,7 +59,10 @@
          
           <td class="action">
             <router-link  to="/" id="view">
-              <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+              <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+            </router-link>
+            <router-link  to="/" id="view">
+              <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
             </router-link>
             
           </td>
@@ -178,6 +181,11 @@
 .text-sm {
   font-weight: 400;
   font-size: 0.8125rem !important;  /*  13px font size*/
+}
+.rounded-circle {
+  border: 1px solid rgb(201, 201, 199);
+  padding: 6px;
+  
 }
 
 
