@@ -14,17 +14,17 @@
     <div class="table-responsive table-hover">
       <base-table class="table  table-flush "
                   :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
+                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
                   :data="tableData" id="left">
-        <template slot="columns" >
+        <template slot="columns">
           <th>Title</th>
           <th>Developer</th>
           <th>Project</th>
           <th>Date Created</th>
           <th>Date Estimated</th>
           <th>Status</th>
-          <th>Action</th>
+          <th></th>
         </template>
 
         <template slot-scope="{row}">
@@ -159,14 +159,26 @@
 #left{
   text-align: left;
 }
+/* Adding cursor to table */
 .table-row{
   cursor:pointer;
 }
+
 .spacing{
   padding-left: 1rem;
   padding-right: 1rem;
 }
+/* Adjustments to font size of the table head content */
+.table thead th {
+  font-size: 0.68rem;
+  font-weight: 700;
+}
 
+/* First column of table font adjustment */
+.text-sm {
+  font-weight: 400;
+  font-size: 0.8125rem !important;  /*  13px font size*/
+}
 
 
 </style>

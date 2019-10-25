@@ -132,3 +132,13 @@ export default {
   }
 };
 </script>
+<style>
+
+ul:hover{
+  cursor: pointer;
+}
+
+.active:hover{
+  color: #d10572;
+}
+</style>
