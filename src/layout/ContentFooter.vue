@@ -20,4 +20,8 @@ export default {
 </script>
 <style>
 
+/* Removing background color of footer */
+.footer{
+  background: none;
+}
 </style>

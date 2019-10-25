@@ -180,5 +180,10 @@
   font-size: 0.8125rem !important;  /*  13px font size*/
 }
 
+/* Status column font size adjustment */
+span .status{
+  font-size: 0.8125rem;
+}
+
 
 </style>
