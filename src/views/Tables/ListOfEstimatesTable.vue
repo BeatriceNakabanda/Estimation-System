@@ -194,20 +194,4 @@
   
 }
 
-/* .row > :hover { 
-   cursor: progress;
-} */
-.table-hover>:hover span,
-.table-hover>:hover {
-  background-color: transparent;
-}
-
-.table-hover>.table>.row .glyphicon-hand-right {
-  visibility: hidden
-}
-
-.table-hover>.table>.row :hover .glyphicon-hand-right {
-  color: blue;
-  visibility: visible
-}
 </style>
