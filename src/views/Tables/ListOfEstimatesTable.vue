@@ -12,7 +12,7 @@
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table  table-flush "
+      <base-table class="table table-flush "
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
@@ -27,16 +27,16 @@
           <th></th>
         </template>
 
-        <template slot-scope="{row}">
+        <template slot-scope="{row} " class="row" >
           
-          <th scope="row">
-            <div class="media">
+          <td>
+            <div class="media" >
               
               <div class="media-body" >
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
             </div>
-          </th>
+          </td>
           
           <td class="developer">
             {{row.developer}}
@@ -57,10 +57,18 @@
             </badge>
           </td>
          
-          <td class="action">
-            <router-link  to="/" id="view">
-              <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
-            </router-link>
+          <td >
+          <!-- <span class="fa fa-eye fa-1x"></span> -->
+            <span class="act">
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+              </router-link>
+            </span>
+            <span class="act">
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+              </router-link>
+            </span>
             
           </td>
         </template>
@@ -178,6 +186,12 @@
 .text-sm {
   font-weight: 400;
   font-size: 0.8125rem !important;  /*  13px font size*/
+}
+/* styling rounded border */
+.rounded-circle {
+  border: 1px solid rgb(201, 201, 199);
+  padding: 6px;
+  
 }
 
 /* Status column font size adjustment */

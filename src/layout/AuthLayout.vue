@@ -1,10 +1,5 @@
 <template>
     <div class="main-content bg-default">
-        <!-- <div class="justify-content-center text-center py-1" id="header">   
-            <router-link slot="brand" class="navbar-brand " to="/">
-                <img src="../assets/logo.png" width="30%"/>
-            </router-link>
-        </div> -->
         <div class="header py-6  mh-100" id="header">
             <div class="container">
                 
@@ -12,10 +7,8 @@
 
                     <div class="row justify-content-md-center" >                          
                         <div class="col-md-auto">
-                            <router-link slot="brand" class="navbar-brand ml-8 mb-5" to="/">
                                 <img src="../assets/logo.png" width="40%"/>
-                            </router-link>
-                            <h1 class="text-white">Welcome!</h1>
+                            <h1 class="text-white mt-4">Welcome!</h1>
                             <p class="text-lead text-white">skala is your task estimation buddy</p>
                         </div>
                     </div>
@@ -29,16 +22,16 @@
             </div>
         </div>
         <!-- Page content -->
-        <div class="container mt--8 pb-2 ">
+        <div class="container mt--8 mb-1 ">
             <slide-y-up-transition mode="out-in" origin="center top">
                 <router-view></router-view>
             </slide-y-up-transition>
         </div>
         <footer >
-            <div class="container " id="footer">
+            <div class="container pb-2 " >
                 <div class="row justify-content-center">
                     <div >
-                        <div class="text-muted">
+                        <div class="text-muted pt-2" id="footer">
                             &copy; {{year}} <b>skala</b>
                         </div>
                     </div>
@@ -69,6 +62,9 @@
 #header{
     background-color: #d10572;
     margin-bottom: 5px; 
+}
+#footer{
+    padding-bottom: 9px; 
 }
 
 

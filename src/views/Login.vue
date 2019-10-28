@@ -24,7 +24,9 @@
                                 <span class="text-muted">Remember me</span>
                             </base-checkbox>
                             <div class="text-center">
-                                <base-button type="primary" class="my-4">Sign in</base-button>
+                              <router-link slot="brand" class="navbar-brand ml-8 mb-5" to="/">
+                                <base-button type="primary"  class="my-2 px-5" id="signin">Sign in</base-button>
+                              </router-link>
                             </div>
                         </form>
                     </div>
@@ -46,4 +48,8 @@
   }
 </script>
 <style>
+#signin{
+  margin-left: -15px;
+  padding: 4px 16px;
+}
 </style>
