@@ -22,6 +22,6 @@ export default {
 
 /* Removing background color of footer */
 .footer{
-  background: none;
+  background: none !important;
 }
 </style>
