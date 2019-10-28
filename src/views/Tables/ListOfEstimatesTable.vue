@@ -27,8 +27,8 @@
           <th></th>
         </template>
 
-        <template slot-scope="{row} " class="row" >
-          
+        <!-- <template slot-scope="{row} "  > -->
+          <template class="table-row" slot-scope="{row} ">
           <td>
             <div class="media" >
               
@@ -59,19 +59,20 @@
          
           <td >
           <!-- <span class="fa fa-eye fa-1x"></span> -->
-            <span class="act">
+            <span class="action-icons">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
-            <span class="act">
+            <span class="action-icons">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
             </span>
             
           </td>
-        </template>
+          </template>
+        <!-- </template> -->
 
       </base-table>
     </div>
@@ -198,6 +199,11 @@
 span .status{
   font-size: 0.8125rem;
 }
-
-
+/* displaying action icons on hover */
+table > tbody > tr .action-icons{
+  display: none;
+}
+table > tbody > tr:hover .action-icons{
+  display: inline-block;
+}
 </style>
