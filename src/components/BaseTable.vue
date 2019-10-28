@@ -15,6 +15,8 @@
             :key="index">
             {{ itemValue(item, column) }}
           </td>
+          <td class="action-icons"> 
+          </td>
         </slot>
       </tr>
     </tbody>
@@ -70,4 +72,6 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+
+</style>
