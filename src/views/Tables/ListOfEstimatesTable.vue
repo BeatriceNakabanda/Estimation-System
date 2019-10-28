@@ -58,8 +58,8 @@
           </td>
          
           <td >
-          <span class="fa fa-eye fa-1x"></span>
-            <!-- <span class="act">
+          <!-- <span class="fa fa-eye fa-1x"></span> -->
+            <span class="act">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
               </router-link>
@@ -68,7 +68,7 @@
               <router-link  to="/" id="view">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
-            </span> -->
+            </span>
             
           </td>
         </template>
