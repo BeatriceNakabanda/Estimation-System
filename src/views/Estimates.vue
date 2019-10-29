@@ -1,8 +1,6 @@
 <template>
     <div>
-        <base-header type="" class="pb-6 pb-8 pt-5 pt-md-8" id="table-head">
-            
-           
+        <base-header type="" class="pb-6 pb-8 pt-4 " id="table-head">
         </base-header>
 
         <div class="container-fluid mt--7">
@@ -11,9 +9,7 @@
                     <estimates-table title="Light Table"></estimates-table>
                 </div>
             </div>
-            
         </div>
-
     </div>
 </template>
 <script>

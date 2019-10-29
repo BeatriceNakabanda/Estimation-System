@@ -4,15 +4,14 @@
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
-        
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="spacing">Create Estimate</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg">Create Estimate</base-button>
         </div>
       </div>
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table table-flush "
+      <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
@@ -26,9 +25,7 @@
           <th class="bgcolor">Status</th>
           <th class="bgcolor"></th>
         </template>
-
-        <template slot-scope="{row} " class="row" >
-          
+          <template class="table-row" slot-scope="{row} ">
           <td>
             <div class="media" >
               
@@ -58,20 +55,20 @@
           </td>
          
           <td >
-          <!-- <span class="fa fa-eye fa-1x"></span> -->
-            <span class="act">
+            <span class="action-icons">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
-            <span class="act">
+            <span class="action-icons">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
             </span>
             
           </td>
-        </template>
+          </template>
+        <!-- </template> -->
 
       </base-table>
     </div>
@@ -202,6 +199,14 @@ span .status{
 .bgcolor {  
   background: #e7eaec !important;
 }
-
-
+/* displaying action icons on hover */
+table > tbody > tr .action-icons{
+  display: none;
+}
+table > tbody > tr:hover .action-icons{
+  display: inline-block;
+}
+base-button{
+  border-radius: 4px;
+}
 </style>
