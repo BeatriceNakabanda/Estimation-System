@@ -61,7 +61,7 @@
   float: right;
 }
 #user-name{
-  margin-bottom: -4px;
+  margin-bottom: -3px;
 }
 .avatar {
   border: none;

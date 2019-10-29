@@ -100,7 +100,10 @@
   padding-right: 120px;  
 }
 .logo{
-  margin-left: -0.75rem;
+  margin-left: -10px;
+  /* margin-bottom: -15px; */
+  margin-top: -3px;
+  padding-top: 0px;
 }
 
 </style>
