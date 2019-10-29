@@ -4,7 +4,6 @@
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
-        
         <div class="col text-right">
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg">Create Estimate</base-button>
         </div>
