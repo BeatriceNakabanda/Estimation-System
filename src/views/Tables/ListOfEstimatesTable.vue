@@ -6,7 +6,7 @@
       <div class="row ">
         
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="spacing">Create Estimate</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing">Create Estimate</base-button>
         </div>
       </div>
     </div>
@@ -58,7 +58,6 @@
           </td>
          
           <td >
-          <!-- <span class="fa fa-eye fa-1x"></span> -->
             <span class="action-icons">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>

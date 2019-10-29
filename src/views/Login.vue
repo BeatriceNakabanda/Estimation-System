@@ -25,7 +25,7 @@
                             </base-checkbox>
                             <div class="text-center ">
                               <router-link slot="brand" class="navbar-brand" to="/">
-                                <base-button type="primary"  class="mt-3 mb-5 px-5 mx-7" id="signin">Sign in</base-button>
+                                <base-button type="primary"  class="shadow-none mt-3 mb-5 px-5 mx-7" id="signin">Sign in</base-button>
                               </router-link>
                             </div>
                         </form>
