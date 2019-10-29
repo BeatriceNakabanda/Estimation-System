@@ -6,7 +6,7 @@
       <div class="row ">
         
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing">Create Estimate</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg">Create Estimate</base-button>
         </div>
       </div>
     </div>
@@ -26,8 +26,6 @@
           <th>Status</th>
           <th></th>
         </template>
-
-        <!-- <template slot-scope="{row} "  > -->
           <template class="table-row" slot-scope="{row} ">
           <td>
             <div class="media" >
@@ -204,5 +202,8 @@ table > tbody > tr .action-icons{
 }
 table > tbody > tr:hover .action-icons{
   display: inline-block;
+}
+base-button{
+  border-radius: 4px;
 }
 </style>
