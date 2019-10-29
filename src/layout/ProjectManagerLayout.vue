@@ -16,8 +16,6 @@
         />
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
-        <sidebar-item  :link="{name: 'Sign out', icon: 'ni ni-user-run text-blue', path: '/login'}"/>
-        
       </template>
       <div id="signout-position" class="position-fixed">
         <router-link  to="/login" >
