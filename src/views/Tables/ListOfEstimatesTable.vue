@@ -12,7 +12,7 @@
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table table-flush "
+      <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
