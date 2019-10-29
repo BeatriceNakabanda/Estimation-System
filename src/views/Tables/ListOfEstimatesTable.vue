@@ -175,7 +175,7 @@
 }
 /* Adjustments to font size of the table head content */
 .table thead th {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 

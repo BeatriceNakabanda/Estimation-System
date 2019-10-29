@@ -6,36 +6,22 @@
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
            
         </form>
-        <ul class="navbar-nav align-items-left d-none d-md-flex">
-            <li class="nav-item dropdown">
-                <base-dropdown class="nav-link pr-0">
-                    <div class="media align-items-center" slot="title">
-                <span class="avatar avatar-sm rounded-circle mb-2">
-                  <img alt="Image placeholder" src="../assets/avatar image.png">
-                </span>
-                        <div class="media-body ml-2 d-none d-lg-block" id="left">
-                            <span class="mb-0 text-sm font-weight-bold">David Pereira
-                            </span>
-                            <span class="mb-0 text-sm font-weight-bold">
-                              <small><br>Project Manager</small>
-                            </span>
-                        </div>
-                    </div>
-
-                    <template>
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
-                        </div>
-                        
-                        <div class="dropdown-divider"></div>
-                        <router-link to="/profile" class="dropdown-item">
-                            <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </router-link>
-                    </template>
-                </base-dropdown>
-            </li>
-        </ul>
+          <ul class="navbar-nav align-items-left d-none d-md-flex text-white" id="cursor">
+              <li class="nav-item dropdown">
+                  <div class="media align-items-center pr-0" slot="title">
+                  <span class="avatar avatar-sm rounded-circle mb-2">
+                    <img alt="Image placeholder" src="../assets/avatar image.png">
+                  </span>
+                      <div class="media-body ml-2 d-none d-lg-block">
+                          <span class="mb-0 text-sm-left font-weight-bold">David Pereira
+                          </span>
+                          <span class="mb-0 text-sm-left">
+                            <br><small>Project Manager</small>
+                          </span>
+                      </div>
+                  </div>
+              </li>
+          </ul>
     </base-nav>
 </template>
 <script>
@@ -61,7 +47,7 @@
   };
 </script>
 <style>
-#left{
-  text-align: left;
+#cursor{
+  cursor: auto;
 }
 </style>
