@@ -16,11 +16,11 @@
         />
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
-        <div id="signout-position" class="position-fixed">
-          <!-- <router-link  to="/login" >
+        <div id="signout-position">
+          <router-link  to="/login" >
               <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
-        </router-link> -->
-        <sidebar-item  :link="{name: 'Sign out', icon: 'ni ni-user-run text-white', path: '/login'}"/>
+        </router-link>
+        <!-- <sidebar-item  :link="{name: 'Sign out', icon: 'ni ni-user-run text-white', path: '/login'}"/> -->
         </div>
       </template>
       <!-- <div id="signout-position" class="position-fixed">
@@ -69,27 +69,28 @@
 </script>
 <style lang="scss">
 
+#signout-position{
+  background-color: #5E72E4;
+  padding-left: 28px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+ 
+}
 // #signout-position{
 //   background-color: #5E72E4;
-//   padding-right:140px;
+//   padding-right:116px;
 //   margin-right: 200px;
-//   padding-left: 25px;
-//   padding-top: 15px;
-//   padding-bottom: 18px;
+//   padding-left: 2px;
+//   padding-top: 8px;
+//   padding-bottom: 20px;
 //   color: #fff;
 //   margin-top: 600px;
  
 // }
-#signout-position{
-  background-color: #5E72E4;
-  padding-right:116px;
-  margin-right: 200px;
-  padding-left: 2px;
-  padding-top: 8px;
-  padding-bottom: 20px;
-  color: #fff;
-  margin-top: 600px;
- 
-}
 
 </style>
