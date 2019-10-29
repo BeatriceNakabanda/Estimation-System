@@ -7,11 +7,16 @@
            
         </form>
         <ul class="navbar-nav align-items-left d-none d-md-flex">
-            <li class="nav-item dropdown">
+
+         <span class="avatar avatar-sm mb-2">
+                  <img alt="Image placeholder"  src="../assets/user.png">
+                </span>
+            <!-- <li class="nav-item dropdown">
+
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
-                <span class="avatar avatar-sm rounded-circle mb-2">
-                  <img alt="Image placeholder" src="../assets/avatar image.png">
+                <span class="avatar avatar-md mb-2">
+                  <img alt="Image placeholder" src="../assets/images.jpeg">
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block" id="left">
                             <span class="mb-0 text-sm font-weight-bold">David Pereira
@@ -34,7 +39,7 @@
                         </router-link>
                     </template>
                 </base-dropdown>
-            </li>
+            </li> -->
         </ul>
     </base-nav>
 </template>
@@ -63,5 +68,8 @@
 <style>
 #left{
   text-align: left;
+}
+.avatar {
+  border: none;
 }
 </style>
