@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </navbar-toggle-button>
             
-                <img class="logo" src="../../assets/logo.png"  alt="..." width="60%"/>
+                <img class="logo" src="../../assets/logo.png"  alt="skala logo" width="60%"/>
             <slot name="mobile-right">
                 <ul class="nav align-items-center d-md-none">          
                     <base-dropdown class="nav-item" position="right">
@@ -97,7 +97,6 @@
 </script>
 <style>
 .navbar-brand{
-  /* margin-left: 0px; */
   padding-right: 120px;  
 }
 .logo{

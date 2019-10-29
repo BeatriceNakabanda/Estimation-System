@@ -90,7 +90,7 @@
 </script>
 <style>
 #page-header{
-  font-weight: bold;
+  font-weight: normal;
   font-size: 25px;
 }
 </style>

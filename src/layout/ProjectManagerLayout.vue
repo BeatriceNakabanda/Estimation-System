@@ -4,21 +4,20 @@
       :background-color="sidebarBackground"
       short-title="skala"
       title="skala"
-      id="sidenav"
-      
+      id="sidenav" 
     >
-      <template slot="links">
-        <sidebar-item
+      <template slot="links" >
+        <sidebar-item 
           :link="{
             name: 'Estimates',
             icon: 'ni ni-bullet-list-67 text-primary',
             path: '/estimates'
           }"
         />
-        <sidebar-item :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
-        <sidebar-item :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
+        <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
+        <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
         <div id="signout-position">
-        <sidebar-item :link="{name: 'Sign out', icon: 'ni ni-user-run text-blue', path: '/login'}"/>
+        <sidebar-item  :link="{name: 'Sign out', icon: 'ni ni-user-run text-blue', path: '/login'}"/>
         </div>
       </template>
     </side-bar>
