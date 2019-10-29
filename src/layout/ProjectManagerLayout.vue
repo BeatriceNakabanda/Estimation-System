@@ -73,10 +73,11 @@
   background-color: #5E72E4;
   padding-left: 28px;
   padding-top: 20px;
-  padding-bottom: 15px;
+  padding-bottom: 40px;
   position: absolute;
   display: inline-block;
   width: 100%;
+  height: 5%;
   bottom: 0;
   left: 0;
  
