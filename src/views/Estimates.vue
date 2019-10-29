@@ -9,9 +9,7 @@
                     <estimates-table title="Light Table"></estimates-table>
                 </div>
             </div>
-            
         </div>
-
     </div>
 </template>
 <script>

@@ -16,10 +16,14 @@
         />
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
-        <div id="signout-position">
         <sidebar-item  :link="{name: 'Sign out', icon: 'ni ni-user-run text-blue', path: '/login'}"/>
-        </div>
+        
       </template>
+      <div id="signout-position" class="position-fixed">
+        <router-link  to="/login" >
+              <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
+        </router-link>
+        </div>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
       <project-manager-navbar></project-manager-navbar>
@@ -62,7 +66,16 @@
 <style lang="scss">
 
 #signout-position{
-  margin-top: 100%;
+  background-color: #5E72E4;
+  padding-right:141px;
+  margin-left: -25px;
+  margin-right: 200px;
+  padding-left: 25px;
+  padding-top: 12px;
+  padding-bottom: 200px;
+  color: #fff;
+  margin-top: 685px;
+ 
 }
 
 </style>
