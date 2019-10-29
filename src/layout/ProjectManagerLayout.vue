@@ -72,8 +72,8 @@
 #signout-position{
   background-color: #5E72E4;
   padding-left: 28px;
-  padding-top: 25px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 15px;
   position: absolute;
   display: inline-block;
   width: 100%;
