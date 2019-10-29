@@ -6,22 +6,22 @@
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
            
         </form>
-          <ul class="navbar-nav align-items-left d-none d-md-flex text-white" id="cursor">
-              <li class="nav-item dropdown">
-                  <div class="media align-items-center pr-0" slot="title">
-                  <span class="avatar avatar-sm rounded-circle mb-2">
-                    <img alt="Image placeholder" src="../assets/avatar image.png">
-                  </span>
-                      <div class="media-body ml-2 d-none d-lg-block">
-                          <span class="mb-0 text-sm-left font-weight-bold">David Pereira
-                          </span>
-                          <span class="mb-0 text-sm-left">
-                            <br><small>Project Manager</small>
-                          </span>
-                      </div>
-                  </div>
-              </li>
-          </ul>
+        <div class="navbar-nav align-items-left d-none d-md-flex">
+
+          <div class="users">
+            <span class="avatar avatar-sm mb-1" > 
+                <img alt="Image placeholder"  id="user-image" src="../assets/user.png">
+            </span> 
+           
+            <div class="user ml-2" >
+              <p class=" text-sm font-weight-bold" id="user-name">David Pereira
+              </p>
+              <p class="text-sm " >
+                Project Manager
+              </p>
+            </div>
+          </div>
+        </div>
     </base-nav>
 </template>
 <script>
@@ -47,7 +47,25 @@
   };
 </script>
 <style>
-#cursor{
-  cursor: auto;
+
+.users{
+  margin-top: 0px;
+  padding-top: 2px;
+  
 }
+#user-image{
+  border: none;
+}
+.user{
+  color: #fff;
+  float: right;
+}
+#user-name{
+  margin-bottom: -3px;
+}
+.avatar {
+  border: none;
+}
+
+
 </style>
