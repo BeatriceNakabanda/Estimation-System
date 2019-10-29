@@ -5,7 +5,7 @@
                     <div class="card-header bg-transparent pb-0">
                         <div class="text-muted text-center mt-2 mb-3"><small>Sign in with credentials</small></div>
                     </div>
-                    <div class="card-body px-lg-5 py-lg-5">
+                    <div class="card-body px-lg-5 py-lg-3">
                         <form role="form">
                             <base-input class="input-group-alternative mb-3"
                                         placeholder="Email"
@@ -23,9 +23,9 @@
                             <base-checkbox class="custom-control-alternative text-left" >
                                 <span class="text-muted">Remember me</span>
                             </base-checkbox>
-                            <div class="text-center">
-                              <router-link slot="brand" class="navbar-brand ml-8 mb-5" to="/">
-                                <base-button type="primary"  class="my-2 px-5" id="signin">Sign in</base-button>
+                            <div class="text-center ">
+                              <router-link slot="brand" class="navbar-brand" to="/">
+                                <base-button type="primary"  class="mt-3 mb-5 px-5 mx-7" id="signin">Sign in</base-button>
                               </router-link>
                             </div>
                         </form>
@@ -49,7 +49,8 @@
 </script>
 <style>
 #signin{
-  margin-left: -15px;
+  /* margin-left: -15px; */
   padding: 4px 16px;
+  
 }
 </style>
