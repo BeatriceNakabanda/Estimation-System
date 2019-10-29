@@ -20,14 +20,8 @@
           <router-link  to="/login" >
               <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
         </router-link>
-        <!-- <sidebar-item  :link="{name: 'Sign out', icon: 'ni ni-user-run text-white', path: '/login'}"/> -->
         </div>
       </template>
-      <!-- <div id="signout-position" class="position-fixed">
-        <router-link  to="/login" >
-              <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
-        </router-link>
-        </div> -->
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
       <project-manager-navbar></project-manager-navbar>
@@ -72,8 +66,8 @@
 #signout-position{
   background-color: #5E72E4;
   padding-left: 28px;
-  padding-top: 20px;
-  padding-bottom: 50px;
+  padding-top: 17px;
+  padding-bottom: 30px;
   position: absolute;
   width: 100%;
   height: 5%;
@@ -81,16 +75,5 @@
   left: 0;
  
 }
-// #signout-position{
-//   background-color: #5E72E4;
-//   padding-right:116px;
-//   margin-right: 200px;
-//   padding-left: 2px;
-//   padding-top: 8px;
-//   padding-bottom: 20px;
-//   color: #fff;
-//   margin-top: 600px;
- 
-// }
 
 </style>
