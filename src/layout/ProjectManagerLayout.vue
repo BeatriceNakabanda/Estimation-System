@@ -16,7 +16,7 @@
         />
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
-        <div id="signout-position" class="position-fixed">
+        <div id="signout-position">
           <router-link  to="/login" >
               <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
         </router-link>
@@ -71,13 +71,14 @@
 
 #signout-position{
   background-color: #5E72E4;
-  padding-right:140px;
-  margin-right: 200px;
-  padding-left: 25px;
-  padding-top: 15px;
-  padding-bottom: 18px;
-  color: #fff;
-  margin-top: 600px;
+  padding-left: 28px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  bottom: 0;
+  left: 0;
  
 }
 // #signout-position{
