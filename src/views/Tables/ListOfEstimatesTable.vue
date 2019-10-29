@@ -16,14 +16,14 @@
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
                   :data="tableData" id="left">
-        <template slot="columns">
-          <th>Title</th>
-          <th>Developer</th>
-          <th>Project</th>
-          <th>Date Created</th>
-          <th>Date Estimated</th>
-          <th>Status</th>
-          <th></th>
+        <template  slot="columns"  >
+          <th class="bgcolor">Title</th>
+          <th class="bgcolor">Developer</th>
+          <th class="bgcolor">Project</th>
+          <th class="bgcolor">Date Created</th>
+          <th class="bgcolor">Date Estimated</th>
+          <th class="bgcolor">Status</th>
+          <th class="bgcolor"></th>
         </template>
           <template class="table-row" slot-scope="{row} ">
           <td>
@@ -170,19 +170,19 @@
 }
 
 .spacing{
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 /* Adjustments to font size of the table head content */
 .table thead th {
-  font-size: 0.68rem;
+  font-size: 13px;
   font-weight: 700;
 }
 
 /* First column of table font adjustment */
 .text-sm {
   font-weight: 400;
-  font-size: 0.8125rem !important;  /*  13px font size*/
+  font-size: 13px !important;
 }
 /* styling rounded border */
 .rounded-circle {
@@ -193,7 +193,11 @@
 
 /* Status column font size adjustment */
 span .status{
-  font-size: 0.8125rem;
+  font-size: 13px; 
+}
+
+.bgcolor {  
+  background: #e7eaec !important;
 }
 /* displaying action icons on hover */
 table > tbody > tr .action-icons{

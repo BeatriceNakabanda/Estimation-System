@@ -7,13 +7,9 @@
          ]">
         <div :class="containerClasses">
             <slot name="brand" >
-              <h1 >
-                <router-link :to="$route.path"
-                    class="h4 mb-0 text-white d-none d-lg-inline-block" id="page-header">
-                    {{$route.name}}
-                </router-link>
-              </h1>
-                
+              <h1 class="h4 mb-0 text-white d-none d-lg-inline-block" id="page-header"> 
+                    {{$route.name}}                
+              </h1>   
             </slot>
             <navbar-toggle-button v-if="showToggleButton"
                                   :toggled="toggled"

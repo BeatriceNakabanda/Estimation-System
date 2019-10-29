@@ -6,7 +6,7 @@
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
            
         </form>
-        <ul class="navbar-nav align-items-left d-none d-md-flex">
+        <div class="navbar-nav align-items-left d-none d-md-flex">
 
           <div class="users">
             <span class="avatar avatar-sm mb-1" > 
@@ -21,7 +21,7 @@
               </p>
             </div>
           </div>
-        </ul>
+        </div>
     </base-nav>
 </template>
 <script>
