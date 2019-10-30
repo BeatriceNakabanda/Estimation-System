@@ -1,15 +1,13 @@
 <template>
     <div>
-        <base-header type="" class="pb-6 pb-8 pt-5 pt-md-8" id="table-head">
-            
-           
+        <base-header type="" class="pb-6 pb-8 pt-4" id="table-head">     
         </base-header>
 
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
                   <!-- table for displaying details of a single pending estimate -->
-                    <pending-table title="Dashboard"></pending-table>
+                    <pending-table ></pending-table>
                 </div>
             </div>
             

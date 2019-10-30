@@ -17,7 +17,11 @@
         <sidebar-item :link="{name: 'Drafts', icon: 'ni ni-books text-blue', path: '/drafts'}"/>
         <sidebar-item :link="{name: 'Submitted', icon: 'ni ni-archive-2 text-blue', path: '/submitted'}"/>
         <!-- <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/> -->
-
+        <div id="signout-position">
+          <router-link  to="/login" >
+              <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
+        </router-link>
+        </div>
       </template> 
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -59,4 +63,16 @@
   };
 </script>
 <style lang="scss">
+#signout-position{
+  background-color: #5E72E4;
+  padding-left: 28px;
+  padding-top: 17px;
+  padding-bottom: 30px;
+  position: absolute;
+  width: 100%;
+  height: 5%;
+  bottom: 0px;
+  left: 0;
+ 
+}
 </style>
