@@ -30,7 +30,9 @@
             <p>{{tableDataDetail.mainTaskDescription}}</p>
             </div>
           </div>
+          
     </div>
+    <hr class="mt--1">
     <div class="table-responsive table-hover table-lg">
       <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
@@ -90,18 +92,16 @@
           <td >
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+                <i class="rounded-circle fas fa-pen fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+                <i class="rounded-circle fas fa-trash-alt" aria-hidden="true"></i>
               </router-link>
             </span>
           </td>
           </template>
-        <!-- </template> -->
-
       </base-table>
     </div>
 
@@ -222,6 +222,7 @@ table > tbody > tr:hover .action-icons{
 /* base-button{
   border-radius: 4px;
 } */
+
 
 
 

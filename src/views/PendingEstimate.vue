@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col">
                   <!-- table for displaying details of a single pending estimate -->
-                    <pending-table ></pending-table>
+                    <pending-table title="Dashboard"></pending-table>
                 </div>
             </div>
             
@@ -26,8 +26,6 @@
 </script>
 <style>
 #table-head{
-    background-color: #d10572;
-  
-    
+    background-color: #d10572; 
 }
 </style>
