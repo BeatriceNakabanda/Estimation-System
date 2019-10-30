@@ -109,6 +109,15 @@
         </div>
       </div>
       <hr class=" mt--1" >
+      <div class="row">
+        <div class="col text-left">
+          <base-button type="warning" size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
+        </div>
+        <div class="col text-right">
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg " id="submit">Save as draft</base-button>
+          <base-button type="success" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+        </div>
+      </div>     
     </div>
 
   </div>
@@ -228,7 +237,9 @@ table > tbody > tr:hover .action-icons{
 base-button{
   border-radius: 4px;
 }
+#submit{
 
+}
 
 
 
