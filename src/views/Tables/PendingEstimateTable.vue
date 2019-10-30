@@ -97,12 +97,18 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-trash-alt" aria-hidden="true"></i>
+                <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
           </td>
           </template>
       </base-table>
+        <div class="row">
+        <div class="col text-right">
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
+        </div>
+      </div>
+      <hr class=" mt--1" >
     </div>
 
   </div>
@@ -219,9 +225,9 @@ table > tbody > tr:hover .action-icons{
   /* margin-left: -800px; */
   color: rgb(140, 140, 146);
 }
-/* base-button{
+base-button{
   border-radius: 4px;
-} */
+}
 
 
 
