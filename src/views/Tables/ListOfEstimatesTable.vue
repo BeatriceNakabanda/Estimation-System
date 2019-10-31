@@ -26,13 +26,16 @@
           <th class="bgcolor"></th>
         </template>
           <template class="table-row" slot-scope="{row} ">
-          <td>
+          <!-- <td>
             <div class="media" >
               
               <div class="media-body" >
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
             </div>
+          </td> -->
+          <td class="title">
+            {{row.title}}
           </td>
           
           <td class="developer">
@@ -68,7 +71,6 @@
             
           </td>
           </template>
-        <!-- </template> -->
 
       </base-table>
     </div>
@@ -204,7 +206,7 @@ table > tbody > tr .action-icons{
   display: none;
 }
 table > tbody > tr:hover .action-icons{
-  display: inline-block;
+  display: inline;
 }
 base-button{
   border-radius: 4px;
