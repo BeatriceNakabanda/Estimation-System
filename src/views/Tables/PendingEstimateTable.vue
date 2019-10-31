@@ -104,18 +104,18 @@
           </template>
       </base-table>
         <div class="row">
-        <div class="col mx-4 text-right">
+        <div class="col mx-3 text-right">
           <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
         </div>
       </div>
       <hr class=" mt--1" >
-      <div class="row mt--2 mx-2">
+      <div class="row mt--2 mx-1">
         <div class="col text-left">
           <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg " id="submit">Save as draft</base-button>
-          <base-button type="success" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg " id="save-draft">Save as draft</base-button>
+          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
         </div>
       </div>     
     </div>
@@ -241,6 +241,12 @@ base-button{
 #cancel{
   background-color: #aca9aa;
   border: none;
+}
+#submit{
+  background-color: #faf9f9;
+  color: #5e72e4;
+  border: 1px solid #5e72e4;
+  
 }
 
 
