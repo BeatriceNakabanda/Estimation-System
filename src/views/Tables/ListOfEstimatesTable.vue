@@ -64,11 +64,11 @@
               </router-link>
             </span>
             <span class="action-icons">
-              <router-link  to="/" id="view">
+              <router-link  to="/" id="view" >
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
                   <modal :show.sync="modal">
                       <template slot="header">
-                          <h5 class="modal-title" id="exampleModalLabel">Draft</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
                       </template>
                       <div>
                         <form role="form">
@@ -218,7 +218,7 @@ import "flatpickr/dist/flatpickr.css"
             dateEstimated: '',
             status: 'Draft',
             statusType: 'warning',
-           
+
           },
           {
             id: 3,
@@ -317,6 +317,7 @@ base-button{
 /* cancel button text color */
 .cancel-color{
   color: rgb(135, 141, 148);
+  background-color: #e2e0e1;
 }
 
 
