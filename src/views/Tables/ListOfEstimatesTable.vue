@@ -62,7 +62,99 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
+                  <modal :show.sync="modal">
+                      <template slot="header">
+                          <h5 class="modal-title" id="exampleModalLabel">Draft</h5>
+                      </template>
+                      <div>
+                        <form role="form">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Title</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative
+                                      class="mb-3"
+                                      placeholder="Edit title here..."
+                                      v-model="form.title"
+                                      >
+                            </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Developer</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative
+                                      class="mb-3"
+                                      placeholder="Edit developer here..."
+                                      v-model="form.developer"
+                                      >
+                                      <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose developer...</option>
+                                        <option value="1">Benjamin</option>
+                                        <option value="2">Beatrice</option>
+                                        <option value="3">Olive</option>
+                                        <option value="4">Ronnie</option>
+                                      </select>
+                            </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Project</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative
+                                      class="mb-3"
+                                      placeholder="Add project here..."
+                                      v-model="form.project"
+                                      >
+                                      <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Select project...</option>
+                                        <option value="1">Refactory</option>
+                                        <option value="2">Xente</option>
+                                        <option value="3">Imuka</option>
+                                        <option value="4">Stanbic</option>
+                                      </select>
+                            </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Due Date</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input addon-left-icon="ni ni-calendar-grid-58">
+                                  <flat-picker slot-scope="{focus, blur}"
+                                              @on-open="focus"
+                                              @on-close="blur"
+                                              :config="{allowInput: true}"
+                                              class="form-control datepicker"
+                                              v-model="form.dueDate">
+                                  </flat-picker>
+                              </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Main <br>Task <br>Description :</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative="">
+                                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                              </base-input>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <template slot="footer">
+                          <base-button type="secondary" @click="modal = false">Cancel</base-button>
+                          <base-button type="primary">Save</base-button>
+                      </template>
+                  </modal>
               </router-link>
             </span>
             
@@ -81,7 +173,11 @@
   </div>
 </template>
 <script>
+import flatPicker from "vue-flatpickr-component";
+import "flatpickr/dist/flatpickr.css"
+
   export default {
+    components: {flatPicker},
     name: 'estimates-table',
     props: {
       type: {
@@ -91,6 +187,14 @@
     },
     data() {
       return {
+        modal : false,
+        form : {id: '',
+                title: '',
+                developer: '',
+                project: '',
+                dueDate: '2018-07-17',
+                taskDescription: ''
+            },
         tableData: [
           {
             id: 1,

@@ -73,7 +73,6 @@
   height: 5%;
   bottom: 0px;
   left: 0;
- 
 }
 
 </style>
