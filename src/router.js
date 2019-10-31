@@ -58,16 +58,16 @@ export default new Router({
       children: [
     {
       path: '/pending',
-      name: 'Pending Estimates',
+      name: 'Pending Estimate',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "demo" */ './views/PendingEstimates.vue')
+      component: () => import(/* webpackChunkName: "demo" */ './views/PendingEstimate.vue')
     },
     {
       path: '/drafts',
-      name: 'Drafts Estimates',
-      component: () => import(/* webpackChunkName: "demo" */ './views/DraftedEstimates.vue')
+      name: 'Draft Estimates',
+      component: () => import(/* webpackChunkName: "demo" */ './views/Drafts.vue')
     },
     {
       path: '/submitted',

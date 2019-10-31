@@ -12,80 +12,112 @@
         
       </div>
     </div>
-    <div class="card-body ">
+        <div class="card-body ">
      
-      <div class="row align-items-center">
-        <div class="col">
-          <p>Project :</p>
-          <p>Project Manager :</p>
-        </div>
-        <div class="col details">
-        <p>Refactory</p>
-        <p>David Pereira</p>
-        </div>
-      </div>
+          <div class="row ">
+            <div class="col- pl-3 align-self-start">
+              <p>Project :</p>
+              <p>Project Manager :</p>
+              <p>Date Created :</p>
+              <p>Due Date :</p>
+              <p>Main Task Description :</p>
+            </div>
+            <div class="col details align-self-end" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+            <p>{{tableDataDetail.project}}</p>
+            <p>{{tableDataDetail.projectManager}}</p>
+            <p>{{tableDataDetail.dateCreated}}</p>
+            <p>{{tableDataDetail.dueDate}}</p>
+            <p>{{tableDataDetail.mainTaskDescription}}</p>
+            </div>
+          </div>
+          
     </div>
-
-    <div class="table-responsive table-hover">
-      <base-table class="table  table-flush "
+    <hr class="mt--1">
+    <div class="table-responsive table-hover table-lg">
+      <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
+                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
                   :data="tableData" id="left">
-        <template slot="columns" >
-          <th>Title</th>
-          <th>Developer</th>
-          <th>Project</th>
-          <th>Date Created</th>
-          <th>Date Estimated</th>
-          <th>Status</th>
-          <th>Action</th>
+        <template  slot="columns">
+          <td class="table-head">Sub Task</td>
+          <td class="table-head">Research</td>
+          <td class="table-head">Planning</td>
+          <td class="table-head">Development</td>
+          <td class="table-head">Testing</td>
+          <td class="table-head">Stabilization</td>
+          <td class="table-head">Certainity</td>
+          <td class="table-head">Sum hours</td>
+          <td class="table-head">Adjusted sum hours</td>
+          <td class="table-head">Comments</td>
+          <td class="table-head"></td>
         </template>
-
-        <template slot-scope="{row}">
-          
-          <th scope="row">
-            <div class="media">
+          <template class="table-row" slot-scope="{row} ">
+          <td>
+            <div class="media" >
               
               <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.title}}</span>
+                <span class="name mb-0 text-sm">{{row.subTask}}</span>
               </div>
             </div>
-          </th>
+          </td>
           
-          <td class="developer">
-            {{row.developer}}
+          <td class="research">
+            {{row.research}}
           </td>
           <td class="project">
-            {{row.project}}
+            {{row.planning}}
           </td>
           <td class="dateCreated">
-            {{row.dateCreated}}
+            {{row.development}}
           </td>
           <td class="dateEstimated">
-            {{row.dateEstimated}}
+            {{row.testing}}
           </td>
-          <td>
-            <badge class="badge-dot mr-4" :type="row.statusType">
-              <i :class="`bg-${row.statusType}`"></i>
-              <span class="status">{{row.status}}</span>
-            </badge>
+          <td class="dateEstimated">
+            {{row.stabilization}}
           </td>
-         
-          <td class="action">
-            <router-link  to="/" id="view">
-              <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
-            </router-link>
-            
+          <td class="dateEstimated">
+            {{row.certainity}}
           </td>
-        </template>
-
+          <td class="dateEstimated">
+            {{row.sumHours}}
+          </td>
+          <td class="dateEstimated">
+            {{row.adjustedSumHours}}
+          </td>
+          <td class="dateEstimated">
+            {{row.comments}}
+          </td>
+          <td >
+            <span class="action-icons">
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fas fa-pen fa-1x" aria-hidden="true"></i>
+              </router-link>
+            </span>
+            <span class="action-icons">
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
+              </router-link>
+            </span>
+          </td>
+          </template>
       </base-table>
-    </div>
-
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
+        <div class="row">
+        <div class="col mx-4 text-right">
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
+        </div>
+      </div>
+      <hr class=" mt--1" >
+      <div class="row mt--2 mx-2">
+        <div class="col text-left">
+          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
+        </div>
+        <div class="col text-right">
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg " id="submit">Save as draft</base-button>
+          <base-button type="success" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+        </div>
+      </div>     
     </div>
 
   </div>
@@ -104,67 +136,40 @@
         tableData: [
           {
             id: 1,
-            title: 'Dashboard',
-            developer: 'Benjamin',
-            project: 'Refactory',
-            dateCreated: '17-07-2018',
-            dateEstimated: '18-07-2018',
-            status: 'Estimated',
-            statusType: 'success',
+            subTask: 'Navbar',
+            research: '1.00hrs',
+            planning: '2.00hrs',
+            development: '2.00hrs',
+            testing: '2.00hrs',
+            stabilization: '2.00hrs',
+            certainity: '90%',
+            sumHours: '9.00hrs',
+            adjustedSumHours: '9.90hrs',
+            comments: '',
           },
           {
             id: 2,
-            title: 'SDK',
-            developer: 'Beatrice',
-            project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
-            status: 'Draft',
-            statusType: 'warning',
-           
+            subTask: 'Table',
+            research: '1.00hrs',
+            planning: '2.00hrs',
+            development: '2.00hrs',
+            testing: '2.00hrs',
+            stabilization: '2.00hrs',
+            certainity: '90%',
+            sumHours: '9.00hrs',
+            adjustedSumHours: '9.90hrs',
+            comments: '',
           },
-          {
-            id: 3,
-            title: 'Registration',
-            developer: 'Ronnie',
-            project: 'Refactory',
-            dateCreated: '17-07-2018',
-            dateEstimated: '18-07-2018',
-            status: 'Estimated',
-            action: '',
-            statusType: 'success',
-          },
-          {
-            id: 4,
-            title: 'Onboarding',
-            developer: 'Olive',
-            project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
-            status: 'Draft',
-            action: '',
-            statusType: 'warning',
-           
-          },
-          {
-            id: 5,
-            title: 'Login',
-            developer: 'Sunday',
-            project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
-            status: 'Submitted',
-            action: '',
-            statusType: 'info',
-           
-          }, 
         ],
-        detailsData: [
-          {
-            projects: 'Refactory',
-            projectManager: 'David Pereira'
-            
-          } 
+        tableDataDetails: [
+           {
+             id: 1,
+              project: 'Refactory',
+              projectManager: 'David Pereira',
+              dateCreated: '20-10-2019',
+              dueDate: '23-10-2019',
+              mainTaskDescription: 'There is need for a dashboard representing different navigation links   for students',
+           }
         ],
         
       }
@@ -179,15 +184,63 @@
 #left{
   text-align: left;
 }
+/* Adding cursor to table */
 .table-row{
   cursor:pointer;
 }
+
 .spacing{
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+/* Adjustments to font size of the table head content */
+.table thead th {
+  font-size: 13px;
+  /* font-weight: 700; */
+}
+.table-head {  
+  background: #e7eaec !important;
+  
+  /* font-weight: 700; */
+  /* text-transform: uppercase; */
+}
+
+/* First column of table font adjustment */
+.text-sm {
+  font-weight: 400;
+  font-size: 13px !important;
+}
+/* styling rounded border */
+.rounded-circle {
+  border: 1px solid rgb(201, 201, 199);
+  padding: 6px;
+  
+}
+
+/* Status column font size adjustment */
+span .status{
+  font-size: 13px; 
+}
+
+
+/* displaying action icons on hover */
+table > tbody > tr .action-icons{
+  display: none;
+}
+table > tbody > tr:hover .action-icons{
+  display: inline-block;
 }
 .details {
-  margin-left: -800px;
+  /* margin-left: -800px; */
+  color: rgb(140, 140, 146);
+}
+base-button{
+  border-radius: 4px;
+}
+
+#cancel{
+  background-color: #aca9aa;
+  border: none;
 }
 
 
