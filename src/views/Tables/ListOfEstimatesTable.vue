@@ -190,7 +190,8 @@ import "flatpickr/dist/flatpickr.css"
     data() {
       return {
         modal : false,
-        form : {id: '',
+        form : {
+                id: '',
                 title: '',
                 developer: '',
                 project: '',
