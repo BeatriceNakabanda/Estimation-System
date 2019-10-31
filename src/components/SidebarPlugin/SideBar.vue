@@ -8,15 +8,16 @@
             </navbar-toggle-button>
             
                 <img class="logo" src="../../assets/logo.png"  alt="skala logo" width="60%"/>
-            <slot name="mobile-right">         
+            <slot name="mobile-right">
+                <ul class="nav align-items-center d-md-none">          
                     <div class="nav-item" position="right">
-                        <div class="media align-items-center" slot="title" role="button">
-                            <span class="avatar avatar-sm">
-                              <img alt="Image placeholder" src="../../assets/user.png">
-                            </span>
-                        </div>
+                            <div class="media align-items-center" slot="title" role="button">
+                              <span class="avatar avatar-sm">
+                                <img alt="Image placeholder" src="../../assets/user.png">
+                              </span>
+                            </div>
                     </div>
-        
+                </ul>
             </slot>
             <slot></slot>
             <div v-show="$sidebar.showSidebar" class="navbar-collapse collapse show" id="sidenav-collapse-main">
@@ -94,7 +95,7 @@
   padding-top: 0px;
 }
 .avatar{
-  border: none;
+  cursor: default;
 }
 
 </style>
