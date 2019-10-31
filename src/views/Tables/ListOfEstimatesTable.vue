@@ -154,8 +154,8 @@
                         </form>
                       </div>
                       <template slot="footer">
-                          <base-button type="secondary" @click="modal = false">Cancel</base-button>
-                          <base-button type="primary">Save</base-button>
+                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Cancel</base-button>
+                          <base-button class="shadow-none" type="primary">Save</base-button>
                       </template>
                   </modal>
               </router-link>
@@ -190,7 +190,8 @@ import "flatpickr/dist/flatpickr.css"
     data() {
       return {
         modal : false,
-        form : {id: '',
+        form : {
+                id: '',
                 title: '',
                 developer: '',
                 project: '',
@@ -254,9 +255,6 @@ import "flatpickr/dist/flatpickr.css"
             statusType: 'info',
            
           },
-         
-          
-         
         ]
       }
     }
@@ -314,5 +312,10 @@ table > tbody > tr:hover .action-icons{
 }
 base-button{
   border-radius: 4px;
+}
+
+/* cancel button text color */
+.cancel-color{
+  color: rgb(135, 141, 148);
 }
 </style>
