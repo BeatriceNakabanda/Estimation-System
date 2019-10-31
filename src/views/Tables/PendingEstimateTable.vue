@@ -104,14 +104,14 @@
           </template>
       </base-table>
         <div class="row">
-        <div class="col text-right">
+        <div class="col mx-4 text-right">
           <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
         </div>
       </div>
       <hr class=" mt--1" >
-      <div class="row">
+      <div class="row mt--2 mx-2">
         <div class="col text-left">
-          <base-button type="warning" size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
+          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
         <div class="col text-right">
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg " id="submit">Save as draft</base-button>
@@ -237,8 +237,10 @@ table > tbody > tr:hover .action-icons{
 base-button{
   border-radius: 4px;
 }
-#submit{
 
+#cancel{
+  background-color: #aca9aa;
+  border: none;
 }
 
 
