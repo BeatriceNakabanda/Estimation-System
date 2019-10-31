@@ -239,8 +239,9 @@ base-button{
 }
 
 #cancel{
-  background-color: #aca9aa;
+  background-color: #e2e0e1;
   border: none;
+  color: #747273;
 }
 #submit{
   background-color: #faf9f9;
