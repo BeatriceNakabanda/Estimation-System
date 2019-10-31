@@ -66,8 +66,8 @@ export default new Router({
     },
     {
       path: '/drafts',
-      name: 'Drafts Estimates',
-      component: () => import(/* webpackChunkName: "demo" */ './views/DraftedEstimates.vue')
+      name: 'Draft Estimates',
+      component: () => import(/* webpackChunkName: "demo" */ './views/Drafts.vue')
     },
     {
       path: '/submitted',
