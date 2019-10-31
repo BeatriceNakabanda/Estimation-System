@@ -310,11 +310,10 @@ table > tbody > tr .action-icons{
 table > tbody > tr:hover .action-icons{
   visibility: visible;
 } 
+/* styling buttons */
 base-button{
   border-radius: 4px;
 }
-
-/* cancel button text color */
 .cancel-color{
   color: rgb(135, 141, 148);
 }

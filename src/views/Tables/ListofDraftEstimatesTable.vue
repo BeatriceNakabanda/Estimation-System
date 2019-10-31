@@ -160,10 +160,10 @@ span .status{
 }
 /* displaying action icons on hover */
 table > tbody > tr .action-icons{
-  display: none;
+  visibility: hidden;
 }
 table > tbody > tr:hover .action-icons{
-  display: inline;
+  visibility: visible;
 }
 base-button{
   border-radius: 4px;
