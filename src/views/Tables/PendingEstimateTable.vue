@@ -145,7 +145,7 @@
             certainity: '90%',
             sumHours: '9.00hrs',
             adjustedSumHours: '9.90hrs',
-            comments: 'This should work well.',
+            comments: 'This should work well enough.',
           },
           {
             id: 2,
