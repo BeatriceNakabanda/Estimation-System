@@ -114,7 +114,7 @@
           <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg " id="save-draft">Save as draft</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
           <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
         </div>
       </div>     
