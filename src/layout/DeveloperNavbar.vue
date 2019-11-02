@@ -10,11 +10,11 @@
 
           <div class="users">
             <span class="avatar avatar-sm mb-1" > 
-                <img alt="Image placeholder"  id="user-image" src="../assets/user.png">
+                <img alt="Image placeholder"  id="user-image" height="38px"  src="../assets/user.png">
             </span> 
            
             <div class="user ml-2" >
-              <p class=" text-sm font-weight-bold" id="user-name">Benjamin Lutaaya
+              <p class=" text-md font-weight-bold" id="user-name">Benjamin Lutaaya
               </p>
               <p class="text-sm " >
                 Developer
@@ -60,7 +60,8 @@
   float: right;
 }
 #user-name{
-  margin-bottom: -3px;
+  margin-bottom: -4px;
+  margin-top: -5px; 
 }
 .avatar {
   border: none;

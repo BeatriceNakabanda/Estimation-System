@@ -21,7 +21,7 @@
                       @click="closeModal"
                       data-dismiss="modal"
                       aria-label="Close">
-                <span :aria-hidden="!show">×</span>
+                <span :aria-hidden="!show">X</span>
               </button>
             </slot>
           </div>
