@@ -136,6 +136,7 @@
                                               @on-close="blur"
                                               :config="{allowInput: true}"
                                               class="form-control datepicker"
+                                              
                                               v-model="form.dueDate">
                                   </flat-picker>
                               </base-input>
@@ -312,6 +313,7 @@ table > tbody > tr:hover .action-icons{
 } 
 base-button{
   border-radius: 4px;
+  border: 1px solid;
 }
 
 /* cancel button text color */
