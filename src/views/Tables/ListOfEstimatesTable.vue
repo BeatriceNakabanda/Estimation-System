@@ -136,6 +136,7 @@
                                               @on-close="blur"
                                               :config="{allowInput: true}"
                                               class="form-control datepicker"
+                                              
                                               v-model="form.dueDate">
                                   </flat-picker>
                               </base-input>

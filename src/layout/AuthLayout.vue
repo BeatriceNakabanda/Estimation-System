@@ -6,7 +6,7 @@
                     <div class="row justify-content-md-center" >                          
                         <div class="col-md-auto">
                                 <img src="../assets/logo.png" width="20%"/>
-                            <h1 class="text-white mt-4">Welcome!</h1>
+                            <h1 class="text-white mt-3">Welcome!</h1>
                             <p class="text-lead text-white">skala is your task estimation buddy</p>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
             <div class="container" >
                 <div class="row justify-content-center">
                     <div >
-                        <div class="text-muted" id="footer">
+                        <div class="text-muted mt-3" id="footer">
                             &copy; {{year}} <b>skala</b>
                         </div>
                     </div>
@@ -57,17 +57,12 @@
 <style>
 #header{
     background-color: #d10572;
-    margin-bottom: 5px; 
+    /* margin-bottom: 5px;  */
     
 }
-.header-body{
-    padding-top: 80px;
-}
-#footer{
-    padding-top: 20px;
-}
+
 .main-content{
     position: relative;
-    padding-bottom: 42px;
+    min-height: 100vh;
 }
 </style>
