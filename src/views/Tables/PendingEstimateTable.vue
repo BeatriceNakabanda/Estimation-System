@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow"
+  <div class="card shadow" id="card"
        :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-1"
          :class="type === 'dark' ? 'bg-transparent': ''">
@@ -251,18 +251,21 @@ base-button{
   border: 1px solid #5e72e4;
   
 }
+
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
 /* Styles */
 .card{
-  margin-top: 20px;
+  margin-top: 30px;
 }
 }
 
 /* Large screens ----------- */
 @media only screen  and (min-width : 1824px) {
 /* Styles */
-
+.card{
+  margin-top: 30px;
+}
 }
 
 

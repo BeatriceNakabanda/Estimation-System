@@ -26,7 +26,7 @@
     <div class="main-content" :data="sidebarBackground">
       <project-manager-navbar></project-manager-navbar>
 
-      <div @click="toggleSidebar">
+      <div class="main" @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">
           
           <router-view></router-view>
@@ -75,4 +75,7 @@
   left: 0;
  
 }
+// .main{
+//   padding-top: 1000px;
+// }
 </style>
