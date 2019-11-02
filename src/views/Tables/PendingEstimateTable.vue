@@ -254,19 +254,18 @@ base-button{
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
-/* Styles */
 .card{
   margin-top: 30px;
 }
 }
 
 /* Large screens ----------- */
-@media only screen  and (min-width : 1824px) {
-/* Styles */
+/* @media only screen  and (min-width : 1824px) {
 .card{
-  margin-top: 30px;
+  margin-top: 20px;
+  
 }
-}
+} */
 
 
 
