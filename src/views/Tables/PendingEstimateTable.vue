@@ -261,12 +261,8 @@ base-button{
 }
 
 /* Large screens ----------- */
-@media only screen  and (min-width : 1824px) {
-/* Styles */
-.card{
-  margin-top: 30px;
-}
-}
+/* @media only screen  and (min-width : 1824px) {
+} */
 
 
 
