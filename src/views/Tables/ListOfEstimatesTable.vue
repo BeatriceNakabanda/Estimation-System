@@ -5,7 +5,7 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg">Create Estimate</base-button>
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md">Create Estimate</base-button>
         </div>
       </div>
     </div>
@@ -310,11 +310,10 @@ table > tbody > tr .action-icons{
 table > tbody > tr:hover .action-icons{
   visibility: visible;
 } 
-base-button{
-  border-radius: 4px;
+/* styling buttons */
+#create-estimate{
+  border-radius: 4px; 
 }
-
-/* cancel button text color */
 .cancel-color{
   color: rgb(135, 141, 148);
   background-color: #e2e0e1;

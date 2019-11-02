@@ -10,24 +10,13 @@
                 <img class="logo" src="../../assets/logo.png"  alt="skala logo" width="60%"/>
             <slot name="mobile-right">
                 <ul class="nav align-items-center d-md-none">          
-                    <base-dropdown class="nav-item" position="right">
-                        <a slot="title" class="nav-link" href="#" role="button">
-                            <div class="media align-items-center">
-                              <span class="avatar avatar-sm rounded-circle">
-                                <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg">
+                    <div class="nav-item" position="right">
+                            <div class="media align-items-center" slot="title" role="button">
+                              <span class="avatar avatar-sm">
+                                <img alt="Image placeholder" src="../../assets/user.png">
                               </span>
                             </div>
-                        </a>
-
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome!</h6>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="#!" class="dropdown-item">
-                            <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </a>
-                    </base-dropdown>
+                    </div>
                 </ul>
             </slot>
             <slot></slot>
@@ -104,6 +93,9 @@
   /* margin-bottom: -15px; */
   margin-top: -3px;
   padding-top: 0px;
+}
+.avatar{
+  cursor: default;
 }
 
 </style>
