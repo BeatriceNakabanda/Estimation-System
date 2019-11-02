@@ -14,9 +14,9 @@
             </span> 
            
             <div class="user ml-2" >
-              <p class=" text-sm font-weight-bold" id="user-name">David Pereira
+              <p class="text-md font-weight-bold mt--1 mb--1" id="user-name">David Pereira
               </p>
-              <p class="text-sm " >
+              <p class="text-sm">
                 Project Manager
               </p>
             </div>
@@ -59,9 +59,6 @@
 .user{
   color: #fff;
   float: right;
-}
-#user-name{
-  margin-bottom: -3px;
 }
 .avatar {
   border: none;

@@ -66,13 +66,13 @@
 #signout-position{
   background-color: #5E72E4;
   padding-left: 28px;
-  padding-top: 17px;
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 36px;
   position: absolute;
   width: 100%;
-  height: 5%;
+  height: 6%;
   bottom: 0px;
   left: 0;
+ 
 }
-
 </style>
