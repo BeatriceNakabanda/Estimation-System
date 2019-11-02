@@ -14,10 +14,10 @@
             </span> 
            
             <div class="user ml-2" >
-              <p class="text-md font-weight-bold" id="user-name">Benjamin Lutaaya
+              <p class="text-md font-weight-bold" id="user-name">David Pereira
               </p>
               <p class="text-sm">
-                Developer
+                Project Manager
               </p>
             </div>
           </div>
