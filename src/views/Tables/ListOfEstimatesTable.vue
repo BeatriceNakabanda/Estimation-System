@@ -97,10 +97,10 @@
                                       >
                                       <select class="custom-select" id="inputGroupSelect01">
                                         <option selected>Choose developer...</option>
-                                        <option value="1">Benjamin</option>
-                                        <option value="2">Beatrice</option>
-                                        <option value="3">Olive</option>
-                                        <option value="4">Ronnie</option>
+                                        <option value="1">Beatrice</option>
+                                        <option value="2">Benjamin</option>
+                                        <option value="3">Ronnie</option>
+                                        <option value="4">Olive</option>
                                       </select>
                             </base-input>
                             </div>
