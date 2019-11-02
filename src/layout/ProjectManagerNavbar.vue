@@ -9,15 +9,15 @@
         <div class="navbar-nav align-items-left d-none d-md-flex">
 
           <div class="users">
-            <span class="avatar avatar-sm mb-1" > 
-                <img alt="Image placeholder"  id="user-image" src="../assets/user.png">
+            <span class="avatar avatar-sm" > 
+                <img alt="Image placeholder"  id="user-image" height="38px" src="../assets/user.png">
             </span> 
            
             <div class="user ml-2" >
-              <p class="text-md font-weight-bold mt--1 mb--1" id="user-name">David Pereira
+              <p class="text-md font-weight-bold" id="user-name">Benjamin Lutaaya
               </p>
               <p class="text-sm">
-                Project Manager
+                Developer
               </p>
             </div>
           </div>
@@ -54,15 +54,16 @@
   
 }
 #user-image{
-  border: none;
+  margin-bottom: -5px;
+  margin-top: -5px; 
 }
 .user{
   color: #fff;
   float: right;
 }
-.avatar {
-  border: none;
-}
 
+.avatar{
+  border: 4px solid red;
+}
 
 </style>

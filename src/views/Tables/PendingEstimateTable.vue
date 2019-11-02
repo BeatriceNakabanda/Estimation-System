@@ -147,7 +147,7 @@
             certainity: '90%',
             sumHours: '9.00hrs',
             adjustedSumHours: '9.90hrs',
-            comments: '',
+            comments: 'This should work well enough.',
           },
           {
             id: 2,
@@ -160,7 +160,7 @@
             certainity: '90%',
             sumHours: '9.00hrs',
             adjustedSumHours: '9.90hrs',
-            comments: '',
+            comments: 'The hours are accurate.',
           },
         ],
         tableDataDetails: [
@@ -254,7 +254,6 @@ base-button{
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
-/* Styles */
 .card{
   margin-top: 30px;
 }
@@ -262,6 +261,10 @@ base-button{
 
 /* Large screens ----------- */
 /* @media only screen  and (min-width : 1824px) {
+.card{
+  margin-top: 20px;
+  
+}
 } */
 
 

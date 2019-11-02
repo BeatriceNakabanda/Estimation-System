@@ -25,4 +25,12 @@
 #table-head{
     background-color: #d10572;
 }
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+/* Styles */
+#table-head{
+  /* padding-bottom: 20px; */
+  min-height: 35vh;
+}
+}
 </style>

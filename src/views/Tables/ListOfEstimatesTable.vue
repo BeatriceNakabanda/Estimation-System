@@ -68,7 +68,7 @@
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
                   <modal :show.sync="modal">
                       <template slot="header">
-                          <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                       </template>
                       <div>
                         <form role="form">
@@ -130,14 +130,13 @@
                               <h6 class="heading-small text-muted mb-4">Due Date</h6>
                             </div>
                             <div class="col-sm">
-                              <base-input addon-left-icon="ni ni-calendar-grid-58">
-                                  <flat-picker slot-scope="{focus, blur}"
-                                              @on-open="focus"
-                                              @on-close="blur"
-                                              :config="{allowInput: true}"
-                                              class="form-control datepicker"
-                                              v-model="form.dueDate">
-                                  </flat-picker>
+                              <base-input addon-left-icon="ni ni-calendar-grid-58"
+                                          alternative
+                                          class="mb-3"
+                                          placeholder="17-07-2019"
+                                          v-model="form.dueDate"
+                              >
+                                  
                               </base-input>
                             </div>
                           </div>
@@ -175,11 +174,8 @@
   </div>
 </template>
 <script>
-import flatPicker from "vue-flatpickr-component";
-import "flatpickr/dist/flatpickr.css"
 
   export default {
-    components: {flatPicker},
     name: 'estimates-table',
     props: {
       type: {
@@ -195,7 +191,7 @@ import "flatpickr/dist/flatpickr.css"
                 title: '',
                 developer: '',
                 project: '',
-                dueDate: '2018-07-17',
+                dueDate: '',
                 taskDescription: ''
             },
         tableData: [
@@ -319,6 +315,12 @@ table > tbody > tr:hover .action-icons{
   background-color: #e2e0e1;
 }
 
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+.card{
+  margin-top: 30px;
+}
+}
 
-  
+
 </style>
