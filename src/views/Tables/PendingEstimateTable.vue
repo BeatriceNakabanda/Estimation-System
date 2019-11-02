@@ -111,11 +111,11 @@
       <hr class=" mt--1" >
       <div class="row mt--2 mx-1">
         <div class="col text-left">
-          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
+          <base-button size="md" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
-          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+          <base-button size="md" class="shadow-none spacing btn-md px-4" id="save-draft">Save as draft</base-button>
+          <base-button type="primary" size="md" class="shadow-none spacing btn-md px-5" id="submit">Submit</base-button>
         </div>
       </div>     
     </div>
@@ -243,7 +243,7 @@ base-button{
   border: none;
   color: #747273;
 }
-#submit{
+#save-draft{
   background-color: #faf9f9;
   color: #5e72e4;
   border: 1px solid #5e72e4;

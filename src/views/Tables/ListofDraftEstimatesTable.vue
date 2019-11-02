@@ -167,5 +167,6 @@ table > tbody > tr:hover .action-icons{
 }
 base-button{
   border-radius: 4px;
+  
 }
 </style>
