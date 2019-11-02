@@ -12,8 +12,7 @@
         
       </div>
     </div>
-        <div class="card-body ">
-     
+        <div class="card-body">
           <div class="row ">
             <div class="col- pl-3 align-self-start">
               <p>Project :</p>
@@ -29,6 +28,9 @@
             <p>{{tableDataDetail.dueDate}}</p>
             <p>{{tableDataDetail.mainTaskDescription}}</p>
             </div>
+          </div>
+          <div class="row" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+            <p>{{tableDataDetail.mainTaskDescription}}</p>
           </div>
           
     </div>
@@ -248,6 +250,19 @@ base-button{
   color: #5e72e4;
   border: 1px solid #5e72e4;
   
+}
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+/* Styles */
+.card{
+  margin-top: 20px;
+}
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+/* Styles */
+
 }
 
 
