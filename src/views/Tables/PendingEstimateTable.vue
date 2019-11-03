@@ -14,7 +14,7 @@
     </div>
         <div class="card-body">
           <div class="row ">
-            <div class="col- pl-3 align-self-start">
+            <!-- <div class="col- pl-3 align-self-start">
               <p>Project :</p>
               <p>Project Manager :</p>
               <p>Date Created :</p>
@@ -27,11 +27,11 @@
             <p>{{tableDataDetail.dateCreated}}</p>
             <p>{{tableDataDetail.dueDate}}</p>
             <p>{{tableDataDetail.mainTaskDescription}}</p>
-            </div>
+            </div> -->
           </div>
-          <div class="row" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+          <!-- <div class="row" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
             <p>{{tableDataDetail.mainTaskDescription}}</p>
-          </div>
+          </div> -->
           
     </div>
     <hr class="mt--1">
