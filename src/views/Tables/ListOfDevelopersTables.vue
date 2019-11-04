@@ -5,8 +5,7 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <!-- <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md">Add Developer</base-button> -->
-          <div class="header-space"></div>
+          <div class="header-spacing"></div>
         </div>
       </div>
     </div>
@@ -34,8 +33,8 @@
               </div>
             </div>
           </td>
-          <td class="project">
-            {{row.project}}
+          <td class="developer">
+            {{row.developer}}
           </td>
           <td>       
           </td>
@@ -79,27 +78,27 @@ export default {
           {
             id: 1,
             no: '1',
-            project: 'Benjamin',
+            developer: 'Benjamin',
           },
           {
             id: 2,
             no: '2',
-            project: 'Beatrice',
+            developer: 'Beatrice',
           },
           {
             id: 3,
             no: '3',
-            project: 'Ronnie',
+            developer: 'Ronnie',
           },
           {
             id: 4,
             no: '4',
-            project: 'Olive',
+            developer: 'Olive',
           },
           {
             id: 5,
             no: '5',
-            project: 'Sunday',
+            developer: 'Sunday',
           },
         ]
       }
@@ -170,8 +169,11 @@ table > tbody > tr:hover .action-icons{
   background-color: #afadae;
 }
 
-/* header spacing of the table */
-
+/* table header spacing */
+.header-spacing{
+  width: 5px;
+  height: 43px;
+}
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
