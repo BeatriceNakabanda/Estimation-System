@@ -21,8 +21,7 @@
         </template>
           <template class="table-row" slot-scope="{row} ">
           <!-- <td>
-            <div class="media" >
-              
+            <div class="media"> 
               <div class="media-body" >
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
