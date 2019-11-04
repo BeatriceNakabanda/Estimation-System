@@ -1,8 +1,4 @@
 <template>
-  <!-- <div class="projects">
-    <h1>This is the projects page</h1>
-  </div> -->
-
    <div>
         <base-header type="" class="pb-6 pb-8 pt-4 " id="table-head">
         </base-header>
