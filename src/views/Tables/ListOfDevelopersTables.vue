@@ -5,7 +5,7 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md">Add Developer</base-button>
+          <!-- <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md">Add Developer</base-button> -->
           <div class="header-space"></div>
         </div>
       </div>
