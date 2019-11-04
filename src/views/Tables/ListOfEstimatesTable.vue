@@ -5,7 +5,98 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md">Create Estimate</base-button>
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Create Estimate</base-button>
+          <modal :show.sync="modal1">
+                      <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
+                      </template>
+                      <div>
+                        <form role="form">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Title</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative
+                                      class="mb-3"
+                                      placeholder="Edit title here..."
+                                      v-model="form.title"
+                                      >
+                            </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Project</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative
+                                      class="mb-3"
+                                      placeholder="Edit developer here..."
+                                      v-model="form.project"
+                                      >
+                                      <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose project...</option>
+                                        <option value="1">Refactory</option>
+                                        <option value="2">Xente</option>
+                                        <option value="3">Imuka</option>
+                                        <option value="4">Stanbic</option>
+                                      </select>
+                            </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Assign to</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input alternative
+                                      class="mb-3"
+                                      placeholder="Add project here..."
+                                      v-model="form.assignTo"
+                                      >
+                                      <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Select developer...</option>
+                                        <option value="1">Benjamin</option>
+                                        <option value="2">Beatrice</option>
+                                        <option value="3">Ronnie</option>
+                                        <option value="4">Olive</option>
+                                      </select>
+                            </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="heading-small text-muted mb-4">Due Date</h6>
+                            </div>
+                            <div class="col-sm">
+                              <base-input addon-left-icon="ni ni-calendar-grid-58"
+                                          alternative
+                                          class="mb-3"
+                                          placeholder="17-07-2019"
+                                          v-model="form.dueDate"
+                              >
+                                  
+                              </base-input>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-5">
+                              <h6 class="heading-small text-muted mb-4">Main Task Description </h6>
+                            </div>
+                            <div class="col-sm-12">
+                              <base-input alternative="">
+                                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                              </base-input>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <template slot="footer">
+                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal1 = false">Save</base-button>
+                          <base-button class="shadow-none" type="primary">Send to Developer</base-button>
+                      </template>
+                  </modal>
         </div>
       </div>
     </div>
@@ -121,6 +212,7 @@
                                         <option value="2">Xente</option>
                                         <option value="3">Imuka</option>
                                         <option value="4">Stanbic</option>
+                                        <option value="5">Emata</option>
                                       </select>
                             </base-input>
                             </div>
@@ -142,9 +234,9 @@
                           </div>
                           <div class="row">
                             <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Main <br>Task <br>Description :</h6>
+                              <h6 class="heading-small text-muted mb-4">Main Task Description</h6>
                             </div>
-                            <div class="col-sm">
+                            <div class="col-sm-12">
                               <base-input alternative="">
                                   <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                               </base-input>
@@ -185,12 +277,22 @@
     },
     data() {
       return {
+        
         modal : false,
+        modal1: false,
         form : {
                 id: '',
                 title: '',
                 developer: '',
                 project: '',
+                dueDate: '',
+                taskDescription: ''
+            },
+            form2 : {
+                id: '',
+                title: '',
+                project: '',
+                assignTo: '',
                 dueDate: '',
                 taskDescription: ''
             },
@@ -310,9 +412,14 @@ table > tbody > tr:hover .action-icons{
 #create-estimate{
   border-radius: 4px; 
 }
+/* cancel button for modal */
 .cancel-color{
   color: rgb(135, 141, 148);
   background-color: #e2e0e1;
+}
+.cancel-color:hover{
+  color: #ffffff;
+  background-color: #afadae;
 }
 
 /* Desktops and laptops ----------- */
