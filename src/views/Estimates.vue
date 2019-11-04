@@ -19,7 +19,7 @@
     components: {
       EstimatesTable
     }
-  };
+  }
 </script>
 <style>
 #table-head{
