@@ -44,15 +44,15 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="/" id="view">
+              <router-link  to="#" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
-            <span class="action-icons">
+            <!-- <span class="action-icons">
               <router-link  to="/" id="view">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
-            </span>
+            </span> -->
             
           </td>
           </template>
@@ -167,6 +167,12 @@ table > tbody > tr:hover .action-icons{
 }
 base-button{
   border-radius: 4px;
-  
+}
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+.card{
+  margin-top: 30px;
+}
 }
 </style>

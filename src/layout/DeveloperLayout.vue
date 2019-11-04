@@ -11,7 +11,7 @@
           :link="{
             name: 'Pending',
             icon: 'ni ni-bullet-list-67 text-primary',
-            path: '/pending'
+            path: '/pendingEstimates'
           }"
         />
         <sidebar-item :link="{name: 'Drafts', icon: 'ni ni-books text-blue', path: '/drafts'}"/>
