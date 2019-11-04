@@ -9,12 +9,28 @@
             {{title}}
           </h3>
         </div>
+        <div class="col">
+         
+        </div>
         
       </div>
     </div>
         <div class="card-body">
-          <div class="row ">
-            <!-- <div class="col- pl-3 align-self-start">
+          <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              Link with href
+            </a>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Button with data-target
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
+          </div>
+          <!-- <div class="row ">
+            <div class="col- pl-3 align-self-start">
               <p>Project :</p>
               <p>Project Manager :</p>
               <p>Date Created :</p>
@@ -27,99 +43,81 @@
             <p>{{tableDataDetail.dateCreated}}</p>
             <p>{{tableDataDetail.dueDate}}</p>
             <p>{{tableDataDetail.mainTaskDescription}}</p>
-            </div> -->
+            </div>
           </div>
-          <!-- <div class="row" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+          <div class="row" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
             <p>{{tableDataDetail.mainTaskDescription}}</p>
-          </div> -->
+          </div>  -->
           
     </div>
     <hr class="mt--1">
-    <div class="table-responsive table-hover table-lg">
+<div class="table-responsive table-hover">
       <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
                   :data="tableData" id="left">
-        <template  slot="columns">
+        <template  slot="columns"  >
           <td class="table-head">Sub Task</td>
           <td class="table-head">Research</td>
           <td class="table-head">Planning</td>
           <td class="table-head">Development</td>
           <td class="table-head">Testing</td>
           <td class="table-head">Stabilization</td>
-          <td class="table-head">Certainity</td>
           <td class="table-head">Sum hours</td>
           <td class="table-head">Adjusted sum hours</td>
-          <td class="table-head">Comments</td>
-          <td class="table-head"></td>
+          <td class="bgcolor"></td>
         </template>
           <template class="table-row" slot-scope="{row} ">
-          <td>
+          <!-- <td>
             <div class="media" >
               
               <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.subTask}}</span>
+                <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
             </div>
+          </td> -->
+          <td class="date-created">
+            {{row.dateCreated}}
           </td>
-          
-          <td class="research">
-            {{row.research}}
+          <td class="date-created">
+            {{row.dateCreated}}
+          </td>
+          <td class="title">
+            {{row.title}}
           </td>
           <td class="project">
-            {{row.planning}}
+            {{row.project}}
           </td>
-          <td class="dateCreated">
-            {{row.development}}
+          <td class="project-manager">
+            {{row.projectManager}}
           </td>
-          <td class="dateEstimated">
-            {{row.testing}}
+          <td class="title">
+            {{row.title}}
           </td>
-          <td class="dateEstimated">
-            {{row.stabilization}}
+          <td class="project">
+            {{row.project}}
           </td>
-          <td class="dateEstimated">
-            {{row.certainity}}
+          <td class="project-manager">
+            {{row.projectManager}}
           </td>
-          <td class="dateEstimated">
-            {{row.sumHours}}
-          </td>
-          <td class="dateEstimated">
-            {{row.adjustedSumHours}}
-          </td>
-          <td class="dateEstimated">
-            {{row.comments}}
-          </td>
+         
           <td >
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen fa-1x" aria-hidden="true"></i>
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
             </span>
+            
           </td>
           </template>
+
       </base-table>
-        <div class="row">
-        <div class="col mx-3 text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
-        </div>
-      </div>
-      <hr class=" mt--1" >
-      <div class="row mt--2 mx-1">
-        <div class="col text-left">
-          <base-button size="md" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
-        </div>
-        <div class="col text-right">
-          <base-button size="md" class="shadow-none spacing btn-md px-4" id="save-draft">Save as draft</base-button>
-          <base-button type="primary" size="md" class="shadow-none spacing btn-md px-5" id="submit">Submit</base-button>
-        </div>
-      </div>     
     </div>
 
   </div>
@@ -257,6 +255,17 @@ base-button{
 .card{
   margin-top: 30px;
 }
+}
+/* Adjustments to font size of the table head content */
+.table thead th {
+  font-size: 13px;
+  /* font-weight: 700; */
+}
+.table-head {  
+  background: #e7eaec !important;
+  
+  /* font-weight: 700; */
+  /* text-transform: uppercase; */
 }
 
 /* Large screens ----------- */
