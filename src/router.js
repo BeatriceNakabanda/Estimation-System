@@ -53,9 +53,17 @@ export default new Router({
     //routes for developer
     {
       path: '/',
-      redirect: 'pending',
+      redirect: 'pendingEstimates',
       component: DeveloperLayout,
       children: [
+    {
+      path: '/pendingEstimates',
+      name: 'Pending Estimates',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "demo" */ './views/PendingEstimates.vue')
+    },
     {
       path: '/pending',
       name: 'Pending Estimate',
@@ -71,7 +79,7 @@ export default new Router({
     },
     {
       path: '/submitted',
-      name: 'submitted Estimates',
+      name: 'Submitted Estimates',
       component: () => import(/* webpackChunkName: "demo" */ './views/SubmittedEstimates.vue')
     },
     
