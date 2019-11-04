@@ -3,7 +3,7 @@
     <div class="row align-items-center justify-content-lg-between">
       <div class="col-lg-11">
         <div class="copyright text-center text-lg-center text-muted">
-          © {{year}} skala
+          © {{year}} skalla
         </div>
       </div>
     </div>
