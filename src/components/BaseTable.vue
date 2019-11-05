@@ -19,6 +19,14 @@
           </td>
         </slot>
       </tr>
+      <!-- <tr v-for="(tableInfo, index) in data" :key="index">
+        <slot :row2="tableInfo" :index="index">
+          <td 
+          v-for="(column, index) in colsWithValue(tableInfo)" :key="index">
+            {{tableInfoValue(item, column)}}
+          </td>
+        </slot>
+      </tr> -->
     </tbody>
   </table>
 </template>

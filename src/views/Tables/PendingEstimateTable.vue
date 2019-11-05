@@ -16,13 +16,7 @@
     </div>
         <div class="card-body">
         <div v-show="isShow"  class="content">
-          contents</div>
-  <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target=".collapsse">Simple collapsible</button>
-   <iframe v-show="isShowing" src="http://www.weather.gov/" 
-        frameborder="0"
-        ></iframe>
-  <button @click="isShowing ^= true">Click Me</button> -->
-          <!-- <div class="row ">
+           <div class="row ">
             <div class="col- pl-3 align-self-start">
               <p>Project :</p>
               <p>Project Manager :</p>
@@ -30,18 +24,18 @@
               <p>Due Date :</p>
               <p>Main Task Description :</p>
             </div>
-            <div class="col details align-self-end" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+            <div class="col details align-self-start" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
             <p>{{tableDataDetail.project}}</p>
             <p>{{tableDataDetail.projectManager}}</p>
             <p>{{tableDataDetail.dateCreated}}</p>
             <p>{{tableDataDetail.dueDate}}</p>
-            <p>{{tableDataDetail.mainTaskDescription}}</p>
+            <!-- <p>{{tableDataDetail.mainTaskDescription}}</p> -->
             </div>
           </div>
-          <div class="row" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+          <div class="pl-3 row details" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
             <p>{{tableDataDetail.mainTaskDescription}}</p>
-          </div>  -->
-          
+          </div>
+        </div>   
     </div>
     <!-- <hr class="mt--1"> -->
 <div class="table-responsive table-hover">
@@ -57,59 +51,87 @@
           <td class="table-head">Development</td>
           <td class="table-head">Testing</td>
           <td class="table-head">Stabilization</td>
+          <td class="table-head">Certainity</td>
           <td class="table-head">Sum hours</td>
           <td class="table-head">Adjusted sum hours</td>
-          <td class="bgcolor"></td>
+          <td class="table-head"></td>
+          <td class="table-head"></td>
         </template>
-          <template class="table-row" slot-scope="{row} ">
-          <!-- <td>
-            <div class="media" >
-              
-              <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.title}}</span>
-              </div>
+          <template class="table-row" slot-scope="{row}">
+            <td>
+              {{row.subTask}}
+            </td>
+            <td>
+              {{row.research}}
+            </td>
+            <td>
+              {{row.planning}}
+            </td>
+            <td>
+              {{row.development}}
+            </td>
+            <td>
+              {{row.testing}}
+            </td>
+            <td>
+              {{row.stabilization}}
+            </td>
+            <td>
+              {{row.certainity}}
+            </td>
+            <td>
+              {{row.sumHours}}
+            </td>
+            <td>
+              {{row.adjustedSumHours}}
+            </td>
+            <td >
+              <span class="action-icons">
+                <router-link  to="/" id="view">
+                  <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+                </router-link>
+              </span>
+              <span class="action-icons">
+                <router-link  to="/" id="view">
+                  <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+                </router-link>
+              </span>
+              <span class="action-icons">
+                <i v-on:click="isShowing = !isShowing" class="ni ni-bold-down  pt-2" id="bold-down"></i>
+              </span>
+            </td>
+            <div v-show="isShow"  class="content">
+           <div class="row ">
+            <div class="col- pl-3 align-self-start">
+              <p>Project :</p>
+              <p>Project Manager :</p>
+              <p>Date Created :</p>
+              <p>Due Date :</p>
+              <p>Main Task Description :</p>
             </div>
-          </td> -->
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          <td class="title">
-            {{row.title}}
-          </td>
-          <td class="project">
-            {{row.project}}
-          </td>
-          <td class="project-manager">
-            {{row.projectManager}}
-          </td>
-          <td class="title">
-            {{row.title}}
-          </td>
-          <td class="project">
-            {{row.project}}
-          </td>
-          <td class="project-manager">
-            {{row.projectManager}}
-          </td>
-         
-          <td >
-            <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
-              </router-link>
-            </span>
-            <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
-              </router-link>
-            </span>
-            
-          </td>
+            <div class="col details align-self-start" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+            <p>{{tableDataDetail.project}}</p>
+            <p>{{tableDataDetail.projectManager}}</p>
+            <p>{{tableDataDetail.dateCreated}}</p>
+            <p>{{tableDataDetail.dueDate}}</p>
+            <!-- <p>{{tableDataDetail.mainTaskDescription}}</p> -->
+            </div>
+          </div>
+          <div class="pl-3 row details" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
+            <p>{{tableDataDetail.mainTaskDescription}}</p>
+          </div>
+        </div>   
           </template>
-
+          <!-- <template class="table-row" slot-scope="{row2}"  >
+          <tr v-show="isShowing">
+                <td>
+                    <ul class="list-group">
+                    <li class="list-group-item disabled">{{row2.comments}}</li>
+                    
+                    </ul>
+                </td>
+              </tr>
+              </template> -->
       </base-table>
     </div>
 
@@ -132,7 +154,7 @@ Vue.use(VueCollapse)
     },
     data() {
       return {
-        //  isShowing:false,
+         isShowing:false,
          isShow: false,
         tableData: [
           {
@@ -169,7 +191,7 @@ Vue.use(VueCollapse)
               projectManager: 'David Pereira',
               dateCreated: '20-10-2019',
               dueDate: '23-10-2019',
-              mainTaskDescription: 'There is need for a dashboard representing different navigation links   for students',
+              mainTaskDescription: 'There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students',
            }
         ],
         
