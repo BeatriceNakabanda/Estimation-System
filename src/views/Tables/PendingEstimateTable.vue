@@ -1,50 +1,27 @@
 <template>
   <div class="card shadow" id="card"
        :class="type === 'dark' ? 'bg-default': ''">
-    <div class="card-header border-1"
+    <div v-on:click="isShow = !isShow"   class="card-header border-1"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}
+            {{title}} 
           </h3>
         </div>
         <div class="col">
-         
+         <i class="ni ni-bold-down" id="bold-down"></i>
         </div>
-        
       </div>
     </div>
         <div class="card-body">
-<!-- <section class="section" id="root">
-  <div class="container">
-    <h1 class="title">Vue2 + Bulma collapse example</h1>
-    <hr />
-    
-    <a class="button is-primary" @click="expandAll">
-      Close All
-    </a>
-    
-    <br />
-    <br />
-
-    <div class="columns is-multiline">
-      <Accordion title="Test 1" @expand="expandAll">
-        <p>Stuff 1</p>
-      </Accordion>
-      <Accordion title="Test 2" @expand="expandAll">
-        <p>Stuff 2</p>
-      </Accordion>
-      <Accordion title="Test 3" @expand="expandAll">
-        <p>Stuff 3</p>
-      </Accordion>
-      <Accordion title="Test 4" @expand="expandAll">
-        <p>Stuff 4</p>
-      </Accordion>
-    </div>
-  </div>
-</section> -->
-   
+        <div v-show="isShow"  class="content">
+          contents</div>
+  <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target=".collapsse">Simple collapsible</button>
+   <iframe v-show="isShowing" src="http://www.weather.gov/" 
+        frameborder="0"
+        ></iframe>
+  <button @click="isShowing ^= true">Click Me</button> -->
           <!-- <div class="row ">
             <div class="col- pl-3 align-self-start">
               <p>Project :</p>
@@ -66,7 +43,7 @@
           </div>  -->
           
     </div>
-    <hr class="mt--1">
+    <!-- <hr class="mt--1"> -->
 <div class="table-responsive table-hover">
       <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
@@ -155,6 +132,8 @@ Vue.use(VueCollapse)
     },
     data() {
       return {
+        //  isShowing:false,
+         isShow: false,
         tableData: [
           {
             id: 1,
@@ -290,7 +269,20 @@ base-button{
   /* font-weight: 700; */
   /* text-transform: uppercase; */
 }
-
+iframe {
+  display:block;
+  margin-top: 20px;
+  margin-left: 200px;
+  width:850px;
+  height:300px;
+}
+#bold-down{
+  float: right;
+  cursor: pointer;
+}
+.card-header{
+  cursor: pointer;
+}
 /* Large screens ----------- */
 /* @media only screen  and (min-width : 1824px) {
 .card{
