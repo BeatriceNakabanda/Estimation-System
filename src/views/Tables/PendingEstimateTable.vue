@@ -16,19 +16,35 @@
       </div>
     </div>
         <div class="card-body">
-          <p>
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-              Link with href
-            </a>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              Button with data-target
-            </button>
-          </p>
-          <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-            </div>
-          </div>
+<!-- <section class="section" id="root">
+  <div class="container">
+    <h1 class="title">Vue2 + Bulma collapse example</h1>
+    <hr />
+    
+    <a class="button is-primary" @click="expandAll">
+      Close All
+    </a>
+    
+    <br />
+    <br />
+
+    <div class="columns is-multiline">
+      <Accordion title="Test 1" @expand="expandAll">
+        <p>Stuff 1</p>
+      </Accordion>
+      <Accordion title="Test 2" @expand="expandAll">
+        <p>Stuff 2</p>
+      </Accordion>
+      <Accordion title="Test 3" @expand="expandAll">
+        <p>Stuff 3</p>
+      </Accordion>
+      <Accordion title="Test 4" @expand="expandAll">
+        <p>Stuff 4</p>
+      </Accordion>
+    </div>
+  </div>
+</section> -->
+   
           <!-- <div class="row ">
             <div class="col- pl-3 align-self-start">
               <p>Project :</p>
@@ -123,6 +139,12 @@
   </div>
 </template>
 <script>
+// Import Vue and vue2-collapse
+import Vue from 'vue'
+import VueCollapse from 'vue2-collapse'
+
+// Loading the plugin into the Vue.
+Vue.use(VueCollapse)
   export default {
     name: 'pending-table',
     props: {
@@ -174,6 +196,7 @@
         
       }
     }
+    
   }
 </script>
 <style>
