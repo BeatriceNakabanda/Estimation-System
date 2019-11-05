@@ -7,7 +7,7 @@
                         <div class="col-md-auto">
                                 <img src="../assets/logo.png" width="20%"/>
                             <h1 class="text-white mt-3">Welcome!</h1>
-                            <p class="text-lead text-white">skala is your task estimation buddy</p>
+                            <p class="text-lead text-white">skalla is your task estimation buddy</p>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <div class="row justify-content-center">
                     <div >
                         <div class="text-muted mt-3" id="footer">
-                            &copy; {{year}} <b>skala</b>
+                            &copy; {{year}} <b>skalla</b>
                         </div>
                     </div>
                 </div>

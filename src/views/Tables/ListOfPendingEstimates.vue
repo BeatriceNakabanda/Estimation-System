@@ -21,8 +21,7 @@
         </template>
           <template class="table-row" slot-scope="{row} ">
           <!-- <td>
-            <div class="media" >
-              
+            <div class="media"> 
               <div class="media-body" >
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
@@ -48,13 +47,11 @@
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
               </router-link>
             </span>
-            <span class="action-icons">
-              <router-link  to="#" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
-                
+            <!-- <span class="action-icons">
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
-            </span>
-            
+            </span> -->
           </td>
           </template>
 
@@ -70,7 +67,7 @@
 </template>
 <script>
   export default {
-    name: 'drafts-estimates-table',
+    name: 'pending-estimates-table',
     props: {
       type: {
         type: String
@@ -79,7 +76,6 @@
     },
     data() {
       return {
-        modal: false,
         tableData: [
           {
             id: 1,

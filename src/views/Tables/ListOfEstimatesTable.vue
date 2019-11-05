@@ -277,7 +277,6 @@
     },
     data() {
       return {
-        
         modal : false,
         modal1: false,
         form : {
