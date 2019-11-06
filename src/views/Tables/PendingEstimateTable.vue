@@ -38,102 +38,92 @@
         </div>   
     </div>
     <!-- <hr class="mt--1"> -->
-<div class="table-responsive table-hover">
-      <base-table class="table table-flush"
-                  :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
-                  tbody-classes="list"
-                  :data="tableData" id="left">
-        <template  slot="columns"  >
-          <td class="table-head">Sub Task</td>
-          <td class="table-head">Research</td>
-          <td class="table-head">Planning</td>
-          <td class="table-head">Development</td>
-          <td class="table-head">Testing</td>
-          <td class="table-head">Stabilization</td>
-          <td class="table-head">Certainity</td>
-          <td class="table-head">Sum hours</td>
-          <td class="table-head">Adjusted sum hours</td>
-          <td class="table-head"></td>
-          <td class="table-head"></td>
-        </template>
-          <template class="table-row" slot-scope="{row}">
-            <td>
-              {{row.subTask}}
-            </td>
-            <td>
-              {{row.research}}
-            </td>
-            <td>
-              {{row.planning}}
-            </td>
-            <td>
-              {{row.development}}
-            </td>
-            <td>
-              {{row.testing}}
-            </td>
-            <td>
-              {{row.stabilization}}
-            </td>
-            <td>
-              {{row.certainity}}
-            </td>
-            <td>
-              {{row.sumHours}}
-            </td>
-            <td>
-              {{row.adjustedSumHours}}
-            </td>
-            <td >
-              <span class="action-icons">
-                <router-link  to="/" id="view">
-                  <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
-                </router-link>
-              </span>
-              <span class="action-icons">
-                <router-link  to="/" id="view">
-                  <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
-                </router-link>
-              </span>
-              <span class="action-icons">
-                <i v-on:click="isShowing = !isShowing" class="ni ni-bold-down  pt-2" id="bold-down"></i>
-              </span>
-            </td>
-            <div v-show="isShow"  class="content">
-           <div class="row ">
-            <div class="col- pl-3 align-self-start">
-              <p>Project :</p>
-              <p>Project Manager :</p>
-              <p>Date Created :</p>
-              <p>Due Date :</p>
-              <p>Main Task Description :</p>
-            </div>
-            <div class="col details align-self-start" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.project}}</p>
-            <p>{{tableDataDetail.projectManager}}</p>
-            <p>{{tableDataDetail.dateCreated}}</p>
-            <p>{{tableDataDetail.dueDate}}</p>
-            <!-- <p>{{tableDataDetail.mainTaskDescription}}</p> -->
-            </div>
-          </div>
-          <div class="pl-3 row details" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.mainTaskDescription}}</p>
-          </div>
-        </div>   
-          </template>
-          <!-- <template class="table-row" slot-scope="{row2}"  >
-          <tr v-show="isShowing">
-                <td>
-                    <ul class="list-group">
-                    <li class="list-group-item disabled">{{row2.comments}}</li>
-                    
-                    </ul>
-                </td>
-              </tr>
-              </template> -->
-      </base-table>
-    </div>
+    <div class="table-responsive table-hover">
+      <table class="table">
+  <thead class="thead-light">
+    <tr>
+        <td class="table-head" scope="col"><b>Sub Task</b></td>
+        <td class="table-head" scope="col"><b>Research</b></td>
+        <td class="table-head" scope="col"><b>Planning</b></td>
+        <td class="table-head" scope="col"><b>Development</b></td>
+        <td class="table-head" scope="col"><b>Testing</b></td>
+        <td class="table-head" scope="col"><b>Stablization</b></td>
+        <td class="table-head" scope="col"><b>Certainity</b></td>
+        <td class="table-head" scope="col"><b>Sum Hours (SH)</b></td>
+        <td class="table-head" scope="col"><b>Adjusted SH</b></td>
+        <td class="table-head" scope="col">
+          <span class="action-icons">
+            <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x"></i>
+          </span>
+        </td>
+        <td class="table-head" scope="col"></td>
+
+    </tr>
+  </thead>
+  <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
+    <tr >
+      <td scope="row">{{tableInfo.subTask}}</td>
+      <td>{{tableInfo.research}}</td>
+      <td>{{tableInfo.planning}}</td>
+      <td>{{tableInfo.development}}</td>
+      <td>{{tableInfo.testing}}</td>
+      <td>{{tableInfo.stabilization}}</td>
+      <td>{{tableInfo.certainity}}</td>
+      <td>{{tableInfo.sumHours}}</td>
+      <td>{{tableInfo.adjustedSumHours}}</td>
+      <td >
+        <span class="action-icons">
+          <router-link  to="/" id="view">
+            <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+          </router-link>
+        </span>
+        <span class="action-icons">
+          <router-link  to="/" id="view">
+            <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+          </router-link>
+        </span>
+
+      </td>
+      <td></td>
+    </tr>
+    <tr v-show="isShowing">
+      <th><b>Comment:</b></th>
+      <td colspan="10">{{tableInfo.comments}}</td>
+    </tr>
+  </tbody>
+  <tr>
+  <th scope="col">Total</th>
+  <th scope="col">2.00hrs</th>
+  <th scope="col">4.00hrs</th>
+  <th scope="col">4.00hrs</th>
+  <th scope="col">4.00hrs</th>
+  <th scope="col">4.00hrs</th>
+  <th scope="col">90%</th>
+  <th scope="col">18.00hrs</th>
+  <th scope="col">19.80hrs</th>
+  <th></th>
+  <th></th>
+</tr>
+</table>
+
+</div>
+<!--     
+      <table class="table">
+        <thead class="thead-light">
+        <tr>
+          <td scope="row">{{tableInfo.subTask}}</td>
+          <td>{{tableInfo.research}}</td>
+          <td>{{tableInfo.planning}}</td>
+          <td>{{tableInfo.development}}</td>
+          <td>{{tableInfo.testing}}</td>
+          <td>{{tableInfo.stabilization}}</td>
+          <td>{{tableInfo.certainity}}</td>
+          <td>{{tableInfo.sumHours}}</td>
+          <td>{{tableInfo.adjustedSumHours}}</td>
+        </tr>
+        </thead>
+      </table> -->
+   
 
   </div>
 </template>
@@ -287,6 +277,7 @@ base-button{
 }
 .table-head {  
   background: #e7eaec !important;
+  font-size: 90px;
   
   /* font-weight: 700; */
   /* text-transform: uppercase; */
