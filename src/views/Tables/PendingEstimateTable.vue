@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-        <div class="card-body">
+      <div class="card-body">
         <div v-show="isShow"  class="content">
            <div class="row ">
             <div class="col- pl-3 align-self-start">
@@ -56,12 +56,12 @@
             <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x"></i>
           </span>
         </td>
-        <td class="table-head" scope="col"></td>
+        <!-- <td class="table-head" scope="col"></td> -->
 
     </tr>
   </thead>
   <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
-    <tr >
+    <tr>
       <td scope="row">{{tableInfo.subTask}}</td>
       <td>{{tableInfo.research}}</td>
       <td>{{tableInfo.planning}}</td>
@@ -71,20 +71,19 @@
       <td>{{tableInfo.certainity}}</td>
       <td>{{tableInfo.sumHours}}</td>
       <td>{{tableInfo.adjustedSumHours}}</td>
-      <td >
-        <span class="action-icons">
-          <router-link  to="/" id="view">
-            <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
-          </router-link>
-        </span>
+      <!-- <td></td> -->
+      <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
             <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
           </router-link>
         </span>
-
+        <span class="action-icons">
+          <router-link  to="/" id="view">
+            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
+          </router-link>
+        </span>
       </td>
-      <td></td>
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
@@ -102,29 +101,26 @@
   <th scope="col">18.00hrs</th>
   <th scope="col">19.80hrs</th>
   <th></th>
-  <th></th>
+  <!-- <th></th> -->
+</tr>
+<tr>
+  <td colspan="12" class="text-right">
+    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
+  </td>
 </tr>
 </table>
-
-</div>
-<!--     
-      <table class="table">
-        <thead class="thead-light">
-        <tr>
-          <td scope="row">{{tableInfo.subTask}}</td>
-          <td>{{tableInfo.research}}</td>
-          <td>{{tableInfo.planning}}</td>
-          <td>{{tableInfo.development}}</td>
-          <td>{{tableInfo.testing}}</td>
-          <td>{{tableInfo.stabilization}}</td>
-          <td>{{tableInfo.certainity}}</td>
-          <td>{{tableInfo.sumHours}}</td>
-          <td>{{tableInfo.adjustedSumHours}}</td>
-        </tr>
-        </thead>
-      </table> -->
-   
-
+</div>   
+   <div class="card-footer">
+      <div class="row mt--2 ">
+        <div class="col text-left">
+          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
+        </div>
+        <div class="col text-right">
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+        </div>
+      </div>
+   </div>
   </div>
 </template>
 <script>
