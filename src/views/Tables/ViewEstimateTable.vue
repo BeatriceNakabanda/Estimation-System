@@ -98,30 +98,14 @@
   <th scope="col">19.80hrs</th>
   <th></th>
 </tr>
-<tr>
-  <td colspan="12" class="text-right">
-    <base-button type="primary" size="sm" class="shadow-none spacing btn-md">Add Row</base-button>
-  </td>
-</tr>
 </table>
 </div>   
-   <div class="card-footer">
-      <div class="row  ">
-        <div class="col text-left">
-          <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
-        </div>
-        <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
-        </div>
-      </div>
-   </div>
   </div>
 </template>
 <script>
 
   export default {
-    name: 'pending-table',
+    name: 'estimates-table',
     props: {
       type: {
         type: String

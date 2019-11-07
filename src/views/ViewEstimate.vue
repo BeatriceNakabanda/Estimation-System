@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-  import PendingTable from './Tables/PendingEstimateTable'
+  import PendingTable from './Tables/ViewEstimateTable'
   export default {
     name: 'pending-estimate',
     components: {
@@ -33,6 +33,7 @@
   min-height: 35vh;
 }
 }
+
 #table-head{
     background-color: #d10572; 
 }

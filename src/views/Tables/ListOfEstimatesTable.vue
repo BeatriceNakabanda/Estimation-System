@@ -151,7 +151,12 @@
           <td >
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" @click="modal2 = true"></i>
+                <modal :show.sync="modal2">
+                  <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
+                      </template>
+                </modal>
               </router-link>
             </span>
             <span class="action-icons">
@@ -262,7 +267,8 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <base-pagination total="30"></base-pagination>
     </div>
-
+    <!-- mmm -->
+    
   </div>
 </template>
 <script>
@@ -279,6 +285,7 @@
       return {
         modal : false,
         modal1: false,
+        modal2: false,
         form : {
                 id: '',
                 title: '',
