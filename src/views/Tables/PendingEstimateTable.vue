@@ -105,7 +105,141 @@
 </tr>
 <tr>
   <td colspan="12" class="text-right">
-    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2">Add Row</base-button>
+    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Row</base-button>
+    <modal :show.sync="modal">
+      <template slot="header">
+          <h3 class="modal-title " id="exampleModalLabel">Add Sub Task</h3>
+      </template>
+      <div>
+        <form role="form">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Sub Task: </h6>
+            </div>
+              <div class="col-sm">
+                  <base-input alternative
+                          class="mb-3"
+                          placeholder="Add sub task here..."
+                          v-model="form.subtask"
+                          >
+                </base-input>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Research: </h6>
+            </div>
+            <div class="col-sm">
+              <base-input alternative
+                      class="mb-3"
+                      placeholder="Add research here..."
+                      v-model="form.research"
+                      >
+                      <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose project...</option>
+                        <option value="1">Refactory</option>
+                        <option value="2">Xente</option>
+                        <option value="3">Imuka</option>
+                        <option value="4">Stanbic</option>
+                      </select>
+            </base-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Planning: </h6>
+            </div>
+            <div class="col-sm">
+              <base-input alternative
+                      class="mb-3"
+                      placeholder="Add planning here..."
+                      v-model="form.planning"
+                      >
+            </base-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Development: </h6>
+            </div>
+            <div class="col-sm">
+              <base-input 
+                          alternative
+                          class="mb-3"
+                          placeholder="Add development here..."
+                          v-model="form.development"
+              >
+                  
+              </base-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Testing: </h6>
+            </div>
+            <div class="col-sm">
+              <base-input 
+                          alternative
+                          class="mb-3"
+                          placeholder="Add testing here..."
+                          v-model="form.testing"
+              >
+                  
+              </base-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Stabilization: </h6>
+            </div>
+            <div class="col-sm">
+              <base-input 
+                          alternative
+                          class="mb-3"
+                          placeholder="Add stabilization here..."
+                          v-model="form.stabilization"
+              >
+              </base-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Certainty: </h6>
+            </div>
+            <div class="col-sm">
+              <base-input 
+                          alternative
+                          class="mb-3"
+                          placeholder="Add certainty here..."
+                          v-model="form.certainty"
+              >
+              <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Add certainty...</option>
+                        <option value="1">5%</option>
+                        <option value="2">10%</option>
+                        <option value="3">15%</option>
+                        <option value="4">20%</option>
+                      </select>
+              </base-input>
+            </div>  
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4">Comment: </h6>
+            </div>
+            <div class="col-sm-12">
+              <base-input alternative="">
+                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+              </base-input>
+            </div>
+          </div>
+        </form>
+      </div>
+        <template slot="footer">
+            <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Close</base-button>
+            <base-button class="shadow-none" type="primary">Add</base-button>
+        </template>
+    </modal>
   </td>
 </tr>
 </table>
@@ -140,8 +274,17 @@ Vue.use(VueCollapse)
     },
     data() {
       return {
+         modal: false,
          isShowing:false,
          isShow: false,
+         form : {
+                id: '',
+                subtask: '',
+                developer: '',
+                project: '',
+                dueDate: '',
+                taskDescription: ''
+            },
         tableData: [
           {
             id: 1,
@@ -291,6 +434,16 @@ iframe {
 }
 .card-header{
   cursor: pointer;
+}
+
+/* cancel button for modal */
+.cancel-color{
+  color: rgb(135, 141, 148);
+  background-color: #e2e0e1;
+}
+.cancel-color:hover{
+  color: #ffffff;
+  background-color: #afadae;
 }
 /* Large screens ----------- */
 /* @media only screen  and (min-width : 1824px) {
