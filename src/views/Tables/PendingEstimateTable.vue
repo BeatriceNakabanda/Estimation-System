@@ -130,13 +130,6 @@
                       placeholder="Add research here..."
                       v-model="form.research"
                       >
-                      <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose project...</option>
-                        <option value="1">Refactory</option>
-                        <option value="2">Xente</option>
-                        <option value="3">Imuka</option>
-                        <option value="4">Stanbic</option>
-                      </select>
             </base-input>
             </div>
           </div>
