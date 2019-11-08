@@ -20,7 +20,7 @@
                               <base-input alternative
                                       class="mb-3"
                                       placeholder="Edit title here..."
-                                      v-model="form.title"
+                                      v-model="estimates.title"
                                       >
                             </base-input>
                             </div>
@@ -33,7 +33,7 @@
                               <base-input alternative
                                       class="mb-3"
                                       placeholder="Edit developer here..."
-                                      v-model="form.project"
+                                      v-model="estimates.project"
                                       >
                                       <select class="custom-select" id="inputGroupSelect01">
                                         <option selected>Choose project...</option>
@@ -53,7 +53,7 @@
                               <base-input alternative
                                       class="mb-3"
                                       placeholder="Add project here..."
-                                      v-model="form.assignTo"
+                                      v-model="estimates.assignTo"
                                       >
                                       <select class="custom-select" id="inputGroupSelect01">
                                         <option selected>Select developer...</option>
@@ -74,7 +74,7 @@
                                           alternative
                                           class="mb-3"
                                           placeholder="17-07-2019"
-                                          v-model="form.dueDate"
+                                          v-model="estimates.dueDate"
                               >
                                   
                               </base-input>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-sm-12">
                               <base-input alternative="">
-                                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                                  <textarea rows="4" v-model="estimates.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                               </base-input>
                             </div>
                           </div>
@@ -106,7 +106,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
+                  :data="estimates" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Developer</th>
@@ -117,14 +117,6 @@
           <th class="bgcolor"></th>
         </template>
           <template class="table-row" slot-scope="{row} ">
-          <!-- <td>
-            <div class="media" >
-              
-              <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.title}}</span>
-              </div>
-            </div>
-          </td> -->
           <td class="title">
             {{row.title}}
           </td>
@@ -176,7 +168,7 @@
                             <base-input alternative
                                     class="mb-3"
                                     placeholder="Edit title here..."
-                                    v-model="form.title"
+                                    v-model="estimates.title"
                                     >
                           </base-input>
                           </div>
@@ -189,7 +181,7 @@
                             <base-input alternative
                                     class="mb-3"
                                     placeholder="Edit developer here..."
-                                    v-model="form.developer"
+                                    v-model="estimates.developer"
                                     >
                                     <select class="custom-select" id="inputGroupSelect01">
                                       <option selected>Choose developer...</option>
@@ -209,7 +201,7 @@
                             <base-input alternative
                                     class="mb-3"
                                     placeholder="Add project here..."
-                                    v-model="form.project"
+                                    v-model="estimates.project"
                                     >
                                     <select class="custom-select" id="inputGroupSelect01">
                                       <option selected>Select project...</option>
@@ -231,7 +223,7 @@
                                         alternative
                                         class="mb-3"
                                         placeholder="17-07-2019"
-                                        v-model="form.dueDate"
+                                        v-model="estimates.dueDate"
                             >
                                 
                             </base-input>
@@ -243,7 +235,7 @@
                           </div>
                           <div class="col-sm-12">
                             <base-input alternative="">
-                                <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                                <textarea rows="4" v-model="estimates.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                             </base-input>
                           </div>
                         </div>
@@ -286,23 +278,7 @@
         modal : false,
         modal1: false,
         modal2: false,
-        form : {
-                id: '',
-                title: '',
-                developer: '',
-                project: '',
-                dueDate: '',
-                taskDescription: ''
-            },
-            form2 : {
-                id: '',
-                title: '',
-                project: '',
-                assignTo: '',
-                dueDate: '',
-                taskDescription: ''
-            },
-        tableData: [
+        estimates: [
           {
             id: 1,
             title: 'Dashboard',
