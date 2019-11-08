@@ -162,98 +162,98 @@
             <span class="action-icons">
               <router-link  to="/" id="view" >
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
-                  <modal :show.sync="modal">
-                      <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
-                      </template>
-                      <div>
-                        <form role="form">
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Title</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Edit title here..."
-                                      v-model="form.title"
-                                      >
+                <modal :show.sync="modal">
+                    <template slot="header">
+                        <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
+                    </template>
+                    <div>
+                      <form role="form">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="heading-small text-muted mb-4">Title</h6>
+                          </div>
+                          <div class="col-sm">
+                            <base-input alternative
+                                    class="mb-3"
+                                    placeholder="Edit title here..."
+                                    v-model="form.title"
+                                    >
+                          </base-input>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="heading-small text-muted mb-4">Developer</h6>
+                          </div>
+                          <div class="col-sm">
+                            <base-input alternative
+                                    class="mb-3"
+                                    placeholder="Edit developer here..."
+                                    v-model="form.developer"
+                                    >
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                      <option selected>Choose developer...</option>
+                                      <option value="1">Beatrice</option>
+                                      <option value="2">Benjamin</option>
+                                      <option value="3">Ronnie</option>
+                                      <option value="4">Olive</option>
+                                    </select>
+                          </base-input>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="heading-small text-muted mb-4">Project</h6>
+                          </div>
+                          <div class="col-sm">
+                            <base-input alternative
+                                    class="mb-3"
+                                    placeholder="Add project here..."
+                                    v-model="form.project"
+                                    >
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                      <option selected>Select project...</option>
+                                      <option value="1">Refactory</option>
+                                      <option value="2">Xente</option>
+                                      <option value="3">Imuka</option>
+                                      <option value="4">Stanbic</option>
+                                      <option value="5">Emata</option>
+                                    </select>
+                          </base-input>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="heading-small text-muted mb-4">Due Date</h6>
+                          </div>
+                          <div class="col-sm">
+                            <base-input addon-left-icon="ni ni-calendar-grid-58"
+                                        alternative
+                                        class="mb-3"
+                                        placeholder="17-07-2019"
+                                        v-model="form.dueDate"
+                            >
+                                
                             </base-input>
-                            </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Developer</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Edit developer here..."
-                                      v-model="form.developer"
-                                      >
-                                      <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Choose developer...</option>
-                                        <option value="1">Beatrice</option>
-                                        <option value="2">Benjamin</option>
-                                        <option value="3">Ronnie</option>
-                                        <option value="4">Olive</option>
-                                      </select>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="heading-small text-muted mb-4">Main Task Description</h6>
+                          </div>
+                          <div class="col-sm-12">
+                            <base-input alternative="">
+                                <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                             </base-input>
-                            </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Project</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Add project here..."
-                                      v-model="form.project"
-                                      >
-                                      <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Select project...</option>
-                                        <option value="1">Refactory</option>
-                                        <option value="2">Xente</option>
-                                        <option value="3">Imuka</option>
-                                        <option value="4">Stanbic</option>
-                                        <option value="5">Emata</option>
-                                      </select>
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Due Date</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input addon-left-icon="ni ni-calendar-grid-58"
-                                          alternative
-                                          class="mb-3"
-                                          placeholder="17-07-2019"
-                                          v-model="form.dueDate"
-                              >
-                                  
-                              </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Main Task Description</h6>
-                            </div>
-                            <div class="col-sm-12">
-                              <base-input alternative="">
-                                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
-                              </base-input>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <template slot="footer">
-                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Cancel</base-button>
-                          <base-button class="shadow-none" type="primary">Save</base-button>
-                      </template>
-                  </modal>
+                        </div>
+                      </form>
+                    </div>
+                    <template slot="footer">
+                        <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Cancel</base-button>
+                        <base-button class="shadow-none" type="primary">Save</base-button>
+                    </template>
+                </modal>
               </router-link>
             </span>
             
