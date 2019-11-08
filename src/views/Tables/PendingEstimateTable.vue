@@ -109,7 +109,7 @@
         <form role="form">
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Sub Task: </h6>
+              <h6 class="text-resize heading-small text-muted mb-4 float-left text-capitalize">Sub Task</h6>
             </div>
               <div class="col-sm">
                   <base-input alternative
@@ -122,7 +122,7 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Research: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Research</h6>
             </div>
             <div class="col-sm">
               <base-input alternative
@@ -142,7 +142,7 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Planning: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Planning</h6>
             </div>
             <div class="col-sm">
               <base-input alternative
@@ -155,9 +155,9 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Development: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Development</h6>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-9">
               <base-input 
                           alternative
                           class="mb-3"
@@ -170,9 +170,9 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Testing: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Testing</h6>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-9">
               <base-input 
                           alternative
                           class="mb-3"
@@ -185,9 +185,9 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Stabilization: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Stabilization </h6>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-9">
               <base-input 
                           alternative
                           class="mb-3"
@@ -199,7 +199,7 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Certainty: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Certainty</h6>
             </div>
             <div class="col-sm">
               <base-input 
@@ -220,7 +220,23 @@
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4">Comment: </h6>
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Sum hours</h6>
+            </div>
+            <div class="col-sm-1">
+              <p class="styling">0 hrs</p>
+            </div>  
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Adjusted Sum</h6>
+            </div>
+            <div class="col-sm-1">
+              <p class="styling">0 hrs</p>
+            </div>  
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Comment</h6>
             </div>
             <div class="col-sm-12">
               <base-input alternative="">
@@ -435,6 +451,17 @@ iframe {
   color: #ffffff;
   background-color: #afadae;
 }
+
+/* Styling fonts */
+.styling{
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/* resizing the labels for the modal */
+.text-resize{
+  font-size: 14px;
+}
 /* Large screens ----------- */
 /* @media only screen  and (min-width : 1824px) {
 .card{
@@ -442,7 +469,5 @@ iframe {
   
 }
 } */
-
-
 
 </style>
