@@ -10,92 +10,8 @@
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
                       </template>
-                      <div>
-                        <form role="form">
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Title</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Edit title here..."
-                                      v-model="estimates.title"
-                                      >
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Project</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Edit developer here..."
-                                      v-model="estimates.project"
-                                      >
-                                      <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Choose project...</option>
-                                        <option value="1">Refactory</option>
-                                        <option value="2">Xente</option>
-                                        <option value="3">Imuka</option>
-                                        <option value="4">Stanbic</option>
-                                      </select>
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Assign to</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Add project here..."
-                                      v-model="estimates.assignTo"
-                                      >
-                                      <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Select developer...</option>
-                                        <option value="1">Benjamin</option>
-                                        <option value="2">Beatrice</option>
-                                        <option value="3">Ronnie</option>
-                                        <option value="4">Olive</option>
-                                      </select>
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Due Date</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input addon-left-icon="ni ni-calendar-grid-58"
-                                          alternative
-                                          class="mb-3"
-                                          placeholder="17-07-2019"
-                                          v-model="estimates.dueDate"
-                              >
-                                  
-                              </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-5">
-                              <h6 class="heading-small text-muted mb-4">Main Task Description </h6>
-                            </div>
-                            <div class="col-sm-12">
-                              <base-input alternative="">
-                                  <textarea rows="4" v-model="estimates.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
-                              </base-input>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <template slot="footer">
-                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal1 = false">Save</base-button>
-                          <base-button class="shadow-none" type="primary">Send to Developer</base-button>
-                      </template>
+                      <!-- create estimate form -->
+                      <CreateEstimateForm />
                   </modal>
         </div>
       </div>
@@ -257,16 +173,20 @@
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
+      <!-- <base-pagination total="30"></base-pagination> -->
+      <base-pagination></base-pagination>
+
     </div>
-    <!-- mmm -->
     
   </div>
 </template>
 <script>
-
+import CreateEstimateForm from '../Forms/CreateEstimateForm'
   export default {
     name: 'estimates-table',
+    components: {
+      CreateEstimateForm,
+    },
     props: {
       type: {
         type: String
@@ -337,7 +257,8 @@
           },
         ]
       }
-    }
+    },
+
   }
 </script>
 <style>
