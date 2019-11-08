@@ -32,7 +32,12 @@ export default new Router({
           name: 'Developers',
           component: () => import(/* webpackChunkName: "demo" */ './views/Developers.vue')
         },
-       
+        {
+          path: '/view-estimate',
+          name: 'View Estimate',
+          component: () => import(/* webpackChunkName: "demo" */ './views/ViewEstimate.vue')
+        },
+  
         
       ]
     },

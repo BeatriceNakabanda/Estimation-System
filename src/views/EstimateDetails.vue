@@ -1,21 +1,14 @@
 
 <template>
   <section>
-    <div>
-      <btn type="primary" @click="show=!show">Click me!</btn>
-    </div>
-    <br/>
-    <collapse v-model="show">
-      <div class="well" style="margin-bottom: 0">Hi there.</div>
-    </collapse>
-    <p>ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
+   <estimates-table></estimates-table>
   </section>
 </template>
 <script>
   export default {
     data () {
       return {
-        show: false
+        
       }
     }
   }
