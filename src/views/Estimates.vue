@@ -6,7 +6,7 @@
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                    <estimates-table title="Light Table" :estimates="estimates"></estimates-table>
+                    <estimates-table title="Light Table" ></estimates-table>
                 </div>
             </div>
         </div>

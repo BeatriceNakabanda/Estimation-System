@@ -21,17 +21,21 @@
             <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
-                        placeholder="Edit developer here..."
-                        v-model="estimate.project"
-                        >
-                        <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose project...</option>
-                        <option value="1">Refactory</option>
-                        <option value="2">Xente</option>
-                        <option value="3">Imuka</option>
-                        <option value="4">Stanbic</option>
+                        placeholder="Edit  project here..." 
+                       >
+                        <select class="custom-select" id="inputGroupSelect01" v-model="selected"         >
+                        <!-- <option v-for="estimate in estimates" v-bind:key="estimate.id">
+                            {{ estimate.project }}
+                        </option> -->
+                        <option :value="null">Please select a project</option>
+                        <option v-for="project in projects" v-bind:key="project.id">{{project.name}}</option>
+                        <!-- <option value="Xente">Xente</option>
+                        <option value="Imuka">Imuka</option>
+                        <option value="Stanbic">Stanbic</option> -->
                         </select>
+                        <p>{{selected}}</p>
             </base-input>
+   
             </div>
             </div>
             <div class="row">
@@ -41,16 +45,13 @@
             <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
-                        placeholder="Add project here..."
-                        v-model="estimate.developer"
-                        >
+                        placeholder="Add developer here..."
+                        v-model="estimate.developer">
                         <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Select developer...</option>
-                        <option value="1">Benjamin</option>
-                        <option value="2">Beatrice</option>
-                        <option value="3">Ronnie</option>
-                        <option value="4">Olive</option>
+                            <option :value="null">Please select a developer</option>
+                            <option v-for="developer in developers" v-bind:key="developer.id">{{developer.name}}</option>
                         </select>
+                        <p>{{estimate.developer}}</p>
             </base-input>
             </div>
             </div>
@@ -87,8 +88,12 @@
 <script>
 export default {
     name: 'create-estimate-form',
+    props: {
+        // estimates: Array,
+    },
     data(){
         return{
+            selected: null,
             estimate:[
                 {
                     title: '',
@@ -97,7 +102,46 @@ export default {
                     dueDate: '',
                     taskDescription: '',
                 }
+            ],
+            projects: [
+                {   
+                    id: 1,
+                    name: 'Xente', 
+                },
+                {   
+                    id: 2,
+                    name: 'Refactory'
+                },
+                {   
+                    id: 3,
+                    name: 'Imuka Access'
+                },
+                {   
+                    id: 4,
+                    name: 'Kanzu Code', 
+                    
+                    },
+            ],
+            developers: [
+                {
+                    id: 1,
+                    name: 'Benjamin',
+                },
+                {
+                    id: 1,
+                    name: 'Ronnie',
+                },
+                {
+                    id: 1,
+                    name: 'Beatrice',
+                },
+                {
+                    id: 1,
+                    name: 'Sunday',
+                }
+                
             ]
+            
         }
         
     },
@@ -109,6 +153,7 @@ export default {
       handleSave() {
       console.log('testing save' )
       },
+
     },
     
 }
