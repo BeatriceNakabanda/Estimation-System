@@ -238,7 +238,7 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
           },
           {
             id: 4,
-            title: 'Onboarding',
+            title: 'Dashboard',
             project: 'Xente',
             developer: 'Olive',
             // dateCreated: '17-07-2018',
