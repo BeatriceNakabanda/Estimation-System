@@ -33,6 +33,7 @@
           <th class="bgcolor"></th>
         </template>
           <template class="table-row" slot-scope="{row} ">
+            <td class="">{{row.id}}</td>
           <td class="title">
             {{row.title}}
           </td>
@@ -67,7 +68,7 @@
               </router-link>
             </span>
             <span class="action-icons">
-              <router-link  to="/" id="view" >
+              <router-link  to="/" id="view" @click="editMode(estimate.id)">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
                 <modal :show.sync="modal">
                     <template slot="header">
@@ -187,7 +188,7 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
       CreateEstimateForm,
     },
     props: {
-      // estimates: Array,
+      estimates: Array,
       type: {
         type: String
       },
@@ -195,72 +196,11 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
     },
     data() {
       return {
+        editing: null,
         modal : false,
         modal1: false,
         modal2: false,
-        estimates: [
-          {
-            id: 1,
-            title: 'Dashboard',
-            project: 'Refactory',
-            developer: 'Benjamin',
-            // dateCreated: '17-07-2018',
-            // dateEstimated: '18-07-2018',
-            status: 'Estimated',
-            statusType: 'success',
-            dueDate: '',
-            taskDescription: '',
-          },
-          {
-            id: 2,
-            title: 'SDK',
-            project: 'Xente',
-            developer: 'Beatrice',
-            // dateCreated: '17-07-2018',
-            // dateEstimated: '',
-            status: 'Draft',
-            statusType: 'warning',
-            dueDate: '',
-            taskDescription: '',
 
-          },
-          {
-            id: 3,
-            title: 'Registration',
-            project: 'Refactory',
-            developer: 'Ronnie',
-            // dateCreated: '17-07-2018',
-            // dateEstimated: '18-07-2018',
-            status: 'Estimated',
-            statusType: 'success',
-            dueDate: '',
-            taskDescription: '',
-          },
-          {
-            id: 4,
-            title: 'Dashboard',
-            project: 'Xente',
-            developer: 'Olive',
-            // dateCreated: '17-07-2018',
-            // dateEstimated: '',
-            status: 'Draft',
-            statusType: 'warning',
-            dueDate: '',
-            taskDescription: '',  
-          },
-          {
-            id: 5,
-            title: 'Login',
-            project: 'Xente',
-            developer: 'Sunday',
-            // dateCreated: '17-07-2018',
-            // dateEstimated: '',
-            status: 'Submitted',
-            statusType: 'info',
-            dueDate: '',
-            taskDescription: '',
-          },
-        ]
       }
     },
   methods: {
@@ -272,6 +212,15 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
         const id = lastId + 1;
         const newEstimate = { ...estimate, id };
       this.estimates = [...this.estimates, newEstimate];
+    },
+    editMode(id){
+      this.editing = id
+    },
+    editEstimate(estimate){
+      if(estimate.title === '' || estimate.project === '' || estimate.developer || estimate.dueDate || estimate.taskDescription) 
+      return
+      this.$emit('edit: estimate', estimate.id, estimate)
+      this.editing = null
     }
   }
   }
