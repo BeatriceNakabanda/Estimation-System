@@ -5,24 +5,24 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   title: {
     type: String,
-    required: true
+     required: "this is required"
   },
 
   Project: {
     type: String,
-    required: true
+    required: "this is required"
   },
   Developer: {
     type: String,
-    required: true
+    required: "this is required"
   },
   password: {
     type: String,
-    required: true
+    required: "this is required"
   },
   dueDate: {
     type: Date,
-    required:true
+    required: "this is required"
   }
 });
 
