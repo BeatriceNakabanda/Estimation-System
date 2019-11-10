@@ -10,46 +10,6 @@
       "dueDate": "",
       "taskDescription":""
     },
-    {
-      "id": 2,
-      "title": "Dashboard",
-      "project": "Refactory",
-      "developer": "Benjamin",
-      "status": "Estimated",
-      "statusType": "success",
-      "dueDate": "",
-      "taskDescription":""
-    },
-    {
-      "id": 3,
-      "title": "SDK",
-      "project": "Xente",
-      "developer": "Beatrice",
-      "status": "Draft",
-      "statusType": "warning",
-      "dueDate": "",
-      "taskDescription":""
-    },
-    {
-      "id": 4,
-      "title": "Registration",
-      "project": "Refactory",
-      "developer": "Ronnie",
-      "status": "Estimated",
-      "statusType": "success",
-      "dueDate": "",
-      "taskDescription":""
-    },
-    {
-      "id": 5,
-      "title": "Dashboard",
-      "project": "Refactory",
-      "developer": "Benjamin",
-      "status": "Estimated",
-      "statusType": "success",
-      "dueDate": "",
-      "taskDescription":""
-    }
     
   ]
 }
