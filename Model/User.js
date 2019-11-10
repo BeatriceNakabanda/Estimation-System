@@ -1,4 +1,4 @@
-onst mongoose = require("mongoose");
+const mongoose = require("mongoose");
 //creating schema object called schema
 const Schema = mongoose.Schema;
 // Create User schema which is the object of schema
