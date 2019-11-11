@@ -16,10 +16,7 @@ const UserSchema = new Schema({
     type: String,
     required: "this is required"
   },
-  password: {
-    type: String,
-    required: "this is required"
-  },
+  
   dueDate: {
     type: Date,
     required: "this is required"
