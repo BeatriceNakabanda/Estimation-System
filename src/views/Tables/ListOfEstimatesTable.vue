@@ -33,7 +33,6 @@
           <th class="bgcolor"></th>
         </template>
           <template class="table-row" slot-scope="{row} ">
-            <td class="">{{row.id}}</td>
           <td class="title">
             {{row.title}}
           </td>
