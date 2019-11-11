@@ -31,9 +31,9 @@
         //  },
         methods: {
           // creating an edit estimate method
-          editEstimate(id, updatedEstimate){
-            this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
-          }
+          // editEstimate(id, updatedEstimate){
+          //   this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
+          // }
         }
       }
     }
