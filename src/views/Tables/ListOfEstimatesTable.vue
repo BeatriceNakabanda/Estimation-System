@@ -77,7 +77,7 @@
                       <form role="form">
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Title</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Title</h6>
                           </div>
                           <div class="col-sm">
                             <base-input alternative
@@ -90,7 +90,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Developer</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Developer</h6>
                           </div>
                           <div class="col-sm">
                             <base-input alternative
@@ -110,7 +110,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Project</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
                           </div>
                           <div class="col-sm">
                             <base-input alternative
@@ -131,7 +131,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Due Date</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Due Date</h6>
                           </div>
                           <div class="col-sm">
                             <base-input addon-left-icon="ni ni-calendar-grid-58"
@@ -146,7 +146,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Main Task Description</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Main Task Description</h6>
                           </div>
                           <div class="col-sm-12">
                             <base-input alternative="">
