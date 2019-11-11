@@ -10,92 +10,8 @@
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
                       </template>
-                      <div>
-                        <form role="form">
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class=" float-left heading-small text-muted mb-4 ">Title</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Edit title here..."
-                                      v-model="estimates.title"
-                                      >
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Project</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Edit developer here..."
-                                      v-model="estimates.project"
-                                      >
-                                      <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Choose project...</option>
-                                        <option value="1">Refactory</option>
-                                        <option value="2">Xente</option>
-                                        <option value="3">Imuka</option>
-                                        <option value="4">Stanbic</option>
-                                      </select>
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Assign to</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Add project here..."
-                                      v-model="estimates.assignTo"
-                                      >
-                                      <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Select developer...</option>
-                                        <option value="1">Benjamin</option>
-                                        <option value="2">Beatrice</option>
-                                        <option value="3">Ronnie</option>
-                                        <option value="4">Olive</option>
-                                      </select>
-                            </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Due Date</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input addon-left-icon="ni ni-calendar-grid-58"
-                                          alternative
-                                          class="mb-3"
-                                          placeholder="17-07-2019"
-                                          v-model="estimates.dueDate"
-                              >
-                                  
-                              </base-input>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-5">
-                              <h6 class="heading-small text-muted mb-4">Main Task Description </h6>
-                            </div>
-                            <div class="col-sm-12">
-                              <base-input alternative="">
-                                  <textarea rows="4" v-model="estimates.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
-                              </base-input>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <template slot="footer">
-                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal1 = false">Save</base-button>
-                          <base-button class="shadow-none" type="primary">Send to Developer</base-button>
-                      </template>
+                      <!-- create estimate form -->
+                      <CreateEstimateForm @add:estimate="addEstimate" />
                   </modal>
         </div>
       </div>
@@ -109,8 +25,8 @@
                   :data="estimates" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">Title</th>
-          <th class="bgcolor">Developer</th>
           <th class="bgcolor">Project</th>
+          <th class="bgcolor">Developer</th>
           <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Date Estimated</th>
           <th class="bgcolor">Status</th>
@@ -120,12 +36,11 @@
           <td class="title">
             {{row.title}}
           </td>
-          
-          <td class="developer">
-            {{row.developer}}
-          </td>
           <td class="project">
             {{row.project}}
+          </td>
+          <td class="developer">
+            {{row.developer}}
           </td>
           <td class="dateCreated">
             {{row.dateCreated}}
@@ -162,7 +77,7 @@
                       <form role="form">
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Title</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Title</h6>
                           </div>
                           <div class="col-sm">
                             <base-input alternative
@@ -175,7 +90,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Developer</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Developer</h6>
                           </div>
                           <div class="col-sm">
                             <base-input alternative
@@ -195,7 +110,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Project</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
                           </div>
                           <div class="col-sm">
                             <base-input alternative
@@ -216,7 +131,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Due Date</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Due Date</h6>
                           </div>
                           <div class="col-sm">
                             <base-input addon-left-icon="ni ni-calendar-grid-58"
@@ -231,7 +146,7 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4">Main Task Description</h6>
+                            <h6 class="heading-small text-muted mb-4 float-left">Main Task Description</h6>
                           </div>
                           <div class="col-sm-12">
                             <base-input alternative="">
@@ -257,17 +172,22 @@
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
+      <!-- <base-pagination total="30"></base-pagination> -->
+      <base-pagination></base-pagination>
+
     </div>
-    <!-- mmm -->
     
   </div>
 </template>
 <script>
-
+import CreateEstimateForm from '../Forms/CreateEstimateForm'
   export default {
     name: 'estimates-table',
+    components: {
+      CreateEstimateForm,
+    },
     props: {
+      // estimates: Array,
       type: {
         type: String
       },
@@ -282,62 +202,78 @@
           {
             id: 1,
             title: 'Dashboard',
-            developer: 'Benjamin',
             project: 'Refactory',
-            dateCreated: '17-07-2018',
-            dateEstimated: '18-07-2018',
+            developer: 'Benjamin',
+            // dateCreated: '17-07-2018',
+            // dateEstimated: '18-07-2018',
             status: 'Estimated',
             statusType: 'success',
+            dueDate: '',
+            taskDescription: '',
           },
           {
             id: 2,
             title: 'SDK',
-            developer: 'Beatrice',
             project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
+            developer: 'Beatrice',
+            // dateCreated: '17-07-2018',
+            // dateEstimated: '',
             status: 'Draft',
             statusType: 'warning',
+            dueDate: '',
+            taskDescription: '',
 
           },
           {
             id: 3,
             title: 'Registration',
-            developer: 'Ronnie',
             project: 'Refactory',
-            dateCreated: '17-07-2018',
-            dateEstimated: '18-07-2018',
+            developer: 'Ronnie',
+            // dateCreated: '17-07-2018',
+            // dateEstimated: '18-07-2018',
             status: 'Estimated',
-            action: '',
             statusType: 'success',
+            dueDate: '',
+            taskDescription: '',
           },
           {
             id: 4,
-            title: 'Onboarding',
-            developer: 'Olive',
+            title: 'Dashboard',
             project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
+            developer: 'Olive',
+            // dateCreated: '17-07-2018',
+            // dateEstimated: '',
             status: 'Draft',
-            action: '',
             statusType: 'warning',
-           
+            dueDate: '',
+            taskDescription: '',  
           },
           {
             id: 5,
             title: 'Login',
-            developer: 'Sunday',
             project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
+            developer: 'Sunday',
+            // dateCreated: '17-07-2018',
+            // dateEstimated: '',
             status: 'Submitted',
-            action: '',
             statusType: 'info',
-           
+            dueDate: '',
+            taskDescription: '',
           },
         ]
       }
+    },
+  methods: {
+    addEstimate(estimate){
+        const lastId =
+          this.estimates.length > 0
+            ? this.estimates[this.estimates.length - 1].id
+            : 0;
+        const id = lastId + 1;
+        const newEstimate = { ...estimate, id };
+      this.estimates = [...this.estimates, newEstimate];
     }
+  }
   }
 </script>
 <style>

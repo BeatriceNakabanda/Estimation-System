@@ -1,28 +1,28 @@
-onst mongoose = require("mongoose");
+const mongoose = require("mongoose");
 //creating schema object called schema
 const Schema = mongoose.Schema;
 // Create User schema which is the object of schema
 const UserSchema = new Schema({
   title: {
     type: String,
-    required: true
+     required: "this is required"
   },
 
   Project: {
     type: String,
-    required: true
+    required: "this is required"
   },
   Developer: {
     type: String,
-    required: true
+    required: "this is required"
   },
   password: {
     type: String,
-    required: true
+    required: "this is required"
   },
   dueDate: {
     type: Date,
-    required:true
+    required: "this is required"
   }
 });
 
