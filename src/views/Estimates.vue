@@ -6,7 +6,8 @@
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                    <estimates-table title="Light Table" ></estimates-table>
+                    <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
+                    <estimates-table title="Light Table" :estimates="estimates"></estimates-table>
                 </div>
             </div>
         </div>
@@ -14,10 +15,27 @@
 </template>
 <script>
   import EstimatesTable from './Tables/ListOfEstimatesTable'
+  import axios from 'axios'
   export default {
     name: 'estimates',
     components: {
       EstimatesTable
+    },
+    data(){
+      return{
+         estimates: [ ],
+        //  async created(){
+        //    try{
+        //      const res = await axios.get(``)
+        //    }
+        //  },
+        methods: {
+          // creating an edit estimate method
+          editEstimate(id, updatedEstimate){
+            this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
+          }
+        }
+      }
     }
   }
 </script>

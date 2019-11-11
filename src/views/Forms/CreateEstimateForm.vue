@@ -88,21 +88,20 @@
 <script>
 export default {
     name: 'create-estimate-form',
-    props: {
-        // estimates: Array,
-    },
     data(){
         return{
             selected: null,
-            estimate:[
-                {
-                    title: '',
-                    project: '',
-                    developer: '',
-                    dueDate: '',
-                    taskDescription: '',
-                }
-            ],
+           
+        estimate:
+          {
+            title: '',
+            project: '',
+            developer: '',
+            status: '',
+            statusType: '',
+            dueDate: '',
+            taskDescription: '',
+          },
             projects: [
                 {   
                     id: 1,
