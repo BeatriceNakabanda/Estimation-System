@@ -14,7 +14,7 @@
                         <form role="form">
                           <div class="row">
                             <div class="col-sm-3">
-                              <h6 class="heading-small text-muted mb-4">Title</h6>
+                              <h6 class=" float-left heading-small text-muted mb-4 ">Title</h6>
                             </div>
                             <div class="col-sm">
                               <base-input alternative
