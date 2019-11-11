@@ -212,15 +212,15 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
         const newEstimate = { ...estimate, id };
       this.estimates = [...this.estimates, newEstimate];
     },
-    editMode(id){
-      this.editing = id
-    },
-    editEstimate(estimate){
-      if(estimate.title === '' || estimate.project === '' || estimate.developer || estimate.dueDate || estimate.taskDescription) 
-      return
-      this.$emit('edit: estimate', estimate.id, estimate)
-      this.editing = null
-    }
+    // editMode(id){
+    //   this.editing = id
+    // },
+    // editEstimate(estimate){
+    //   if(estimate.title === '' || estimate.project === '' || estimate.developer || estimate.dueDate || estimate.taskDescription) 
+    //   return
+    //   this.$emit('edit: estimate', estimate.id, estimate)
+    //   this.editing = null
+    // }
   }
   }
 </script>
