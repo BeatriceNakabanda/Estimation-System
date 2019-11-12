@@ -15,7 +15,7 @@
             </div>
             </div>
             <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3">          
                 <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
             </div>
             <div class="col-sm">

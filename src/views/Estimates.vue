@@ -16,6 +16,7 @@
 <script>
   import EstimatesTable from './Tables/ListOfEstimatesTable'
   import axios from 'axios'
+
   export default {
     name: 'estimates',
     components: {
@@ -23,12 +24,7 @@
     },
     data(){
       return{
-         estimates: [ ],
-        //  async created(){
-        //    try{
-        //      const res = await axios.get(``)
-        //    }
-        //  },
+         estimates: [], 
         methods: {
           // creating an edit estimate method
           // editEstimate(id, updatedEstimate){
@@ -36,7 +32,16 @@
           // }
         }
       }
-    }
+    },
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:3000/estimates`)
+
+        this.estimates = res.data; 
+      } catch(e){
+        console.error(e)
+      }
+    } 
   }
 </script>
 <style>
