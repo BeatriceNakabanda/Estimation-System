@@ -51,7 +51,7 @@
         <td class="table-head" scope="col"><b>Adjusted SH</b></td>
         <td class="table-head" scope="col">
           <span class="action-icons">
-            <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x"></i>
+            <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i>
           </span>
         </td>
     </tr>
@@ -462,5 +462,7 @@ iframe {
   
 }
 } */
-
+#comments{
+  cursor:pointer;
+}
 </style>
