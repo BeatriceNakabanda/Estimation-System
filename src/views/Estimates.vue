@@ -7,9 +7,9 @@
             <div class="row">
                 <div class="col">
                     <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
-                    <estimates-table title="Light Table" :estimates="estimates"></estimates-table>
+                    <estimates-table  :estimates="estimates"></estimates-table>
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
 </template>
@@ -33,6 +33,7 @@
         }
       }
     },
+    //fetches estimates when the component is created
     async created(){
       try {
         const res = await axios.get(`http://localhost:3000/estimates`)
@@ -41,7 +42,9 @@
       } catch(e){
         console.error(e)
       }
-    } 
+    },
+  
+
   }
 </script>
 <style>

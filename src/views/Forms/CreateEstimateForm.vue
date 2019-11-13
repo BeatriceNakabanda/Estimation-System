@@ -18,31 +18,26 @@
             <div class="col-sm-3">          
                 <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
             </div>
-            <div class="col-sm">
+            <!-- <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
                         placeholder="Edit  project here..." 
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selected"         >
-                        <!-- <option v-for="estimate in estimates" v-bind:key="estimate.id">
-                            {{ estimate.project }}
-                        </option> -->
+                        
                         <option :value="null">Please select a project</option>
                         <option v-for="project in projects" v-bind:key="project.id">{{project.name}}</option>
-                        <!-- <option value="Xente">Xente</option>
-                        <option value="Imuka">Imuka</option>
-                        <option value="Stanbic">Stanbic</option> -->
                         </select>
                         <p>{{selected}}</p>
             </base-input>
    
-            </div>
+            </div> -->
             </div>
             <div class="row">
             <div class="col-sm-3">
                 <h6 class="heading-small text-muted mb-4 float-left">Assign to</h6>
             </div>
-            <div class="col-sm">
+            <!-- <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
@@ -53,7 +48,7 @@
                         </select>
                         <p>{{estimate.developer}}</p>
             </base-input>
-            </div>
+            </div> -->
             </div>
             <div class="row">
             <div class="col-sm-3">
@@ -86,6 +81,7 @@
         </form>
 </template>
 <script>
+
 export default {
     name: 'create-estimate-form',
     data(){
@@ -94,6 +90,7 @@ export default {
            
         estimate:
           {
+              name: '',
             title: '',
             project: '',
             developer: '',
@@ -152,7 +149,7 @@ export default {
       handleSave() {
       console.log('testing save' )
       },
-
+ 
     },
     
 }

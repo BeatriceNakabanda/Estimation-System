@@ -1,50 +1,63 @@
 {
-    "estimates": [
-        {
-            "id": 1,
-            "title": "Dashboard",
-            "project":"Refactory",
-            "developer": "Benjamin",
-            "status": "Estimated",
-            "statusType": "success",
-            "dueDate": "",
-            "taskDescription":""
-        }
-    ],
-    "projects": [
-        {
-            "id": 1,
-            "name": "Xente"
-        },
-        {
-            "id": 2,
-            "name": "Refactory"
-        },
-        {
-            "id": 3,
-            "name": "Imuka Access"
-        },
-        {
-            "id": 4,
-            "name": "Kanzu Code"
-        }
-    ],
-    "developers": [
-        {
-            "id": 1,
-            "name": "Xente"
-        },
-        {
-            "id": 2,
-            "name": "Ronnie"
-        },
-        {
-            "id": 3,
-            "name": "Beatrice"
-        },
-        {
-            "id": 4,
-            "name": "Sunday"
-        }            
-    ]
+  "estimates": [
+    {
+      "id": 1,
+      "title": "Dashboard",
+      "project": "Refactory",
+      "developer": "Benjamin",
+      "status": "Estimated",
+      "statusType": "success",
+      "dueDate": "",
+      "taskDescription": ""
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "title": "",
+      "id": 5
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Xente"
+    },
+    {
+      "id": 2,
+      "name": "Refactory"
+    },
+    {
+      "id": 3,
+      "name": "Imuka Access"
+    },
+    {
+      "id": 4,
+      "name": "Kanzu Code"
+    }
+  ],
+  "developers": [
+    {
+      "id": 1,
+      "name": "Xente"
+    },
+    {
+      "id": 2,
+      "name": "Ronnie"
+    },
+    {
+      "id": 3,
+      "name": "Beatrice"
+    },
+    {
+      "id": 4,
+      "name": "Sunday"
+    }
+  ]
 }

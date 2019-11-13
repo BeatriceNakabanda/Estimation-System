@@ -181,6 +181,10 @@
 </template>
 <script>
 import CreateEstimateForm from '../Forms/CreateEstimateForm'
+import axios from 'axios';
+
+const baseURL = "http://localhost:3000/estimates"
+
   export default {
     name: 'estimates-table',
     components: {
@@ -188,10 +192,11 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
     },
     props: {
       estimates: Array,
+      estimate: Array,
       type: {
         type: String
       },
-      title: String
+      // title: String
     },
     data() {
       return {
@@ -199,19 +204,19 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
         modal : false,
         modal1: false,
         modal2: false,
+        title: ''
 
       }
     },
   methods: {
-    addEstimate(estimate){
-        const lastId =
-          this.estimates.length > 0
-            ? this.estimates[this.estimates.length - 1].id
-            : 0;
-        const id = lastId + 1;
-        const newEstimate = { ...estimate, id };
-      this.estimates = [...this.estimates, newEstimate];
-    },
+    async addEstimate(){
+      // const newEstimate = { ...estimate};
+      const res = await axios.post(baseURL, {title: this.title})
+
+      this.estimates = [...this.estimates, res.data]
+      this.estimate = '' 
+    }
+
     // editMode(id){
     //   this.editing = id
     // },
