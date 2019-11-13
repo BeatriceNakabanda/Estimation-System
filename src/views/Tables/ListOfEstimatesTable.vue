@@ -11,7 +11,7 @@
                           <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
                       </template>
                       <!-- create estimate form -->
-                      <CreateEstimateForm @add:estimate="addEstimate" />
+                      <CreateEstimateForm  />
                   </modal>
         </div>
       </div>
@@ -181,6 +181,10 @@
 </template>
 <script>
 import CreateEstimateForm from '../Forms/CreateEstimateForm'
+import axios from 'axios';
+
+const baseURL = "http://localhost:3000/estimates"
+
   export default {
     name: 'estimates-table',
     components: {
@@ -199,19 +203,13 @@ import CreateEstimateForm from '../Forms/CreateEstimateForm'
         modal : false,
         modal1: false,
         modal2: false,
+       
 
       }
     },
   methods: {
-    addEstimate(estimate){
-        const lastId =
-          this.estimates.length > 0
-            ? this.estimates[this.estimates.length - 1].id
-            : 0;
-        const id = lastId + 1;
-        const newEstimate = { ...estimate, id };
-      this.estimates = [...this.estimates, newEstimate];
-    },
+
+
     // editMode(id){
     //   this.editing = id
     // },

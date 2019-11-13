@@ -10,27 +10,10 @@
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Add New Project</h3>
                       </template>
+                      <!-- Add project form -->
                       <div>
-                        <form role="form">
-                          <div class="row">
-                            <div class="col-sm-4">
-                              <h6 class="heading-small text-muted mb-4">Project Name</h6>
-                            </div>
-                            <div class="col-sm">
-                              <base-input alternative
-                                      class="mb-3"
-                                      placeholder="Add project name here..."
-                                      v-model="form.project"
-                                      >
-                            </base-input>
-                            </div>
-                          </div>
-                        </form>
+                         <AddProjectForm  />
                       </div>
-                      <template slot="footer">
-                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal1 = false">Close</base-button>
-                          <base-button class="shadow-none" type="primary">Add</base-button>
-                      </template>
                   </modal>
         </div>
       </div>
@@ -41,7 +24,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
+                  :data="projects" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">No</th>
           <th class="bgcolor">Project</th>
@@ -55,12 +38,12 @@
           <td>
             <div class="media" > 
               <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.no}}</span>
+                <span class="name mb-0 text-sm">{{row.id}}</span>
               </div>
             </div>
           </td>
           <td class="project">
-            {{row.project}}
+            {{row.name}}
           </td>
           <td>       
           </td>
@@ -86,8 +69,14 @@
   </div>
 </template>
 <script>
+import AddProjectForm from '../Forms/AddProjectForm'
+import axios from 'axios';
+
 export default {
     name: 'projects-table',
+    components: {
+      AddProjectForm,
+    },
     props: {
       type: {
         type: String
@@ -97,36 +86,20 @@ export default {
     data() {
       return {
         modal1: false,
+        projects: [],
         form : {
                 project: '',
             },
-        tableData: [
-          {
-            id: 1,
-            no: '1',
-            project: 'Refactory',
-          },
-          {
-            id: 2,
-            no: '2',
-            project: 'Xente',
-          },
-          {
-            id: 3,
-            no: '3',
-            project: 'Imuka',
-          },
-          {
-            id: 4,
-            no: '4',
-            project: 'Stanbic',
-          },
-          {
-            id: 5,
-            no: '5',
-            project: 'Emata',
-          },
-        ]
+
+      }
+    },
+    async created(){
+      try{
+        const res = await axios.get(`http://localhost:3000/projects`)
+
+        this.projects = res.data;
+      }catch(e){
+        console.error(e)
       }
     }
 }

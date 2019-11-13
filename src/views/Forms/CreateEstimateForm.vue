@@ -10,39 +10,34 @@
                         class="mb-3"
                         placeholder="Edit title here..."
                         v-model="estimate.title"
-                        >
+                       >
             </base-input>
             </div>
             </div>
             <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3">          
                 <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
             </div>
-            <div class="col-sm">
+            <!-- <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
                         placeholder="Edit  project here..." 
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selected"         >
-                        <!-- <option v-for="estimate in estimates" v-bind:key="estimate.id">
-                            {{ estimate.project }}
-                        </option> -->
+                        
                         <option :value="null">Please select a project</option>
                         <option v-for="project in projects" v-bind:key="project.id">{{project.name}}</option>
-                        <!-- <option value="Xente">Xente</option>
-                        <option value="Imuka">Imuka</option>
-                        <option value="Stanbic">Stanbic</option> -->
                         </select>
                         <p>{{selected}}</p>
             </base-input>
    
-            </div>
+            </div> -->
             </div>
             <div class="row">
             <div class="col-sm-3">
                 <h6 class="heading-small text-muted mb-4 float-left">Assign to</h6>
             </div>
-            <div class="col-sm">
+            <!-- <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
@@ -53,7 +48,7 @@
                         </select>
                         <p>{{estimate.developer}}</p>
             </base-input>
-            </div>
+            </div> -->
             </div>
             <div class="row">
             <div class="col-sm-3">
@@ -82,10 +77,14 @@
             </div>
         </div>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save</base-button>
-            <base-button class="shadow-none mt-4" type="primary" @click="handleSubmit">Send to Developer</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send to Developer</base-button>
         </form>
 </template>
 <script>
+import axios from 'axios';
+
+const baseURL = "http://localhost:3000/estimates"
+
 export default {
     name: 'create-estimate-form',
     data(){
@@ -145,14 +144,30 @@ export default {
         
     },
     methods: {
-      handleSubmit() {
-    //   console.log('testing submit')
-      this.$emit('add:estimate', this.estimate)
-      },
+        async addEstimate(){
+        const res = await axios.post(baseURL, {
+            // objects to pass
+            title: this.estimate.title,
+            project: this.estimate.project,
+            developer: this.estimate.developer,
+            status: this.estimate.status,
+            dueDate: this.estimate.dueDate,
+            taskDescription: this.estimate.taskDescription,
+            
+            })
+
+        this.estimates = [...this.estimates, res.data]
+        this.title = '' ,
+        this.project = '',
+        this.developer = '',
+        this.status = '',
+        this.dueDate = '',
+        this.taskDescription = ''
+        },
       handleSave() {
       console.log('testing save' )
       },
-
+ 
     },
     
 }

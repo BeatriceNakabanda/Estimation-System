@@ -15,7 +15,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
+                  :data="developers" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">No</th>
           <th class="bgcolor">Developer</th>
@@ -29,12 +29,12 @@
           <td>
             <div class="media" > 
               <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.no}}</span>
+                <span class="name mb-0 text-sm">{{row.id}}</span>
               </div>
             </div>
           </td>
           <td class="developer">
-            {{row.developer}}
+            {{row.name}}
           </td>
           <td>       
           </td>
@@ -60,6 +60,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
     name: 'developers-table',
     props: {
@@ -71,36 +73,16 @@ export default {
     data() {
       return {
         modal1: false,
-        form : {
-                project: '',
-            },
-        tableData: [
-          {
-            id: 1,
-            no: '1',
-            developer: 'Benjamin',
-          },
-          {
-            id: 2,
-            no: '2',
-            developer: 'Beatrice',
-          },
-          {
-            id: 3,
-            no: '3',
-            developer: 'Ronnie',
-          },
-          {
-            id: 4,
-            no: '4',
-            developer: 'Olive',
-          },
-          {
-            id: 5,
-            no: '5',
-            developer: 'Sunday',
-          },
-        ]
+        developers: [],
+      }
+    }, 
+    async created(){
+      try{
+        const res = await axios.get(`http://localhost:3000/developers`)
+
+        this.developers = res.data;
+      }catch(e){
+        console.error(e)
       }
     }
 }
