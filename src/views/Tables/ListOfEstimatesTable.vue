@@ -11,7 +11,7 @@
                           <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
                       </template>
                       <!-- create estimate form -->
-                      <CreateEstimateForm @add:estimate="addEstimate" />
+                      <CreateEstimateForm  />
                   </modal>
         </div>
       </div>
@@ -192,11 +192,10 @@ const baseURL = "http://localhost:3000/estimates"
     },
     props: {
       estimates: Array,
-      estimate: Array,
       type: {
         type: String
       },
-      // title: String
+      title: String
     },
     data() {
       return {
@@ -204,18 +203,12 @@ const baseURL = "http://localhost:3000/estimates"
         modal : false,
         modal1: false,
         modal2: false,
-        title: ''
+       
 
       }
     },
   methods: {
-    async addEstimate(){
-      // const newEstimate = { ...estimate};
-      const res = await axios.post(baseURL, {title: this.title})
 
-      this.estimates = [...this.estimates, res.data]
-      this.estimate = '' 
-    }
 
     // editMode(id){
     //   this.editing = id

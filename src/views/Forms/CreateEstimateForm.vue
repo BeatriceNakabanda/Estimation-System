@@ -10,7 +10,7 @@
                         class="mb-3"
                         placeholder="Edit title here..."
                         v-model="estimate.title"
-                        >
+                       >
             </base-input>
             </div>
             </div>
@@ -77,10 +77,13 @@
             </div>
         </div>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save</base-button>
-            <base-button class="shadow-none mt-4" type="primary" @click="handleSubmit">Send to Developer</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send to Developer</base-button>
         </form>
 </template>
 <script>
+import axios from 'axios';
+
+const baseURL = "http://localhost:3000/estimates"
 
 export default {
     name: 'create-estimate-form',
@@ -90,7 +93,6 @@ export default {
            
         estimate:
           {
-              name: '',
             title: '',
             project: '',
             developer: '',
@@ -142,10 +144,26 @@ export default {
         
     },
     methods: {
-      handleSubmit() {
-    //   console.log('testing submit')
-      this.$emit('add:estimate', this.estimate)
-      },
+        async addEstimate(){
+        const res = await axios.post(baseURL, {
+            // objects to pass
+            title: this.estimate.title,
+            project: this.estimate.project,
+            developer: this.estimate.developer,
+            status: this.estimate.status,
+            dueDate: this.estimate.dueDate,
+            taskDescription: this.estimate.taskDescription,
+            
+            })
+
+        this.estimates = [...this.estimates, res.data]
+        this.title = '' ,
+        this.project = '',
+        this.developer = '',
+        this.status = '',
+        this.dueDate = '',
+        this.taskDescription = ''
+        },
       handleSave() {
       console.log('testing save' )
       },
