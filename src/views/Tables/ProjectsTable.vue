@@ -10,13 +10,10 @@
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Add New Project</h3>
                       </template>
+                      <!-- Add project form -->
                       <div>
-
+                         <AddProjectForm  />
                       </div>
-                      <template slot="footer">
-                          <base-button class="shadow-none cancel-color" type="secondary" @click="modal1 = false">Close</base-button>
-                          <base-button class="shadow-none" type="primary">Add</base-button>
-                      </template>
                   </modal>
         </div>
       </div>
@@ -72,10 +69,14 @@
   </div>
 </template>
 <script>
+import AddProjectForm from '../Forms/AddProjectForm'
 import axios from 'axios';
 
 export default {
     name: 'projects-table',
+    components: {
+      AddProjectForm,
+    },
     props: {
       type: {
         type: String
