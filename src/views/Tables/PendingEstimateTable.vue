@@ -40,7 +40,7 @@
       <table class="table">
   <thead class="thead-light">
     <tr>
-        <td class="table-head" scope="col"><b>Sub Task</b></td>
+        <td class="table-head" scope="col"><b>Task</b></td>
         <td class="table-head" scope="col"><b>Research</b></td>
         <td class="table-head" scope="col"><b>Planning</b></td>
         <td class="table-head" scope="col"><b>Development</b></td>
@@ -101,147 +101,17 @@
 <tr>
   <td colspan="12" class="text-right">
     <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Row</base-button>
-    <modal :show.sync="modal">
+    <modal :show.sync="modal" id="modal">
       <template slot="header">
-          <h3 class="modal-title " id="exampleModalLabel">Add Sub Task</h3>
+          <h3 class="modal-title " id="exampleModalLabel">New Task</h3>
       </template>
+      <!-- Add task form -->
       <div>
-        <form role="form">
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="text-resize heading-small text-muted mb-4 float-left text-capitalize">Sub Task</h6>
-            </div>
-              <div class="col-sm">
-                  <base-input alternative
-                          class="mb-3"
-                          placeholder="Add sub task here..."
-                          v-model="form.subtask"
-                          >
-                </base-input>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Research</h6>
-            </div>
-            <div class="col-sm">
-              <base-input alternative
-                      class="mb-3"
-                      placeholder="Add research here..."
-                      v-model="form.research"
-                      >
-            </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Planning</h6>
-            </div>
-            <div class="col-sm">
-              <base-input alternative
-                      class="mb-3"
-                      placeholder="Add planning here..."
-                      v-model="form.planning"
-                      >
-            </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Development</h6>
-            </div>
-            <div class="col-sm-9">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add development here..."
-                          v-model="form.development"
-              >
-                  
-              </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Testing</h6>
-            </div>
-            <div class="col-sm-9">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add testing here..."
-                          v-model="form.testing"
-              >
-                  
-              </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Stabilization </h6>
-            </div>
-            <div class="col-sm-9">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add stabilization here..."
-                          v-model="form.stabilization"
-              >
-              </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Certainty</h6>
-            </div>
-            <div class="col-sm">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add certainty here..."
-                          v-model="form.certainty"
-              >
-              <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Add certainty...</option>
-                        <option value="1">5%</option>
-                        <option value="2">10%</option>
-                        <option value="3">15%</option>
-                        <option value="4">20%</option>
-                      </select>
-              </base-input>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Sum hours</h6>
-            </div>
-            <div class="col-sm-1">
-              <p class="styling">0 hrs</p>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Adjusted Sum</h6>
-            </div>
-            <div class="col-sm-1">
-              <p class="styling">0 hrs</p>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Comment</h6>
-            </div>
-            <div class="col-sm-12">
-              <base-input alternative="">
-                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
-              </base-input>
-            </div>
-          </div>
-        </form>
+        <AddTaskForm />
       </div>
         <template slot="footer">
-            <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Close</base-button>
-            <base-button class="shadow-none" type="primary">Add</base-button>
+            <base-button class="shadow-none cancel-color mt--5" type="secondary" @click="modal = false">Close</base-button>
+            <base-button class="shadow-none mt--5" type="primary">Add</base-button>
         </template>
     </modal>
   </td>
@@ -262,9 +132,13 @@
   </div>
 </template>
 <script>
+import AddTaskForm from '../Forms/AddTaskForm'
 
   export default {
     name: 'pending-table',
+    components: {
+      AddTaskForm,
+    },
     props: {
       type: {
         type: String
@@ -449,6 +323,12 @@ iframe {
 .styling{
   font-weight: 400;
   font-size: 14px;
+}
+#modal{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  height: fit-content;
+  margin-top: -12px;
 }
 
 /* resizing the labels for the modal */
