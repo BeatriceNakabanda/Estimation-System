@@ -2,7 +2,7 @@
   <!-- <form method="POST" role="form"> -->
   <form action="/estimate" method="POST" role="form" autocomplete="off">
     <!-- <input type="hidden" name="_id" value="{{estimates.id}}" /> -->
-    <input type="hidden" name="_id" value="{{.id}}" />
+    <!-- <input type="hidden" name="_id" value="{{.id}}" /> -->
     <div>
       <div class="row">
         <div class="col-sm-3">
