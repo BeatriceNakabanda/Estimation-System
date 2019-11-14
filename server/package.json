@@ -1,7 +1,6 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/server.js",
@@ -19,5 +18,10 @@
     "mocha": "^6.2.2",
     "mongoose": "^5.7.6",
     "nodemon": "^1.19.4"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "description": ""
 }
