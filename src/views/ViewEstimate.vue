@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-  import PendingTable from './Tables/ViewEstimateTable'
+  import PendingTable from './Tables/ViewEstimateTable' 
   export default {
     name: 'pending-estimate',
     components: {

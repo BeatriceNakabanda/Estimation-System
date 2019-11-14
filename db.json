@@ -8,8 +8,57 @@
       "status": "Estimated",
       "statusType": "success",
       "dueDate": "",
-      "taskDescription":""
+      "taskDescription": ""
     },
-    
+    {
+      "title": "Login",
+      "project": "",
+      "developer": "",
+      "status": "",
+      "dueDate": "17",
+      "taskDescription": "A user must login",
+      "id": 2
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Xente"
+    },
+    {
+      "id": 2,
+      "name": "Refactory"
+    },
+    {
+      "id": 3,
+      "name": "Imuka Access"
+    },
+    {
+      "id": 4,
+      "name": "Kanzu Code"
+    },
+    {
+      "name": "Login",
+      "id": 5
+    }
+  ],
+  "developers": [
+    {
+      "id": 1,
+      "name": "Benjamin"
+    },
+    {
+      "id": 2,
+      "name": "Ronnie"
+    },
+    {
+      "id": 3,
+      "name": "Beatrice"
+    },
+    {
+      "id": 4,
+      "name": "Sunday"
+    }
   ]
+  
 }
