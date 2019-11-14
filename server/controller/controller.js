@@ -47,7 +47,7 @@ function updateInfo(req, res) {
           handleValidationError(err, req.body);
           res.render("employee/andEdit", {
             viewTitle: "My Information",
-            employee: req.body
+            estimate: req.body
           });
         } else console.log("error" + err);
       }
