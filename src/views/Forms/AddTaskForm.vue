@@ -1,6 +1,19 @@
 <template>
         <form role="form ">  
-          <div class="row mt--4">
+         <div class="row mt--4">
+             <div class="col-sm-7"></div>
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted float-left text-capitalize text-resize">Sum hours</h6>
+              <h6 class="heading-small text-muted float-left text-capitalize text-resize mt--2">Adjusted Sum</h6>
+
+            </div>
+            <div class="col-sm-1">
+              <p class="styling">0.00 hrs</p>
+              <p class="styling mt--2">0.00 hrs</p>
+
+            </div> 
+          </div>
+          <div class="row mt--2">
             <div class="col-sm-3 ">
               <h6 class="text-resize heading-small text-muted float-left text-capitalize">Task</h6>
             </div>
@@ -11,23 +24,24 @@
                           v-model="form.subtask"
                           >
                 </base-input>
-              </div>
-              
+              </div>  
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Research</h6>
             </div>
             <div class="col-sm">
+                
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
                       v-model="form.research"
                       >
             </base-input>
+
             </div>
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted float-left text-capitalize text-resize">Planning</h6>
             </div>
@@ -40,7 +54,7 @@
             </base-input>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Development</h6>
             </div>
@@ -55,7 +69,7 @@
               </base-input>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted float-left text-capitalize text-resize">Testing</h6>
             </div>
@@ -70,7 +84,7 @@
               </base-input>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Stabilization </h6>
             </div>
@@ -84,7 +98,7 @@
               </base-input>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted float-left text-capitalize text-resize">Certainty</h6>
             </div>
@@ -105,7 +119,7 @@
               </base-input>
             </div>  
           </div>
-          <div class="row">
+          <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted float-left text-capitalize text-resize">Comment</h6>
             </div>

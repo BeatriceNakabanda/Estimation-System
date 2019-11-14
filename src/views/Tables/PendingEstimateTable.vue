@@ -103,7 +103,7 @@
     <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Row</base-button>
     <modal :show.sync="modal" id="modal">
       <template slot="header">
-          <h3 class="modal-title " id="exampleModalLabel">New Task</h3>
+          <h2 class="modal-title " id="exampleModalLabel">New Task</h2>
       </template>
       <!-- Add task form -->
       <div>
@@ -325,10 +325,8 @@ iframe {
   font-size: 14px;
 }
 #modal{
-  padding-bottom: 0px;
-  margin-bottom: 0px;
   height: fit-content;
-  margin-top: -12px;
+  margin-top: -15px;
 }
 
 /* resizing the labels for the modal */
