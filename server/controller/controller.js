@@ -66,7 +66,7 @@ router.get("/estimates", (req, res) => {
   Employee.find((err, docs) => {
     if (!err) {
       res.render("./client/src/views/Tables/ListOfEstimatesTable.vue", {
-        list: docs
+        estimates: docs
       });
       // console.log(Employee);
     } else {
@@ -105,7 +105,6 @@ router.get("estimates/:id", (req, res) => {
   Employee.findById(req.params.id, (err, doc) => {
     if (!err) {
       res.render("../client/src/views/Tables/ListOfEstimatesTable.vue", {
-        viewTitle: "Update",
         estimates: doc
       });
     }
