@@ -1,64 +1,71 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
 const express = require("express");
 var router = express.Router();
 const mongoose = require("mongoose");
-const Employee = mongoose.model("estimateRequest");
+const Estimates = mongoose.model("estimateRequest");
+
 // CRUD operations
-router.get("/", (req, res) => {
-  res.render("employee/andEdit", {
-    viewTitle: "My Information"
+router.get("/estimates", (req, res) => {
+  res.render("../src/views/Tables/ListOfEstimatesTable", {
+    estimates: req.body
   });
 });
 
-router.post("/", (req, res) => {
+router.post("/estimates", (req, res) => {
   if (req.body._id == "") insertdata(req, res);
   else updateInfo(req, res);
 });
 
 function insertdata(req, res) {
-  var employee = new Employee();
+  var estimate = new Estimates();
 
-  employee.fullName = req.body.fullName;
-  employee.email = req.body.email;
-  employee.mobile = req.body.mobile;
-  employee.city = req.body.city;
-  employee.save((err, doc) => {
+  estimate.title = req.body.title;
+  estimate.taskDescription = req.body.taskDescription;
+  estimate.project = req.body.project;
+  estimate.developer = req.body.developer;
+  estimate.project = req.body.project;
+  estimate.status = req.body.status;
+  estimate.createdDate = req.body.createdDate;
+
+  // eslint-disable-next-line no-unused-vars
+  estimate.save((err, doc) => {
     if (!err) {
-      res.redirect("employee/list");
+      res.redirect("../client/src/views/Tables/ListOfEstimatesTable");
     } else {
       if (err.name == "ValidationError") handleValidationError(err, req.body);
-      res.render("employee/andEdit", {
-        viewTitle: "My Information",
-        employee: req.body
+      res.render("../client/src/views/Tables/ListOfEstimatesTable.vue", {
+        estimate: req.body
       });
       //console.log("error" + err);
     }
   });
 }
 function updateInfo(req, res) {
-  Employee.findByIdAndUpdate(
+  Estimates.findByIdAndUpdate(
     { _id: req.body._id },
     req.body,
     { new: true },
+    // eslint-disable-next-line no-unused-vars
     (err, doc) => {
       if (!err) {
-        res.redirect("employee/list");
+        res.redirect("/estimates");
       } else {
         if (err.name == "handleValidationError") {
           handleValidationError(err, req.body);
-          res.render("employee/andEdit", {
-            viewTitle: "My Information",
-            estimate: req.body
+          res.render("../client/src/views/Tables/ListOfEstimatesTable.vue", {
+            estimates: req.body
           });
         } else console.log("error" + err);
       }
     }
   );
 }
-router.get("/list", (req, res) => {
+router.get("/estimates", (req, res) => {
   // res.json("fromlist");
   Employee.find((err, docs) => {
     if (!err) {
-      res.render("employee/list", {
+      res.render("./client/src/views/Tables/ListOfEstimatesTable.vue", {
         list: docs
       });
       // console.log(Employee);
@@ -71,31 +78,44 @@ router.get("/list", (req, res) => {
 function handleValidationError(err, body) {
   for (field in err.errors) {
     switch (err.errors[field].path) {
-      case "fullName":
-        body["fullNameError"] = err.errors[field].message;
+      case "title":
+        body["titleError"] = err.errors[field].message;
         break;
-      case "email":
-        body["emailError"] = err.errors[field].message;
+      case "developer":
+        body["developerError"] = err.errors[field].message;
+        break;
+      case "status":
+        body["projectError"] = err.errors[field].message;
+        break;
+      case "statusType":
+        body["statusTypeError"] = err.errors[field].message;
+        break;
+      case "dueDate":
+        body["dueDateError"] = err.errors[field].message;
+        break;
+      case "taskDescription":
+        body["taskDescriptionError"] = err.errors[field].message;
         break;
       default:
         break;
     }
   }
 }
-router.get("/:id", (req, res) => {
+router.get("estimates/:id", (req, res) => {
   Employee.findById(req.params.id, (err, doc) => {
     if (!err) {
-      res.render("employee/andEdit", {
+      res.render("../client/src/views/Tables/ListOfEstimatesTable.vue", {
         viewTitle: "Update",
-        employee: doc
+        estimates: doc
       });
     }
   });
 });
 router.get("/delete/:id", (req, res) => {
+  // eslint-disable-next-line no-unused-vars
   Employee.findByIdAndDelete(req.params.id, (err, doc) => {
     if (!err) {
-      res.redirect("/employee/list");
+      res.redirect("../client/src/views/Tables/ListOfEstimatesTable.vue");
     } else {
       console.log("Error" + err);
     }
@@ -103,4 +123,3 @@ router.get("/delete/:id", (req, res) => {
 });
 //exporting the router object
 module.exports = router;
-© 2019 GitHub, Inc.
