@@ -1,19 +1,21 @@
 <template>
         <form role="form ">  
          <div class="row mt--4">
-             <div class="col-sm-7"></div>
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted float-left text-capitalize text-resize">Sum hours</h6>
-              <h6 class="heading-small text-muted float-left text-capitalize text-resize mt--2">Adjusted Sum</h6>
-
+           <div class="col-sm-3"></div>
+            <div class="col-sm-2">
+              <h6 class="heading-small text-capitalize float-left  text-resize">Sum hours: </h6>
             </div>
-            <div class="col-sm-1">
-              <p class="styling">0.00 hrs</p>
-              <p class="styling mt--2">0.00 hrs</p>
-
+            <div class="col-sm-2 ml-2">
+              <h6 class="heading-small  text-capitalize float-left  text-resize">0.00 hrs</h6>
             </div> 
+            <div class="col-sm-3 ">
+              <h6 class="heading-small text-capitalize float-left  text-resize ">Adjusted Sum:</h6>
+            </div>
+            <div class="col-sm-1 ml--3">
+              <h6 class="heading-small  text-capitalize float-left  text-resize">0.00 hrs</h6>
+            </div>
           </div>
-          <div class="row mt--2">
+          <div class="row ">
             <div class="col-sm-3 ">
               <h6 class="text-resize heading-small text-muted float-left text-capitalize">Task</h6>
             </div>
@@ -87,6 +89,7 @@
           <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Stabilization </h6>
+              <i class="fas fa-info-circle ml-2 mt-2  btn-tooltip" id="myicon" v-b-tooltip.hover.right title="Stabilization ...."></i>
             </div>
             <div class="col-sm-9">
               <base-input 
@@ -101,6 +104,7 @@
           <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted float-left text-capitalize text-resize">Certainty</h6>
+              <i class="fas fa-info-circle  mr-2 mt-2 " id="myicon"></i>
             </div>
             <div class="col-sm">
               <base-input 
@@ -148,3 +152,14 @@ export default {
     }
 }
 </script>
+<style>
+#myicon{
+  color: #5e72e4;
+  
+}
+#myicon:hover {
+  cursor:pointer;
+  color: #d10572;
+}
+#myicon:hover, #myiconactive {font-size: 120%;}
+</style>
