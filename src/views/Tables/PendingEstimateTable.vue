@@ -40,7 +40,7 @@
       <table class="table">
   <thead class="thead-light">
     <tr>
-        <td class="table-head" scope="col"><b>Sub Task</b></td>
+        <td class="table-head" scope="col"><b>Task</b></td>
         <td class="table-head" scope="col"><b>Research</b></td>
         <td class="table-head" scope="col"><b>Planning</b></td>
         <td class="table-head" scope="col"><b>Development</b></td>
@@ -51,7 +51,8 @@
         <td class="table-head" scope="col"><b>Adjusted SH</b></td>
         <td class="table-head" scope="col">
           <span class="action-icons">
-            <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i>
+            <!-- <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i> -->
+            <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
           </span>
         </td>
     </tr>
@@ -71,12 +72,12 @@
       <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+            <i class="rounded-circle fas fa-pen" aria-hidden="true" id="action-icons"></i>
           </router-link>
         </span>
         <span class="action-icons">
           <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
+            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true" id="action-icons"></i>
           </router-link>
         </span>
       </td>
@@ -101,147 +102,17 @@
 <tr>
   <td colspan="12" class="text-right">
     <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Row</base-button>
-    <modal :show.sync="modal">
+    <modal :show.sync="modal" id="modal">
       <template slot="header">
-          <h3 class="modal-title " id="exampleModalLabel">Add Sub Task</h3>
+          <h3 class="modal-title" id="exampleModalLabel">New Task</h3>
       </template>
+      <!-- Add task form -->
       <div>
-        <form role="form">
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="text-resize heading-small text-muted mb-4 float-left text-capitalize">Sub Task</h6>
-            </div>
-              <div class="col-sm">
-                  <base-input alternative
-                          class="mb-3"
-                          placeholder="Add sub task here..."
-                          v-model="form.subtask"
-                          >
-                </base-input>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Research</h6>
-            </div>
-            <div class="col-sm">
-              <base-input alternative
-                      class="mb-3"
-                      placeholder="Add research here..."
-                      v-model="form.research"
-                      >
-            </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Planning</h6>
-            </div>
-            <div class="col-sm">
-              <base-input alternative
-                      class="mb-3"
-                      placeholder="Add planning here..."
-                      v-model="form.planning"
-                      >
-            </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Development</h6>
-            </div>
-            <div class="col-sm-9">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add development here..."
-                          v-model="form.development"
-              >
-                  
-              </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Testing</h6>
-            </div>
-            <div class="col-sm-9">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add testing here..."
-                          v-model="form.testing"
-              >
-                  
-              </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Stabilization </h6>
-            </div>
-            <div class="col-sm-9">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add stabilization here..."
-                          v-model="form.stabilization"
-              >
-              </base-input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Certainty</h6>
-            </div>
-            <div class="col-sm">
-              <base-input 
-                          alternative
-                          class="mb-3"
-                          placeholder="Add certainty here..."
-                          v-model="form.certainty"
-              >
-              <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Add certainty...</option>
-                        <option value="1">5%</option>
-                        <option value="2">10%</option>
-                        <option value="3">15%</option>
-                        <option value="4">20%</option>
-                      </select>
-              </base-input>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Sum hours</h6>
-            </div>
-            <div class="col-sm-1">
-              <p class="styling">0 hrs</p>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Adjusted Sum</h6>
-            </div>
-            <div class="col-sm-1">
-              <p class="styling">0 hrs</p>
-            </div>  
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h6 class="heading-small text-muted mb-4 float-left text-capitalize text-resize">Comment</h6>
-            </div>
-            <div class="col-sm-12">
-              <base-input alternative="">
-                  <textarea rows="4" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
-              </base-input>
-            </div>
-          </div>
-        </form>
+        <AddTaskForm />
       </div>
         <template slot="footer">
-            <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Close</base-button>
-            <base-button class="shadow-none" type="primary">Add</base-button>
+            <base-button class="shadow-none cancel-color mt--5" type="secondary" @click="modal = false">Close</base-button>
+            <base-button class="shadow-none mt--5" type="primary">Add</base-button>
         </template>
     </modal>
   </td>
@@ -262,9 +133,13 @@
   </div>
 </template>
 <script>
+import AddTaskForm from '../Forms/AddTaskForm'
 
   export default {
     name: 'pending-table',
+    components: {
+      AddTaskForm,
+    },
     props: {
       type: {
         type: String
@@ -450,6 +325,10 @@ iframe {
   font-weight: 400;
   font-size: 14px;
 }
+#modal{
+  height: fit-content;
+  /* margin-top: -4px; */
+}
 
 /* resizing the labels for the modal */
 .text-resize{
@@ -463,7 +342,19 @@ iframe {
 }
 } */
 #comments{
-  cursor:pointer;
+ color: #5e72e4;
 }
-
+#comments:hover {
+  cursor:pointer;
+  color: #d10572;
+}
+#commentsactive {font-size: 120%;}
+#action-icons {
+  background-color: #5e72e4;
+  color: #eee7eb;
+}
+#action-icons:hover {
+  background-color: #d10572;
+  color: #eee7eb;
+}
 </style>

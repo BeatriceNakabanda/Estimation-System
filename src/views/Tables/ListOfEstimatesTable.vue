@@ -58,7 +58,7 @@
           <td >
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" @click="modal2 = true"></i>
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" @click="modal2 = true"></i>
                 <modal :show.sync="modal2">
                   <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
@@ -68,7 +68,7 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view" @click="editMode(estimate.id)">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
                 <modal :show.sync="modal">
                     <template slot="header">
                         <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
@@ -284,6 +284,16 @@ table > tbody > tr:hover .action-icons{
 .cancel-color:hover{
   color: #ffffff;
   background-color: #afadae;
+}
+#my-icons {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+  color: #eee7eb;
+}
+#my-icons:hover {
+  background-color: #d10572;
+  border-color: #d10572;
+  color: #eee7eb;
 }
 
 /* Desktops and laptops ----------- */
