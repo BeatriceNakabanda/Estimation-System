@@ -100,6 +100,7 @@
   <th scope="col">19.80hrs</th>
   <th></th>
   <th></th>
+
 </tr>
 <tr>
   <td colspan="12" class="text-right">
@@ -222,17 +223,6 @@ import AddTaskForm from '../Forms/AddTaskForm'
   padding-left: 16px;
   padding-right: 16px;
 }
-/* Adjustments to font size of the table head content */
-.table thead th {
-  font-size: 13px;
-  /* font-weight: 700; */
-}
-.table-head {  
-  background: #e7eaec !important;
-  
-  /* font-weight: 700; */
-  /* text-transform: uppercase; */
-}
 
 /* First column of table font adjustment */
 .text-sm {
@@ -259,11 +249,7 @@ table > tbody > tr .action-icons{
 table > tbody > tr:hover .action-icons{
   visibility: visible;
 }
-.table{
-  width: fit-content;
-  
-  /* height: fit-content; */
-}
+
 .details {
   /* margin-left: -800px; */
   color: rgb(140, 140, 146);
@@ -281,7 +267,10 @@ base-button{
   background-color: #faf9f9;
   color: #5e72e4;
   border: 1px solid #5e72e4;
-  
+}
+.card{
+  width: fit-content;
+  height: fit-content;
 }
 
 /* Desktops and laptops ----------- */
@@ -364,7 +353,10 @@ iframe {
   background-color: #d10572;
   color: #eee7eb;
 }
+.table{
+  width: 100%; 
+}
 .card{
-  height: fit-content;
+  width: 79vw;
 }
 </style>
