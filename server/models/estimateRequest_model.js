@@ -37,6 +37,6 @@ const estimateRequestSchema = new Schema ({
 })
 
 //defining request model
-const request = mongoose.model('estimateRequest', estimateRequestSchema)
+ const request = mongoose.model('estimateRequest', estimateRequestSchema)
 
-module.exports = request;
+ module.exports= request;
