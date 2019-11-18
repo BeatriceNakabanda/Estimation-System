@@ -5,7 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
-const routes = require("../routes/api");
+const routes = require("../routes/estimateRequest_apis");
 const port = process.env.PORT || 8082;
 
 //express app dependencies
@@ -21,7 +21,7 @@ app.use(function(err, req, res, next) {
 
 // eslint-disable-next-line no-undef
 //localhost mongodb url connection
-const mongourl = "mongodb://localhost:27017/skalla";
+const mongourl = "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
