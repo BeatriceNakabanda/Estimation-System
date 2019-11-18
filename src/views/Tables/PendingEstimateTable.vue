@@ -47,8 +47,8 @@
         <td class="table-head" scope="col"><b>Testing</b></td>
         <td class="table-head" scope="col"><b>Stablization</b></td>
         <td class="table-head" scope="col"><b>Certainity</b></td>
-        <td class="table-head" scope="col"><b>Sum Hours</b></td>
-        <td class="table-head" scope="col"><b>Adjusted Sum Hours</b></td>
+        <!-- <td class="table-head" scope="col"><b>Sum Hours</b></td>
+        <td class="table-head" scope="col"><b>Adjusted Sum Hours</b></td> -->
         <td class="table-head" scope="col">
           <span class="action-icons">
             <!-- <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i> -->
@@ -67,8 +67,8 @@
       <td>{{tableInfo.testing}}</td>
       <td>{{tableInfo.stabilization}}</td>
       <td>{{tableInfo.certainity}}</td>
-      <td>{{tableInfo.sumHours}}</td>
-      <td>{{tableInfo.adjustedSumHours}}</td>
+      <!-- <td>{{tableInfo.sumHours}}</td>
+      <td>{{tableInfo.adjustedSumHours}}</td> -->
       <td></td>
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -96,8 +96,8 @@
   <th scope="col">4.00hrs</th>
   <th scope="col">4.00hrs</th>
   <th scope="col">90%</th>
-  <th scope="col">18.00hrs</th>
-  <th scope="col">19.80hrs</th>
+  <!-- <th scope="col">18.00hrs</th>
+  <th scope="col">19.80hrs</th> -->
   <th></th>
   <th></th>
 
@@ -268,10 +268,6 @@ base-button{
   color: #5e72e4;
   border: 1px solid #5e72e4;
 }
-.card{
-  width: fit-content;
-  height: fit-content;
-}
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
@@ -281,14 +277,14 @@ base-button{
 }
 /* Adjustments to font size of the table head content */
 .table thead th {
-  font-size: 13px;
+  font-size: 13x;
   /* font-weight: 700; */
 }
 .table-head {  
   background: #e7eaec !important;
-  font-size: 90px;
+  font-size: 10px;
   
-  /* font-weight: 700; */
+  font-weight: 700;
   /* text-transform: uppercase; */
 }
 iframe {

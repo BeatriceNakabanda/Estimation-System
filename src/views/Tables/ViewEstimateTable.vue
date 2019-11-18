@@ -185,7 +185,7 @@
 .table-head {  
   background: #e7eaec !important;
   
-  /* font-weight: 700; */
+  font-weight: 700;
   /* text-transform: uppercase; */
 }
 
