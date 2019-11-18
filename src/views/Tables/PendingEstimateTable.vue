@@ -67,8 +67,8 @@
       <td>{{tableInfo.testing}}</td>
       <td>{{tableInfo.stabilization}}</td>
       <td>{{tableInfo.certainity}}</td>
-      <!-- <td>{{tableInfo.sumHours}}</td>
-      <td>{{tableInfo.adjustedSumHours}}</td> -->
+      <td>{{tableInfo.sumHours}}</td>
+      <td>{{tableInfo.adjustedSumHours}}</td>
       <td></td>
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -96,8 +96,8 @@
   <th scope="col">4.00hrs</th>
   <th scope="col">4.00hrs</th>
   <th scope="col">90%</th>
-  <!-- <th scope="col">18.00hrs</th>
-  <th scope="col">19.80hrs</th> -->
+  <th scope="col">18.00hrs</th>
+  <th scope="col">19.80hrs</th>
   <th></th>
   <th></th>
 
