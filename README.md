@@ -25,9 +25,9 @@ npm run lint
 npm install
 ```
 
-### Run the client & server concurrently
+### Run the client & server concurrently 
 ```
-npm run dev
+npm run app
 ```
 
 ### Run the express server only

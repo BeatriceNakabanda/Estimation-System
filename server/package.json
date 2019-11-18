@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/server.js",
-    "test": "mocha",
-    "dev": ""
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +22,8 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    
+  },
   "description": ""
 }
