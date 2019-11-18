@@ -51,7 +51,7 @@
         <td class="table-head" scope="col"><b>Adjusted SH</b></td>
         <td class="table-head" scope="col">
           <span class="action-icons">
-            <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x"></i>
+            <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
           </span>
         </td>
     </tr>
@@ -71,12 +71,12 @@
       <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+            <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons"></i>
           </router-link>
         </span>
         <span class="action-icons">
           <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
+            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true" id="my-icons"></i>
           </router-link>
         </span>
       </td>
@@ -233,6 +233,13 @@ base-button{
   border: 1px solid #5e72e4;
   
 }
+#comments{
+ color: #5e72e4;
+}
+#comments:hover {
+  cursor:pointer;
+  color: #d10572;
+}
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
@@ -273,7 +280,16 @@ iframe {
   
 }
 } */
-
+#my-icons {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+  color: #eee7eb;
+}
+#my-icons:hover {
+  background-color: #d10572;
+  border-color: #d10572;
+  color: #eee7eb;
+}
 
 
 </style>
