@@ -47,14 +47,15 @@
         <td class="table-head" scope="col"><b>Testing</b></td>
         <td class="table-head" scope="col"><b>Stablization</b></td>
         <td class="table-head" scope="col"><b>Certainity</b></td>
-        <td class="table-head" scope="col"><b>Sum Hours (SH)</b></td>
-        <td class="table-head" scope="col"><b>Adjusted SH</b></td>
+        <td class="table-head" scope="col"><b>Sum Hours</b></td>
+        <td class="table-head" scope="col"><b>Adjusted Sum Hours</b></td>
         <td class="table-head" scope="col">
           <span class="action-icons">
             <!-- <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i> -->
             <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
           </span>
         </td>
+        <td class="table-head"  scope="col"></td>
     </tr>
   </thead>
   <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
@@ -68,7 +69,7 @@
       <td>{{tableInfo.certainity}}</td>
       <td>{{tableInfo.sumHours}}</td>
       <td>{{tableInfo.adjustedSumHours}}</td>
-      <!-- <td></td> -->
+      <td></td>
       <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
@@ -97,6 +98,7 @@
   <th scope="col">90%</th>
   <th scope="col">18.00hrs</th>
   <th scope="col">19.80hrs</th>
+  <th></th>
   <th></th>
 </tr>
 <tr>
@@ -257,6 +259,11 @@ table > tbody > tr .action-icons{
 table > tbody > tr:hover .action-icons{
   visibility: visible;
 }
+.table{
+  width: fit-content;
+  
+  /* height: fit-content; */
+}
 .details {
   /* margin-left: -800px; */
   color: rgb(140, 140, 146);
@@ -356,5 +363,8 @@ iframe {
 #action-icons:hover {
   background-color: #d10572;
   color: #eee7eb;
+}
+.card{
+  height: fit-content;
 }
 </style>
