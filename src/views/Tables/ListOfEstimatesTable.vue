@@ -180,62 +180,64 @@
   </div>
 </template>
 <script>
-import CreateEstimateForm from '../Forms/CreateEstimateForm'
-import axios from 'axios';
+import CreateEstimateForm from "../Forms/CreateEstimateForm";
+import axios from "axios";
 
-const baseURL = "http://localhost:3000/estimates"
+const baseURL = "http://localhost:3000/estimates";
 
-  export default {
-    name: 'estimates-table',
-    components: {
-      CreateEstimateForm,
+export default {
+  name: "estimates-table",
+  components: {
+    CreateEstimateForm
+  },
+  props: {
+    estimates: Array,
+    type: {
+      type: String
     },
-    props: {
-      estimates: Array,
-      type: {
-        type: String
-      },
-      title: String
-    },
-    data() {
-      return {
-        editing: null,
-        modal : false,
-        modal1: false,
-        modal2: false,
-       
-
-      }
-    },
+    title: String
+  },
+  data() {
+    return {
+      editing: null,
+      modal: false,
+      modal1: false,
+      modal2: false
+    };
+  },
   methods: {
-
-
-    // editMode(id){
-    //   this.editing = id
-    // },
-    // editEstimate(estimate){
-    //   if(estimate.title === '' || estimate.project === '' || estimate.developer || estimate.dueDate || estimate.taskDescription) 
-    //   return
-    //   this.$emit('edit: estimate', estimate.id, estimate)
-    //   this.editing = null
-    // }
+    editMode(id) {
+      this.editing = id;
+    },
+    editEstimate(estimate) {
+      if (
+        estimate.title === req.body.title||
+        estimate.project === req.body.project ||
+        estimate.developer===req.body.developer ||
+        estimate.dueDate===req.body.dueDate ||
+        estimate.taskDescription===req.body.taskDescription
+      )
+        return;
+      this.$emit("edit: estimate", estimate.id, estimate);
+      this.editing = null;
+    }
   }
-  }
+};
 </script>
 <style>
-#view{
+#view {
   color: #747273;
   padding-left: 10px;
 }
-#left{
+#left {
   text-align: left;
 }
 /* Adding cursor to table */
-.table-row{
-  cursor:pointer;
+.table-row {
+  cursor: pointer;
 }
 
-.spacing{
+.spacing {
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -254,34 +256,33 @@ const baseURL = "http://localhost:3000/estimates"
 .rounded-circle {
   border: 1px solid rgb(201, 201, 199);
   padding: 6px;
-  
 }
 
 /* Status column font size adjustment */
-span .status{
-  font-size: 13px; 
+span .status {
+  font-size: 13px;
 }
 
-.bgcolor {  
+.bgcolor {
   background: #e7eaec !important;
 }
 /* displaying action icons on hover */
-table > tbody > tr .action-icons{
+table > tbody > tr .action-icons {
   visibility: hidden;
-} 
-table > tbody > tr:hover .action-icons{
+}
+table > tbody > tr:hover .action-icons {
   visibility: visible;
-} 
+}
 /* styling buttons */
-#create-estimate{
-  border-radius: 4px; 
+#create-estimate {
+  border-radius: 4px;
 }
 /* cancel button for modal */
-.cancel-color{
+.cancel-color {
   color: rgb(135, 141, 148);
   background-color: #e2e0e1;
 }
-.cancel-color:hover{
+.cancel-color:hover {
   color: #ffffff;
   background-color: #afadae;
 }
@@ -297,11 +298,9 @@ table > tbody > tr:hover .action-icons{
 }
 
 /* Desktops and laptops ----------- */
-@media only screen  and (min-width : 1224px) {
-.card{
-  margin-top: 30px;
+@media only screen and (min-width: 1224px) {
+  .card {
+    margin-top: 30px;
+  }
 }
-}
-
-
 </style>
