@@ -17,7 +17,8 @@
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Project Manager</th>
-          <th class="bgcolor">Action</th>
+          <th class="bgcolor"></th>
+          <!-- <th class="bgcolor">Action</th> -->
         </template>
           <template class="table-row" slot-scope="{row} ">
           <!-- <td>
@@ -146,11 +147,11 @@
   font-size: 13px !important;
 }
 /* styling rounded border */
-.rounded-circle {
+/* .rounded-circle {
   border: 1px solid rgb(201, 201, 199);
   padding: 6px;
   
-}
+} */
 
 /* Status column font size adjustment */
 span .status{
