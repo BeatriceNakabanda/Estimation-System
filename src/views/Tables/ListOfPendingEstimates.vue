@@ -177,9 +177,7 @@ base-button{
   border-color: #d10572;
   color: #eee7eb;
 }
-#left{
-  
-}
+
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {

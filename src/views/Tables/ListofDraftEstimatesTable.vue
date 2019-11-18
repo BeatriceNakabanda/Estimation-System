@@ -167,6 +167,12 @@ table > tbody > tr .action-icons{
 table > tbody > tr:hover .action-icons{
   visibility: visible;
 }
+.table{
+  width: 100%; 
+}
+.card{
+  width: 79vw;
+}
 base-button{
   border-radius: 4px;
   
