@@ -353,10 +353,10 @@ iframe {
   background-color: #d10572;
   color: #eee7eb;
 }
-.table{
+/* .table{
   width: 100%; 
 }
 .card{
   width: 79vw;
-}
+} */
 </style>
