@@ -105,66 +105,6 @@ export default {
         }
         
     },
-    methods: {
-        async addEstimate(){
-        const res = await axios.post(baseURL, {
-            // objects to pass
-            title: this.estimate.title,
-            project: this.estimate.project,
-            developer: this.estimate.developer,
-            status: this.estimate.status,
-            dueDate: this.estimate.dueDate,
-            taskDescription: this.estimate.taskDescription,
-            
-            })
-
-      estimate: {
-        title: "",
-        project: "",
-        developer: "",
-        status: "",
-        statusType: "",
-        dueDate: "",
-        taskDescription: ""
-      },
-      projects: [
-        {
-          id: 1,
-          name: "Xente"
-        },
-        {
-          id: 2,
-          name: "Refactory"
-        },
-        {
-          id: 3,
-          name: "Imuka Access"
-        },
-        {
-          id: 4,
-          name: "Kanzu Code"
-        }
-      ],
-      developers: [
-        {
-          id: 1,
-          name: "Benjamin"
-        },
-        {
-          id: 1,
-          name: "Ronnie"
-        },
-        {
-          id: 1,
-          name: "Beatrice"
-        },
-        {
-          id: 1,
-          name: "Sunday"
-        }
-      ]
-    };
-  },
   methods: {
     async addEstimate() {
       const res = await axios.post(baseURL, {
@@ -197,6 +137,6 @@ export default {
       }
     },
     
-    
+  }  
 }
 </script>
