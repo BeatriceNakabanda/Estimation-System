@@ -9,6 +9,15 @@
       "statusType": "success",
       "dueDate": "",
       "taskDescription": ""
+    },
+    {
+      "title": "Footer",
+      "project": "Kanzu Code",
+      "developer": "Beatrice",
+      "status": "",
+      "dueDate": "",
+      "taskDescription": "",
+      "id": 2
     }
   ],
   "projects": [

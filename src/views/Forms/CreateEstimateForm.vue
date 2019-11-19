@@ -80,9 +80,9 @@
         
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios';
 
-const baseURL = "http://localhost:3000/estimates";
+const baseURL = "http://localhost:3000/estimates"
 
 export default {
     name: 'create-estimate-form',
@@ -118,72 +118,18 @@ export default {
             
             })
 
-      estimate: {
-        title: "",
-        project: "",
-        developer: "",
-        status: "",
-        statusType: "",
-        dueDate: "",
-        taskDescription: ""
+        this.estimates = [...this.estimates, res.data]
+        this.title = '' ,
+        this.project = '',
+        this.developer = '',
+        this.status = '',
+        this.dueDate = '',
+        this.taskDescription = ''
+        },
+      handleSave() {
+      console.log('testing save' )
       },
-      projects: [
-        {
-          id: 1,
-          name: "Xente"
-        },
-        {
-          id: 2,
-          name: "Refactory"
-        },
-        {
-          id: 3,
-          name: "Imuka Access"
-        },
-        {
-          id: 4,
-          name: "Kanzu Code"
-        }
-      ],
-      developers: [
-        {
-          id: 1,
-          name: "Benjamin"
-        },
-        {
-          id: 1,
-          name: "Ronnie"
-        },
-        {
-          id: 1,
-          name: "Beatrice"
-        },
-        {
-          id: 1,
-          name: "Sunday"
-        }
-      ]
-    };
-  },
-  methods: {
-    async addEstimate() {
-      const res = await axios.post(baseURL, {
-        // objects to pass
-        title: this.estimate.title,
-        project: this.estimate.project,
-        developer: this.estimate.developer,
-        status: this.estimate.status,
-        dueDate: this.estimate.dueDate,
-        taskDescription: this.estimate.taskDescription
-      });
-
-      this.estimates = [...this.estimates, res.data];
-      (this.title = ""),
-        (this.project = ""),
-        (this.developer = ""),
-        (this.status = ""),
-        (this.dueDate = ""),
-        (this.taskDescription = "");
+ 
     },
     async created(){
       try{
