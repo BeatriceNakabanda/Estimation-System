@@ -80,9 +80,9 @@
         
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios';
 
-const baseURL = "http://localhost:3000/estimates";
+const baseURL = "http://localhost:3000/estimates"
 
 export default {
     name: 'create-estimate-form',
@@ -105,25 +105,31 @@ export default {
         }
         
     },
-  methods: {
-    async addEstimate() {
-      const res = await axios.post(baseURL, {
-        // objects to pass
-        title: this.estimate.title,
-        project: this.estimate.project,
-        developer: this.estimate.developer,
-        status: this.estimate.status,
-        dueDate: this.estimate.dueDate,
-        taskDescription: this.estimate.taskDescription
-      });
+    methods: {
+        async addEstimate(){
+        const res = await axios.post(baseURL, {
+            // objects to pass
+            title: this.estimate.title,
+            project: this.estimate.project,
+            developer: this.estimate.developer,
+            status: this.estimate.status,
+            dueDate: this.estimate.dueDate,
+            taskDescription: this.estimate.taskDescription,
+            
+            })
 
-      this.estimates = [...this.estimates, res.data];
-      (this.title = ""),
-        (this.project = ""),
-        (this.developer = ""),
-        (this.status = ""),
-        (this.dueDate = ""),
-        (this.taskDescription = "");
+        this.estimates = [...this.estimates, res.data]
+        this.title = '' ,
+        this.project = '',
+        this.developer = '',
+        this.status = '',
+        this.dueDate = '',
+        this.taskDescription = ''
+        },
+      handleSave() {
+      console.log('testing save' )
+      },
+ 
     },
     async created(){
       try{
@@ -137,6 +143,6 @@ export default {
       }
     },
     
-  }  
+    
 }
 </script>
