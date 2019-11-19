@@ -24,8 +24,7 @@
                         placeholder="Edit  project here..."  
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
-                        
-                        <option :value="null">Please select a project</option>
+                        <option value="" disabled>Please select a project</option>
                         <option v-for="project in projects" v-bind:key="project.id">{{project.name}}</option>
                         </select>
             </base-input>
@@ -42,7 +41,7 @@
                         placeholder="Add developer here..."
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
-                            <option :value="null">Please select a developer</option>
+                            <option value="" disabled>Please select a developer</option>
                             <option v-for="developer in developers" v-bind:key="developer.id">{{developer.name}}</option>
                         </select>
             </base-input>
@@ -88,7 +87,6 @@ export default {
     name: 'create-estimate-form',
     data(){
         return{
-            selected: null,
             projects: [],
             developers: [],
            
