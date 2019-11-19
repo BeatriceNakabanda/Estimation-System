@@ -18,37 +18,35 @@
             <div class="col-sm-3">          
                 <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
             </div>
-            <!-- <div class="col-sm">
+            <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
-                        placeholder="Edit  project here..." 
+                        placeholder="Edit  project here..."  
                        >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="selected"         >
+                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
                         
                         <option :value="null">Please select a project</option>
                         <option v-for="project in projects" v-bind:key="project.id">{{project.name}}</option>
                         </select>
-                        <p>{{selected}}</p>
             </base-input>
    
-            </div> -->
+            </div>
             </div>
             <div class="row">
             <div class="col-sm-3">
                 <h6 class="heading-small text-muted mb-4 float-left">Assign to</h6>
             </div>
-            <!-- <div class="col-sm">
+            <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                        v-model="estimate.developer">
-                        <select class="custom-select" id="inputGroupSelect01">
+                        >
+                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
                             <option :value="null">Please select a developer</option>
                             <option v-for="developer in developers" v-bind:key="developer.id">{{developer.name}}</option>
                         </select>
-                        <p>{{estimate.developer}}</p>
             </base-input>
-            </div> -->
+            </div>
             </div>
             <div class="row">
             <div class="col-sm-3">
@@ -79,6 +77,7 @@
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save</base-button>
             <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send to Developer</base-button>
         </form>
+        
 </template>
 <script>
 import axios from 'axios';
@@ -90,6 +89,8 @@ export default {
     data(){
         return{
             selected: null,
+            projects: [],
+            developers: [],
            
         estimate:
           {
@@ -101,45 +102,6 @@ export default {
             dueDate: '',
             taskDescription: '',
           },
-            projects: [
-                {   
-                    id: 1,
-                    name: 'Xente', 
-                },
-                {   
-                    id: 2,
-                    name: 'Refactory'
-                },
-                {   
-                    id: 3,
-                    name: 'Imuka Access'
-                },
-                {   
-                    id: 4,
-                    name: 'Kanzu Code', 
-                    
-                    },
-            ],
-            developers: [
-                {
-                    id: 1,
-                    name: 'Benjamin',
-                },
-                {
-                    id: 1,
-                    name: 'Ronnie',
-                },
-                {
-                    id: 1,
-                    name: 'Beatrice',
-                },
-                {
-                    id: 1,
-                    name: 'Sunday',
-                }
-                
-            ]
-            
         }
         
     },
@@ -169,6 +131,18 @@ export default {
       },
  
     },
+    async created(){
+      try{
+        const response = await axios.get(`http://localhost:3000/projects`)
+        const resp = await axios.get(`http://localhost:3000/developers`)
+
+        this.projects = response.data;
+        this.developers = resp.data;
+      }catch(e){
+        console.error(e)
+      }
+    },
+    
     
 }
 </script>

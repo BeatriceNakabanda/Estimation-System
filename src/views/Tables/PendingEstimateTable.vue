@@ -16,7 +16,7 @@
     </div>
       <div class="card-body">
         <div v-show="isShow"  class="content">
-           <div class="row ">
+           <div class="row">
             <div class="col- pl-3 align-self-start">
               <p>Project </p>
               <p>Project Manager </p>
