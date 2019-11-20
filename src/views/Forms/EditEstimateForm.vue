@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form">
+    <form role="form">
         <div>
             <div class="row">
             <div class="col-sm-3">
@@ -8,7 +8,6 @@
             <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
-                        placeholder="Add title here..."
                         v-model="estimate.title"
                        >
             </base-input>
@@ -20,8 +19,7 @@
             </div>
             <div class="col-sm">
                 <base-input alternative
-                        class="mb-3"
-                        placeholder="Edit  project here..."  
+                        class="mb-3" 
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
                         <option value="" disabled>Please select a project</option>
@@ -73,74 +71,54 @@
             </div>
             </div>
         </div>
-            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save</base-button>
-            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send to Developer</base-button>
-        </form>
-        
+            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Cancel</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="editEstimate">Save</base-button>
+    </form>
 </template>
-<script>
-import axios from 'axios';
 
-const baseURL = "http://localhost:3000/estimates"
-
+<script>    
 export default {
-    name: 'create-estimate-form',
-    data(){
-        return{
-            projects: [],
-            developers: [],
-           
-        estimate:
-          {
-            title: '',
-            project: '',
-            developer: '',
-            status: '',
-            statusType: '',
-            dueDate: '',
-            taskDescription: '',
-          },
-        }
-        
+    name: 'edit-estimate-form',
+    props: {
+        estimates: Array,
+        type: {
+            type: String
+        },
+        title: String
     },
     methods: {
-        async addEstimate(){
-        const res = await axios.post(baseURL, {
-            // objects to pass
-            title: this.estimate.title,
-            project: this.estimate.project,
-            developer: this.estimate.developer,
-            status: this.estimate.status,
-            dueDate: this.estimate.dueDate,
-            taskDescription: this.estimate.taskDescription,
+        // async editEstimate(id, updatedEstimate){
+           
+        //         const response = await axios.put(`http://localhost:3000/estimates/${id}`, {
+        //             title: this.estimate.title,
+        //             project: this.estimate.project,
+        //             developer: this.estimate.developer,
+        //             status: this.estimate.status,
+        //             dueDate: this.estimate.dueDate,
+        //             taskDescription: this.estimate.taskDescription,
+        //         })
+        // this.estimates = [...this.estimates, res.data]
+        // this.title = '' ,
+        // this.project = '',
+        // this.developer = '',
+        // this.status = '',
+        // this.dueDate = '',
+        // this.taskDescription = ''
             
-            })
-
-        this.estimates = [...this.estimates, res.data]
-        this.title = '' ,
-        this.project = '',
-        this.developer = '',
-        this.status = '',
-        this.dueDate = '',
-        this.taskDescription = ''
-        },
-      handleSave() {
-      console.log('testing save' )
-      },
- 
-    },
-    async created(){
-      try{
-        const response = await axios.get(`http://localhost:3000/projects`)
-        const resp = await axios.get(`http://localhost:3000/developers`)
-
-        this.projects = response.data;
-        this.developers = resp.data;
-      }catch(e){
-        console.error(e)
-      }
-    },
-    
-    
+        // }
+        async editEstimate(id, updatedEstimate) {
+            try {
+                const response = await fetch(`http://localhost:3000/estimates/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(updatedEstimate),
+                headers: { 'Content-type': 'application/json; charset=UTF-8' },
+                })
+                const data = await response.json()
+                this.estimates = this.estimates.map(estimate => (estimate.id === id ? data : estimate))
+            } catch (error) {
+                console.error(error)
+            }
+            }
+    }
 }
 </script>

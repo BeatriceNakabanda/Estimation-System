@@ -67,94 +67,15 @@
               </router-link>
             </span>
             <span class="action-icons">
-              <router-link  to="/" id="view" @click="editMode(estimate.id)">
+              <router-link  to="/" id="view">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
                 <modal :show.sync="modal">
                     <template slot="header">
                         <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                     </template>
                     <div>
-                      <form role="form">
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4 float-left">Title</h6>
-                          </div>
-                          <div class="col-sm">
-                            <base-input alternative
-                                    class="mb-3"
-                                    placeholder="Edit title here..."
-                                    v-model="estimates.title"
-                                    >
-                          </base-input>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4 float-left">Developer</h6>
-                          </div>
-                          <div class="col-sm">
-                            <base-input alternative
-                                    class="mb-3"
-                                    placeholder="Edit developer here..."
-                                    v-model="estimates.developer"
-                                    >
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                      <option selected>Choose developer...</option>
-                                      <option value="1">Beatrice</option>
-                                      <option value="2">Benjamin</option>
-                                      <option value="3">Ronnie</option>
-                                      <option value="4">Olive</option>
-                                    </select>
-                          </base-input>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
-                          </div>
-                          <div class="col-sm">
-                            <base-input alternative
-                                    class="mb-3"
-                                    placeholder="Add project here..."
-                                    v-model="estimates.project"
-                                    >
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                      <option selected>Select project...</option>
-                                      <option value="1">Refactory</option>
-                                      <option value="2">Xente</option>
-                                      <option value="3">Imuka</option>
-                                      <option value="4">Stanbic</option>
-                                      <option value="5">Emata</option>
-                                    </select>
-                          </base-input>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4 float-left">Due Date</h6>
-                          </div>
-                          <div class="col-sm">
-                            <base-input addon-left-icon="ni ni-calendar-grid-58"
-                                        alternative
-                                        class="mb-3"
-                                        placeholder="17-07-2019"
-                                        v-model="estimates.dueDate"
-                            >
-                                
-                            </base-input>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <h6 class="heading-small text-muted mb-4 float-left">Main Task Description</h6>
-                          </div>
-                          <div class="col-sm-12">
-                            <base-input alternative="">
-                                <textarea rows="4" v-model="estimates.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
-                            </base-input>
-                          </div>
-                        </div>
-                      </form>
+                      <!-- edit estimate form -->
+                      <EditEstimateForm />
                     </div>
                     <template slot="footer">
                         <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Cancel</base-button>
@@ -181,6 +102,7 @@
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
+import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
 
 const baseURL = "http://localhost:3000/estimates";
@@ -188,7 +110,8 @@ const baseURL = "http://localhost:3000/estimates";
 export default {
   name: "estimates-table",
   components: {
-    CreateEstimateForm
+    CreateEstimateForm,
+    EditEstimateForm
   },
   props: {
     estimates: Array,
