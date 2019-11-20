@@ -23,7 +23,7 @@
     "test": "test"
   },
   "devDependencies": {
-    
+    "faker": "^4.1.0"
   },
   "description": ""
 }
