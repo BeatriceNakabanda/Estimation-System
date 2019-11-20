@@ -21,7 +21,8 @@ app.use(function(err, req, res, next) {
 
 // eslint-disable-next-line no-undef
 //localhost mongodb url connection
-const mongourl = "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority";
+const mongourl =
+  "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
