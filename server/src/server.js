@@ -3,15 +3,15 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express();
+const app = express(); //our app running on express server
 const mongoose = require("mongoose");
-const routes = require("../routes/estimateRequest_apis");
-const port = process.env.PORT || 8082;
+const estimateRequestRoute = require("../routes/estimateRequest_api");
+const port = process.env.PORT || 8081;
 
 //express app dependencies
 app.use(bodyParser.json());
 app.use(cors());
-app.use(routes);
+app.use(estimateRequestRoute);
 
 //error handling
 // eslint-disable-next-line no-unused-vars
@@ -21,7 +21,7 @@ app.use(function(err, req, res, next) {
 
 // eslint-disable-next-line no-undef
 //localhost mongodb url connection
-const mongourl = "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority";
+const mongourl = "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
 
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
