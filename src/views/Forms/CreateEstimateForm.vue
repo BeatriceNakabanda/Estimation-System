@@ -179,8 +179,7 @@
 import axios from "axios";
 
 const baseURL =
-  "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority";
-
+""
 export default {
   name: "create-estimate-form",
   data() {
@@ -226,12 +225,9 @@ export default {
   async created() {
     try {
       const response = await axios.get(
-        `mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority`
-      );
+``      );
       const resp = await axios.get(
-        `mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority`
-      );
-
+``
       this.projects = response.data;
       this.developers = resp.data;
     } catch (e) {
