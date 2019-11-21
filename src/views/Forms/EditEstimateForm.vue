@@ -5,7 +5,6 @@
         <div class="col-sm-3">
           <h6 class="heading-small text-muted mb-4 float-left">Title</h6>
         </div>
-<<<<<<< HEAD
         <div class="col-sm">
           <base-input alternative class="mb-3" v-model="estimate.title">
           </base-input>
@@ -101,20 +100,6 @@
 </template>
 
 <script>
-=======
-            <base-button class="shadow-none mt-4 cancel-color " type="secondary"  @click="modal = false">Cancel</base-button>
-            <base-button class="shadow-none mt-4 " type="primary " @click="editMode(estimate.id)">Save</base-button>
-            <ol>
-                <li>{{estimate.title}}</li>
-            </ol>
-    </form>
-</template>
-
-<script>    
- 
- import axios from 'axios'
-    
->>>>>>> bd06c796517365a37fc777286c068ca816c3ad14
 export default {
   name: "edit-estimate-form",
   props: {
@@ -133,18 +118,7 @@ export default {
         console.error(error);
       }
     },
-<<<<<<< HEAD
-    async updateUser() {
-      try {
-        const res = await axios.put("", {
-          name: "Atta Shah",
-          job: "MEAN Stack Developer"
-        });
-        console.log(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-=======
+
     data(){
         return{
         projects: [],
@@ -206,19 +180,7 @@ export default {
          editMode(id) {
             this.editing = id;
             },
-            // editEstimate(estimate) {
-            // if (
-            //     estimate.title === '' ||
-            //     estimate.project === '' ||
-            //     estimate.developer=== '' ||
-            //     estimate.dueDate=== '' ||
-            //     estimate.taskDescription=== ''
-            // )
-            //     return;
-            // this.$emit('edit:estimate', estimate.id, estimate);
-            // this.editing = null;
-            // }
->>>>>>> bd06c796517365a37fc777286c068ca816c3ad14
+            
     }
   }
 };
