@@ -68,19 +68,16 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="editMode(estimate); modal = true"></i>
                 <modal :show.sync="modal">
                     <template slot="header">
                         <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                     </template>
                     <div>
                       <!-- edit estimate form -->
-                      <EditEstimateForm />
+                      <EditEstimateForm @edit:item= "editItem" />
                     </div>
-                    <template slot="footer">
-                        <base-button class="shadow-none cancel-color" type="secondary" @click="modal = false">Cancel</base-button>
-                        <base-button class="shadow-none" type="primary">Save</base-button>
-                    </template>
+                    
                 </modal>
               </router-link>
             </span>
@@ -122,28 +119,32 @@ export default {
   },
   data() {
     return {
-      editing: null,
+      // editing: null,
       modal: false,
       modal1: false,
       modal2: false
     };
   },
   methods: {
-    editMode(id) {
-      this.editing = id;
-    },
-    editEstimate(estimate) {
-      if (
-        estimate.title === req.body.title||
-        estimate.project === req.body.project ||
-        estimate.developer===req.body.developer ||
-        estimate.dueDate===req.body.dueDate ||
-        estimate.taskDescription===req.body.taskDescription
-      )
-        return;
-      this.$emit("edit: estimate", estimate.id, estimate);
-      this.editing = null;
-    }
+   
+      // async editEstimate(id, updatedEstimate) {
+      // try {
+      //     const response = await fetch(`http://localhost:3000/estimates/${id}`, {
+      //     method: 'PUT',
+      //     body: JSON.stringify(updatedEstimate),
+      //     headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      //     })
+      //     const data = await response.json()
+      //     this.estimates = this.estimates.map(estimate => (estimate.id === id ? data : estimate))
+      // } catch (error) {
+      //     console.error(error)
+      // }
+      // }
+      editMode(estimate){
+            this.cachedEstimate = Object.assign({}, estimate)
+            this.editing = estimate.id
+            
+            },
   }
 };
 </script>
