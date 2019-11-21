@@ -2,19 +2,34 @@
 const express = require("express");
 const router = express.Router(); //express router for routing
 // const request = require("../models/estimateRequest_model"); //estimateRequest_model
-const estimateRequest = require('../controllers/estimateRequest_controller')
+const estimateRequest_controller = require('../controllers/estimateRequest_controller')
+const project_controller = require('../controllers/project_controller')
+
+/* Listing estimate Routes */
 
 //get all estimates
-router.get("/estimate", estimateRequest.estimatesList);
+router.get("/estimate", estimateRequest_controller.estimatesList);
 
 //create estimate
-router.post("/estimate", estimateRequest.createEstimate);
+router.post("/estimate", estimateRequest_controller.createEstimate);
 
 //get single estimate
-router.get("/estimate/:requestId", estimateRequest.singleEstimate);
+router.get("/estimate/:requestId", estimateRequest_controller.singleEstimate);
 
 //update single estimate
-router.put("/estimate/:requestId", estimateRequest.updateEstimate);
+router.put("/estimate/:requestId", estimateRequest_controller.updateEstimate);
+
+
+/* Listing Project Routes */
+
+//get all projects
+router.get("/project", project_controller.projectList);
+
+//create project
+router.post("/project", project_controller.createProject);
+
+
+
 
 //get request from the db
 /* router.get("/estimate", (req, res) => {

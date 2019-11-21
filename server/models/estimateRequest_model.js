@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-//creating request Schema and model
+//request Schema and model
 const estimateRequestSchema = new Schema ({
     title: {
         type: String,
@@ -11,7 +11,7 @@ const estimateRequestSchema = new Schema ({
         type: String,
     },
     project: {
-        type: String,
+        name: {type: mongoose.Schema.Types.ObjectId, ref: 'Project'},
     },
     developer: {
         type: String,

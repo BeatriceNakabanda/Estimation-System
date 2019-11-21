@@ -95,7 +95,7 @@ export default {
     },
     async created(){
       try{
-        const res = await axios.get(`http://localhost:3000/projects`)
+        const res = await axios.get(`http://localhost:8081/project`)
 
         this.projects = res.data;
       }catch(e){
