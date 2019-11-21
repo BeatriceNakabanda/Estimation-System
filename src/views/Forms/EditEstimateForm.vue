@@ -71,12 +71,18 @@
             </div>
             </div>
         </div>
-            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Cancel</base-button>
-            <base-button class="shadow-none mt-4" type="primary" @click="editEstimate">Save</base-button>
+            <base-button class="shadow-none mt-4 cancel-color " type="secondary"  @click="modal = false">Cancel</base-button>
+            <base-button class="shadow-none mt-4 " type="primary " @click="editMode(estimate.id)">Save</base-button>
+            <ol>
+                <li>{{estimate.title}}</li>
+            </ol>
     </form>
 </template>
 
 <script>    
+ 
+ import axios from 'axios'
+    
 export default {
     name: 'edit-estimate-form',
     props: {
@@ -86,39 +92,79 @@ export default {
         },
         title: String
     },
+    data(){
+        return{
+        projects: [],
+        developers: [],
+        estimate:
+          {
+            title: '',
+            project: '',
+            developer: '',
+            status: '',
+            statusType: '',
+            dueDate: '',
+            taskDescription: '',
+          },
+        }
+    },
+    // async created(id){
+    //   try {
+    //     const res = await axios.get(`http://localhost:3000/estimates/${id}`)
+
+    //     this.estimates = res.data; 
+    //   } catch(e){
+    //     console.error(e)
+    //   }
+    // },
+    // mounted(){
+    //     this.id = this.$route.params.id,
+    //     this.fetchEstimate(this.id)
+    // },
     methods: {
-        // async editEstimate(id, updatedEstimate){
+        // used to fetch the article to updated
+        // @return {[type]} [description]
+    //    fetchEstimate(id){
+    //         const response = await axios.get(`http://localhost:3000/estimates/${id}`, {
+                
+    //         }
+
+    //    }
            
-        //         const response = await axios.put(`http://localhost:3000/estimates/${id}`, {
-        //             title: this.estimate.title,
-        //             project: this.estimate.project,
-        //             developer: this.estimate.developer,
-        //             status: this.estimate.status,
-        //             dueDate: this.estimate.dueDate,
-        //             taskDescription: this.estimate.taskDescription,
-        //         })
-        // this.estimates = [...this.estimates, res.data]
-        // this.title = '' ,
-        // this.project = '',
-        // this.developer = '',
-        // this.status = '',
-        // this.dueDate = '',
-        // this.taskDescription = ''
-            
-        // }
-        async editEstimate(id, updatedEstimate) {
-            try {
-                const response = await fetch(`http://localhost:3000/estimates/${id}`, {
-                method: 'PUT',
-                body: JSON.stringify(updatedEstimate),
-                headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        async editEstimate(id, updatedEstimate){
+           
+                const response = await axios.put(`http://localhost:3000/estimates/${id}`, {
+                    title: this.estimate.title,
+                    project: this.estimate.project,
+                    developer: this.estimate.developer,
+                    status: this.estimate.status,
+                    dueDate: this.estimate.dueDate,
+                    taskDescription: this.estimate.taskDescription,
                 })
-                const data = await response.json()
-                this.estimates = this.estimates.map(estimate => (estimate.id === id ? data : estimate))
-            } catch (error) {
-                console.error(error)
-            }
-            }
+        this.estimates = [...this.estimates, res.data]
+        this.title = '' ,
+        this.project = '',
+        this.developer = '',
+        this.status = '',
+        this.dueDate = '',
+        this.taskDescription = ''
+            
+        },
+         editMode(id) {
+            this.editing = id;
+            },
+            // editEstimate(estimate) {
+            // if (
+            //     estimate.title === '' ||
+            //     estimate.project === '' ||
+            //     estimate.developer=== '' ||
+            //     estimate.dueDate=== '' ||
+            //     estimate.taskDescription=== ''
+            // )
+            //     return;
+            // this.$emit('edit:estimate', estimate.id, estimate);
+            // this.editing = null;
+            // }
     }
 }
 </script>
