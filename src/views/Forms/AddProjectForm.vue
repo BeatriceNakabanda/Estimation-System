@@ -27,7 +27,7 @@
 </template>
 <script>
 import axios from "axios";
-const baseURL = "http://localhost:3000/projects";
+const baseURL = "http://localhost:8081/project";
 
 export default {
   name: "add-project-form",
