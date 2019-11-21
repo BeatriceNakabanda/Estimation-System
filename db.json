@@ -18,6 +18,15 @@
       "dueDate": "",
       "taskDescription": "",
       "id": 2
+    },
+    {
+      "title": "Navbar",
+      "project": "Refactory",
+      "developer": "Ronnie",
+      "status": "",
+      "dueDate": "17",
+      "taskDescription": "SImple",
+      "id": 3
     }
   ],
   "projects": [
@@ -40,6 +49,10 @@
     {
       "name": "Login",
       "id": 5
+    },
+    {
+      "name": "Footer",
+      "id": 6
     }
   ],
   "developers": [

@@ -8,7 +8,7 @@ const project_controller = require('../controllers/project_controller')
 /* Listing estimate Routes */
 
 //get all estimates
-router.get("/estimate", estimateRequest_controller.estimatesList);
+router.get("/estimates", estimateRequest_controller.estimatesList);
 
 //create estimate
 router.post("/estimate", estimateRequest_controller.createEstimate);
@@ -23,7 +23,7 @@ router.put("/estimate/:requestId", estimateRequest_controller.updateEstimate);
 /* Listing Project Routes */
 
 //get all projects
-router.get("/project", project_controller.projectList);
+router.get("/projects", project_controller.projectList);
 
 //create project
 router.post("/project", project_controller.createProject);
