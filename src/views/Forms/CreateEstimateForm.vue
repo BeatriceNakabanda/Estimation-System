@@ -178,9 +178,7 @@
 <script>
 import axios from "axios";
 
-const baseURL =
-  "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/test?retryWrites=true&w=majority";
-
+const baseURL = "http:localhost:8080/estimate";
 export default {
   name: "create-estimate-form",
   data() {
