@@ -75,7 +75,7 @@
                     </template>
                     <div>
                       <!-- edit estimate form -->
-                      <EditEstimateForm @edit:item= "editItem" />
+                     
                     </div>
                     
                 </modal>
@@ -99,7 +99,7 @@
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
-import EditEstimateForm from "../Forms/EditEstimateForm";
+// import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
 
 const baseURL = "http://localhost:8081/estimates";
@@ -108,7 +108,7 @@ export default {
   name: "estimates-table",
   components: {
     CreateEstimateForm,
-    EditEstimateForm
+    // EditEstimateForm
   },
   props: {
     estimates: Array,

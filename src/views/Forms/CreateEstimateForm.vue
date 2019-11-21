@@ -105,7 +105,7 @@ export default {
     },
     methods: {
         async addEstimate(){
-        const res = await axios.post(baseURL, {
+        /* const res = await axios.post(baseURL, {
             // objects to pass
             title: this.estimate.title,
             project: this.estimate.project,
@@ -122,20 +122,34 @@ export default {
         this.developer = '',
         this.status = '',
         this.dueDate = '',
-        this.taskDescription = ''
+        this.taskDescription = '' */
+        let newEstimate = {
+            title: this.estimate.title,
+            project: this.estimate.project,
+            developer: this.estimate.developer,
+            dueDate: this.estimate.dueDate,
+            taskDescription: this.estimate.taskDescription
+        }
+        console.log(newEstimate)
+        axios.post('http://localhost:8081/estimate', newEstimate)
+            .then((response) =>{
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         },
       handleSave() {
       console.log('testing save' )
-      },
- 
+      },  
     },
     async created(){
       try{
         const response = await axios.get(`http://localhost:8081/projects`)
-        const resp = await axios.get(`http://localhost:8081/developers`)
+        // const resp = await axios.get(`http://localhost:8081/developers`)
 
         this.projects = response.data;
-        this.developers = resp.data;
+        // this.developers = resp.data;
       }catch(e){
         console.error(e)
       }
