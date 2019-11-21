@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
 //get all estimates
-exports.estimatesList = function(req, res, next){
-  request.find({}, function (estimate){
+exports.estimatesList = function(req, res){
+  request.find({}, function (estimate, next){
     if(next){
       res.send(next);
     }else{
@@ -15,9 +15,9 @@ exports.estimatesList = function(req, res, next){
 };
 
 //create estimate
-exports.createEstimate = function(req, res, next){
+exports.createEstimate = function(req, res){
   const newEstimate = new request(req.body);
-  newEstimate.save(function(estimate){
+  newEstimate.save(function(estimate, next){
     if(next){
       res.send(next);
     }else{
@@ -27,8 +27,8 @@ exports.createEstimate = function(req, res, next){
 };
 
 //get single estimate
-exports.singleEstimate = function(req, res, next){
-  request.findById({_id: req.params.requestId}, function(estimate){
+exports.singleEstimate = function(req, res){
+  request.findById({_id: req.params.requestId}, function(estimate, next){
     if(next){
       res.send(next);
     }else{
@@ -38,8 +38,8 @@ exports.singleEstimate = function(req, res, next){
 };
 
 //update single estimate
-exports.updateEstimate = function(req, res, next){
-  request.findByIdAndUpdate({_id: req.params.requestId}, req.body, function(estimate){
+exports.updateEstimate = function(req, res){
+  request.findByIdAndUpdate({_id: req.params.requestId}, req.body, function(estimate, next){
     /* if(next)
         res.send(next);
         res.json(estimate) */

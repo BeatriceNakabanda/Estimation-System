@@ -82,7 +82,7 @@
 <script>
 import axios from 'axios';
 
-const baseURL = "http://localhost:3000/estimates"
+const baseURL = "http://localhost:8081/estimate"
 
 export default {
     name: 'create-estimate-form',
@@ -133,8 +133,8 @@ export default {
     },
     async created(){
       try{
-        const response = await axios.get(`http://localhost:3000/projects`)
-        const resp = await axios.get(`http://localhost:3000/developers`)
+        const response = await axios.get(`http://localhost:8081/projects`)
+        const resp = await axios.get(`http://localhost:8081/developers`)
 
         this.projects = response.data;
         this.developers = resp.data;
