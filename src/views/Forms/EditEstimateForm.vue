@@ -153,18 +153,7 @@ export default {
          editMode(id) {
             this.editing = id;
             },
-            // editEstimate(estimate) {
-            // if (
-            //     estimate.title === '' ||
-            //     estimate.project === '' ||
-            //     estimate.developer=== '' ||
-            //     estimate.dueDate=== '' ||
-            //     estimate.taskDescription=== ''
-            // )
-            //     return;
-            // this.$emit('edit:estimate', estimate.id, estimate);
-            // this.editing = null;
-            // }
+            
     }
 }
 </script>
