@@ -24,7 +24,12 @@ const UserSchema = new Schema({
     }
 });
 
-//defining user model
- const user = mongoose.model('user', UserSchema);
+//developer schema
+/* const DeveloperSchema = new Schema({
 
- module.exports = user;
+})
+ */
+//defining user model
+ const User = mongoose.model('User', UserSchema);
+
+ module.exports = User;

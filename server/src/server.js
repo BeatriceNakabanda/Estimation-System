@@ -5,13 +5,13 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express(); //our app running on express server
 const mongoose = require("mongoose");
-const estimateRequestRoute = require("../routes/estimateRequest_api");
-const port = process.env.PORT || 9000;
+const routes = require("../routes/api_routes");
+const port = process.env.PORT || 8888;
 
 //express app dependencies
 app.use(bodyParser.json());
 app.use(cors());
-app.use(estimateRequestRoute);
+app.use(routes);
 
 //error handling
 // eslint-disable-next-line no-unused-vars
