@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 //request Schema and model
-const estimateRequestSchema = new Schema ({
+/* const estimateRequestSchema = new Schema ({
     title: {
         type: String,
     },
@@ -30,6 +30,16 @@ const estimateRequestSchema = new Schema ({
         default: Date.now
     },
     
+}) */
+
+//request schema
+const estimateRequestSchema = new Schema ({
+    title: String,
+    project: String,
+    developer: String,
+    dueDate: Date,
+    taskDescription: String
+
 })
 
 //defining request model
