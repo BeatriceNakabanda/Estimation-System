@@ -8,10 +8,12 @@
           <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Create Estimate</base-button>
           <modal :show.sync="modal1">
                       <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
+                        <!-- here -->
+                          <h3 class="modal-title " id="exampleModalLabel">Created Estimate</h3>
                       </template>
                       <!-- create estimate form -->
                       <CreateEstimateForm  />
+                      
                   </modal>
         </div>
       </div>
@@ -58,7 +60,7 @@
           <td >
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" @click="modal2 = true"></i>
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" @click="modal2 = false" ></i>
                 <modal :show.sync="modal2">
                   <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
@@ -68,10 +70,10 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="editMode(estimate); modal = true"></i>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click=" modal1 = true ,edit(_id,updatedEstimate);" ></i>
                 <modal :show.sync="modal">
                     <template slot="header">
-                        <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
+                        <h3 class="modal-title " id="exampleModalLabel">Editing Estimate</h3>
                     </template>
                     <div>
                       <!-- edit estimate form -->
@@ -99,6 +101,7 @@
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
+
 // import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
 
@@ -107,7 +110,7 @@ const baseURL = "http://localhost:8081/estimates";
 export default {
   name: "estimates-table",
   components: {
-    CreateEstimateForm,
+    CreateEstimateForm
     // EditEstimateForm
   },
   props: {
@@ -120,32 +123,47 @@ export default {
   data() {
     return {
       // editing: null,
-      modal: false,
-      modal1: false,
-      modal2: false
+      modal: true,
+      modal1: true,
+      modal2: true
     };
   },
   methods: {
-   
-      // async editEstimate(id, updatedEstimate) {
-      // try {
-      //     const response = await fetch(`http://localhost:3000/estimates/${id}`, {
-      //     method: 'PUT',
-      //     body: JSON.stringify(updatedEstimate),
-      //     headers: { 'Content-type': 'application/json; charset=UTF-8' },
-      //     })
-      //     const data = await response.json()
-      //     this.estimates = this.estimates.map(estimate => (estimate.id === id ? data : estimate))
-      // } catch (error) {
-      //     console.error(error)
-      // }
-      // }
-      editMode(estimate){
-            this.cachedEstimate = Object.assign({}, estimate)
-            this.editing = estimate.id
-            
-            },
+    edit: function(_id, updatedEstimate) {
+      row.title = req.body.title = title;
+
+      row.project = req.body.project = project;
+      row.developer = req.body.developer = developer;
+      let { title, project, developer } = updatedEstimate;
+
+      axios
+        .put("http://localhost:8081/estimates/" + _id, updatedEstimate)
+        .then(res => {
+          res.data = updatedEstimate;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
+
+  // async editEstimate(id, updatedEstimate) {
+  // try {
+  //     const response = await fetch(`http://localhost:3000/estimates/${id}`, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(updatedEstimate),
+  //     headers: { 'Content-type': 'application/json; charset=UTF-8' },
+  //     })
+  //     const data = await response.json()
+  //     this.estimates = this.estimates.map(estimate => (estimate.id === id ? data : estimate))
+  // } catch (error) {
+  //     console.error(error)
+  // }
+  // }
+  // editMode(estimate) {
+  //   this.cachedEstimate = Object.assign({}, estimate);
+  //   this.editing = estimate.id;
+  // }
 };
 </script>
 <style>

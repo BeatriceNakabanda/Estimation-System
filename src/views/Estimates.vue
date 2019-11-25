@@ -36,9 +36,10 @@ export default {
   //fetches estimates when the component is created
   async created() {
     try {
-      const res = await axios.get(`http://localhost:8083/estimates`);
+      const res = await axios.get(`http://localhost:8081/estimates`);
 
       this.estimates = res.data;
+      console.log(res.data);
     } catch (e) {
       console.error(e);
     }

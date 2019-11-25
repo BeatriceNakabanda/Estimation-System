@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const app = express(); //our app running on express server
 const mongoose = require("mongoose");
 const routes = require("../routes/api_routes");
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 8081;
 
 //express app dependencies
 app.use(bodyParser.json());
