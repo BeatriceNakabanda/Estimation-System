@@ -70,6 +70,7 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
+<<<<<<< HEAD
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click=" modal1 = true ,edit(_id,updatedEstimate);" ></i>
                 <modal :show.sync="modal">
                     <template slot="header">
@@ -81,6 +82,10 @@
                     </div>
                     
                 </modal>
+=======
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="editEstimate(row._id)"></i>
+
+>>>>>>> 454bc23f60f602203105424e3aefbd6eb8c014a8
               </router-link>
             </span>
             
@@ -128,7 +133,18 @@ export default {
       modal2: true
     };
   },
+    //fetches a single estimate when the component is created
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
+
+        this.estimate = res.data; 
+      } catch(e){
+        console.error(e)
+      }
+    },
   methods: {
+<<<<<<< HEAD
     edit: function(_id, updatedEstimate) {
       row.title = req.body.title = title;
 
@@ -144,6 +160,13 @@ export default {
         .catch(error => {
           console.log(error);
         });
+=======
+    editEstimate(estimateid){
+      this.$router.push({
+        name: 'EditEstimate',
+        params: { id: estimateid }
+      })
+>>>>>>> 454bc23f60f602203105424e3aefbd6eb8c014a8
     }
   }
 

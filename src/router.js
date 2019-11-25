@@ -20,7 +20,14 @@ export default new Router({
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/Estimates.vue')
+          component: () => import(/* webpackChunkName: "demo" */ './views/Estimates.vue'),
+          children:[
+            {
+              path: '/edit-estimate',
+              // name: 'Estimate',
+              component: () => import(/* webpackChunkName: "demo" */ './views/Forms/EditEstimateForm.vue'), 
+            }
+          ]
         },
         {
           path: '/projects',
