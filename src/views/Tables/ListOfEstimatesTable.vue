@@ -68,17 +68,8 @@
             </span>
             <span class="action-icons">
               <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="editMode(estimate); modal = true"></i>
-                <modal :show.sync="modal">
-                    <template slot="header">
-                        <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
-                    </template>
-                    <div>
-                      <!-- edit estimate form -->
-                     
-                    </div>
-                    
-                </modal>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="editEstimate(row._id)"></i>
+
               </router-link>
             </span>
             
@@ -125,26 +116,23 @@ export default {
       modal2: false
     };
   },
+    //fetches a single estimate when the component is created
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
+
+        this.estimate = res.data; 
+      } catch(e){
+        console.error(e)
+      }
+    },
   methods: {
-   
-      // async editEstimate(id, updatedEstimate) {
-      // try {
-      //     const response = await fetch(`http://localhost:3000/estimates/${id}`, {
-      //     method: 'PUT',
-      //     body: JSON.stringify(updatedEstimate),
-      //     headers: { 'Content-type': 'application/json; charset=UTF-8' },
-      //     })
-      //     const data = await response.json()
-      //     this.estimates = this.estimates.map(estimate => (estimate.id === id ? data : estimate))
-      // } catch (error) {
-      //     console.error(error)
-      // }
-      // }
-      editMode(estimate){
-            this.cachedEstimate = Object.assign({}, estimate)
-            this.editing = estimate.id
-            
-            },
+    editEstimate(estimateid){
+      this.$router.push({
+        name: 'EditEstimate',
+        params: { id: estimateid }
+      })
+    }
   }
 };
 </script>
