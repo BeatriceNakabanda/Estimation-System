@@ -57,8 +57,8 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" @click="modal2 = true"></i>
+              <router-link  to="/view-estimate" id="view">
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
                 <modal :show.sync="modal2">
                   <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>

@@ -38,7 +38,7 @@
           <td>
             <div class="media" > 
               <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.id}}</span>
+                <span class="name mb-0 text-sm">{{ index + 1}}</span>
               </div>
             </div>
           </td>
