@@ -32,14 +32,35 @@ const Schema = mongoose.Schema
     
 }) */
 
+//lineItemSchema
+const lineItemSchema = new Schema({
+    description: mongoose.Types.Decimal128,
+    research: mongoose.Types.Decimal128,
+    planning: mongoose.Types.Decimal128,
+    development: mongoose.Types.Decimal128,
+    testing: mongoose.Types.Decimal128,
+    stabilization: mongoose.Types.Decimal128,
+    certainty: Number,
+    sum: mongoose.Types.Decimal128,
+    adjustedSum: mongoose.Types.Decimal128,
+    comments: String
+});
+
+
 //request schema
 const estimateRequestSchema = new Schema ({
+    // const date = new Date();
+    // date.toDateString();
+
     title: String,
     project: String,
+    projectManager: String,
     developer: String,
-    dueDate: Date,
-    taskDescription: String
-
+    dueDate: {Type: Date},
+    taskDescription: String,
+    dateCreated: {Type: Date, default: Date.now},
+    status: String,
+    lineItem: [lineItemSchema]
 })
 
 //defining request model
