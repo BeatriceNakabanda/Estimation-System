@@ -52,13 +52,22 @@
                 <h6 class="heading-small text-muted mb-4 float-left">Due Date</h6>
             </div>
             <div class="col-sm">
-                <base-input addon-left-icon="ni ni-calendar-grid-58"
+                <!-- <base-input addon-left-icon="ni ni-calendar-grid-58"
                             alternative
                             class="mb-3"
                             placeholder="17-07-2019"
                             v-model="estimate.dueDate"
                 >
                     
+                </base-input> -->
+                <base-input addon-left-icon="ni ni-calendar-grid-58">
+                    <flat-picker slot-scope="{focus, blur}"
+                                @on-open="focus"
+                                @on-close="blur"
+                                :config="{allowInput: true, dateFormat: 'd-m-Y'}"
+                                class="form-control datepicker"
+                                v-model="estimate.dueDate">
+                    </flat-picker>
                 </base-input>
             </div>
             </div>
@@ -80,11 +89,16 @@
 </template>
 <script>
 import axios from 'axios';
+import flatPicker from "vue-flatpickr-component";
+import "flatpickr/dist/flatpickr.css";
 
 const baseURL = "http://localhost:8081/estimate"
 
 export default {
     name: 'create-estimate-form',
+    components: {
+        flatPicker
+        },
     data(){
         return{
             projects: [],
