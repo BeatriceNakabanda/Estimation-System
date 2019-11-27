@@ -35,10 +35,10 @@ const Schema = mongoose.Schema
 //request schema
 const estimateRequestSchema = new Schema ({
     _id: mongoose.Types.ObjectId,
-    projectID: {type: String},
-    developerID: {type: String},
+    project: {type: String},
+    developer: {type: String},
     title: {type: String},
-    projectManagerID: {type: String},
+    projectManager: {type: String},
     dueDate: {type: Date},
     taskDescription: {type: String},
     dateCreated: {type: Date, default: Date.now},
@@ -70,10 +70,6 @@ const estimateSchema = new Schema ({
     totalSum: {type: Number},
     lineItem: [lineItemSchema]
 })
-
-
-
-
 
 
 //defining request model
