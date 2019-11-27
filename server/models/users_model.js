@@ -14,7 +14,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    role: {UserRolesSchema},
+    role: {UserRolesSchema, required: true},
     date: {
         type: Date,
         default: Date.now
@@ -23,7 +23,8 @@ const UserSchema = new Schema({
 
 //roles schema
 const UserRolesSchema = new Schema({
-    
+    developer : {type: String},
+    projectManager: {type: String}
 })
 
 

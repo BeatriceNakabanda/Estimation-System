@@ -28,7 +28,7 @@ router.get("/projects", project_controller.projectList);
 //create project
 router.post("/project", project_controller.createProject);
 
-
+/* Listing Project Routes */
 
 
 //get request from the db
