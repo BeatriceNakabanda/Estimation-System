@@ -31,10 +31,10 @@ router.post("/project", project_controller.createProject);
 /* Listing Developer Routes */
 
 //get all developers
-router.get("/developers", developer_controller.developerList);
+// router.get("/developers", developer_controller.developerList);
 
 //get a single developer
-router.get("/developer/:requestId", developer_controller.singleDeveloper);
+// router.get("/developer/:requestId", developer_controller.singleDeveloper);
 
 /* Listing projectManager Routes */
 

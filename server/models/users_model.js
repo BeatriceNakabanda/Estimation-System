@@ -1,6 +1,12 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
+//roles schema
+const UserRolesSchema = new Schema({
+    developer : {type: String},
+    projectManager: {type: String}
+});
+
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -14,18 +20,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    role: {UserRolesSchema, required: true},
+    role: {UserRolesSchema},
     date: {
         type: Date,
         default: Date.now
     }
 });
 
-//roles schema
-const UserRolesSchema = new Schema({
-    developer : {type: String},
-    projectManager: {type: String}
-})
+
 
 
 //defining user model
