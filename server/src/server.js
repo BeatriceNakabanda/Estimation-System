@@ -15,8 +15,25 @@ app.use(routes);
 
 //error handling
 // eslint-disable-next-line no-unused-vars
-app.use(function(err, req, res, next) {
+/* app.use(function(err, req, res, next) {
   res.status(422).send({ error: err.message });
+}); */
+
+//central error handling for errors
+app.use((req, res, next) => {
+  const error = new Error ('Not found');
+  error.status = 404;
+  next(error);
+});
+
+app.use((error , req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error : {
+      message : error.message
+    }
+  });
+  next()
 });
 
 // eslint-disable-next-line no-undef

@@ -1,9 +1,9 @@
 //requiring dependecies
 const express = require("express");
-const router = express.Router(); //express router for routing
-// const request = require("../models/estimateRequest_model"); //estimateRequest_model
+const router = express.Router();  //express router for routing
 const estimateRequest_controller = require('../controllers/estimateRequest_controller')
 const project_controller = require('../controllers/project_controller')
+const developer_controller = require('../controllers/developer_controller')
 
 /* Listing estimate Routes */
 
@@ -28,8 +28,19 @@ router.get("/projects", project_controller.projectList);
 //create project
 router.post("/project", project_controller.createProject);
 
+/* Listing Developer Routes */
 
+//get all developers
+router.get("/developers", developer_controller.developerList);
 
+//get a single developer
+router.get("/developer/:requestId", developer_controller.singleDeveloper);
+
+/* Listing projectManager Routes */
+
+//get all projectManagers
+
+//get a single projectManager
 
 //get request from the db
 /* router.get("/estimate", (req, res) => {
