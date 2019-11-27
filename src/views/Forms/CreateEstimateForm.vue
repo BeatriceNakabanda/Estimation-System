@@ -73,8 +73,8 @@
             </div>
             </div>
         </div>
-            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save</base-button>
-            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send to Developer</base-button>
+            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
         </form>
         
 </template>

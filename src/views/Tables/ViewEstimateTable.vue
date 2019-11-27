@@ -125,7 +125,7 @@ const baseURL = "http://localhost:8081/estimates";
     //fetches estimates when the component is created
     async created(){
       try {
-        const res = await axios.get(`http://localhost:8081/estimates`)
+        const res = await axios.get(`http://localhost:8081/estimates` + this.$route.params.id)
 
         this.estimates = res.data; 
       } catch(e){
