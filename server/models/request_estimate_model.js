@@ -32,6 +32,30 @@ const Schema = mongoose.Schema
     
 }) */
 
+//request schema
+const estimateRequestSchema = new Schema ({
+    _id: mongoose.Types.ObjectId,
+    projectID: {type: String},
+    developerID: {type: String},
+    title: {type: String},
+    projectManagerID: {type: String},
+    dueDate: {type: Date},
+    taskDescription: {type: String},
+    dateCreated: {type: Date, default: Date.now},
+    status: {type: String},
+    createdDate: {type: Date, default: Date.now}
+})
+
+//estimate schema
+const estimateSchema = new Schema ({
+    _id: mongoose.Types.ObjectId,
+    createdDate: {type: Date, default: Date.now},
+    submittedDate: {type: Date, default: Date.now},
+    developerID: String,
+    totalSum: Number,
+    lineItem: [lineItemSchema]
+})
+
 //lineItemSchema
 const lineItemSchema = new Schema({
     description: mongoose.Types.Decimal128,
@@ -47,23 +71,10 @@ const lineItemSchema = new Schema({
 });
 
 
-//request schema
-const estimateRequestSchema = new Schema ({
-    // const date = new Date();
-    // date.toDateString();
 
-    title: String,
-    project: String,
-    projectManager: String,
-    developer: String,
-    dueDate: {Type: Date},
-    taskDescription: String,
-    dateCreated: {Type: Date, default: Date.now},
-    status: String,
-    lineItem: [lineItemSchema]
-})
 
 //defining request model
  const request = mongoose.model('estimateRequest', estimateRequestSchema)
 
  module.exports= request;
+
