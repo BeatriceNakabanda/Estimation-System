@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();  //express router for routing
 const estimateRequest_controller = require('../controllers/estimateRequest_controller')
 const project_controller = require('../controllers/project_controller')
-const developer_controller = require('../controllers/developer_controller')
+// const developer_controller = require('../controllers/developer_controller')
 
 /* Listing estimate Routes */
 
@@ -58,7 +58,7 @@ router.post("/project", project_controller.createProject);
       res.send(estimate);
     })
     .catch(next);
-}); */
+});  */
 
 //put request in the db
 /* router.put("/estimate/:id", (req, res) => {

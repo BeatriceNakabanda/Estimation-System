@@ -34,7 +34,7 @@ const Schema = mongoose.Schema
 
 //request schema
 const estimateRequestSchema = new Schema ({
-    _id: mongoose.Types.ObjectId,
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'Estimate'},
     project: {type: String},
     developer: {type: String},
     title: {type: String},
@@ -43,7 +43,8 @@ const estimateRequestSchema = new Schema ({
     taskDescription: {type: String},
     dateCreated: {type: Date, default: Date.now},
     status: {type: String},
-    createdDate: {type: Date, default: Date.now}
+    // eslint-disable-next-line no-dupe-keys
+    dateCreated: {type: Date, default: Date.now}
 })
 
 //lineItemSchema
@@ -63,8 +64,8 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema ({
-    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'estimateRequestSchema'},
-    createdDate: {type: Date, default: Date.now},
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'Request'},
+    dateCreated: {type: Date, default: Date.now},
     submittedDate: {type: Date, default: Date.now},
     developerID: {type: String},
     totalSum: {type: Number},
@@ -78,5 +79,4 @@ const estimateSchema = new Schema ({
 //estimate model
 const Estimate = mongoose.model('estimate', estimateSchema)
 
- module.exports= Request;
-
+module.exports= {Request, Estimate};
