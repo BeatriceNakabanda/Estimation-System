@@ -3,8 +3,8 @@ const developer = require("../models/users_model"); //users_model
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
-//get all developers
-exports.developersList = function(req, res){
+//get all users
+exports.usersList = function(req, res){
   developer.find({}, function (developer, next){
     if(next){
       res.send(next);
@@ -14,8 +14,8 @@ exports.developersList = function(req, res){
   });
 };
 
-//create developer
-exports.createDeveloper = function(req, res){
+//create user
+exports.createUser = function(req, res){
   const newDeveloper = new developer(req.body);
   newDeveloper.save(function(developer, next){
     if(next){
@@ -26,8 +26,8 @@ exports.createDeveloper = function(req, res){
   });
 };
 
-//get single developer
-exports.singleDeveloper = function(req, res){
+//get single user
+exports.singleUser = function(req, res){
   developer.findById({_id: req.params.requestId}, function(developer, next){
     if(next){
       res.send(next);
@@ -37,4 +37,4 @@ exports.singleDeveloper = function(req, res){
   })
 };
 
-//update single developer
+//update single user

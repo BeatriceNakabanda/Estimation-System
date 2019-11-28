@@ -1,40 +1,43 @@
 //requiring dependecies
-const express = require("express");
+const express = require("express")
 const router = express.Router();  //express router for routing
-const estimateRequest_controller = require('../controllers/estimateRequest_controller')
-const project_controller = require('../controllers/project_controller')
-// const developer_controller = require('../controllers/developer_controller')
+const estimateRequestController = require('../controllers/estimateRequest_controller')
+const projectController = require('../controllers/project_controller')
+const userController = require('../controllers/user_controller')
 
 /* Listing estimate Routes */
 
 //get all estimates
-router.get("/estimates", estimateRequest_controller.estimatesList);
+router.get("/estimates", estimateRequestController.estimatesList)
 
 //create estimate
-router.post("/estimate", estimateRequest_controller.createEstimate);
+router.post("/estimate", estimateRequestController.createEstimate)
 
 //get single estimate
-router.get("/estimate/:requestId", estimateRequest_controller.singleEstimate);
+router.get("/estimate/:requestId", estimateRequestController.singleEstimate)
 
 //update single estimate
-router.put("/estimate/:requestId", estimateRequest_controller.updateEstimate);
+router.put("/estimate/:requestId", estimateRequestController.updateEstimate)
 
 
 /* Listing Project Routes */
 
 //get all projects
-router.get("/projects", project_controller.projectList);
+router.get("/projects", projectController.projectList)
 
 //create project
-router.post("/project", project_controller.createProject);
+router.post("/project", projectController.createProject)
 
-/* Listing Developer Routes */
+/* Listing User Routes */
 
-//get all developers
-// router.get("/developers", developer_controller.developerList);
+//get all users
+router.get("/users", userController.usersList)
 
-//get a single developer
-// router.get("/developer/:requestId", developer_controller.singleDeveloper);
+//get a single user
+router.get("/user/:requestId", userController.singleUser)
+
+//create user
+router.post("/user", userController.createUser)
 
 /* Listing projectManager Routes */
 

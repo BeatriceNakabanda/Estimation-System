@@ -1,3 +1,4 @@
+//requiring dependencies
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
@@ -7,6 +8,7 @@ const UserRolesSchema = new Schema({
     projectManager: {type: String}
 });
 
+//user schema
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -21,14 +23,11 @@ const UserSchema = new Schema({
         required: true
     },
     role: {UserRolesSchema},
-    date: {
+    dateCreated: {
         type: Date,
         default: Date.now
     }
 });
-
-
-
 
 //defining user model
  const User = mongoose.model('User', UserSchema);
