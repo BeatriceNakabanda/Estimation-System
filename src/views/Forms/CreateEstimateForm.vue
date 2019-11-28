@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form">
+    <form method="POST" role="form" @submit.prevent="addEstimate">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -7,8 +7,12 @@
             </div>
             <div class="col-sm">
                 <base-input alternative
+                        ref="first"
                         class="mb-3"
-                        placeholder="Add project here..."  
+                        placeholder="Add project here..." 
+                        :class="{ 'has-error': submitting && invalidName }" 
+                        @focus="clearForm"
+                        @keypress="clearForm"
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
                         <option value="" disabled>Please select a project</option>
@@ -26,6 +30,7 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
+                        @focus="clearForm"
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
                             <option value="" disabled>Please select a developer</option>
@@ -54,6 +59,8 @@
                                 :config="{allowInput: true, dateFormat: 'd-m-Y'}"
                                 placeholder="17-07-2019"
                                 class="form-control datepicker"
+                                :class="{ 'has-error': submitting && invalidName }"
+                                @focus="clearForm"
                                 v-model="estimate.dueDate">
                     </flat-picker>
                 </base-input>
@@ -67,7 +74,9 @@
                     <base-input alternative
                             class="mb-3"
                             placeholder="Add title here..."
-                            v-model="estimate.title"
+                            v-model="estimate.title" 
+                            @focus="clearForm"
+                            :class="{ 'has-error': submitting && invalidName }"
                         >
                 </base-input>
                 </div>
@@ -77,12 +86,21 @@
                 <h6 class="heading-small text-muted mb-4 float-left">Main Task Description </h6>
             </div>
             <div class="col-sm-12">
-                <base-input alternative="">
+                <base-input alternative=""
+                :class="{ 'has-error': submitting && invalidName }"
+                @focus="clearForm"
+                >
                     <textarea rows="4" v-model="estimate.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                 </base-input>
             </div>
             </div>
         </div>
+            <p v-if="error && submitting" class="error-message">
+                ❗Please fill in all fields
+            </p>
+            <p v-if="success" class="success-message">
+                ✅ Request successfully sent
+            </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
         </form>
@@ -100,11 +118,32 @@ export default {
     components: {
         flatPicker
         },
+            // automatically computed properties(functions) to validate form inputs 
+    computed: {
+        invalidProjectName(){
+            return this.estimate.project === ''
+        },
+        // invalidDeveloper(){
+        //     return this.estimate.developers === ''
+        // },
+        invalidDueDate(){
+            return this.dueDate === ''
+        },
+        invalidTitle(){
+            return this.title === ''
+        },
+        invalidTaskDescription(){
+            return this.taskDescription === ''
+        }
+
+    },
     data(){
         return{
             projects: [],
             developers: [],
-           
+            submitting: false,
+            error: false,
+            success: false,
         estimate:
           {
             project: '',
@@ -118,30 +157,18 @@ export default {
         }
         
     },
-    // automatically computed properties(functions) to validate form inputs 
-    computed: {
-        invalid
-    },
+
     methods: {
         async addEstimate(){
-        /* const res = await axios.post(baseURL, {
-            // objects to pass
-            title: this.estimate.title,
-            project: this.estimate.project,
-            developer: this.estimate.developer,
-            status: this.estimate.status,
-            dueDate: this.estimate.dueDate,
-            taskDescription: this.estimate.taskDescription,
-            
-            })
+            this.submitting = true
+            this.clearForm()
+                // validating empty inputs
+            if(this.invalidProjectName || this.invalidProjectName || this.invalidDueDate || this.invalidTaskDescription)
+            {
+                this.error = true
+                return
+            }
 
-        this.estimates = [...this.estimates, res.data]
-        this.title = '' ,
-        this.project = '',
-        this.developer = '',
-        this.status = '',
-        this.dueDate = '',
-        this.taskDescription = '' */
         let newEstimate = {
             title: this.estimate.title,
             project: this.estimate.project,
@@ -157,7 +184,15 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+            this.error = false
+            this.success = true
+            this.submitting = false
+
         },
+    clearForm(){
+                this.success = false
+                this.error = false
+            },
       handleSave() {
       console.log('testing save' )
       },  
@@ -177,3 +212,18 @@ export default {
     
 }
 </script>
+<style scoped>
+[class*='-message'] {
+    font-weight: 500;
+  }
+
+  .error-message {
+    color: #d33c40;
+    text-align: left;
+  }
+
+  .success-message {
+    color: #32a95d;
+    text-align: left;
+  }
+</style>
