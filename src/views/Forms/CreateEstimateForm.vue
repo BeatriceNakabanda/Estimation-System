@@ -2,26 +2,13 @@
     <form method="POST" role="form">
         <div>
             <div class="row">
-            <div class="col-sm-3">
-                <h6 class="heading-small text-muted mb-4 float-left">Title</h6>
-            </div>
-            <div class="col-sm">
-                <base-input alternative
-                        class="mb-3"
-                        placeholder="Add title here..."
-                        v-model="estimate.title"
-                       >
-            </base-input>
-            </div>
-            </div>
-            <div class="row">
             <div class="col-sm-3">          
                 <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
             </div>
             <div class="col-sm">
                 <base-input alternative
                         class="mb-3"
-                        placeholder="Edit  project here..."  
+                        placeholder="Add project here..."  
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
                         <option value="" disabled>Please select a project</option>
@@ -65,11 +52,25 @@
                                 @on-open="focus"
                                 @on-close="blur"
                                 :config="{allowInput: true, dateFormat: 'd-m-Y'}"
+                                placeholder="17-07-2019"
                                 class="form-control datepicker"
                                 v-model="estimate.dueDate">
                     </flat-picker>
                 </base-input>
             </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="heading-small text-muted mb-4 float-left">Title</h6>
+                </div>
+                <div class="col-sm">
+                    <base-input alternative
+                            class="mb-3"
+                            placeholder="Add title here..."
+                            v-model="estimate.title"
+                        >
+                </base-input>
+                </div>
             </div>
             <div class="row">
             <div class="col-sm-5">
@@ -106,16 +107,20 @@ export default {
            
         estimate:
           {
-            title: '',
             project: '',
             developer: '',
             status: '',
             statusType: '',
             dueDate: '',
+            title: '',
             taskDescription: '',
           },
         }
         
+    },
+    // automatically computed properties(functions) to validate form inputs 
+    computed: {
+        invalid
     },
     methods: {
         async addEstimate(){
