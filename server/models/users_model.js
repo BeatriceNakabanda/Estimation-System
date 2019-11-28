@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 //roles schema
 const UserRolesSchema = new Schema({
-    name: String
+    _ : String
 });
 
 //user schema
