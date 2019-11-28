@@ -43,7 +43,8 @@
             {{row.developer}}
           </td>
           <td class="dateCreated">
-            {{row.dateCreated}}
+            {{ formatDate(row.dateCreated) }}
+            <!-- {{ row.dateCreated }} -->
           </td>
           <td class="dateEstimated">
             {{row.dateEstimated}}
@@ -57,8 +58,8 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" @click="modal2 = true"></i>
+              <router-link  to="/view-estimate" id="view">
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
                 <modal :show.sync="modal2">
                   <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
@@ -92,6 +93,7 @@
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
 // import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
+import { format, compareAsc } from 'date-fns'
 
 const baseURL = "http://localhost:8081/estimates";
 
@@ -113,7 +115,8 @@ export default {
       // editing: null,
       modal: false,
       modal1: false,
-      modal2: false
+      modal2: false,
+      format,
     };
   },
     //fetches a single estimate when the component is created
@@ -132,6 +135,9 @@ export default {
         name: 'EditEstimate',
         params: { id: estimateid }
       })
+    },
+    formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd/MM/yyy')
     }
   }
 };

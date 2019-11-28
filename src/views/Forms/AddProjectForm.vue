@@ -1,5 +1,5 @@
 <template>
-  <form role="form">
+  <form role="form" method="POST">
     <div class="row">
       <div class="col-sm-4">
         <h6 class="heading-small text-muted mb-4">Project Name</h6>

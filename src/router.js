@@ -40,7 +40,7 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Developers.vue')
         },
         {
-          path: '/view-estimate',
+          path: '/view-estimate/:id',
           name: 'View Estimate',
           component: () => import(/* webpackChunkName: "demo" */ './views/ViewEstimate.vue')
         },
