@@ -33,6 +33,7 @@ const Schema = mongoose.Schema
 }) */
 
 //request schema
+<<<<<<< HEAD
 const estimateRequestSchema = new Schema ({
     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'Estimate'},
     project: {type: String},
@@ -46,7 +47,29 @@ const estimateRequestSchema = new Schema ({
     // eslint-disable-next-line no-dupe-keys
     dateCreated: {type: Date, default: Date.now}
 })
+=======
+// const estimateRequestSchema = new Schema ({
+//     _id: mongoose.Types.ObjectId,
+//     project: {type: String},
+//     developer: {type: String},
+//     title: {type: String},
+//     projectManager: {type: String},
+//     dueDate: {type: Date},
+//     taskDescription: {type: String},
+//     dateCreated: {type: Date, default: Date.now},
+//     status: {type: String},
+//     createdDate: {type: Date, default: Date.now}
+// })
+>>>>>>> 7ea308ba1940d38512e715fad7b4b0343cc76249
 
+const estimateRequestSchema = new Schema({
+    title: String,
+    project: String,
+    developer: String,
+    dueDate: String,
+    taskDescription: String,
+    dateCreated: {type: Date, default: Date.now}
+})
 //lineItemSchema
 const lineItemSchema = new Schema({
     _id: mongoose.Types.ObjectId,

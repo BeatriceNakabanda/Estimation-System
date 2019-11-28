@@ -25,6 +25,7 @@
     data(){
       return{
          estimates: [], 
+        
         methods: {
           // creating an edit estimate method
           // editEstimate(id, updatedEstimate){
