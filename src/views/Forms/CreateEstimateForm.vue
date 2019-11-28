@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="addEstimate">
+    <form method="POST" role="form">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -10,7 +10,7 @@
                         ref="first"
                         class="mb-3"
                         placeholder="Add project here..." 
-                        :class="{ 'has-error': submitting && invalidName }" 
+                        :class="{ 'has-error': submitting && invalidName } " 
                         @focus="clearForm"
                         @keypress="clearForm"
                        >
@@ -102,7 +102,9 @@
                 ✅ Request successfully sent
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
+            <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
             <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
+
         </form>
         
 </template>
@@ -162,6 +164,7 @@ export default {
         async addEstimate(){
             this.submitting = true
             this.clearForm()
+
                 // validating empty inputs
             if(this.invalidProjectName || this.invalidProjectName || this.invalidDueDate || this.invalidTaskDescription)
             {
@@ -187,7 +190,8 @@ export default {
             this.error = false
             this.success = true
             this.submitting = false
-
+        
+        this.$refs.first.focus()
         },
     clearForm(){
                 this.success = false
