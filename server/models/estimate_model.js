@@ -20,9 +20,9 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema ({
-    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'Request'},
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'request'},
     dateCreated: {type: Date, default: Date.now},
-    submittedDate: {type: Date, default: Date.now},
+    submittedDate: {type: Date},
     developerID: {type: String},
     totalSum: {type: Number},
     lineItem: [lineItemSchema]
