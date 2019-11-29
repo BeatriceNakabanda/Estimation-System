@@ -5,6 +5,7 @@ const estimateRequestController = require('../controllers/estimateRequest_contro
 const projectController = require('../controllers/project_controller')
 const userController = require('../controllers/user_controller')
 
+
 /* Listing estimate Routes */
 
 //get all estimates
@@ -32,6 +33,11 @@ router.post("/project", projectController.createProject)
 
 //get all users
 router.get("/users", userController.usersList)
+
+//get all users who are developers
+router.get("/users/developers", userController.usersDevelopers)
+
+//get all users who are projectManagers
 
 //get a single user
 router.get("/user/:requestId", userController.singleUser)

@@ -12,7 +12,7 @@ exports.estimatesList = function(req, res){
       res.json(estimate);
     }
   });
-};
+}; 
 
 //create estimate
 exports.createEstimate = function(req, res){
