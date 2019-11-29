@@ -1,7 +1,7 @@
 //requiring dependencies
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
+const user = require('../models/users_model')
 
 //lineItemSchema
 const lineItemSchema = new Schema({
@@ -23,7 +23,7 @@ const estimateSchema = new Schema ({
     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'request'},
     dateCreated: {type: Date, default: Date.now},
     submittedDate: {type: Date},
-    developerID: {type: String},
+    developer: mongoose.Types.ObjectId, ref:({user, role: 'developer'}),
     totalSum: {type: Number},
     lineItem: [lineItemSchema]
 })
