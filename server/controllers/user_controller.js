@@ -25,9 +25,6 @@ exports.usersDevelopers = function(req, res){
   })
 };
 
-//get all users who are projectManagers
-
-
 //create user
 exports.createUser = function(req, res){
   const newUser = new user(req.body);
@@ -50,5 +47,3 @@ exports.singleUser = function(req, res){
     }
   })
 };
-
-//update single user
