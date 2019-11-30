@@ -24,15 +24,15 @@
               <p>Due Date </p>
               <p>Main Task Description </p>
             </div>
-            <div class="col details align-self-start" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.project}}</p>
-            <p>{{tableDataDetail.projectManager}}</p>
-            <p>{{tableDataDetail.dateCreated}}</p>
-            <p>{{tableDataDetail.dueDate}}</p>
+            <div class="col details align-self-start" v-for="estimate in estimates" v-bind:key="estimate.id">
+            <p>{{estimate.project}}</p>
+            <p>{{estimate.projectManager}}</p>
+            <p>{{estimate.dateCreated}}</p>
+            <p>{{estimate.dueDate}}</p>
             </div>
           </div>
-          <div class="pl-3 row details" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.mainTaskDescription}}</p>
+          <div class="pl-3 row details" v-for="estimate in estimates" v-bind:key="estimate.id">
+            <p>{{estimate.mainTaskDescription}}</p>
           </div>
         </div>   
     </div>
@@ -56,17 +56,17 @@
         </td>
     </tr>
   </thead>
-  <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
+  <tbody v-for="estimate in estimates" :key="estimate.id">
     <tr>
-      <td scope="row">{{tableInfo.subTask}}</td>
-      <td>{{tableInfo.research}}</td>
-      <td>{{tableInfo.planning}}</td>
-      <td>{{tableInfo.development}}</td>
-      <td>{{tableInfo.testing}}</td>
-      <td>{{tableInfo.stabilization}}</td>
-      <td>{{tableInfo.certainity}}</td>
-      <td>{{tableInfo.sumHours}}</td>
-      <td>{{tableInfo.adjustedSumHours}}</td>
+      <td scope="row">{{estimate.subTask}}</td>
+      <td>{{estimate.research}}</td>
+      <td>{{estimate.planning}}</td>
+      <td>{{estimate.development}}</td>
+      <td>{{estimate.testing}}</td>
+      <td>{{estimate.stabilization}}</td>
+      <td>{{estimate.certainity}}</td>
+      <td>{{estimate.sumHours}}</td>
+      <td>{{estimate.adjustedSumHours}}</td>
       <!-- <td></td> -->
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -83,7 +83,7 @@
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
-      <td colspan="10">{{tableInfo.comments}}</td>
+      <td colspan="10">{{estimate.comments}}</td>
     </tr>
   </tbody>
   <tr>
@@ -103,6 +103,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+const baseURL = "http://localhost:8081/estimates";
 
   export default {
     name: 'estimates-table',
@@ -116,47 +118,20 @@
       return {
          isShowing:false,
          isShow: false,
-        tableData: [
-          {
-            id: 1,
-            subTask: 'Navbar',
-            research: '1.00hrs',
-            planning: '2.00hrs',
-            development: '2.00hrs',
-            testing: '2.00hrs',
-            stabilization: '2.00hrs',
-            certainity: '90%',
-            sumHours: '9.00hrs',
-            adjustedSumHours: '9.90hrs',
-            comments: 'This should work well enough.',
-          },
-          {
-            id: 2,
-            subTask: 'Table',
-            research: '1.00hrs',
-            planning: '2.00hrs',
-            development: '2.00hrs',
-            testing: '2.00hrs',
-            stabilization: '2.00hrs',
-            certainity: '90%',
-            sumHours: '9.00hrs',
-            adjustedSumHours: '9.90hrs',
-            comments: 'The hours are accurate.',
-          },
-        ],
-        tableDataDetails: [
-           {
-             id: 1,
-              project: 'Refactory',
-              projectManager: 'David Pereira',
-              dateCreated: '20-10-2019',
-              dueDate: '23-10-2019',
-              mainTaskDescription: 'There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students',
-           }
-        ],
-        
+         estimates: [], 
+ 
       }
-    }
+    },
+    //fetches estimates when the component is created
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:8081/estimates` + this.$route.params.id)
+
+        this.estimates = res.data; 
+      } catch(e){
+        console.error(e)
+      }
+    },
     
   }
 </script>

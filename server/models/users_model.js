@@ -1,6 +1,8 @@
+//requiring dependencies
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
+//user schema
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -14,21 +16,9 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    role: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
-});
+    role: String,
+}, {timestamps: true});
 
-//developer schema
-/* const DeveloperSchema = new Schema({
-
-})
- */
 //defining user model
  const User = mongoose.model('User', UserSchema);
 

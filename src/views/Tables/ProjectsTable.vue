@@ -20,47 +20,29 @@
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table table-flush"
-                  :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
-                  tbody-classes="list"
-                  :data="projects" id="left">
-        <template  slot="columns"  >
-          <th class="bgcolor">No</th>
-          <th class="bgcolor">Project</th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-        </template>
-          <template class="table-row" slot-scope="{row} ">
-          <td>
-            <div class="media" > 
-              <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.id}}</span>
-              </div>
-            </div>
-          </td>
-          <td class="project">
-            {{row.name}}
-          </td>
-          <td>       
-          </td>
-          <td>
-          </td>
-          <td>
-          </td>
-          <td> 
-          </td>
-          <td>
-            <badge class="badge-dot mr-4" :type="row.statusType">
-              <i :class="`bg-${row.statusType}`"></i>
-              <span class="status">{{row.status}}</span>
-            </badge>
-          </td>
-          </template>
-      </base-table>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th class="bgcolor">No</th>
+            <th class="bgcolor">Project</th>
+            <th class="bgcolor"></th>
+            <th class="bgcolor"></th>
+            <th class="bgcolor"></th>
+            <th class="bgcolor"></th>
+            
+        </tr>
+        </thead>
+          <tbody>
+            <tr v-for="project, index in projects">
+              <td >{{ index + 1 }}</td>
+               <td> {{ project.name}}</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+          </tbody>
+      </table>
     </div>
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">

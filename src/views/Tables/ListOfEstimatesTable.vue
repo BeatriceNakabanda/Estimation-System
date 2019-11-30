@@ -52,11 +52,17 @@
           <td v-else class="developer">
             {{row.developer}}
           </td>
+<<<<<<< HEAD
           <td v-if="editing===row.id">
               <input type="text" v-model="row.dateCreated">
             </td>
           <td  v-else class="dateCreated">
             {{row.dateCreated}}
+=======
+          <td class="dateCreated">
+            {{ formatDate(row.dateCreated) }}
+            <!-- {{ row.dateCreated }} -->
+>>>>>>> 0bbac4813e7201387a4c160fbbf983bb47f88a62
           </td>
           <td v-if="editing===row.id">
               <input type="text" v-model="row.dateEstimated">
@@ -73,8 +79,8 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" @click="modal2 = true"></i>
+              <router-link  to="/view-estimate" id="view">
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
                 <modal :show.sync="modal2">
                   <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
@@ -119,6 +125,7 @@
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
 // import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
+import { format, compareAsc } from 'date-fns'
 
 const baseURL = "http://localhost:8081/estimates";
 
@@ -136,11 +143,11 @@ export default {
   },
   data() {
     return {
-      editing: null
-      // estimates: [],
-      // modal: false,
-      // modal1: false,
-      // modal2: false
+      // editing: null,
+      modal: false,
+      modal1: false,
+      modal2: false,
+      format,
     };
   },
   mounted() {
@@ -160,26 +167,15 @@ export default {
         console.error(e);
       }
     },
-    editMode(estimate) {
-      this.cachedEstimate = Object.assign({}, estimate);
-      this.editing = this.row.id;
-      alert("yello");
+  methods: {
+    editEstimate(estimateid){
+      this.$router.push({
+        name: 'EditEstimate',
+        params: { id: estimateid }
+      })
     },
-    cancelEdit(estimate) {
-      Object.assign(estimate, this.cachedEstimate);
-      this.editing = null;
-    },
-    editEstimate(estimate) {
-      if (
-        this.row.title === "" ||
-        this.row.project === "" ||
-        this.row.developer == "" ||
-        this.row.dateCreated === "" ||
-        this.row.dateEstimated === ""
-      )
-        this.$emit("edit:estimate", estimate.id, estimate);
-      alert("okay");
-      this.editing = null;
+    formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd/MM/yyy')
     }
     // async editEstimate(id, updatedEstimate) {
     //   try {
