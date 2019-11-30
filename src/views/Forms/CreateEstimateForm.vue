@@ -148,44 +148,11 @@ export default {
         const response = await axios.get(`http://localhost:8081/projects`)
         // const resp = await axios.get(`http://localhost:8081/developers`)
 
-<<<<<<< HEAD
-      estimate: {
-        title: '',
-        project: '',
-        developer: '',
-        status: '',
-        statusType: '',
-        dueDate:'',
-        taskDescription : ''
-      },
-    }
-  },
-  methods: {
-    async addEstimate() {
-      const res = await axios.post(baseURL, {
-        // objects to pass
-        title: this.estimate.title,
-        project: this.estimate.project,
-        developer: this.estimate.developer,
-        status: this.estimate.status,
-        dueDate: this.estimate.dueDate,
-        taskDescription: this.estimate.taskDescription
-      });
-
-      this.estimates = [...this.estimates, res.data];
-      (this.title = ""),
-        (this.project = ""),
-        (this.developer = ""),
-        (this.status = ""),
-        (this.dueDate = ""),
-        (this.taskDescription = "");
-=======
         this.projects = response.data;
         // this.developers = resp.data;
       }catch(e){
         console.error(e)
       }
->>>>>>> 475edd8e90420738d48377081c7b6b97e3e2cb45
     },
     
     
