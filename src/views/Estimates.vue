@@ -14,43 +14,27 @@
     </div>
 </template>
 <script>
-  import EstimatesTable from './Tables/ListOfEstimatesTable'
-  import axios from 'axios'
+import EstimatesTable from "./Tables/ListOfEstimatesTable";
+import axios from "axios";
 
-  export default {
-    name: 'estimates',
-    components: {
-      EstimatesTable
-    },
-    data(){
-      return{
-         estimates: [], 
-        methods: {
-          // creating an edit estimate method
-          // editEstimate(id, updatedEstimate){
-          //   this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
-          // }
-        }
-      }
-    },
-    //fetches estimates when the component is created
-    async created(){
-      try {
-        const res = await axios.get(`http://localhost:8081/estimates`)
+export default {
+  name: "estimates",
+  components: {
+    EstimatesTable
+  },
+  data() {
+    return {
+      estimates: [],
 
-        this.estimates = res.data; 
-      } catch(e){
-        console.error(e)
-      }
-    },
-  
-
+      methods: {}
+    };
   }
+  //fetches estimates when the component is created
+};
 </script>
 <style>
-#table-head{
-    background-color: #d10572;
-    height: 35vh;
+#table-head {
+  background-color: #d10572;
+  height: 35vh;
 }
-
 </style>
