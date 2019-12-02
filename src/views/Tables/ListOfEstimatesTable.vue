@@ -5,10 +5,10 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Request Estimate</base-button>
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Create Estimate</base-button>
           <modal :show.sync="modal1">
                       <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
+                          <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
                       </template>
                       <!-- create estimate form -->
                       <CreateEstimateForm  />
@@ -32,34 +32,21 @@
           <th class="bgcolor">Status</th>
           <th class="bgcolor"></th>
         </template>
-          <template class="table-row" slot-scope="{row}" >
-            <td v-if="editing===row.id">
-              
-              <input type="text" v-model="row.title">
-            </td>
-          <td v-else class="title">
+          <template class="table-row" slot-scope="{row} ">
+          <td class="title">
             {{row.title}}
           </td>
-          <td v-if="editing===row.id">
-              <input type="text" v-model="row.project">
-            </td>
-          <td v-else class="project">
+          <td class="project">
             {{row.project}}
           </td>
-         <td v-if="editing===row.id">
-              <input type="text" v-model="row.developer">
-            </td>
-          <td v-else class="developer">
+          <td class="developer">
             {{row.developer}}
           </td>
           <td class="dateCreated">
             {{ formatDate(row.dateCreated) }}
             <!-- {{ row.dateCreated }} -->
           </td>
-          <td v-if="editing===row.id">
-              <input type="text" v-model="row.dateEstimated">
-            </td>
-          <td v-else class="dateEstimated">
+          <td class="dateEstimated">
             {{row.dateEstimated}}
           </td>
           <td>
@@ -81,22 +68,13 @@
               </router-link>
             </span>
             <span class="action-icons">
-              
-              <router-link  to="/" id="view" >
-              <!-- <edit-estimate-form @edit:estimate="editEstimate"></edit-estimate-form> -->
-                <i v-if="editing===estimate.id" class="rounded-circle fas fa-pen"   aria-hidden="true" id="my-icons" @click=
-                "editEstimate(estimate)"
-                ></i>
-                <i v-else class="rounded-circle fas fa-pen"    aria-hidden="true" id="my-icons" @click=
-                "editMode(estimate)"
-                ></i>
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="editEstimate(row._id)"></i>
+
               </router-link>
-              <!-- <p>row.id</p> -->
             </span>
-            hello
+            
           </td>
-          
-         
           </template>
 
       </base-table>
@@ -108,10 +86,8 @@
       <base-pagination></base-pagination>
 
     </div>
-  
     
   </div>
-   
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
@@ -124,14 +100,15 @@ const baseURL = "http://localhost:8081/estimates";
 export default {
   name: "estimates-table",
   components: {
-    CreateEstimateForm
+    CreateEstimateForm,
+    // EditEstimateForm
   },
   props: {
-    estimates: Array
-    // type: {
-    //   type: String
-    // },
-    // title: String
+    estimates: Array,
+    type: {
+      type: String
+    },
+    title: String
   },
   data() {
     return {
@@ -142,21 +119,14 @@ export default {
       format,
     };
   },
-  mounted() {
-    this.created();
-  },
-
-  // fetches a single estimate when the component is created
-
-  methods: {
-    async created() {
+    //fetches a single estimate when the component is created
+    async created(){
       try {
-        const res = await axios.get(baseURL);
-        //const res = await axios.get(baseURL);
+        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
 
-        this.estimates = res.data;
-      } catch (e) {
-        console.error(e);
+        this.estimate = res.data; 
+      } catch(e){
+        console.error(e)
       }
     },
   methods: {
@@ -169,27 +139,6 @@ export default {
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     }
-    // async editEstimate(id, updatedEstimate) {
-    //   try {
-    //     const response = await fetch(
-    //       `http://localhost:8081/estimate/` + this.$route.params.id,
-    //       {
-    //         method: "PUT",
-    //         body: JSON.stringify(updatedEstimate),
-    //         headers: { "Content-type": "application/json; charset=UTF-8" }
-    //       }
-    //     );
-    //     const data = await response.json();
-    //     data = this.data;
-    //     this.estimates = this.estimates.map(
-    //       estimate => (estimate.id === id ? data : estimate)
-    //     );
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-    // editEstimate(estimateid) {
-    // }
   }
 };
 </script>
