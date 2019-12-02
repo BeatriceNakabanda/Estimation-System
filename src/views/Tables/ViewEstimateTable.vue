@@ -56,7 +56,7 @@
         </td>
     </tr>
   </thead>
-  <tbody v-for="estimate in estimates" :key="estimate.id">
+  <tbody v-for="estimate in estimates" :key="estimate._id">
     <tr>
       <td scope="row">{{estimate.subTask}}</td>
       <td>{{estimate.research}}</td>
@@ -125,7 +125,7 @@ const baseURL = "http://localhost:8081/estimates";
     //fetches estimates when the component is created
     async created(){
       try {
-        const res = await axios.get(`http://localhost:8081/estimates` + this.$route.params.id)
+        const res = await axios.get(`http://localhost:8081/estimates` )
 
         this.estimates = res.data; 
       } catch(e){

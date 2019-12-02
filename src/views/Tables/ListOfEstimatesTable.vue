@@ -5,10 +5,10 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Create Estimate</base-button>
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Request Estimate</base-button>
           <modal :show.sync="modal1">
                       <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
+                          <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
                       </template>
                       <!-- create estimate form -->
                       <CreateEstimateForm  />
@@ -52,17 +52,9 @@
           <td v-else class="developer">
             {{row.developer}}
           </td>
-<<<<<<< HEAD
-          <td v-if="editing===row.id">
-              <input type="text" v-model="row.dateCreated">
-            </td>
-          <td  v-else class="dateCreated">
-            {{row.dateCreated}}
-=======
           <td class="dateCreated">
             {{ formatDate(row.dateCreated) }}
             <!-- {{ row.dateCreated }} -->
->>>>>>> 0bbac4813e7201387a4c160fbbf983bb47f88a62
           </td>
           <td v-if="editing===row.id">
               <input type="text" v-model="row.dateEstimated">
