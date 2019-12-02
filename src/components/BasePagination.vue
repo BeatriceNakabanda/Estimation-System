@@ -8,7 +8,7 @@
     <li class="page-item" :class="{active: value === item}"
         :key="item"
         v-for="item in range(minPage, maxPage)">
-      <a class="page-link" @click="changePage(item)">{{item}}</a>
+      <a class="page-link" id="num" @click="changePage(item)">{{item}}</a>
     </li>
     <li class="page-item next-page" :class="{disabled: value === totalPages}">
       <a class="page-link" aria-label="Next" @click="nextPage">
@@ -132,9 +132,6 @@ export default {
   }
 };
 </script>
-<<<<<<< HEAD
-
-=======
 <style>
 
 ul:hover{
@@ -142,7 +139,11 @@ ul:hover{
 }
 
 .active:hover{
-  color: #d10572;
+  color: #eeeeee;
+  /* background-color: #d10572; */
+}
+#num:hover{
+  background-color: #d10572;
+  border: #d10572;
 }
 </style>
->>>>>>> cd865f509662f4566315a2367d2653787dd08fb8

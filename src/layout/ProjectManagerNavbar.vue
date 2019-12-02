@@ -6,36 +6,22 @@
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
            
         </form>
-        <ul class="navbar-nav align-items-left d-none d-md-flex">
-            <li class="nav-item dropdown">
-                <base-dropdown class="nav-link pr-0">
-                    <div class="media align-items-center" slot="title">
-                <span class="avatar avatar-sm rounded-circle mb-2">
-                  <img alt="Image placeholder" src="../assets/avatar image.png">
-                </span>
-                        <div class="media-body ml-2 d-none d-lg-block" id="left">
-                            <span class="mb-0 text-sm font-weight-bold">David Pereira
-                            </span>
-                            <span class="mb-0 text-sm font-weight-bold">
-                              <small><br>Project Manager</small>
-                            </span>
-                        </div>
-                    </div>
+        <div class="navbar-nav align-items-left d-none d-md-flex">
 
-                    <template>
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
-                        </div>
-                        
-                        <div class="dropdown-divider"></div>
-                        <router-link to="/profile" class="dropdown-item">
-                            <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </router-link>
-                    </template>
-                </base-dropdown>
-            </li>
-        </ul>
+          <div class="users">
+            <span class="avatar avatar-sm" > 
+                <img alt="Image placeholder"  id="user-image" height="38px" src="../assets/user.png">
+            </span> 
+           
+            <div class="user ml-2" >
+              <p class="text-md font-weight-bold" id="user-name">David Pereira
+              </p>
+              <p class="text-sm">
+                Project Manager
+              </p>
+            </div>
+          </div>
+        </div>
     </base-nav>
 </template>
 <script>
@@ -61,7 +47,23 @@
   };
 </script>
 <style>
-#left{
-  text-align: left;
+
+.users{
+  margin-top: 0px;
+  padding-top: 2px;
+  
 }
+#user-image{
+  margin-bottom: -5px;
+  margin-top: -5px; 
+}
+.user{
+  color: #fff;
+  float: right;
+}
+
+.avatar{
+  border: 4px solid red;
+}
+
 </style>

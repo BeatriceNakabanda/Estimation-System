@@ -20,7 +20,14 @@ export default new Router({
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/Estimates.vue')
+          component: () => import(/* webpackChunkName: "demo" */ './views/Estimates.vue'),
+          children:[
+            {
+              path: '/edit-estimate',
+              // name: 'Estimate',
+              component: () => import(/* webpackChunkName: "demo" */ './views/Forms/EditEstimateForm.vue'), 
+            }
+          ]
         },
         {
           path: '/projects',
@@ -32,7 +39,12 @@ export default new Router({
           name: 'Developers',
           component: () => import(/* webpackChunkName: "demo" */ './views/Developers.vue')
         },
-       
+        {
+          path: '/view-estimate/:id',
+          name: 'View Estimate',
+          component: () => import(/* webpackChunkName: "demo" */ './views/ViewEstimate.vue')
+        },
+  
         
       ]
     },
@@ -53,11 +65,11 @@ export default new Router({
     //routes for developer
     {
       path: '/',
-      redirect: 'pending',
+      redirect: 'pendingEstimates',
       component: DeveloperLayout,
       children: [
     {
-      path: '/pending',
+      path: '/pendingEstimates',
       name: 'Pending Estimates',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
@@ -65,14 +77,27 @@ export default new Router({
       component: () => import(/* webpackChunkName: "demo" */ './views/PendingEstimates.vue')
     },
     {
+      path: '/pending',
+      name: 'Pending Estimate',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "demo" */ './views/PendingEstimate.vue')
+    },
+    {
       path: '/drafts',
-      name: 'Drafts Estimates',
-      component: () => import(/* webpackChunkName: "demo" */ './views/DraftedEstimates.vue')
+      name: 'Draft Estimates',
+      component: () => import(/* webpackChunkName: "demo" */ './views/Drafts.vue')
     },
     {
       path: '/submitted',
-      name: 'submitted Estimates',
+      name: 'Submitted Estimates',
       component: () => import(/* webpackChunkName: "demo" */ './views/SubmittedEstimates.vue')
+    },
+    {
+      path: '/estimateDetails',
+      name: 'estimate Details',
+      component: () => import('./views/EstimateDetails.vue')
     },
     
   ]

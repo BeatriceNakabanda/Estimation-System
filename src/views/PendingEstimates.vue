@@ -1,35 +1,29 @@
 <template>
     <div>
-        <base-header type="" class="pb-6 pb-8 pt-5 pt-md-8" id="table-head">
-            
-           
+        <base-header type=""  id="table-head">
         </base-header>
 
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                  <!-- table for displaying details of a single pending estimate -->
-                    <pending-table title="Dashboard"></pending-table>
+                    <estimates-table title="Light Table"></estimates-table>
                 </div>
             </div>
-            
         </div>
-
     </div>
 </template>
 <script>
-  import PendingTable from './Tables/PendingEstimateTable'
+  import EstimatesTable from './Tables/ListOfPendingEstimates'
   export default {
-    name: 'pending-estimate',
+    name: 'pending',
     components: {
-      PendingTable
+      EstimatesTable
     }
   };
 </script>
 <style>
 #table-head{
     background-color: #d10572;
-  
-    
+    height: 35vh;
 }
 </style>

@@ -4,28 +4,23 @@
       :background-color="sidebarBackground"
       short-title="skala"
       title="skala"
-      id="sidenav"
-      
+      id="sidenav" 
     >
-      <template slot="links">
-        <sidebar-item
-          :link="{
-            name: 'Estimates',
-            icon: 'ni ni-bullet-list-67 text-primary',
-            path: '/estimates'
-          }"
-        />
-        <sidebar-item :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
-        <sidebar-item :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
+      <template slot="links" >
+        <sidebar-item :link="{name: 'Estimates', icon: 'ni ni-bullet-list-67 text-primary', path: '/estimates'}"/>
+        <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
+        <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
         <div id="signout-position">
-        <sidebar-item :link="{name: 'Sign out', icon: 'ni ni-user-run text-blue', path: '/login'}"/>
+          <router-link  to="/login" >
+              <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
+        </router-link>
         </div>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
       <project-manager-navbar></project-manager-navbar>
 
-      <div @click="toggleSidebar">
+      <div class="main" @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">
           
           <router-view></router-view>
@@ -63,7 +58,18 @@
 <style lang="scss">
 
 #signout-position{
-  margin-top: 100%;
+  background-color: #5E72E4;
+  padding-left: 28px;
+  padding-top: 15px;
+  padding-bottom: 36px;
+  position: absolute;
+  width: 100%;
+  height: 6%;
+  bottom: 0px;
+  left: 0;
+ 
 }
-
+// .main{
+//   padding-top: 1000px;
+// }
 </style>

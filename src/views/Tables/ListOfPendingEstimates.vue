@@ -21,8 +21,7 @@
         </template>
           <template class="table-row" slot-scope="{row} ">
           <!-- <td>
-            <div class="media" >
-              
+            <div class="media"> 
               <div class="media-body" >
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
@@ -53,7 +52,6 @@
                 <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
               </router-link>
             </span> -->
-            
           </td>
           </template>
 
@@ -69,7 +67,7 @@
 </template>
 <script>
   export default {
-    name: 'drafts-estimates-table',
+    name: 'pending-estimates-table',
     props: {
       type: {
         type: String
@@ -167,17 +165,19 @@ table > tbody > tr:hover .action-icons{
 }
 base-button{
   border-radius: 4px;
+  
 }
 #my-icons {
   background-color: #5e72e4;
-  color: #eee7eb;
   border-color: #5e72e4;
+  color: #eee7eb;
 }
 #my-icons:hover {
   background-color: #d10572;
+  border-color: #d10572;
   color: #eee7eb;
-  border-color: #d10572
 }
+
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {

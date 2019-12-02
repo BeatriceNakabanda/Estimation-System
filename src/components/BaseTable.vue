@@ -8,12 +8,14 @@
       </tr>
     </thead>
     <tbody :class="tbodyClasses">
-      <tr v-for="(item, index) in data" :key="index">
+      <tr v-for="(item, index) in data" :key="index" >
         <slot :row="item" :index="index">
           <td
             v-for="(column, index) in colsWithValue(item)"
             :key="index">
             {{ itemValue(item, column) }}
+          </td>
+          <td class="action-icons"> 
           </td>
         </slot>
       </tr>
@@ -70,4 +72,6 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+
+</style>

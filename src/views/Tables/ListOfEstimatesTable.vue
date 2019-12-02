@@ -4,48 +4,47 @@
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
-        
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="spacing">Create Estimate</base-button>
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Create Estimate</base-button>
+          <modal :show.sync="modal1">
+                      <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
+                      </template>
+                      <!-- create estimate form -->
+                      <CreateEstimateForm  />
+                  </modal>
         </div>
       </div>
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table  table-flush "
+      <base-table class="table table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
-        <template slot="columns">
-          <th>Title</th>
-          <th>Developer</th>
-          <th>Project</th>
-          <th>Date Created</th>
-          <th>Date Estimated</th>
-          <th>Status</th>
-          <th></th>
+                  :data="estimates" id="left">
+        <template  slot="columns"  >
+          <th class="bgcolor">Title</th>
+          <th class="bgcolor">Project</th>
+          <th class="bgcolor">Developer</th>
+          <th class="bgcolor">Date Created</th>
+          <th class="bgcolor">Date Estimated</th>
+          <th class="bgcolor">Status</th>
+          <th class="bgcolor"></th>
         </template>
-
-        <template slot-scope="{row}">
-          
-          <th scope="row">
-            <div class="media">
-              
-              <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.title}}</span>
-              </div>
-            </div>
-          </th>
-          
-          <td class="developer">
-            {{row.developer}}
+          <template class="table-row" slot-scope="{row} ">
+          <td class="title">
+            {{row.title}}
           </td>
           <td class="project">
             {{row.project}}
           </td>
+          <td class="developer">
+            {{row.developer}}
+          </td>
           <td class="dateCreated">
-            {{row.dateCreated}}
+            {{ formatDate(row.dateCreated) }}
+            <!-- {{ row.dateCreated }} -->
           </td>
           <td class="dateEstimated">
             {{row.dateEstimated}}
@@ -57,133 +56,169 @@
             </badge>
           </td>
          
-          <td class="action">
-            <router-link  to="/" id="view">
-              <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
-            </router-link>
+          <td >
+            <span class="action-icons">
+              <router-link  to="/view-estimate" id="view">
+                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
+                <modal :show.sync="modal2">
+                  <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
+                      </template>
+                </modal>
+              </router-link>
+            </span>
+            <span class="action-icons">
+              <router-link  to="/" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="editEstimate(row._id)"></i>
+
+              </router-link>
+            </span>
             
           </td>
-        </template>
+          </template>
 
       </base-table>
     </div>
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
-    </div>
+      <!-- <base-pagination total="30"></base-pagination> -->
+      <base-pagination></base-pagination>
 
+    </div>
+    
   </div>
 </template>
 <script>
-  export default {
-    name: 'estimates-table',
-    props: {
-      type: {
-        type: String
-      },
-      title: String
+import CreateEstimateForm from "../Forms/CreateEstimateForm";
+// import EditEstimateForm from "../Forms/EditEstimateForm";
+import axios from "axios";
+import { format, compareAsc } from 'date-fns'
+
+const baseURL = "http://localhost:8081/estimates";
+
+export default {
+  name: "estimates-table",
+  components: {
+    CreateEstimateForm,
+    // EditEstimateForm
+  },
+  props: {
+    estimates: Array,
+    type: {
+      type: String
     },
-    data() {
-      return {
-        tableData: [
-          {
-            id: 1,
-            title: 'Dashboard',
-            developer: 'Benjamin',
-            project: 'Refactory',
-            dateCreated: '17-07-2018',
-            dateEstimated: '18-07-2018',
-            status: 'Estimated',
-            statusType: 'success',
-          },
-          {
-            id: 2,
-            title: 'SDK',
-            developer: 'Beatrice',
-            project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
-            status: 'Draft',
-            statusType: 'warning',
-           
-          },
-          {
-            id: 3,
-            title: 'Registration',
-            developer: 'Ronnie',
-            project: 'Refactory',
-            dateCreated: '17-07-2018',
-            dateEstimated: '18-07-2018',
-            status: 'Estimated',
-            action: '',
-            statusType: 'success',
-          },
-          {
-            id: 4,
-            title: 'Onboarding',
-            developer: 'Olive',
-            project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
-            status: 'Draft',
-            action: '',
-            statusType: 'warning',
-           
-          },
-          {
-            id: 5,
-            title: 'Login',
-            developer: 'Sunday',
-            project: 'Xente',
-            dateCreated: '17-07-2018',
-            dateEstimated: '',
-            status: 'Submitted',
-            action: '',
-            statusType: 'info',
-           
-          },
-         
-          
-         
-        ]
+    title: String
+  },
+  data() {
+    return {
+      // editing: null,
+      modal: false,
+      modal1: false,
+      modal2: false,
+      format,
+    };
+  },
+    //fetches a single estimate when the component is created
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
+
+        this.estimate = res.data; 
+      } catch(e){
+        console.error(e)
       }
+    },
+  methods: {
+    editEstimate(estimateid){
+      this.$router.push({
+        name: 'EditEstimate',
+        params: { id: estimateid }
+      })
+    },
+    formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd/MM/yyy')
     }
   }
+};
 </script>
 <style>
-#view{
+#view {
   color: #747273;
   padding-left: 10px;
 }
-#left{
+#left {
   text-align: left;
 }
 /* Adding cursor to table */
-.table-row{
-  cursor:pointer;
+.table-row {
+  cursor: pointer;
 }
 
-.spacing{
-  padding-left: 1rem;
-  padding-right: 1rem;
+.spacing {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 /* Adjustments to font size of the table head content */
 .table thead th {
-  font-size: 0.68rem;
+  font-size: 13px;
   font-weight: 700;
 }
 
 /* First column of table font adjustment */
 .text-sm {
   font-weight: 400;
-  font-size: 0.8125rem !important;  /*  13px font size*/
+  font-size: 13px !important;
+}
+/* styling rounded border */
+.rounded-circle {
+  border: 1px solid rgb(201, 201, 199);
+  padding: 6px;
 }
 
 /* Status column font size adjustment */
-span .status{
-  font-size: 0.8125rem;
+span .status {
+  font-size: 13px;
 }
 
+.bgcolor {
+  background: #e7eaec !important;
+}
+/* displaying action icons on hover */
+table > tbody > tr .action-icons {
+  visibility: hidden;
+}
+table > tbody > tr:hover .action-icons {
+  visibility: visible;
+}
+/* styling buttons */
+#create-estimate {
+  border-radius: 4px;
+}
+/* cancel button for modal */
+.cancel-color {
+  color: rgb(135, 141, 148);
+  background-color: #e2e0e1;
+}
+.cancel-color:hover {
+  color: #ffffff;
+  background-color: #afadae;
+}
+#my-icons {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+  color: #eee7eb;
+}
+#my-icons:hover {
+  background-color: #d10572;
+  border-color: #d10572;
+  color: #eee7eb;
+}
 
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 1224px) {
+  .card {
+    margin-top: 30px;
+  }
+}
 </style>
