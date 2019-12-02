@@ -82,6 +82,7 @@
 </modal>
 </template>
 <script>
+<<<<<<< HEAD
 import axios from 'axios';
 
 const baseURL = "http://localhost:8081/estimate"
@@ -145,4 +146,28 @@ export default {
 
     
 }
+=======
+import axios from "axios";
+
+const baseURL = "http://localhost:8081/estimate";
+
+export default {
+  name: "edit-estimate-form",
+  props: {
+    estimates: Array
+  },
+  data() {
+    return {
+      projects: [],
+      developers: []
+    };
+  },
+  async created() {},
+
+  methods: {
+    onSubmit(evt) {},
+    handleSave() {}
+  }
+};
+>>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
 </script>

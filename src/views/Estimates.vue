@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div>
         <base-header type=""  id="table-head">
         </base-header>
@@ -11,11 +12,29 @@
                 </div>
             </div>  
         </div>
+=======
+  <div>
+    <base-header type="" id="table-head"> </base-header>
+
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col">
+          <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
+          <estimates-table :estimates="estimates"></estimates-table>
+        </div>
+      </div>
+>>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
     </div>
+  </div>
 </template>
 <script>
+<<<<<<< HEAD
   import EstimatesTable from './Tables/ListOfEstimatesTable'
   import axios from 'axios'
+=======
+import EstimatesTable from "./Tables/ListOfEstimatesTable";
+import axios from "axios";
+>>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
 
   export default {
     name: 'estimates',
@@ -24,6 +43,7 @@
     },
     data(){
       return{
+<<<<<<< HEAD
          estimates: [], 
         
         methods: {
@@ -32,6 +52,11 @@
           //   this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
           // }
         }
+=======
+         estimates: [],
+
+        
+>>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
       }
     },
     //fetches estimates when the component is created
@@ -39,11 +64,16 @@
       try {
         const res = await axios.get(`http://localhost:8081/estimates`)
 
+<<<<<<< HEAD
         this.estimates = res.data; 
+=======
+        this.estimates = res.data;
+>>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
       } catch(e){
         console.error(e)
       }
     },
+<<<<<<< HEAD
   
 
   }
@@ -52,6 +82,19 @@
 #table-head{
     background-color: #d10572;
     height: 35vh;
+=======
+
+
+      
+    
+  }
+  
+</script>
+<style>
+#table-head {
+  background-color: #d10572;
+  height: 35vh;
+>>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
 }
 
 </style>

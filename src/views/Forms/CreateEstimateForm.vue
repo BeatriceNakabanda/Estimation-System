@@ -10,8 +10,8 @@
                         ref="first"
                         class="mb-3"
                         placeholder="Add project here..." 
-                        :class="{ 'has-error': submitting && invalidName } " 
-                        @focus="clearForm"
+                        :class="{ 'has-error': submitting && invalidProjectName } " 
+                        
                         @keypress="clearForm"
                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
@@ -30,7 +30,7 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                        @focus="clearForm"
+                       :class="{ 'has-error': submitting && invalidDeveloper } " 
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
                             <option value="" disabled>Please select a developer</option>
@@ -76,6 +76,7 @@
                             placeholder="Add title here..."
                             v-model="estimate.title" 
                             @focus="clearForm"
+                           
                             :class="{ 'has-error': submitting && invalidTitle }"
                         >
                 </base-input>
@@ -187,12 +188,14 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
-            this.error = false
+            
             this.success = true
-            this.submitting = false
+            this.error = false
+            this.submitting = false               
         
-        this.$refs.first.focus()
         },
+
+
     clearForm(){
                 this.success = false
                 this.error = false
@@ -204,10 +207,10 @@ export default {
     async created(){
       try{
         const response = await axios.get(`http://localhost:8081/projects`)
-        // const resp = await axios.get(`http://localhost:8081/developers`)
+        const resp = await axios.get(`http://localhost:8081/users/developers`)
 
         this.projects = response.data;
-        // this.developers = resp.data;
+        this.developers = resp.data;
       }catch(e){
         console.error(e)
       }
