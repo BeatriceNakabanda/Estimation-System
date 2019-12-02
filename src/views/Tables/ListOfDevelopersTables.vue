@@ -53,19 +53,6 @@ export default {
     type: {
       type: String
     },
-<<<<<<< HEAD
-    title: String
-  },
-  data() {
-    return {
-      modal1: false,
-      developers: []
-    };
-  },
-  async created() {
-    try {
-      const res = await axios.get(`http://localhost:3000/developers`);
-=======
     data() {
       return {
         modal1: false,
@@ -75,7 +62,6 @@ export default {
     async created(){
       try{
         const res = await axios.get(`http://localhost:8081/users/developers`)
->>>>>>> 0bbac4813e7201387a4c160fbbf983bb47f88a62
 
       this.developers = res.data;
     } catch (e) {
