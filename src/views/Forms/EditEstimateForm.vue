@@ -82,67 +82,26 @@
 </modal>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = "http://localhost:8081/estimate"
+const baseURL = "http://localhost:8081/estimate";
 
 export default {
-    name: 'edit-estimate-form',
-    props:{
-        estimates: Array
-    },
-    data(){
-        return{
-            projects: [],
-            developers: [],
-           
-        estimate:
-          {
-            title: '',
-            project: '',
-            developer: '',
-            status: '',
-            statusType: '',
-            dueDate: '',
-            taskDescription: '',
-          },
-        }
-        
+  name: "edit-estimate-form",
+  props: {
+    estimates: Array
+  },
+  data() {
+    return {
+      projects: [],
+      developers: []
+    };
+  },
+  async created() {},
 
-    },
-    async created(){
-      try{
-        const response = await axios.get(`http://localhost:8081/projects`)
-        // const resp = await axios.get(`http://localhost:8081/developers`)
-        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
-
-        this.projects = response.data;
-        this.estimate = res.data; 
-        // this.developers = resp.data;
-      }catch(e){
-        console.error(e)
-      }
-    },
-    
-    methods: {
-        onSubmit(evt){
-            evt.preventDefault()
-            axios.put(`http://localhost:8081/estimate/` + this.$route.params.id, this.estimate)
-            .then(response => {
-                this.$router.push({
-                    name: 'ShowEstimate',
-                    params: { id: this.$route.params.id}
-                })
-            } )
-            .catch(e => {
-                this.errors.push(e)
-            })
-        },
-      handleSave() {
-      console.log('testing save' )
-      },  
-    },
-
-    
-}
+  methods: {
+    onSubmit(evt) {},
+    handleSave() {}
+  }
+};
 </script>

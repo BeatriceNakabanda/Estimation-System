@@ -32,22 +32,34 @@
           <th class="bgcolor">Status</th>
           <th class="bgcolor"></th>
         </template>
-          <template class="table-row" slot-scope="{row} ">
-            
-          <td class="title">
+          <template class="table-row" slot-scope="{row}" >
+            <td v-if="editing===row.id">
+              
+              <input type="text" v-model="row.title">
+            </td>
+          <td v-else class="title">
             {{row.title}}
           </td>
-          <td class="project">
+          <td v-if="editing===row.id">
+              <input type="text" v-model="row.project">
+            </td>
+          <td v-else class="project">
             {{row.project}}
           </td>
-          <td class="developer">
+         <td v-if="editing===row.id">
+              <input type="text" v-model="row.developer">
+            </td>
+          <td v-else class="developer">
             {{row.developer}}
           </td>
           <td class="dateCreated">
             {{ formatDate(row.dateCreated) }}
             <!-- {{ row.dateCreated }} -->
           </td>
-          <td class="dateEstimated">
+          <td v-if="editing===row.id">
+              <input type="text" v-model="row.dateEstimated">
+            </td>
+          <td v-else class="dateEstimated">
             {{row.dateEstimated}}
           </td>
           <td>
@@ -69,13 +81,22 @@
               </router-link>
             </span>
             <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="editEstimate(row._id)"></i>
-
+              
+              <router-link  to="/" id="view" >
+              <!-- <edit-estimate-form @edit:estimate="editEstimate"></edit-estimate-form> -->
+                <i v-if="editing===estimate.id" class="rounded-circle fas fa-pen"   aria-hidden="true" id="my-icons" @click=
+                "editEstimate(estimate)"
+                ></i>
+                <i v-else class="rounded-circle fas fa-pen"    aria-hidden="true" id="my-icons" @click=
+                "editMode(estimate)"
+                ></i>
               </router-link>
+              <!-- <p>row.id</p> -->
             </span>
-            
+            hello
           </td>
+          
+         
           </template>
 
       </base-table>
@@ -87,8 +108,10 @@
       <base-pagination></base-pagination>
 
     </div>
+  
     
   </div>
+   
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
@@ -101,15 +124,14 @@ const baseURL = "http://localhost:8081/estimates";
 export default {
   name: "estimates-table",
   components: {
-    CreateEstimateForm,
-    // EditEstimateForm
+    CreateEstimateForm
   },
   props: {
-    estimates: Array,
-    type: {
-      type: String
-    },
-    title: String
+    estimates: Array
+    // type: {
+    //   type: String
+    // },
+    // title: String
   },
   data() {
     return {
@@ -120,14 +142,21 @@ export default {
       format,
     };
   },
-    //fetches a single estimate when the component is created
-    async created(){
-      try {
-        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
+  mounted() {
+    this.created();
+  },
 
-        this.estimate = res.data; 
-      } catch(e){
-        console.error(e)
+  // fetches a single estimate when the component is created
+
+  methods: {
+    async created() {
+      try {
+        const res = await axios.get(baseURL);
+        //const res = await axios.get(baseURL);
+
+        this.estimates = res.data;
+      } catch (e) {
+        console.error(e);
       }
     },
   methods: {
@@ -140,6 +169,27 @@ export default {
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     }
+    // async editEstimate(id, updatedEstimate) {
+    //   try {
+    //     const response = await fetch(
+    //       `http://localhost:8081/estimate/` + this.$route.params.id,
+    //       {
+    //         method: "PUT",
+    //         body: JSON.stringify(updatedEstimate),
+    //         headers: { "Content-type": "application/json; charset=UTF-8" }
+    //       }
+    //     );
+    //     const data = await response.json();
+    //     data = this.data;
+    //     this.estimates = this.estimates.map(
+    //       estimate => (estimate.id === id ? data : estimate)
+    //     );
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+    // editEstimate(estimateid) {
+    // }
   }
 };
 </script>
