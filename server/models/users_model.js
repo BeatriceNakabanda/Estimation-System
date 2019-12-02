@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 //user schema
-const UserSchema = new Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -16,10 +16,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    role: String,
+    role: {String},
 }, {timestamps: true});
 
+
 //defining user model
- const User = mongoose.model('User', UserSchema);
+ const User = mongoose.model('User', userSchema);
 
  module.exports = User;

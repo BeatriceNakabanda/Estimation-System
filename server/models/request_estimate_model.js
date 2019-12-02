@@ -5,10 +5,10 @@ const Schema = mongoose.Schema
 //request schema
 const estimateRequestSchema = new Schema ({
     _id: mongoose.Types.ObjectId,
-    project: {type: String},
-    developer: {type: String},
+    project: {type: Schema.Types.ObjectId, ref: 'project'},
+    developer: {type: Schema.Types.ObjectId, ref: 'user'},
     title: {type: String},
-    projectManager: {type: String},
+    projectManager: {type: Schema.Types.ObjectId, ref: 'user'},
     dueDate: {type: Date},
     taskDescription: {type: String},
     dateCreated: {type: Date, default: Date.now},

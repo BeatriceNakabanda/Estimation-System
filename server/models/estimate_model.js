@@ -1,11 +1,10 @@
 //requiring dependencies
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const user = require('../models/users_model')
 
 //lineItemSchema
 const lineItemSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
+    _id: {type: Schema.Types.ObjectId},
     description: mongoose.Types.Decimal128,
     research: mongoose.Types.Decimal128,
     planning: mongoose.Types.Decimal128,
@@ -20,11 +19,11 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema ({
-    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'request'},
+    _id: {type: Schema.Types.ObjectId},
     dateCreated: {type: Date, default: Date.now},
     submittedDate: {type: Date},
-    developer: mongoose.Types.ObjectId, ref:({user, role: 'developer'}),
-    totalSum: {type: Number},
+    developer: {type: Schema.Types.ObjectId, ref: 'user'},
+    totalSum: {type: mongoose.Types.Decimal128},
     lineItem: [lineItemSchema]
 })
 

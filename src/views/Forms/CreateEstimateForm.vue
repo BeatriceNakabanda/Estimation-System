@@ -173,10 +173,10 @@ export default {
             }
 
         let newEstimate = {
-            title: this.estimate.title,
             project: this.estimate.project,
             developer: this.estimate.developer,
             dueDate: this.estimate.dueDate,
+            title: this.estimate.title,
             taskDescription: this.estimate.taskDescription
         }
         console.log(newEstimate)
@@ -204,10 +204,10 @@ export default {
     async created(){
       try{
         const response = await axios.get(`http://localhost:8081/projects`)
-        // const resp = await axios.get(`http://localhost:8081/developers`)
+        const resp = await axios.get(`http://localhost:8081/users/developers`)
 
         this.projects = response.data;
-        // this.developers = resp.data;
+        this.developers = resp.data;
       }catch(e){
         console.error(e)
       }
