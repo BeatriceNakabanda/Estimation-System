@@ -9,7 +9,7 @@ const estimateRequestSchema = new Schema ({
     developer: {type: String},
     title: {type: String},
     projectManager: {type: String},
-    dueDate: {type: Date},
+    dueDate: {type: String},
     taskDescription: {type: String},
     dateCreated: {type: Date, default: Date.now},
     status: {type: String}
