@@ -59,7 +59,7 @@
                                 :config="{allowInput: true, dateFormat: 'd-m-Y'}"
                                 placeholder="17-07-2019"
                                 class="form-control datepicker"
-                                :class="{ 'has-error': submitting && invalidName }"
+                                :class="{ 'has-error': submitting && invalidDueDate }"
                                 @focus="clearForm"
                                 v-model="estimate.dueDate">
                     </flat-picker>
@@ -76,7 +76,7 @@
                             placeholder="Add title here..."
                             v-model="estimate.title" 
                             @focus="clearForm"
-                            :class="{ 'has-error': submitting && invalidName }"
+                            :class="{ 'has-error': submitting && invalidTitle }"
                         >
                 </base-input>
                 </div>
@@ -87,7 +87,7 @@
             </div>
             <div class="col-sm-12">
                 <base-input alternative=""
-                :class="{ 'has-error': submitting && invalidName }"
+                :class="{ 'has-error': submitting && invalidTaskDescription }"
                 @focus="clearForm"
                 >
                     <textarea rows="4" v-model="estimate.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
