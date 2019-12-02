@@ -4,15 +4,12 @@ const Schema = mongoose.Schema
 
 //request schema
 const estimateRequestSchema = new Schema ({
-    _id: mongoose.Types.ObjectId,
-    project: {type: String},
-    developer: {type: String},
-    title: {type: String},
-    projectManager: {type: String},
-    dueDate: {type: Date},
-    taskDescription: {type: String},
-    dateCreated: {type: Date, default: Date.now},
-    status: {type: String}
+    project: String,
+    developer: String,
+    dueDate: Date,
+    title: String,
+    taskDescription: String,
+    dateCreated: {type: Date, default: Date.now}
 })
 
 //defining request model

@@ -173,10 +173,10 @@ export default {
             }
 
         let newEstimate = {
-            title: this.estimate.title,
             project: this.estimate.project,
             developer: this.estimate.developer,
             dueDate: this.estimate.dueDate,
+            title: this.estimate.title,
             taskDescription: this.estimate.taskDescription
         }
         console.log(newEstimate)

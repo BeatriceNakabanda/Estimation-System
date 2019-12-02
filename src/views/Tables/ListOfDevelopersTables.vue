@@ -53,6 +53,7 @@ export default {
     type: {
       type: String
     },
+  },
     data() {
       return {
         modal1: false,
