@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form">
+    <form method="POST" role="form" @submit.prevent="addEstimate">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -60,7 +60,6 @@
                                 placeholder="17-07-2019"
                                 class="form-control datepicker"
                                 :class="{ 'has-error': submitting && invalidDueDate }"
-                                @focus="clearForm"
                                 v-model="estimate.dueDate">
                     </flat-picker>
                 </base-input>
@@ -75,7 +74,7 @@
                             class="mb-3"
                             placeholder="Add title here..."
                             v-model="estimate.title" 
-                            @focus="clearForm"
+                           
                             :class="{ 'has-error': submitting && invalidTitle }"
                         >
                 </base-input>
@@ -88,7 +87,7 @@
             <div class="col-sm-12">
                 <base-input alternative=""
                 :class="{ 'has-error': submitting && invalidTaskDescription }"
-                @focus="clearForm"
+                
                 >
                     <textarea rows="4" v-model="estimate.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                 </base-input>
@@ -120,32 +119,14 @@ export default {
     components: {
         flatPicker
         },
-            // automatically computed properties(functions) to validate form inputs 
-    computed: {
-        invalidProjectName(){
-            return this.estimate.project === ''
-        },
-        // invalidDeveloper(){
-        //     return this.estimate.developers === ''
-        // },
-        invalidDueDate(){
-            return this.dueDate === ''
-        },
-        invalidTitle(){
-            return this.title === ''
-        },
-        invalidTaskDescription(){
-            return this.taskDescription === ''
-        }
-
-    },
     data(){
         return{
+            error: false,
+            submitting: false,
+            success: false,
             projects: [],
             developers: [],
-            submitting: false,
-            error: false,
-            success: false,
+           
         estimate:
           {
             project: '',
@@ -159,14 +140,33 @@ export default {
         }
         
     },
+     // automatically computed properties(functions) to validate form inputs 
+    computed: {
+        invalidProjectName(){
+            return this.estimate.project === ''
+        },
+        // invalidDeveloper(){
+        //     return this.estimate.developers === ''
+        // },
+        invalidDueDate(){
+            return this.estimate.dueDate === ''
+        },
+        invalidTitle(){
+            return this.estimate.title === ''
+        },
+        invalidTaskDescription(){
+            return this.estimate.taskDescription === ''
+        }
+
+    },
 
     methods: {
         async addEstimate(){
-            this.submitting = true
             this.clearForm()
+            this.submitting = true
 
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidProjectName || this.invalidDueDate || this.invalidTaskDescription)
+            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
             {
                 this.error = true
                 return
