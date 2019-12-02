@@ -43,8 +43,12 @@
             {{row.developer}}
           </td>
           <td class="dateCreated">
+<<<<<<< HEAD
             {{ formatDate(row.dateCreated) }}
             <!-- {{ row.dateCreated }} -->
+=======
+            {{row.dateCreated}}
+>>>>>>> parent of 1beb491... adding edit code
           </td>
           <td class="dateEstimated">
             {{row.dateEstimated}}
@@ -115,8 +119,12 @@ export default {
       // editing: null,
       modal: false,
       modal1: false,
+<<<<<<< HEAD
       modal2: false,
       format,
+=======
+      modal2: false
+>>>>>>> parent of 1beb491... adding edit code
     };
   },
     //fetches a single estimate when the component is created
@@ -135,9 +143,12 @@ export default {
         name: 'EditEstimate',
         params: { id: estimateid }
       })
+<<<<<<< HEAD
     },
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
+=======
+>>>>>>> parent of 1beb491... adding edit code
     }
   }
 };
