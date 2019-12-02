@@ -57,9 +57,12 @@ import axios from "axios";
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 >>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
 =======
+=======
+>>>>>>> parent of de4ab64... adding changes
 =======
 >>>>>>> parent of de4ab64... adding changes
         methods: {
@@ -69,6 +72,9 @@ import axios from "axios";
           // }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of de4ab64... adding changes
+=======
 >>>>>>> parent of de4ab64... adding changes
 =======
 >>>>>>> parent of de4ab64... adding changes
