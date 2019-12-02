@@ -55,8 +55,17 @@ import axios from "axios";
 =======
          estimates: [],
 
+<<<<<<< HEAD
         
 >>>>>>> 5130b298bb49fb6cd0ce6be654434809533f7458
+=======
+        methods: {
+          // creating an edit estimate method
+          // editEstimate(id, updatedEstimate){
+          //   this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
+          // }
+        }
+>>>>>>> parent of de4ab64... adding changes
       }
     },
     //fetches estimates when the component is created
@@ -85,10 +94,11 @@ import axios from "axios";
 =======
 
 
-      
-    
+      methods: {}
+    };
   }
-  
+  //fetches estimates when the component is created
+};
 </script>
 <style>
 #table-head {
