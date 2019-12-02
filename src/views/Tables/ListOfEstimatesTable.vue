@@ -8,7 +8,7 @@
           <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Create Estimate</base-button>
           <modal :show.sync="modal1">
                       <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Create Estimate</h3>
+                          <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
                       </template>
                       <!-- create estimate form -->
                       <CreateEstimateForm  />
@@ -33,6 +33,7 @@
           <th class="bgcolor"></th>
         </template>
           <template class="table-row" slot-scope="{row} ">
+            
           <td class="title">
             {{row.title}}
           </td>

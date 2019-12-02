@@ -30,7 +30,7 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                       
+                       :class="{ 'has-error': submitting && invalidDeveloper } " 
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
                             <option value="" disabled>Please select a developer</option>
@@ -206,10 +206,10 @@ export default {
     async created(){
       try{
         const response = await axios.get(`http://localhost:8081/projects`)
-        // const resp = await axios.get(`http://localhost:8081/developers`)
+        const resp = await axios.get(`http://localhost:8081/users/developers`)
 
         this.projects = response.data;
-        // this.developers = resp.data;
+        this.developers = resp.data;
       }catch(e){
         console.error(e)
       }
