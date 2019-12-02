@@ -8,8 +8,8 @@ const Schema = mongoose.Schema
     project: {type: Schema.Types.ObjectId, ref: 'project'},
     developer: {type: Schema.Types.ObjectId, ref: 'user'},
     title: {type: String},
-    projectManager: {type: Schema.Types.ObjectId, ref: 'user'},
-    dueDate: {type: Date},
+    projectManager: {type: String},
+    dueDate: {type: String},
     taskDescription: {type: String},
     dateCreated: {type: Date, default: Date.now},
     status: {type: String}

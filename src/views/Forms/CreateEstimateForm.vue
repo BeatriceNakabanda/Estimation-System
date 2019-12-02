@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="addEstimate">
+    <form method="POST" role="form">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -120,14 +120,32 @@ export default {
     components: {
         flatPicker
         },
+            // automatically computed properties(functions) to validate form inputs 
+    computed: {
+        invalidProjectName(){
+            return this.estimate.project === ''
+        },
+        // invalidDeveloper(){
+        //     return this.estimate.developers === ''
+        // },
+        invalidDueDate(){
+            return this.dueDate === ''
+        },
+        invalidTitle(){
+            return this.title === ''
+        },
+        invalidTaskDescription(){
+            return this.taskDescription === ''
+        }
+
+    },
     data(){
         return{
-            error: false,
-            submitting: false,
-            success: false,
             projects: [],
             developers: [],
-           
+            submitting: false,
+            error: false,
+            success: false,
         estimate:
           {
             project: '',
@@ -141,33 +159,14 @@ export default {
         }
         
     },
-     // automatically computed properties(functions) to validate form inputs 
-    computed: {
-        invalidProjectName(){
-            return this.estimate.project === ''
-        },
-        // invalidDeveloper(){
-        //     return this.estimate.developers === ''
-        // },
-        invalidDueDate(){
-            return this.estimate.dueDate === ''
-        },
-        invalidTitle(){
-            return this.estimate.title === ''
-        },
-        invalidTaskDescription(){
-            return this.estimate.taskDescription === ''
-        }
-
-    },
 
     methods: {
         async addEstimate(){
-            this.clearForm()
             this.submitting = true
+            this.clearForm()
 
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+            if(this.invalidProjectName || this.invalidProjectName || this.invalidDueDate || this.invalidTaskDescription)
             {
                 this.error = true
                 return
