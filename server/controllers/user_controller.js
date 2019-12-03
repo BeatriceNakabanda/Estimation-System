@@ -5,7 +5,7 @@ mongoose.set('useFindAndModify', false);
 
 //get all users
 exports.usersList = function(req, res){
-  user.find({}, function (next, user){
+  user.find({}, function (user, next){
     if(next){
       res.send(next);
     }else{
@@ -15,8 +15,8 @@ exports.usersList = function(req, res){
 };
 
 //get all users who are developers
-exports.usersDevelopers = function(req, res, next){
-  user.find({role: "developer"}, function(developers){
+exports.usersDevelopers = function(req, res){
+  user.find({role: "developer"}, function(developers, next){
     if(next){
       res.send(next);
     }else{
@@ -26,9 +26,9 @@ exports.usersDevelopers = function(req, res, next){
 };
 
 //create user
-exports.createUser = function(req, res,next){
+exports.createUser = function(req, res){
   const newUser = new user(req.body);
-  newUser.save(function(user){
+  newUser.save(function(user, next){
     if(next){
       res.send(next);
     }else{
@@ -38,8 +38,8 @@ exports.createUser = function(req, res,next){
 };
 
 //get single user
-exports.singleUser = function(req, res, next){
-  user.findById({_id: req.params.requestId}, function(user){
+exports.singleUser = function(req, res){
+  user.findById({_id: req.params.requestId}, function(user, next){
     if(next){
       res.send(next);
     }else{
