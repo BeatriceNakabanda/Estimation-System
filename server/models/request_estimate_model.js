@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 
 //request schema
 const estimateRequestSchema = new Schema ({
-    project: String,
-    developer: String,
-    dueDate: Date,
-    title: String,
-    taskDescription: String,
+    project: {type: String},
+    developer: {type: String},
+    dueDate: {type: Date},
+    title: {type: String},
+    taskDescription: {type: String},
     dateCreated: {type: Date, default: Date.now}
 })
 
