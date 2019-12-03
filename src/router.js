@@ -30,6 +30,11 @@ export default new Router({
           ]
         },
         {
+          path: '/draftrequests',
+          name: 'Drafts',
+          component: () => import(/* webpackChunkName: "demo" */ './views/DraftsProjectManager.vue')
+        },
+        {
           path: '/projects',
           name: 'Projects',
           component: () => import(/* webpackChunkName: "demo" */ './views/Projects.vue')

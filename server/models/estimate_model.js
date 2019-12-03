@@ -2,9 +2,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-//lineItemSchema
+//lineItemSchema for what lineItem should have
 const lineItemSchema = new Schema({
-    _id: {type: Schema.Types.ObjectId},
+    id: {type: String},
     description: mongoose.Types.Decimal128,
     research: mongoose.Types.Decimal128,
     planning: mongoose.Types.Decimal128,
@@ -17,13 +17,15 @@ const lineItemSchema = new Schema({
     comments: {type: String}
 });
 
-//estimate schema
+//estimate schema for what an estimate should have
 const estimateSchema = new Schema ({
-    _id: {type: Schema.Types.ObjectId},
+    id: {type: String},
     dateCreated: {type: Date, default: Date.now},
     submittedDate: {type: Date},
-    developer: {type: Schema.Types.ObjectId, ref: 'user'},
+    developerId: {type: String},
     totalSum: {type: mongoose.Types.Decimal128},
+    totalAdjstedSum: {type: mongoose.Types.Decimal128},
+    status: {type: String},
     lineItem: [lineItemSchema]
 })
 

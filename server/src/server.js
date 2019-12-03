@@ -13,12 +13,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(routes);
 
-//error handling
-// eslint-disable-next-line no-unused-vars
-/* app.use(function(err, req, res, next) {
-  res.status(422).send({ error: err.message });
-}); */
-
 //central error handling for errors
 app.use((req, res, next) => {
   const error = new Error ('Not found');

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 //project schema and model
 const ProjectSchema = new Schema({
+    id: String,
     name: String,
 })
 

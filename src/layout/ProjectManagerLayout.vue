@@ -8,6 +8,7 @@
     >
       <template slot="links" >
         <sidebar-item :link="{name: 'Estimates', icon: 'ni ni-bullet-list-67 text-primary', path: '/estimates'}"/>
+        <sidebar-item  :link="{name: 'Drafts', icon: 'ni ni-box-2 text-blue', path: '/draftrequests'}"/>
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
         <div id="signout-position">
