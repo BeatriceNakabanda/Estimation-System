@@ -15,8 +15,8 @@ exports.usersList = function(req, res){
 };
 
 //get all users who are developers
-exports.usersDevelopers = function(req, res){
-  user.find({role: "developer"}, function(next, developers){
+exports.usersDevelopers = function(req, res, next){
+  user.find({role: "developer"}, function(developers){
     if(next){
       res.send(next);
     }else{
@@ -26,9 +26,9 @@ exports.usersDevelopers = function(req, res){
 };
 
 //create user
-exports.createUser = function(req, res){
+exports.createUser = function(req, res,next){
   const newUser = new user(req.body);
-  newUser.save(function(next, user){
+  newUser.save(function(user){
     if(next){
       res.send(next);
     }else{
@@ -38,8 +38,8 @@ exports.createUser = function(req, res){
 };
 
 //get single user
-exports.singleUser = function(req, res){
-  user.findById({_id: req.params.requestId}, function(next, user){
+exports.singleUser = function(req, res, next){
+  user.findById({_id: req.params.requestId}, function(user){
     if(next){
       res.send(next);
     }else{
