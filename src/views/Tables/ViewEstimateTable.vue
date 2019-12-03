@@ -24,15 +24,16 @@
               <p>Due Date </p>
               <p>Main Task Description </p>
             </div>
-            <div class="col details align-self-start" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.project}}</p>
-            <p>{{tableDataDetail.projectManager}}</p>
-            <p>{{tableDataDetail.dateCreated}}</p>
-            <p>{{tableDataDetail.dueDate}}</p>
+            <div class="col details align-self-start" v-for="estimate in estimates" v-bind:key="estimate._id">
+            <p>{{estimate.project}}</p>
+            <p>{{estimate.projectManager}}</p>
+            <p>{{estimate.dateCreated}}</p>
+            <p>{{estimate.dueDate}}</p>
+            <p>{{estimate.taskDescription}}</p>
             </div>
           </div>
-          <div class="pl-3 row details" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.mainTaskDescription}}</p>
+          <div class="pl-3 row details" v-for="estimate in estimates" v-bind:key="estimate._id">
+            <p>{{estimate.mainTaskDescription}}</p>
           </div>
         </div>   
     </div>
@@ -51,39 +52,39 @@
         <td class="table-head" scope="col"><b>Adjusted SH</b></td>
         <td class="table-head" scope="col">
           <span class="action-icons">
-            <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x"></i>
+            <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
           </span>
         </td>
     </tr>
   </thead>
-  <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
+  <tbody v-for="estimate in estimates" :key="estimate._id">
     <tr>
-      <td scope="row">{{tableInfo.subTask}}</td>
-      <td>{{tableInfo.research}}</td>
-      <td>{{tableInfo.planning}}</td>
-      <td>{{tableInfo.development}}</td>
-      <td>{{tableInfo.testing}}</td>
-      <td>{{tableInfo.stabilization}}</td>
-      <td>{{tableInfo.certainity}}</td>
-      <td>{{tableInfo.sumHours}}</td>
-      <td>{{tableInfo.adjustedSumHours}}</td>
+      <td scope="row">{{estimate.subTask}}</td>
+      <td>{{estimate.research}}</td>
+      <td>{{estimate.planning}}</td>
+      <td>{{estimate.development}}</td>
+      <td>{{estimate.testing}}</td>
+      <td>{{estimate.stabilization}}</td>
+      <td>{{estimate.certainity}}</td>
+      <td>{{estimate.sumHours}}</td>
+      <td>{{estimate.adjustedSumHours}}</td>
       <!-- <td></td> -->
       <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+            <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons"></i>
           </router-link>
         </span>
         <span class="action-icons">
           <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true"></i>
+            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true" id="my-icons"></i>
           </router-link>
         </span>
       </td>
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
-      <td colspan="10">{{tableInfo.comments}}</td>
+      <td colspan="10">{{estimate.comments}}</td>
     </tr>
   </tbody>
   <tr>
@@ -103,10 +104,12 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 
   export default {
     name: 'estimates-table',
     props: {
+      
       type: {
         type: String
       },
@@ -114,49 +117,24 @@
     },
     data() {
       return {
+        estimates: [],
          isShowing:false,
          isShow: false,
-        tableData: [
-          {
-            id: 1,
-            subTask: 'Navbar',
-            research: '1.00hrs',
-            planning: '2.00hrs',
-            development: '2.00hrs',
-            testing: '2.00hrs',
-            stabilization: '2.00hrs',
-            certainity: '90%',
-            sumHours: '9.00hrs',
-            adjustedSumHours: '9.90hrs',
-            comments: 'This should work well enough.',
-          },
-          {
-            id: 2,
-            subTask: 'Table',
-            research: '1.00hrs',
-            planning: '2.00hrs',
-            development: '2.00hrs',
-            testing: '2.00hrs',
-            stabilization: '2.00hrs',
-            certainity: '90%',
-            sumHours: '9.00hrs',
-            adjustedSumHours: '9.90hrs',
-            comments: 'The hours are accurate.',
-          },
-        ],
-        tableDataDetails: [
-           {
-             id: 1,
-              project: 'Refactory',
-              projectManager: 'David Pereira',
-              dateCreated: '20-10-2019',
-              dueDate: '23-10-2019',
-              mainTaskDescription: 'There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students',
-           }
-        ],
-        
+ 
       }
-    }
+    },
+    //fetches estimates when the component is created
+    async created(){
+
+      try {
+        const response = await axios.get(`http://localhost:8081/estimate/`+ this.$route.params.id)
+
+        this.estimate = response.data; 
+        console.log(response)
+      } catch(e){
+        console.error(e)
+      }
+    },
     
   }
 </script>
@@ -185,7 +163,7 @@
 .table-head {  
   background: #e7eaec !important;
   
-  /* font-weight: 700; */
+  font-weight: 700;
   /* text-transform: uppercase; */
 }
 
@@ -233,6 +211,13 @@ base-button{
   border: 1px solid #5e72e4;
   
 }
+#comments{
+ color: #5e72e4;
+}
+#comments:hover {
+  cursor:pointer;
+  color: #d10572;
+}
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
@@ -273,7 +258,16 @@ iframe {
   
 }
 } */
-
+#my-icons {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+  color: #eee7eb;
+}
+#my-icons:hover {
+  background-color: #d10572;
+  border-color: #d10572;
+  color: #eee7eb;
+}
 
 
 </style>

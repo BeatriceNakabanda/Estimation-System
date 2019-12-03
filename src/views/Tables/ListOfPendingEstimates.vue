@@ -44,7 +44,7 @@
           <td >
             <span class="action-icons">
               <router-link  to="#" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+                <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span>
             <!-- <span class="action-icons">
@@ -167,6 +167,17 @@ base-button{
   border-radius: 4px;
   
 }
+#my-icons {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+  color: #eee7eb;
+}
+#my-icons:hover {
+  background-color: #d10572;
+  border-color: #d10572;
+  color: #eee7eb;
+}
+
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {

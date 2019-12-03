@@ -1,6 +1,6 @@
 <template>
     <div>
-        <base-header type="" class="pb-6 pb-8 pt-4 " id="table-head">
+        <base-header type=""  id="table-head">
         </base-header>
 
         <div class="container-fluid mt--7">
@@ -24,5 +24,6 @@
 <style>
 #table-head{
     background-color: #d10572;
+    height: 35vh;
 }
 </style>

@@ -11,114 +11,80 @@
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table table-flush"
-                  :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
-                  tbody-classes="list"
-                  :data="tableData" id="left">
-        <template  slot="columns"  >
-          <th class="bgcolor">No</th>
-          <th class="bgcolor">Developer</th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-          <th class="bgcolor"></th>
-        </template>
-          <template class="table-row" slot-scope="{row} ">
-          <td>
-            <div class="media" > 
-              <div class="media-body" >
-                <span class="name mb-0 text-sm">{{row.no}}</span>
-              </div>
-            </div>
-          </td>
-          <td class="developer">
-            {{row.developer}}
-          </td>
-          <td>       
-          </td>
-          <td>
-          </td>
-          <td>
-          </td>
-          <td> 
-          </td>
-          <td>
-            <badge class="badge-dot mr-4" :type="row.statusType">
-              <i :class="`bg-${row.statusType}`"></i>
-              <span class="status">{{row.status}}</span>
-            </badge>
-          </td>
-          </template>
-      </base-table>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th class="bgcolor">No</th>
+            <th class="bgcolor">Developer</th>
+            <th class="bgcolor"></th>
+            <th class="bgcolor"></th>
+            <th class="bgcolor"></th>
+            <th class="bgcolor"></th>
+            
+        </tr>
+        </thead>
+          <tbody>
+            <tr v-for="(developer, index) in developers" :key="developer._id">
+              <td >{{ index + 1 }}</td>
+               <td> {{ developer.name}}</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+          </tbody>
+      </table>
     </div>
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <base-pagination total="30"></base-pagination>
     </div>
   </div>
+  
 </template>
+
 <script>
+import axios from "axios";
+import EditEstimateForm from "../Forms/EditEstimateForm";
+
 export default {
-    name: 'developers-table',
-    props: {
-      type: {
-        type: String
-      },
-      title: String,
+  name: "developers-table",
+  props: {
+    type: {
+      type: String
     },
+  },
     data() {
       return {
         modal1: false,
-        form : {
-                project: '',
-            },
-        tableData: [
-          {
-            id: 1,
-            no: '1',
-            developer: 'Benjamin',
-          },
-          {
-            id: 2,
-            no: '2',
-            developer: 'Beatrice',
-          },
-          {
-            id: 3,
-            no: '3',
-            developer: 'Ronnie',
-          },
-          {
-            id: 4,
-            no: '4',
-            developer: 'Olive',
-          },
-          {
-            id: 5,
-            no: '5',
-            developer: 'Sunday',
-          },
-        ]
+        developers: [],
       }
+    }, 
+    async created(){
+      try{
+        const res = await axios.get(`http://localhost:8081/users/developers`)
+
+      this.developers = res.data;
+    } catch (e) {
+      console.error(e);
     }
-}
+  }
+};
 </script>
 <style>
-#view{
+#view {
   color: #747273;
   padding-left: 10px;
 }
-#left{
+#left {
   text-align: left;
 }
 /* Adding cursor to table */
-.table-row{
-  cursor:pointer;
+.table-row {
+  cursor: pointer;
 }
 
-.spacing{
+.spacing {
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -137,48 +103,47 @@ export default {
 .rounded-circle {
   border: 1px solid rgb(201, 201, 199);
   padding: 6px;
-  
 }
 
 /* Status column font size adjustment */
-span .status{
-  font-size: 13px; 
+span .status {
+  font-size: 13px;
 }
 
-.bgcolor {  
+.bgcolor {
   background: #e7eaec !important;
 }
 /* displaying action icons on hover */
-table > tbody > tr .action-icons{
+table > tbody > tr .action-icons {
   visibility: hidden;
-} 
-table > tbody > tr:hover .action-icons{
+}
+table > tbody > tr:hover .action-icons {
   visibility: visible;
-} 
+}
 /* styling buttons */
-#create-estimate{
-  border-radius: 4px; 
+#create-estimate {
+  border-radius: 4px;
 }
 /* cancel button for modal */
-.cancel-color{
+.cancel-color {
   color: rgb(135, 141, 148);
   background-color: #e2e0e1;
 }
-.cancel-color:hover{
+.cancel-color:hover {
   color: #ffffff;
   background-color: #afadae;
 }
 
 /* table header spacing */
-.header-spacing{
+.header-spacing {
   width: 5px;
   height: 43px;
 }
 
 /* Desktops and laptops ----------- */
-@media only screen  and (min-width : 1224px) {
-.card{
-  margin-top: 30px;
-}
+@media only screen and (min-width: 1224px) {
+  .card {
+    margin-top: 30px;
+  }
 }
 </style>

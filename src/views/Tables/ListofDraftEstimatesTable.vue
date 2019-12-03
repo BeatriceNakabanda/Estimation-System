@@ -17,7 +17,8 @@
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Project Manager</th>
-          <th class="bgcolor">Action</th>
+          <th class="bgcolor"></th>
+          <!-- <th class="bgcolor">Action</th> -->
         </template>
           <template class="table-row" slot-scope="{row} ">
           <!-- <td>
@@ -45,12 +46,12 @@
           <td >
             <span class="action-icons">
               <router-link  to="#" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true"></i>
+                <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span>
             <span class="action-icons">
               <router-link  to="#" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" @click="modal = true"></i>
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
                 
               </router-link>
             </span>
@@ -146,11 +147,11 @@
   font-size: 13px !important;
 }
 /* styling rounded border */
-.rounded-circle {
+/* .rounded-circle {
   border: 1px solid rgb(201, 201, 199);
   padding: 6px;
   
-}
+} */
 
 /* Status column font size adjustment */
 span .status{
@@ -167,9 +168,25 @@ table > tbody > tr .action-icons{
 table > tbody > tr:hover .action-icons{
   visibility: visible;
 }
+/* .table{
+  width: 100%; 
+}
+.card{
+  width: 79vw;
+} */
 base-button{
   border-radius: 4px;
   
+}
+#my-icons {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+  color: #eee7eb;
+}
+#my-icons:hover {
+  background-color: #d10572;
+  border-color: #d10572;
+  color: #eee7eb;
 }
 
 /* Desktops and laptops ----------- */

@@ -1,21 +1,21 @@
 <template>
-    <div>
-        <base-header type="" class="pb-6 pb-8 pt-4 " id="table-head">
-        </base-header>
+  <div>
+    <base-header type="" id="table-head"> </base-header>
 
-        <div class="container-fluid mt--7">
-            <div class="row">
-                <div class="col">
-                    <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
-                    <estimates-table title="Light Table" :estimates="estimates"></estimates-table>
-                </div>
-            </div>
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col">
+          <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
+          <estimates-table :estimates="estimates"></estimates-table>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
-  import EstimatesTable from './Tables/ListOfEstimatesTable'
-  import axios from 'axios'
+import EstimatesTable from "./Tables/ListOfEstimatesTable";
+import axios from "axios";
+
   export default {
     name: 'estimates',
     components: {
@@ -23,32 +23,31 @@
     },
     data(){
       return{
-         estimates: [ ],
-        //  async created(){
-        //    try{
-        //      const res = await axios.get(``)
-        //    }
-        //  },
-        methods: {
-          // creating an edit estimate method
-          // editEstimate(id, updatedEstimate){
-          //   this.estimates = this.estimates.map(estimate => employee.id === id ? updatedEstimate : estimate)
-          // }
-        }
+         estimates: [],
+
+        
       }
-    }
+    },
+    //fetches estimates when the component is created
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:8081/estimates`)
+
+        this.estimates = res.data;
+      } catch(e){
+        console.error(e)
+      }
+    },
+
+
+      
+    
   }
+  
 </script>
 <style>
-#table-head{
-    background-color: #d10572;
-}
-/* Desktops and laptops ----------- */
-@media only screen  and (min-width : 1224px) {
-/* Styles */
-#table-head{
-  /* padding-bottom: 20px; */
-  min-height: 35vh;
-}
+#table-head {
+  background-color: #d10572;
+  height: 35vh;
 }
 </style>

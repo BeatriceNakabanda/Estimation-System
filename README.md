@@ -20,5 +20,21 @@ npm run build
 npm run lint
 ```
 
+### Install dependencies for the server
+```
+npm install
+```
+
+### Run the client & server concurrently 
+```
+npm run app
+```
+
+### Run the express server only
+```
+npm start
+```
+
+
 
 
