@@ -3,16 +3,16 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const projectsRouter = require('../skalla_server/modules/projects_module/projects_routes')
+const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
+const developersRouter = require("../skalla_server/modules/developers_module/developer_routes");
+
 const port = process.env.PORT || 8081;
 
-const app = express(); 
+const app = express();
 
 //express app middleware
 app.use(cors());
 app.use(bodyParser.json());
-
-
 
 
 //database connection
@@ -23,8 +23,6 @@ mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Mongodb successfully connected"))
   .catch(err => console.log(err));
-
-
 
 //All our routes
 app.get('/', (req, res) => {
@@ -50,9 +48,10 @@ res.json({
 next()
 }); 
 
+app.use("/projects", projectsRouter);
+app.use("/developers", developersRouter);
 
 //express app port
 app.listen(port, function() {
-    console.log(`Server is running on port: ${port}`);
-  });
-  
+  console.log(`Server is running on port: ${port}`);
+});
