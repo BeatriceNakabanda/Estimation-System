@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router();  //express router for routing
 const projectService = require('./projects_contoller')
 
-/* Listing Project Routes */
+/* Listing Project Route */
 
 
 
