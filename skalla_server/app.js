@@ -24,12 +24,11 @@ mongoose
   .then(() => console.log("Mongodb successfully connected"))
   .catch(err => console.log(err));
 
-//All our routes
-app.get('/', (req, res) => {
-    res.send("Welcome to Skalla server")
-})
+//app routes
+app.get('/', (req, res) => {res.send("Welcome to Skalla server")})
+app.use('/api', projectsRouter)
+app.use("/api", developersRouter);
 
-app.all('/projects', projectsRouter)
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {
@@ -47,9 +46,6 @@ res.json({
 });
 next()
 }); 
-
-app.use("/projects", projectsRouter);
-app.use("/developers", developersRouter);
 
 //express app port
 app.listen(port, function() {

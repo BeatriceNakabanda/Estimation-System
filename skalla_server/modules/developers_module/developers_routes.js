@@ -6,9 +6,7 @@ const developerService = require("./developers_controller");
 /* Listing Project Routes */
 
 //get all developers
-router.get("/developers", (req, res) =>
-  developerService.developerList(req, res)
-);
+router.get("/developers", developerService.developerList);
 
 // router.post("/developer", projectService.updateDeveloper);
 
