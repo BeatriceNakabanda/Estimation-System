@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
 const developersRouter = require("../skalla_server/modules/developers_module/developers_routes");
+const estimateRequestRouter = require("../skalla_server/modules/estimateRequests_module/estimateRequests_routes");
 
 const port = process.env.PORT || 8081;
 
@@ -27,7 +28,8 @@ mongoose
 //app routes
 app.get('/', (req, res) => {res.send("Welcome to Skalla server")})
 app.use('/api', projectsRouter)
-app.use("/api", developersRouter);
+app.use("/api", developersRouter)
+app.use('/api', estimateRequestRouter)
 
 
 //central error handling for errors throughout the express app
