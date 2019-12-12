@@ -14,7 +14,7 @@
             path: '/pendingEstimates'
           }"
         />
-        <sidebar-item :link="{name: 'Drafts', icon: 'ni ni-books text-blue', path: '/drafts'}"/>
+        <sidebar-item :link="{name: 'Drafts', icon: 'ni ni-box-2 text-blue', path: '/drafts'}"/>
         <sidebar-item :link="{name: 'Submitted', icon: 'ni ni-archive-2 text-blue', path: '/submitted'}"/>
         <!-- <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/> -->
         <div id="signout-position">
