@@ -95,7 +95,7 @@ import CreateEstimateForm from "../Forms/CreateEstimateForm";
 import axios from "axios";
 import { format, compareAsc } from 'date-fns'
 
-const baseURL = "http://localhost:8081/estimates";
+const baseURL = "http://localhost:8081/api/estimate-requests";
 
 export default {
   name: "estimates-table",
@@ -120,15 +120,15 @@ export default {
     };
   },
     //fetches a single estimate when the component is created
-    async created(){
-      try {
-        const res = await axios.get(`http://localhost:8081/estimate/` + this.$route.params.id) 
+    // async created(){
+    //   try {
+    //     const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id) 
 
-        this.estimate = res.data; 
-      } catch(e){
-        console.error(e)
-      }
-    },
+    //     this.estimate = res.data; 
+    //   } catch(e){
+    //     console.error(e)
+    //   }
+    // },
   methods: {
     editEstimate(estimateid){
       this.$router.push({

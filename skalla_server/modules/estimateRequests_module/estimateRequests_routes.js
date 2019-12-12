@@ -1,16 +1,19 @@
 //requiring dependecies
 const express = require("express")
 const router = express.Router(); 
+const estimateRequestController = require('./estimateRequests_controller')
 
 //All estimate request routes
 //get all estimates
-router.get("/estimate-requests", estimateRequestController.estimatesList)
+router.get("/estimate-requests", estimateRequestController.EstimateRequestList)
 
 //create estimate
-router.post("/estimate-request", estimateRequestController.createEstimate)
+router.post("/estimate-request", estimateRequestController.createEstimateRequest)
 
 //get single estimate
-router.get("/estimate-request/:requestId", estimateRequestController.singleEstimate)
+router.get("/estimate-request/:requestId", estimateRequestController.singleEstimateRequest)
 
 //update single estimate
-router.put("/estimate-request/:requestId", estimateRequestController.updateEstimate)
+router.put("/estimate-request/:requestId", estimateRequestController.updateEstimateRequest)
+
+module.exports = router

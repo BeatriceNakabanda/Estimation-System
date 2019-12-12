@@ -16,12 +16,12 @@ exports.EstimateRequestList = function(req, res){
 
 //create estimate request
 exports.createEstimateRequest = function(req, res){
-    const newEstimateRequest = new request(req.body);
-    newEstimateRequest.save(function(next, estimateRequest){
+    const newEstimateRequest = new EstimateRequest(req.body);
+    newEstimateRequest.save(function(estimateRequest, next){
         if(next){
             res.send(next)
         }else{
-            res.json(estimate);
+            res.json(estimateRequest);
         }
     })
 }

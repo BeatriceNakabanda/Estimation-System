@@ -31,7 +31,7 @@ import axios from "axios";
     //fetches estimates when the component is created
     async created(){
       try {
-        const res = await axios.get(`http://localhost:8081/estimates`)
+        const res = await axios.get(`http://localhost:8081/api/estimate-requests`)
 
         this.estimates = res.data;
       } catch(e){
