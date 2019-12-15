@@ -52,17 +52,25 @@ export default {
   props: {
     type: {
       type: String
-    },
+    }
   },
-    data() {
-      return {
-        modal1: false,
-        developers: [],
+  data() {
+    return {
+      modal1: false,
+      developers: [],
+
+      form: {
+        developers: ""
       }
-    }, 
-    async created(){
-      try{
-        const res = await axios.get(`http://localhost:8081/users/developers`)
+    };
+  },
+  mounted() {
+    created();
+  },
+
+  async created() {
+    try {
+      const res = await axios.get(`http://localhost:8081/api/developers`);
 
       this.developers = res.data;
     } catch (e) {
