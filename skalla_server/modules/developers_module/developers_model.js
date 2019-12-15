@@ -7,4 +7,4 @@ const DeveloperSchema = new Schema({
   name: String
 });
 
-module.exports = mongoose.model("developer", DeveloperSchema);
+module.exports = mongoose.model("users", DeveloperSchema);
