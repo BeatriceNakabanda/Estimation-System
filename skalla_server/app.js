@@ -25,7 +25,7 @@ mongoose
   .catch(err => console.log(err));
 
 //app routes
-app.get('/', (req, res) => {res.send("Welcome to Skalla server")})
+app.get('/', (req, res) => {res.send("Welcome to skalla server")})
 app.use('/api', projectsRouter)
 app.use("/api", developersRouter);
 
