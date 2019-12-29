@@ -2,8 +2,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//estimate request schema and model
-const EstimateRequestShema = new Schema({
+//Defining EstimateRequestSchema
+const EstimateRequestSchema = new Schema({
   project: { type: String, required: true },
   developer: {type: Schema.Types.ObjectId, ref: 'Developer', required: true},
   title: { type: String, required: true },
@@ -14,6 +14,6 @@ const EstimateRequestShema = new Schema({
   status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated'], default: 'Created'}
 });
 
-//defining request model
-const request = mongoose.model("estimaterequests", EstimateRequestShema);
-module.exports = request;
+//exporting estimateRequest model
+module.exports = mongoose.model("EstimateRequest", EstimateRequestSchema);
+
