@@ -25,4 +25,4 @@ const ProjectManagerSchema = new Schema({
 });
 
 
-module.exports = mongoose.model("ProjectManager",  ProjectManagerSchema, 'Users');
+module.exports = mongoose.model("ProjectManager",  ProjectManagerSchema);
