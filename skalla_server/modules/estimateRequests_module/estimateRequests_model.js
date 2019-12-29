@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 //estimate request schema and model
 const EstimateRequestShema = new Schema({
-  project: { type: String },
-  developer: { type: String },
+  project: { type: String, required: true },
+  developer: {type: Schema.Types.ObjectId, ref: 'Developer', required: true},
   title: { type: String },
   projectManager: { type: String },
   dueDate: { type: Date },
