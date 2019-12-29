@@ -24,5 +24,4 @@ const DeveloperSchema = new Schema({
     timestamps: true
 });
 
-
 module.exports = mongoose.model("Developer", DeveloperSchema, 'Users');
