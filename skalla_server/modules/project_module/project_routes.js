@@ -1,7 +1,7 @@
 //requiring dependecies
 const express = require("express")
 const router = express.Router();  //express router for routing
-const projectService = require('./projects_contoller')
+const projectService = require('./project_contollers')
 
 //get all projects
 router.get("/projects", projectService.projectList)

@@ -1,5 +1,5 @@
 //requiring dependencies
-const EstimateRequest = require("./estimateRequests_model")
+const EstimateRequest = require("./estimateRequest_model")
 const mongoose = require("mongoose")
 mongoose.set('useFindAndModify', false)
 

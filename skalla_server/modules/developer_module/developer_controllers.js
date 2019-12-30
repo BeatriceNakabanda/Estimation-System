@@ -1,4 +1,4 @@
-const Developer = require("./developers_model");
+const Developer = require("./developer_model");
 
 //get all devlopers
 exports.developerList = function(req, res) {
