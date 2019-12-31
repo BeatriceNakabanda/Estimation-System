@@ -78,23 +78,49 @@ function developerCreate(name, password, email, role, cb) {
   }
 
   function estimateRequestCreate(project, developer, title, projectManager, dueDate, taskDescription, status, cb) {
-    bookdetail = { 
+    estimateRequestDetail = { 
+      project: project,
+      developer: developer,
       title: title,
-      summary: summary,
-      author: author,
-      isbn: isbn
+      projectManager: projectManager,
+      dueDate: dueDate,
+      taskDescription: taskDescription,
+      status: status
     }
-    if (genre != false) bookdetail.genre = genre
+
+    if (dueDate != false) estimateRequestDetail.dueDate = dueDate
+    if (status != false) estimateRequestDetail.status = status
       
-    var book = new Book(bookdetail);    
-    book.save(function (err) {
+    const estimateRequest = new EstimateRequest(estimateRequestDetail);    
+    estimateRequest.save(function (err) {
       if (err) {
         cb(err, null)
         return
       }
-      console.log('New Book: ' + book);
-      books.push(book)
-      cb(null, book)
+      console.log('New Estimate Request: ' + estimateRequest);
+      estimateRequests.push(estimateRequest)
+      cb(null, estimateRequest)
     }  );
   }
 
+  function estimateCreate(submittedDate, developer, totalSum, lineItem, cb) {
+    estimateDetail = { 
+      submittedDate: submittedDate,
+      developer: developer,
+      totalSum: totalSum,
+      lineItem: lineItem
+    }    
+    if (lineItem != false) estimateDetail.lineItem = lineItem
+      
+    const estimate = new Estimate(estimateDetail);    
+    estimate.save(function (err) {
+      if (err) {
+        console.log('ERROR CREATING Estimate: ' + estimate);
+        cb(err, null)
+        return
+      }
+      console.log('New Estimate: ' + estimate);
+      estimates.push(estimate)
+      cb(null, estimate)
+    }  );
+  }

@@ -10,8 +10,8 @@ const EstimateRequestSchema = new Schema({
   projectManager: {type: Schema.Types.ObjectId, ref: 'ProjectManager', required: true},
   dueDate: { type: Date, required: true },
   taskDescription: { type: String, required: true },
-  dateCreated: { type: Date, default: Date.now },
-  status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated'], default: 'Created'}
+  status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated'], default: 'Created'},
+  dateCreated: { type: Date, default: Date.now }
 });
 
 //exporting estimateRequest model
