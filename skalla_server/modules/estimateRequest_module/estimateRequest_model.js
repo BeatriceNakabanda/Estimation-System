@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 //Defining EstimateRequestSchema
 const EstimateRequestSchema = new Schema({
-  project: { type: String, required: true },
+  project: {type: Schema.Types.ObjectId, ref: 'Project', required: true},
   developer: {type: Schema.Types.ObjectId, ref: 'Developer', required: true},
   title: { type: String, required: true },
   projectManager: {type: Schema.Types.ObjectId, ref: 'ProjectManager', required: true},

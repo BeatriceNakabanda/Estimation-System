@@ -19,7 +19,7 @@ const Project = require('./modules/project_module/project_model')
 
 const mongoose = require('mongoose');
 const mongoDB = userArgs[0];
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -249,6 +249,9 @@ function(err, results) {
     // All done, disconnect from database
     mongoose.connection.close();
 });
+
+//node command to run script for localhost testing
+// node populatedb mongodb://localhost:27017/skalla_localhost_app
 
 
 
