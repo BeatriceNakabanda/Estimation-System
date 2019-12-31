@@ -46,81 +46,160 @@ function developerCreate(name, password, email, role, cb) {
     }  );
   }
 
-  function projectManagerCreate(name, password, email, role, cb) {
-    //object for projectManager details
-    projectManagerDetail = {name:name , password: password, email: email, role:role }    
-    
-    const projectManager = new ProjectManager(projectManagerDetail);
-         
-    projectManager.save(function (err) {
-      if (err) {
-        cb(err, null)
-        return
-      }
-      console.log('New Project Manager: ' + projectManager);
-      projectManagers.push(projectManager)
-      cb(null, projectManager)
-    }  );
-  }
+function projectManagerCreate(name, password, email, role, cb) {
+//object for projectManager details
+projectManagerDetail = {name:name , password: password, email: email, role:role }    
 
-  function projectCreate(name, cb) {
-    var project = new Project({ name: name });
-         
-    project.save(function (err) {
-      if (err) {
-        cb(err, null);
-        return;
-      }
-      console.log('New Project: ' + project);
-      projects.push(project)
-      cb(null, project);
-    }   );
-  }
-
-  function estimateRequestCreate(project, developer, title, projectManager, dueDate, taskDescription, status, cb) {
-    estimateRequestDetail = { 
-      project: project,
-      developer: developer,
-      title: title,
-      projectManager: projectManager,
-      dueDate: dueDate,
-      taskDescription: taskDescription,
-      status: status
+const projectManager = new ProjectManager(projectManagerDetail);
+        
+projectManager.save(function (err) {
+    if (err) {
+    cb(err, null)
+    return
     }
+    console.log('New Project Manager: ' + projectManager);
+    projectManagers.push(projectManager)
+    cb(null, projectManager)
+}  );
+}
 
-    if (dueDate != false) estimateRequestDetail.dueDate = dueDate
-    if (status != false) estimateRequestDetail.status = status
-      
-    const estimateRequest = new EstimateRequest(estimateRequestDetail);    
-    estimateRequest.save(function (err) {
-      if (err) {
-        cb(err, null)
-        return
-      }
-      console.log('New Estimate Request: ' + estimateRequest);
-      estimateRequests.push(estimateRequest)
-      cb(null, estimateRequest)
-    }  );
-  }
+function projectCreate(name, cb) {
+var project = new Project({ name: name });
+        
+project.save(function (err) {
+    if (err) {
+    cb(err, null);
+    return;
+    }
+    console.log('New Project: ' + project);
+    projects.push(project)
+    cb(null, project);
+}   );
+}
 
-  function estimateCreate(submittedDate, developer, totalSum, lineItem, cb) {
-    estimateDetail = { 
-      submittedDate: submittedDate,
-      developer: developer,
-      totalSum: totalSum,
-      lineItem: lineItem
-    }    
-    if (lineItem != false) estimateDetail.lineItem = lineItem
-      
-    const estimate = new Estimate(estimateDetail);    
-    estimate.save(function (err) {
-      if (err) {
-        console.log('ERROR CREATING Estimate: ' + estimate);
-        cb(err, null)
-        return
-      }
-      console.log('New Estimate: ' + estimate);
-      estimates.push(estimate)
-      cb(null, estimate)
-    }  );
-  }
+function estimateRequestCreate(project, developer, title, projectManager, dueDate, taskDescription, status, cb) {
+estimateRequestDetail = { 
+    project: project,
+    developer: developer,
+    title: title,
+    projectManager: projectManager,
+    dueDate: dueDate,
+    taskDescription: taskDescription,
+    status: status
+}
+
+if (dueDate != false) estimateRequestDetail.dueDate = dueDate
+if (status != false) estimateRequestDetail.status = status
+    
+const estimateRequest = new EstimateRequest(estimateRequestDetail);    
+estimateRequest.save(function (err) {
+    if (err) {
+    cb(err, null)
+    return
+    }
+    console.log('New Estimate Request: ' + estimateRequest);
+    estimateRequests.push(estimateRequest)
+    cb(null, estimateRequest)
+}  );
+}
+
+function estimateCreate(submittedDate, developer, totalSum, lineItem, cb) {
+estimateDetail = { 
+    submittedDate: submittedDate,
+    developer: developer,
+    totalSum: totalSum,
+    lineItem: lineItem
+}    
+if (lineItem != false) estimateDetail.lineItem = lineItem
+    
+const estimate = new Estimate(estimateDetail);    
+estimate.save(function (err) {
+    if (err) {
+    console.log('ERROR CREATING Estimate: ' + estimate);
+    cb(err, null)
+    return
+    }
+    console.log('New Estimate: ' + estimate);
+    estimates.push(estimate)
+    cb(null, estimate)
+}  );
+}
+
+function createProjectsDevelopers(cb) {
+    async.parallel([
+        function(callback) {
+          developerCreate('Beatrice', 'beats321', 'beats@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Ronnie', 'ronnie321', 'ronnie@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Odong', 'odong321', 'odong@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Benjamin', 'ben321', 'benjamin@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Olive', 'olee321', 'olive@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          projectCreate("Refactory", callback);
+        },
+        function(callback) {
+          projectCreate("Xente", callback);
+        },
+        function(callback) {
+          projectCreate("Imuka Access", callback);
+        },
+        function(callback) {
+            projectCreate("Elisha Rooms", callback);
+        },
+        function(callback) {
+            projectCreate("Stanbic", callback);
+        },
+        ],
+        // optional callback
+        cb);
+}
+
+function createProjectsDevelopers(cb) {
+    async.parallel([
+        function(callback) {
+          developerCreate('Beatrice', 'beats321', 'beats@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Ronnie', 'ronnie321', 'ronnie@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Odong', 'odong321', 'odong@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Benjamin', 'ben321', 'benjamin@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          developerCreate('Olive', 'olee321', 'olive@gmail.com', 'developer', callback);
+        },
+        function(callback) {
+          projectCreate("Refactory", callback);
+        },
+        function(callback) {
+          projectCreate("Xente", callback);
+        },
+        function(callback) {
+          projectCreate("Imuka Access", callback);
+        },
+        function(callback) {
+            projectCreate("Elisha Rooms", callback);
+        },
+        function(callback) {
+            projectCreate("Stanbic", callback);
+        },
+        ],
+        // optional callback
+        cb);
+}
+
+
+
+
+
