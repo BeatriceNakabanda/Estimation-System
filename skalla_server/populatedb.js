@@ -1,6 +1,9 @@
 #! /usr/bin/env node
 
-console.log('This script populates some developers, projectManagers, estimateRequests, estimates and projects to the database. Specify database as argument - e.g.: populatedb mongodb://your_username:your_password@your_dabase_url');
+console.log('This script populates some developers, projectManagers, estimateRequests, estimates and projects to the database. Specify database as argument - e.g.: node populatedb mongodb://your_username:your_password@your_dabase_url');
+
+//node command to run script for localhost testing for skalla application
+// node populatedb mongodb://localhost:27017/skalla_localhost_app
 
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
@@ -17,18 +20,21 @@ const EstimateRequest = require('./modules/estimateRequest_module/estimateReques
 const Estimate = require('./modules/estimate_module/estimate_model')
 const Project = require('./modules/project_module/project_model')
 
+//database connection
 const mongoose = require('mongoose');
 const mongoDB = userArgs[0];
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+//arrays for models
 const developers = []
 const projectManagers = []
 const projects = []
 const estimateRequests = []
 const estimates = []
 
+//functions for creation of the models
 function developerCreate(name, password, email, role, cb) {
     //object for developer details
     developerDetail = {name:name , password: password, email: email, role:role }    
@@ -125,6 +131,7 @@ estimate.save(function (err) {
 }  );
 }
 
+//creating model instances 
 function createProjectsDevelopers(cb) {
     async.parallel([
         function(callback) {
@@ -250,8 +257,7 @@ function(err, results) {
     mongoose.connection.close();
 });
 
-//node command to run script for localhost testing
-// node populatedb mongodb://localhost:27017/skalla_localhost_app
+
 
 
 
