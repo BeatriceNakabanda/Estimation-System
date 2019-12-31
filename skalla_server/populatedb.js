@@ -215,17 +215,17 @@ function createEstimateRequests(cb) {
 function createEstimates(cb) {
     async.parallel([
         function(callback) {
-          estimateCreate('2020-01-10', developers[0], '16.00', [], callback)
-        }/* ,
-        function(callback) {
-            estimateCreate('2020-01-11', developers[1], '16.00', ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
+          estimateCreate('2020-01-10', developers[0], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: ''}], callback)
         },
         function(callback) {
-            estimateCreate('2020-01-12', developers[2], '16.00', ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
+            estimateCreate('2020-01-11', developers[1], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: ''}], callback)
         },
         function(callback) {
-            estimateCreate('2020-01-13', developers[3], 16.00, ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
-        } */
+            estimateCreate('2020-01-12', developers[2], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: 'Will be accomplished earlier than estimated.'}], callback)
+        },
+        function(callback) {
+            estimateCreate('2020-01-13', developers[3], 16.00, [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: 'Will be accomplished earlier than estimated.'}], callback)
+        }
         ],
         // Optional callback
         cb);
