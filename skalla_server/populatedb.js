@@ -184,7 +184,71 @@ function createProjectManagers(cb) {
         cb);
 }
 
+function createEstimateRequests(cb) {
+    async.parallel([
+        function(callback) {
+          estimateRequestCreate([projects[0],], developers[0], 'Navigation', projectManagers[0], '2020-01-15', 'Let us add a navigation bar.', 'Created', callback);
+        },
+        function(callback) {
+            estimateRequestCreate([projects[1],], developers[1], 'Dashboard', projectManagers[0], '2020-01-10', 'Let us add a dashboard.', 'Created', callback);
+        },
+        function(callback) {
+            estimateRequestCreate([projects[2],], developers[2], 'Deals', projectManagers[0], '2020-01-16', 'Let us add deals.', 'Created', callback);
+        },
+        function(callback) {
+            estimateRequestCreate([projects[3],], developers[3], 'Categories', projectManagers[0], '2020-01-18', 'Let us add categories.', 'Created', callback);
+        },
+        function(callback) {
+            estimateRequestCreate([projects[4],], developers[4], 'Credit', projectManagers[0], '2020-01-19', 'Let us add a credit section.', 'Created', callback);
+        },
+        function(callback) {
+            estimateRequestCreate([projects[0],], developers[3], 'Main Section', projectManagers[0], '2020-01-15', 'Let us add a main section.', 'Created', callback);
+        },
+        function(callback) {
+            estimateRequestCreate([projects[1],], developers[1], 'Content', projectManagers[0], '2020-01-15', 'Let us add some dummy content.', 'Created', callback);
+          }
+        ],
+        // optional callback
+        cb);
+}
 
+function createEstimates(cb) {
+    async.parallel([
+        function(callback) {
+          estimateCreate('2020-01-10', developers[0], 16.00, ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
+        },
+        function(callback) {
+            estimateCreate('2020-01-11', developers[1], 16.00, ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
+        },
+        function(callback) {
+            estimateCreate('2020-01-12', developers[2], 16.00, ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
+        },
+        function(callback) {
+            estimateCreate('2020-01-13', developers[3], 16.00, ['description: 2.00', 'research: 2.00', 'planning: 2.00', 'development: 2.00', 'testing: 2.00', 'stabilization: 2.00', 'certainty: 75', 'sum: 12.00', 'adjustedSum: 14.00', false], callback)
+        }
+        ],
+        // Optional callback
+        cb);
+}
+
+async.series([
+    createProjectsDevelopers,
+    createProjectManagers,
+    createEstimateRequests,
+    createEstimates
+],
+// Optional callback
+function(err, results) {
+    if (err) {
+        console.log('FINAL ERR: '+err);
+    }
+    else {
+        console.log('Estimates: '+ estimates);
+        
+    }
+    // All done, disconnect from database
+    mongoose.connection.close();
+});
 
 
 
