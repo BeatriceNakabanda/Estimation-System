@@ -162,37 +162,22 @@ function createProjectsDevelopers(cb) {
         cb);
 }
 
-function createProjectsDevelopers(cb) {
+function createProjectManagers(cb) {
     async.parallel([
         function(callback) {
-          developerCreate('Beatrice', 'beats321', 'beats@gmail.com', 'developer', callback);
+          projectManagerCreate('Cindy', 'cindy123', 'cindy@gmail.com', 'project manager', callback);
         },
         function(callback) {
-          developerCreate('Ronnie', 'ronnie321', 'ronnie@gmail.com', 'developer', callback);
+          projectManagerCreate('Roy', 'roy123', 'roy@gmail.com', 'project manager', callback);
         },
         function(callback) {
-          developerCreate('Odong', 'odong321', 'odong@gmail.com', 'developer', callback);
+          projectManagerCreate('Joanitah', 'joanitah123', 'joanitah@gmail.com', 'project manager', callback);
         },
         function(callback) {
-          developerCreate('Benjamin', 'ben321', 'benjamin@gmail.com', 'developer', callback);
+          projectManagerCreate('Lillian', 'lillian123', 'lillian@gmail.com', 'project manager', callback);
         },
         function(callback) {
-          developerCreate('Olive', 'olee321', 'olive@gmail.com', 'developer', callback);
-        },
-        function(callback) {
-          projectCreate("Refactory", callback);
-        },
-        function(callback) {
-          projectCreate("Xente", callback);
-        },
-        function(callback) {
-          projectCreate("Imuka Access", callback);
-        },
-        function(callback) {
-            projectCreate("Elisha Rooms", callback);
-        },
-        function(callback) {
-            projectCreate("Stanbic", callback);
+          projectManagerCreate('Micheal', 'micheal123', 'micheal@gmail.com', 'project manager', callback);
         },
         ],
         // optional callback
