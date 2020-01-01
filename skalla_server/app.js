@@ -31,7 +31,7 @@ mongoose
 //app routes
 app.get('/', (req, res) => {res.send("Welcome to skalla server")})
 app.use('/api', projectsRouter)
-app.use("/api", developersRouter)
+app.use('/api', developersRouter)
 app.use('/api', estimateRequestRouter)
 
 

@@ -5,15 +5,15 @@ const estimateRequestController = require('./estimateRequest_controllers')
 
 //All estimate request routes
 //get all estimates
-router.get("/estimate-requests", estimateRequestController.EstimateRequestList)
+router.get("/estimateRequests", estimateRequestController.EstimateRequestList)
 
 //create estimate
-router.post("/estimate-request", estimateRequestController.createEstimateRequest)
+router.post("/estimateRequest", estimateRequestController.createEstimateRequest)
 
 //get single estimate
-router.get("/estimate-request/:requestId", estimateRequestController.singleEstimateRequest)
+router.get("/estimateRequest/:requestId", estimateRequestController.singleEstimateRequest)
 
 //update single estimate
-router.put("/estimate-request/:requestId", estimateRequestController.updateEstimateRequest)
+router.put("/estimateRequest/:requestId", estimateRequestController.updateEstimateRequest)
 
 module.exports = router
