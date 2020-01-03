@@ -17,7 +17,14 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
+// Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 // Passport Config
 require('./config/passport')(passport);
 
