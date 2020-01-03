@@ -12,6 +12,8 @@ const estimateRequestRouter = require("../skalla_server/modules/estimateRequests
 const port = process.env.PORT || 8081;
 
 const app = express();
+// Passport Config
+require('./config/passport')(passport);
 
 //express app middleware
 app.use(cors());
@@ -25,8 +27,12 @@ app.use(
     saveUninitialized: true
   })
 );
-// Passport Config
-require('./config/passport')(passport);
+
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //database connection
 const mongourl =
