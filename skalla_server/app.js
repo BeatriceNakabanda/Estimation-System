@@ -1,6 +1,8 @@
 //requiring dependencies
 const express = require("express");
 const cors = require("cors");
+const passport = require('passport');
+const session = require('express-session');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
@@ -47,7 +49,7 @@ res.json({
   }
 });
 next()
-}); 
+});
 
 //express app port
 app.listen(port, function() {
