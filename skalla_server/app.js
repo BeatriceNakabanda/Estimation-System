@@ -18,6 +18,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
+// Passport Config
+require('./config/passport')(passport);
+
 //database connection
 const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
