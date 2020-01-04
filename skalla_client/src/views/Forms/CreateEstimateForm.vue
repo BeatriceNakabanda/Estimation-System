@@ -210,8 +210,10 @@ export default {
 
         this.projects = response.data;
         this.developers = resp.data;
+        // window.location.reload();
       }catch(e){
         console.error(e)
+        
       }
     },
     

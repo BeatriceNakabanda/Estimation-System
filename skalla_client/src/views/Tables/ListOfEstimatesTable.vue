@@ -67,12 +67,20 @@
                 </modal>
               </router-link>
             </span>
-            <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="editEstimate(row._id)"></i>
-
+            <span class="action-icons" id="view">
+              <router-link :to="{params: {id: row._id}}">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true"></i>
               </router-link>
+                    <modal :show.sync="modal3">
+                      <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
+                      </template>
+                      <!-- Edit Estimate Form -->
+                      <EditEstimateForm  />
+                  </modal>
+            
             </span>
+            
             
           </td>
           </template>
@@ -91,7 +99,7 @@
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
-// import EditEstimateForm from "../Forms/EditEstimateForm";
+import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
 import { format, compareAsc } from 'date-fns'
 
@@ -101,7 +109,7 @@ export default {
   name: "estimates-table",
   components: {
     CreateEstimateForm,
-    // EditEstimateForm
+    EditEstimateForm
   },
   props: {
     estimates: Array,
@@ -116,6 +124,7 @@ export default {
       modal: false,
       modal1: false,
       modal2: false,
+      modal3: false,
       format,
     };
   },
