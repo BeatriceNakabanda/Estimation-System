@@ -1,4 +1,3 @@
-const LocalStrategy = require('passport-local').Strategy;
 
 // Load User model
 const User = require('../modules/developers_module/developers_model');
@@ -23,4 +22,10 @@ passport.use(new LocalStrategy(
 //serialize into a session
 passport.serializeUser(function(user, done) {
   done(null, user.id);
+});
+//deserialize out of a session
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
 });
