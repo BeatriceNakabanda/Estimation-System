@@ -4,7 +4,7 @@ const User = require('../modules/developers_module/developers_model');
 
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
-
+module.exports = function(passport) {
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
@@ -29,3 +29,4 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+}

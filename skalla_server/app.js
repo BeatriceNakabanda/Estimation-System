@@ -1,11 +1,11 @@
 //requiring dependencies
 const express = require("express");
 const cors = require("cors");
-const passport = require('passport');
-const session = require('express-session');
+const passport = require("passport");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const loginRouter=require("../skalla_server/modules/login_module/login_route")
+const loginRouter = require("../skalla_server/modules/login_module/login_route");
 const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
 const developersRouter = require("../skalla_server/modules/developers_module/developers_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequests_module/estimateRequests_routes");
@@ -13,28 +13,26 @@ const estimateRequestRouter = require("../skalla_server/modules/estimateRequests
 const port = process.env.PORT || 8081;
 
 const app = express();
-// Passport Config
-//require('./config/passport')(passport);
-const passport_handler=require('./config/passport');
 
 //express app middleware
 app.use(cors());
 app.use(bodyParser.json());
 
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Express session
 app.use(
   session({
-    secret: 'secret',
+    secret: "secret",
     resave: true,
     saveUninitialized: true
   })
 );
 
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
+// Passport Config
+const passport_handler = require("./config/passport");
 
 //database connection
 const mongourl =
@@ -46,28 +44,29 @@ mongoose
   .catch(err => console.log(err));
 
 //app routes
-app.get('/', (req, res) => {res.send("Welcome to Skalla server")})
-app.use('/api', projectsRouter)
-app.use("/api", developersRouter)
-app.use('/api', estimateRequestRouter)
-app.use('/',loginRouter)
-
+app.get("/", (req, res) => {
+  res.send("Welcome to Skalla server");
+});
+app.use("/api", projectsRouter);
+app.use("/api", developersRouter);
+app.use("/api", estimateRequestRouter);
+app.use("/", loginRouter);
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {
-  const error = new Error ('Not found');
+  const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
 
-app.use((error , req, res, next) => {
-res.status(error.status || 500);
-res.json({
-  error : {
-  message : error.message
-  }
-});
-next()
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
+    }
+  });
+  next();
 });
 
 //express app port
