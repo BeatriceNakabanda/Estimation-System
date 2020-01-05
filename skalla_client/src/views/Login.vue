@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 <template>
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
@@ -9,11 +10,11 @@
                       <form action="/login" method="post">
     <div>
         <label>Username:</label>
-        <input type="text" name="username"/>
+        <input type="text" id="username" name="username"/>
     </div>
     <div>
         <label>Password:</label>
-        <input type="password" name="password"/>
+        <input type="password" id="password" name="password"/>
     </div>
     <div>
         <input type="submit" value="Log In"/>
@@ -48,22 +49,42 @@
         </div>
 </template>
 <script>
-  export default {
-    name: 'login',
-    data() {
-      return {
-        model: {
-          email: '',
-          password: ''
-        }
-      }
+import axios from "axios";
+export default {
+  name: "login",
+  data() {
+    return {
+      // model: {
+      //   email: '',
+      //   password: ''
+      // }
+      email: "",
+      password: ""
+    };
+  },
+  mounted() {
+    // eslint-disable-next-line no-undef
+    created();
+  },
+
+  async created() {
+    try {
+      const res = await axios.post(`http://localhost:8081/login`, {
+        email: document.getElementById("email"),
+        password: document.getElementById("password")
+      });
+
+      this.developers = res.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
     }
   }
+};
 </script>
 <style>
-#signin{
+#signin {
   /* margin-left: -15px; */
   padding: 4px 16px;
-
 }
 </style>
