@@ -13,7 +13,8 @@ const port = process.env.PORT || 8081;
 
 const app = express();
 // Passport Config
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
+const passport_handler=require('./config/passport');
 
 //express app middleware
 app.use(cors());
