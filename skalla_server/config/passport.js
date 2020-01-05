@@ -20,3 +20,7 @@ passport.use(new LocalStrategy(
     });
   }
 ));
+//serialize into a session
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
