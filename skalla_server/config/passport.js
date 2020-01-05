@@ -1,3 +1,4 @@
+const LocalStrategy = require('passport-local').Strategy;
 
 // Load User model
 const User = require('../modules/developers_module/developers_model');
