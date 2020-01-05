@@ -6,7 +6,20 @@
                         <div class="text-muted text-center mt-2 mb-3"><small>Sign in with credentials</small></div>
                     </div>
                     <div class="card-body px-lg-5 py-lg-3">
-                        <form role="form" action="/login" method="post" class="mb-1">
+                      <form action="/login" method="post">
+    <div>
+        <label>Username:</label>
+        <input type="text" name="username"/>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Log In"/>
+    </div>
+</form>
+                        <!-- <form role="form" action="/login" method="post" class="mb-1">
                             <base-input class="input-group-alternative mb-3"
                                         placeholder="Email"
                                         addon-left-icon="ni ni-circle-08"
@@ -28,7 +41,7 @@
                                 <base-button type="primary"  class="shadow-none mt-3 mb-5 px-5 mx-7" id="signin">Sign in</base-button>
                               </router-link>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
