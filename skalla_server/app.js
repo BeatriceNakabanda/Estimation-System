@@ -50,7 +50,7 @@ app.get('/', (req, res) => {res.send("Welcome to Skalla server")})
 app.use('/api', projectsRouter)
 app.use("/api", developersRouter)
 app.use('/api', estimateRequestRouter)
-app.use('/api',loginRouter)
+app.use('/',loginRouter)
 
 
 //central error handling for errors throughout the express app
