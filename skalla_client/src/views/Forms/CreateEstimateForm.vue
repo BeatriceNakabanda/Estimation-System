@@ -145,9 +145,9 @@ export default {
         invalidProjectName(){
             return this.estimate.project === ''
         },
-        // invalidDeveloper(){
-        //     return this.estimate.developers === ''
-        // },
+        invalidDeveloper(){
+            return this.estimate.developers === ''
+        },
         invalidDueDate(){
             return this.estimate.dueDate === ''
         },

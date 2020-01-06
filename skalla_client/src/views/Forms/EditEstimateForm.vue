@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="editEstimate">
+    <form method="POST" role="form" @submit.prevent="addEstimate">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -98,11 +98,11 @@
                 ❗Please fill in all fields
             </p>
             <p v-if="success" class="success-message">
-                ✅ Request successfully sent
+                ✅ Request successfully edited
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="editEstimate">Edit request</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Edit request</base-button>
 
         </form>
         
@@ -124,32 +124,30 @@ export default {
             error: false,
             submitting: false,
             success: false,
-            // id:0,
             projects: [],
             developers: [],
            
         estimate:
           {
-            // project: '',
-            // developer: '',
-            // status: '',
-            // statusType: '',
-            // dueDate: '',
-            // title: '',
-            // taskDescription: '',
+            project: '',
+            developer: '',
+            status: '',
+            statusType: '',
+            dueDate: '',
+            title: '',
+            taskDescription: '',
           },
         }
         
     },
- 
      // automatically computed properties(functions) to validate form inputs 
     computed: {
         invalidProjectName(){
             return this.estimate.project === ''
         },
-        // invalidDeveloper(){
-        //     return this.estimate.developers === ''
-        // },
+        invalidDeveloper(){
+            return this.estimate.developers === ''
+        },
         invalidDueDate(){
             return this.estimate.dueDate === ''
         },
@@ -163,7 +161,7 @@ export default {
     },
 
     methods: {
-        async editEstimate(){
+        async addEstimate(){
             this.clearForm()
             this.submitting = true
 
@@ -174,15 +172,15 @@ export default {
                 return
             }
 
-        let newEstimate = {
+        let edtitedEstimate = {
             project: this.estimate.project,
             developer: this.estimate.developer,
             dueDate: this.estimate.dueDate,
             title: this.estimate.title,
             taskDescription: this.estimate.taskDescription
         }
-        console.log(newEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/${this.$route.params.id}`, newEstimate)
+        console.log(edtitedEstimate)
+        axios.put('http://localhost:8081/api/estimate-request/5de538265144501d695f354c', edtitedEstimate)
             .then((response) =>{
                 console.log(response);
             })
@@ -196,20 +194,7 @@ export default {
         
         },
 
-    async created(){
-      try{
-        const response = await axios.get(`http://localhost:8081/api/projects`)
-        const resp = await axios.get(`http://localhost:8081/api/developers`)
-        const respons = await axios.get(`http://localhost:8081/api/estimate-request/${this.$route.params.id}`)
-        // this.id = this.$route.params.id;
 
-        this.projects = response.data;
-        this.developers = resp.data;
-        this.estimate = respons.data;
-      }catch(e){
-        console.error(e)
-      }
-    },
     clearForm(){
                 this.success = false
                 this.error = false
@@ -218,7 +203,21 @@ export default {
       console.log('testing save' )
       },  
     },
+    async created(){
+      try{
+        const response = await axios.get(`http://localhost:8081/api/projects`)
+        const resp = await axios.get(`http://localhost:8081/api/developers`)
+        const respons = await axios.get(`http://localhost:8081/api/estimate-request/5de538265144501d695f354c`)
 
+        this.projects = response.data;
+        this.developers = resp.data;
+        this.estimate = respons.data;
+        // window.location.reload();
+      }catch(e){
+        console.error(e)
+        
+      }
+    },
     
     
 }

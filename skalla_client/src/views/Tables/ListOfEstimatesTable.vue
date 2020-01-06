@@ -68,15 +68,13 @@
               </router-link>
             </span>
             <span class="action-icons" id="view">
-              <router-link :to="{params: {id: row._id}}">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true"></i>
-              </router-link>
-                    <modal :show.sync="modal3">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true, editMode(row.id)"></i>
+                    <modal :show.sync="modal3" >
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                       </template>
                       <!-- Edit Estimate Form -->
-                      <EditEstimateForm  />
+                      <EditEstimateForm   @edit:estimate="editEstimate"/>
                   </modal>
             
             </span>
@@ -128,7 +126,7 @@ export default {
       format,
     };
   },
-    //fetches a single estimate when the component is created
+    // fetches a single estimate when the component is created
     // async created(){
     //   try {
     //     const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id) 
@@ -139,12 +137,19 @@ export default {
     //   }
     // },
   methods: {
-    editEstimate(estimateid){
-      this.$router.push({
-        name: 'EditEstimate',
-        params: { id: estimateid }
-      })
+    editEstimate(id, updatedEstimate){
+      this.estimates = this.estimates.map(estimate => estimate.id === id? updatedEstimate : estimate)
     },
+    // editEstimate(estimateid){
+    //   this.$router.push({
+    //     name: 'EditEstimate',
+    //     params: { id: estimateid }
+    //   })
+    // },
+      editMode(id) {
+        this.editing = id
+      },
+
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     }
