@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
+const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
 const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
 
@@ -14,7 +14,6 @@ const app = express();
 //express app middleware
 app.use(cors());
 app.use(bodyParser.json());
-
 
 //database connection
 const mongourl =
@@ -29,28 +28,29 @@ mongoose
   .catch(err => console.log(err));
 
 //app routes
-app.get('/', (req, res) => {res.send("Welcome to skalla server")})
-app.use('/api', projectsRouter)
-app.use('/api', developersRouter)
-app.use('/api', estimateRequestRouter)
-
+app.get("/", (req, res) => {
+  res.send("Welcome to Skalla server");
+});
+app.use("/api", projectsRouter);
+app.use("/api", developersRouter);
+app.use("/api", estimateRequestRouter);
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {
-  const error = new Error ('Not found');
+  const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
 
-app.use((error , req, res, next) => {
-res.status(error.status || 500);
-res.json({
-  error : {
-  message : error.message
-  }
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
+    }
+  });
+  next();
 });
-next()
-}); 
 
 //express app port
 app.listen(port, function() {

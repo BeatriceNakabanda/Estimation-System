@@ -37,10 +37,10 @@
             {{row.title}}
           </td>
           <td class="project">
-            {{row.project}}
+            {{row.project.name}}
           </td>
           <td class="developer">
-            {{row.developer}}
+            {{row.developer.name}}
           </td>
           <td class="dateCreated">
             {{ formatDate(row.dateCreated) }}

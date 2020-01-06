@@ -197,19 +197,19 @@ function createEstimateRequests(cb) {
           estimateRequestCreate(projects[0], developers[0], 'Navigation', projectManagers[0], '2020-01-15', 'Let us add a navigation bar.', 'Created', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[1], developers[1], 'Dashboard', projectManagers[0], '2020-01-10', 'Let us add a dashboard.', 'Created', callback);
+            estimateRequestCreate(projects[1], developers[1], 'Dashboard', projectManagers[0], '2020-01-10', 'Let us add a dashboard.', 'Submitted', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[2], developers[2], 'Deals', projectManagers[0], '2020-01-16', 'Let us add deals.', 'Created', callback);
+            estimateRequestCreate(projects[2], developers[2], 'Deals', projectManagers[0], '2020-01-16', 'Let us add deals.', 'Estimated', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[3], developers[3], 'Categories', projectManagers[0], '2020-01-18', 'Let us add categories.', 'Created', callback);
+            estimateRequestCreate(projects[3], developers[3], 'Categories', projectManagers[0], '2020-01-18', 'Let us add categories.', 'Draft', callback);
         },
         function(callback) {
             estimateRequestCreate(projects[4], developers[4], 'Credit', projectManagers[0], '2020-01-19', 'Let us add a credit section.', 'Created', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[0], developers[3], 'Main Section', projectManagers[0], '2020-01-15', 'Let us add a main section.', 'Created', callback);
+            estimateRequestCreate(projects[0], developers[3], 'Main Section', projectManagers[0], '2020-01-15', 'Let us add a main section.', 'Submitted', callback);
         },
         function(callback) {
             estimateRequestCreate(projects[1], developers[1], 'Content', projectManagers[0], '2020-01-15', 'Let us add some dummy content.', 'Created', callback);
