@@ -16,6 +16,12 @@ const app = express();
 
 //express app middleware
 app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
 app.use(bodyParser.json());
 
 // Passport middleware
@@ -32,7 +38,8 @@ app.use(
 );
 
 // Passport Config
-const passport_handler = require("./config/passport");
+//const passport_handler = require("./config/passport");
+require("./config/passport")(passport);
 
 //database connection
 const mongourl =
