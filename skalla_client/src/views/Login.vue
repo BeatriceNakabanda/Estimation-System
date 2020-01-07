@@ -64,22 +64,44 @@ export default {
   },
   mounted() {
     // eslint-disable-next-line no-undef
-    created();
+    posting();
   },
+  methods: {
+    posting: function() {
+      var body = {
+        email: "body.email",
+        password: "body.password"
+      };
 
-  async created() {
-    try {
-      const res = await axios.post(`http://localhost:8081/login`, {
-        email: document.getElementById("email"),
-        password: document.getElementById("password")
-      });
-
-      this.developers = res.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+      axios({
+        method: "post",
+        url: "http://localhost:8081/login",
+        data: body
+      })
+        .then(function(response) {
+          // eslint-disable-next-line no-console
+          console.log(response);
+        })
+        .catch(function(error) {
+          // eslint-disable-next-line no-console
+          console.log(error);
+        });
     }
   }
+
+  // async posting() {
+  //   try {
+  //     const res = await axios.post(`http://localhost:8081/login`, {
+  //       email: document.getElementById("email"),
+  //       password: document.getElementById("password")
+  //     });
+
+  //     this.email = res.data;
+  //   } catch (e) {
+  //     // eslint-disable-next-line no-console
+  //     console.error(e);
+  //   }
+  // }
 };
 </script>
 <style>
