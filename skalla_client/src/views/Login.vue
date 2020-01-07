@@ -11,7 +11,7 @@
                                         placeholder="Email"
                                         addon-left-icon="ni ni-circle-08"
                                         v-model="model.email"
-                                        :class="{ 'has-error': submitting && invalidEmail } " 
+                                        :class="{ 'has-error': submitting && invalidEmail }" 
                                         @keypress="clearForm"
                                         >
                             </base-input>
@@ -22,17 +22,29 @@
                                         addon-left-icon="ni ni-lock-circle-open"
                                         v-model="model.password"
                                         :class="{ 'has-error': submitting && invalidPassword } "
+                                        @keypress="clearForm"
                                         >
                             </base-input>
-                            <p v-if="error && submitting" class="error-message">
-                                ❗Please fill in all fields
-                            </p>
+
                             <base-checkbox class="custom-control-alternative text-left" >
+                                
                                 <span class="text-muted">Remember me</span>
+                                
                             </base-checkbox>
+
+                            
                             <div class="text-center">
                                 <base-button type="primary"  class="shadow-none mt-3 mb-5 px-5 mx-7" id="signin" @click="signIn">Sign in</base-button>
                             </div>
+
+                            <div class="text-center">
+                              <small>
+                              <span v-if="error && submitting" class="text-danger error-message text-muted ">
+                                  Please fill in all fields
+                              </span>
+                            </small>
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -43,55 +55,73 @@
   import router from "../router"
   import axios from "axios";
 
+
   export default {
-    name: 'login',
-    data() {
+    name: 'Login',
+    data(){
       return {
-        model: {
+        error: false,
+        submitting: false,
+        success: false,
+        model:{
           email: '',
           password: ''
         }
       }
     },
-     // automatically computed properties(functions) to validate form inputs 
+    //automatically computed properties(functions) to validate form inputs 
     computed: {
-        invalidEmail(){
+      invalidEmail(){
             return this.model.email === ''
         },
-        invalidPassword(){
+      invalidPassword(){
             return this.model.password === ''
         }
     },
-    methods : {
-      login: (e) => {
-      e.preventDefault()
-      let email = e.target.elements.email.value
-      let password = e.target.elements.password.value
-      let login = () => {
-        let data = {
-          email: email,
-          password: password
-        }
-        axios.post("/api/login", data)
-          .then((response) => {
-            // console.log("Logged in")
-            router.push("/estimates")
-          })
-          .catch((err) => {
-            console.log("Cannot log in")
-          })
-      }
-      login()
-    }
-    }
-    
-  }
+    methods: {
+      async signIn(){
+            this.clearForm()
+            this.submitting = true
 
+
+            // validating empty inputs
+            if(this.invalidEmail || this.invalidPassword )
+            {
+                this.error = true
+                return
+            }
+
+    let newSignIn = {
+            email: this.model.email,
+            password: this.model.password
+        }
+        console.log(newSignIn)
+        axios.post('http://localhost:8081/api/login', newSignIn)
+            .then((response) =>{
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            
+            this.success = true
+            this.error = false
+            this.submitting = false
+    }, 
+    clearForm(){
+                this.success = false
+                this.error = false
+            }
+    }
+  }  
 </script>
 <style>
 #signin{
   /* margin-left: -15px; */
   padding: 4px 16px;
-  
+}
+
+.text-danger {
+    color: #dc3545!important;
 }
 </style>
