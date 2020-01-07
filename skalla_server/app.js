@@ -3,10 +3,17 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy //local authentication type
+const cookieSession = require('cookie-session')
+
+//requiring app files
 const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
 const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
+const UsersRouter  = require('./config/users')
 
+//declaring server port
 const port = process.env.PORT || 8081;
 
 const app = express();
@@ -14,6 +21,13 @@ const app = express();
 //express app middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieSession({
+  name: 'mysession',
+  keys: ['vueauthrandomkey'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 //database connection
 /* const mongourl =

@@ -4,20 +4,7 @@ const mongoose = require("mongoose")
 mongoose.set('useFindAndModify', false)
 
 //get all estimateRequests
-/* exports.EstimateRequestList = function(req, res){
-
-    EstimateRequest.find({}, 
-        
-        function (next, estimateRequest){
-        if(next){
-            res.send(next)
-        }else{
-            res.json(estimateRequest)
-        }
-    })
-} */
-
-exports.EstimateRequestList = function(req, res, next){
+exports.estimateRequestList = function(req, res, next){
 
     EstimateRequest.find({})
     .populate('project', 'name')
