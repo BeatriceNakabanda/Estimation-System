@@ -67,14 +67,16 @@
                 </modal>
               </router-link>
             </span>
-            <span class="action-icons" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true, editMode(row.id)"></i>
+            <span class="action-icons" id="view" >
+              <!-- <router-link :to="{params: {id: row._id}}"> -->
+                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="modal3 = true, addEstimate(row._id)"></i>
+              <!-- </router-link> -->
                     <modal :show.sync="modal3" >
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                       </template>
                       <!-- Edit Estimate Form -->
-                      <EditEstimateForm   @edit:estimate="editEstimate"/>
+                      <EditEstimateForm  />
                   </modal>
             
             </span>
@@ -124,6 +126,17 @@ export default {
       modal2: false,
       modal3: false,
       format,
+      estimate:
+          {
+              _id: '',
+            project: '',
+            developer: '',
+            status: '',
+            statusType: '',
+            dueDate: '',
+            title: '',
+            taskDescription: '',
+          },
     };
   },
     // fetches a single estimate when the component is created
@@ -137,18 +150,67 @@ export default {
     //   }
     // },
   methods: {
-    editEstimate(id, updatedEstimate){
-      this.estimates = this.estimates.map(estimate => estimate.id === id? updatedEstimate : estimate)
+    async addEstimate(estimateid){
+            
+            this.submitting = true
+
+                // validating empty inputs
+            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+            {
+                this.error = true
+                return
+            }
+
+        let edtitedEstimate = {
+            project: this.estimate.project,
+            developer: this.estimate.developer,
+            dueDate: this.estimate.dueDate,
+            title: this.estimate.title,
+            taskDescription: this.estimate.taskDescription
+        }
+        console.log(edtitedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid, edtitedEstimate)
+            .then((response) =>{
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            
+            this.success = true
+            this.error = false
+            this.submitting = false               
+        
+        },
+            async created(){
+      try{
+        const response = await axios.get(`http://localhost:8081/api/projects`)
+        const resp = await axios.get(`http://localhost:8081/api/developers`)
+        const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid)
+
+        this.projects = response.data;
+        this.developers = resp.data;
+        this.estimate = respons.data;
+        // window.location.reload();
+      }catch(e){
+        console.error(e)
+        
+      }
     },
+
+
+    // editEstimate(id, updatedEstimate){
+    //   this.estimates = this.estimates.map(estimate => estimate.id === id? updatedEstimate : estimate)
+    // },
     // editEstimate(estimateid){
     //   this.$router.push({
     //     name: 'EditEstimate',
     //     params: { id: estimateid }
     //   })
     // },
-      editMode(id) {
-        this.editing = id
-      },
+      // editMode(id) {
+      //   this.editing = id
+      // },
 
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')

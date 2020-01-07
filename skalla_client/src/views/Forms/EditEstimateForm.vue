@@ -129,6 +129,7 @@ export default {
            
         estimate:
           {
+              _id: '',
             project: '',
             developer: '',
             status: '',
@@ -161,7 +162,7 @@ export default {
     },
 
     methods: {
-        async addEstimate(){
+        async addEstimate(estimateid){
             this.clearForm()
             this.submitting = true
 
@@ -180,7 +181,7 @@ export default {
             taskDescription: this.estimate.taskDescription
         }
         console.log(edtitedEstimate)
-        axios.put('http://localhost:8081/api/estimate-request/5de538265144501d695f354c', edtitedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/`+ this.$route.params.estimateid, edtitedEstimate)
             .then((response) =>{
                 console.log(response);
             })
@@ -207,7 +208,7 @@ export default {
       try{
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/developers`)
-        const respons = await axios.get(`http://localhost:8081/api/estimate-request/5de538265144501d695f354c`)
+        const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid )
 
         this.projects = response.data;
         this.developers = resp.data;
