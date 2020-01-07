@@ -8,9 +8,23 @@ Vue.use(Router)
 export default new Router({
   linkExactActiveClass: 'active',
   routes: [
+    // routes for login
+    {
+      path: '/',
+      redirect: 'login',
+      component: AuthLayout,
+      children: [
+        {
+          path: '/login',
+          name: 'login',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
+        },
+       
+      ]
+    },
     // routes for project manager 
         {
-          path: '/',
+          path: '/estimates',
           redirect: 'estimates',
           component: ProjectManagerLayout,
           children: [
@@ -49,22 +63,6 @@ export default new Router({
           name: 'View Estimate',
           component: () => import(/* webpackChunkName: "demo" */ './views/ViewEstimate.vue')
         },
-  
-        
-      ]
-    },
-    // routes for login
-    {
-      path: '/',
-      redirect: 'login',
-      component: AuthLayout,
-      children: [
-        {
-          path: '/login',
-          name: 'login',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
-        },
-       
       ]
     },
     //routes for developer
