@@ -11,11 +11,12 @@ const cookieSession = require('cookie-session')
 const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
 const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
-const UsersRouter  = require('./config/users')
+const UserRouter  = require('./config/users')
 
 //declaring server port
 const port = process.env.PORT || 8081;
 
+//Initializing express app
 const app = express();
 
 //express app middleware
@@ -28,6 +29,7 @@ app.use(cookieSession({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 //database connection
 /* const mongourl =
@@ -48,6 +50,35 @@ app.get("/", (req, res) => {
 app.use("/api", projectsRouter);
 app.use("/api", developersRouter);
 app.use("/api", estimateRequestRouter);
+
+//user log in
+app.post("/api/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.status(400).send([user, "Cannot log in", info]);
+    }
+
+    req.login(user, err => {
+      res.send("Logged in");
+    });
+  })(req, res, next);
+});
+
+//user log out
+app.get("/api/logout", function(req, res) {
+  req.logout();
+
+  console.log("logged out")
+
+  return res.send();
+});
+
+//currently logged in user's data
+
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {
