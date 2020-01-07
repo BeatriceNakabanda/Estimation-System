@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
+const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
 const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
 
@@ -16,9 +16,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //database connection
-const mongourl =
+/* const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
-
+ */
 //localhost database connection string for development testing purposes
 const mongourl_localhost = 'mongodb://localhost:27017/skalla_localhost_app';
 
