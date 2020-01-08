@@ -1,5 +1,5 @@
 //requiring dependencies
-const Project = require("./projects_model");
+const Project = require("./project_model");
 
 //get all projects
 exports.projectList = function(req, res){
