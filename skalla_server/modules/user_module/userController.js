@@ -3,6 +3,18 @@ const jwt = require("jsonwebtoken");
 const User = require("../user_module/user_model");
 class loginController {
   constructor() {}
+  //function for geting all users
+  async getAllUsers(req, res) {
+    return await User.find()
+      .then(response => {
+        res.send(response);
+      })
+      .catch(error => {
+        res.send({
+          status: error.message
+        });
+      });
+  }
 
   //function for login user
   async loginUser(req, res) {
@@ -43,7 +55,8 @@ class loginController {
       }
     );
   }
-  verifyToken(req, res, next) {
+  //checking for the token match
+  CheckToken(req, res, next) {
     if (!req.headers.authorization) {
       return res.status(401).send({
         status: "Unauthorized request"
