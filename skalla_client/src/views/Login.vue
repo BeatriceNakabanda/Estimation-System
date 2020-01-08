@@ -17,7 +17,7 @@
         <input type="password" id="password" name="password"/>
     </div>
     <div>
-        <input type="submit" value="Log In"/>
+        <input type="button" value="Log In"/>
     </div>
 </form>
                         <!-- <form role="form" action="/login" method="post" class="mb-1">
@@ -58,34 +58,22 @@ export default {
       //   email: '',
       //   password: ''
       // }
-      email: "",
-      password: ""
+      login: {
+        email: "",
+        password: ""
+      }
     };
   },
   mounted() {
     // eslint-disable-next-line no-undef
-    posting();
   },
   methods: {
-    posting: function() {
-      var body = {
-        email: "body.email",
-        password: "body.password"
-      };
-
-      axios({
-        method: "post",
-        url: "http://localhost:8081/login",
-        data: body
-      })
-        .then(function(response) {
-          // eslint-disable-next-line no-console
-          console.log(response);
-        })
-        .catch(function(error) {
-          // eslint-disable-next-line no-console
-          console.log(error);
-        });
+    posting() {
+      axios.post(`http://localhost:8081/login`, this.login).then(response => {
+        let token = response.data.user.token;
+        localStorage.setItem("token", token);
+        this.$router.push("/developers");
+      });
     }
   }
 
