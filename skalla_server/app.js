@@ -1,17 +1,22 @@
 //requiring dependencies
 const express = require("express");
 const cors = require("cors");
-const passport = require("passport");
-const session = require("express-session");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const loginRouter = require("../skalla_server/modules/login_module/login_route");
-const projectsRouter = require("../skalla_server/modules/projects_module/projects_routes");
-const developersRouter = require("../skalla_server/modules/developers_module/developers_routes");
-const estimateRequestRouter = require("../skalla_server/modules/estimateRequests_module/estimateRequests_routes");
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy //local authentication type
+const cookieSession = require('cookie-session')
 
+//requiring app files
+const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
+const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
+const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
+
+
+//declaring server port
 const port = process.env.PORT || 8081;
 
+//Initializing express app
 const app = express();
 
 //express app middleware
@@ -23,8 +28,11 @@ app.use(
 );
 
 app.use(bodyParser.json());
-
-// Passport middleware
+app.use(cookieSession({
+  name: 'mysession',
+  keys: ['vueauthrandomkey'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,9 +53,12 @@ require("./config/passport")(passport);
 const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
 
+//localhost database connection string for development testing purposes
+const mongourl_localhost = 'mongodb://localhost:27017/skalla_localhost_app';
+
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Mongodb successfully connected"))
+  .then(() => console.log("Mongodb successfully connected to localhost mongodb database"))
   .catch(err => console.log(err));
 
 //app routes
@@ -57,7 +68,35 @@ app.get("/", (req, res) => {
 app.use("/api", projectsRouter);
 app.use("/api", developersRouter);
 app.use("/api", estimateRequestRouter);
-app.use("/", loginRouter);
+
+//user log in
+app.post("/api/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.status(400).send([user, "Cannot log in", info]);
+    }
+
+    req.login(user, err => {
+      res.send("Logged in");
+    });
+  })(req, res, next);
+});
+
+//user log out
+app.get("/api/logout", function(req, res) {
+  req.logout();
+
+  console.log("logged out")
+
+  return res.send();
+});
+
+//currently logged in user's data
+
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {

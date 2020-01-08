@@ -64,8 +64,7 @@ class loginController {
         status: "The provided token is incorrect"
       });
     }
-    req.session.user = user.dataValues;
-    res.redirect("/estimates");
+
     next();
   }
 }

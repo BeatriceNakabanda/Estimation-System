@@ -1,11 +1,11 @@
 //requiring dependecies
 const express = require("express")
 const router = express.Router(); 
-const estimateRequestController = require('./estimateRequests_controller')
+const estimateRequestController = require('./estimateRequest_controllers')
 
 //All estimate request routes
 //get all estimates
-router.get("/estimate-requests", estimateRequestController.EstimateRequestList)
+router.get("/estimate-requests", estimateRequestController.estimateRequestList)
 
 //create estimate
 router.post("/estimate-request", estimateRequestController.createEstimateRequest)
