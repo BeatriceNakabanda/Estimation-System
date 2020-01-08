@@ -3,15 +3,15 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy //local authentication type
-const cookieSession = require('cookie-session')
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy; //local authentication type
+const cookieSession = require("cookie-session");
+const session = require("express-session");
 
 //requiring app files
 const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
-const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
+const userRouter = require("../skalla_server/modules/user_module/user_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
-
 
 //declaring server port
 const port = process.env.PORT || 8081;
@@ -28,11 +28,13 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(cookieSession({
-  name: 'mysession',
-  keys: ['vueauthrandomkey'],
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}))
+app.use(
+  cookieSession({
+    name: "mysession",
+    keys: ["vueauthrandomkey"],
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,20 +47,18 @@ app.use(
   })
 );
 
-// Passport Config
-//const passport_handler = require("./config/passport");
-require("./config/passport")(passport);
-
 //database connection
 const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
 
 //localhost database connection string for development testing purposes
-const mongourl_localhost = 'mongodb://localhost:27017/skalla_localhost_app';
+const mongourl_localhost = "mongodb://localhost:27017/skalla_localhost_app";
 
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Mongodb successfully connected to localhost mongodb database"))
+  .then(() =>
+    console.log("Mongodb successfully connected to localhost mongodb database")
+  )
   .catch(err => console.log(err));
 
 //app routes
@@ -66,8 +66,9 @@ app.get("/", (req, res) => {
   res.send("Welcome to Skalla server");
 });
 app.use("/api", projectsRouter);
-app.use("/api", developersRouter);
+
 app.use("/api", estimateRequestRouter);
+app.use("/api", userRouter);
 
 //user log in
 app.post("/api/login", (req, res, next) => {
@@ -90,13 +91,12 @@ app.post("/api/login", (req, res, next) => {
 app.get("/api/logout", function(req, res) {
   req.logout();
 
-  console.log("logged out")
+  console.log("logged out");
 
   return res.send();
 });
 
 //currently logged in user's data
-
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {
