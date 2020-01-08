@@ -50,14 +50,14 @@ app.use(
 require("./config/passport")(passport);
 
 //database connection
-/* const mongourl =
+const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
- */
+
 //localhost database connection string for development testing purposes
 const mongourl_localhost = 'mongodb://localhost:27017/skalla_localhost_app';
 
 mongoose
-  .connect(mongourl_localhost, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Mongodb successfully connected to localhost mongodb database"))
   .catch(err => console.log(err));
 
