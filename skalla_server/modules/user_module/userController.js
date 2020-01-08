@@ -26,7 +26,7 @@ class loginController {
             const payload = {
               subject: user.id,
               role: user.role,
-              name: user.name
+              name: user.email
             };
             const token = jwt.sign(payload, "secretKey");
             res.status(200).send({
@@ -64,6 +64,7 @@ class loginController {
         status: "The provided token is incorrect"
       });
     }
+
     next();
   }
 }
