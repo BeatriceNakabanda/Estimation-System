@@ -14,12 +14,12 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
-        enum: ['Project Manager', 'Developer']
+        required: true
     },
     role: {
         type: String, 
-        required: true
+        required: true,
+        enum: ['Project Manager', 'Developer']
     },
 }, {
     timestamps: true

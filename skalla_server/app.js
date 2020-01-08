@@ -11,7 +11,7 @@ const cookieSession = require('cookie-session')
 const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
 const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
-const UserRouter  = require('./config/users')
+
 
 //declaring server port
 const port = process.env.PORT || 8081;
