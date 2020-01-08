@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const User = require("../developers_module/developers_model");
+const User = require("../user_module/user_model");
 class loginController {
   constructor() {}
-  async login(req, res) {
+
+  //function for login user
+  async loginUser(req, res) {
     const userData = req.body;
     User.findOne(
       { email: userData.email, password: userData.password },
