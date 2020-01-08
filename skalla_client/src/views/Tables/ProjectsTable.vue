@@ -33,7 +33,7 @@
         </tr>
         </thead>
           <tbody>
-            <tr v-for="project, index in projects">
+            <tr v-for="(project, index) in projects">
               <td >{{ index + 1 }}</td>
                <td> {{ project.name}}</td>
                <td></td>
