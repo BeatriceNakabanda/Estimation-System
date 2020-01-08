@@ -10,7 +10,7 @@ const EstimateRequestSchema = new Schema({
   projectManager: {type: Schema.ObjectId, ref: 'ProjectManager', required: true},
   dueDate: { type: Date, required: true },
   taskDescription: { type: String, required: true },
-  status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated'], default: 'Created'},
+  status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated']},
   dateCreated: { type: Date, default: Date.now }
 });
 
