@@ -112,7 +112,6 @@ import axios from 'axios';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 
-const baseURL = "http://localhost:8081/api/estimate-request"
 
 export default {
     name: 'create-estimate-form',
@@ -129,7 +128,6 @@ export default {
            
         estimate:
           {
-              _id: '',
             project: '',
             developer: '',
             status: '',
@@ -208,7 +206,8 @@ export default {
       try{
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/developers`)
-        const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid )
+        const respons = await axios.get(`http://localhost:8081/api/estimate-request/5de652b133653b1fc2ec2ee3` )
+        // const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid )
 
         this.projects = response.data;
         this.developers = resp.data;

@@ -32,7 +32,7 @@
           <th class="bgcolor">Status</th>
           <th class="bgcolor"></th>
         </template>
-          <template class="table-row" slot-scope="{row} ">
+          <template class="table-row" slot-scope="{row}">
           <td class="title">
             {{row.title}}
           </td>
@@ -58,7 +58,7 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="/view-estimate" id="view">
+              <router-link  :to="`/view-estimate/${row._id}`" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
                 <modal :show.sync="modal2">
                   <template slot="header">
@@ -68,9 +68,9 @@
               </router-link>
             </span>
             <span class="action-icons" id="view" >
-              <!-- <router-link :to="{params: {id: row._id}}"> -->
-                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="modal3 = true, addEstimate(row._id)"></i>
-              <!-- </router-link> -->
+              <router-link :to="{params: {id: row._id}}">
+                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="modal3 = true, addEstimate(`${row._id}`)"></i>
+              </router-link>
                     <modal :show.sync="modal3" >
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
@@ -128,7 +128,7 @@ export default {
       format,
       estimate:
           {
-              _id: '',
+            _id: '',
             project: '',
             developer: '',
             status: '',
@@ -150,6 +150,7 @@ export default {
     //   }
     // },
   methods: {
+    
     async addEstimate(estimateid){
             
             this.submitting = true
@@ -182,11 +183,11 @@ export default {
             this.submitting = false               
         
         },
-            async created(){
+      async created(){
       try{
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/developers`)
-        const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid)
+        const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
         this.projects = response.data;
         this.developers = resp.data;
