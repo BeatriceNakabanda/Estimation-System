@@ -145,9 +145,9 @@ export default {
         invalidProjectName(){
             return this.estimate.project === ''
         },
-        // invalidDeveloper(){
-        //     return this.estimate.developers === ''
-        // },
+        invalidDeveloper(){
+            return this.estimate.developers === ''
+        },
         invalidDueDate(){
             return this.estimate.dueDate === ''
         },
@@ -210,8 +210,10 @@ export default {
 
         this.projects = response.data;
         this.developers = resp.data;
+        // window.location.reload();
       }catch(e){
         console.error(e)
+        
       }
     },
     

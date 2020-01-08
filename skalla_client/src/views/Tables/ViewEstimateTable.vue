@@ -18,21 +18,23 @@
         <div v-show="isShow"  class="content">
            <div class="row ">
             <div class="col- pl-3 align-self-start">
+             
               <p>Project </p>
-              <p>Project Manager </p>
+              <!-- <p>Project Manager </p> -->
               <p>Date Created </p>
               <p>Due Date </p>
               <p>Main Task Description </p>
             </div>
-            <div class="col details align-self-start" v-for="estimate in estimates" v-bind:key="estimate.id">
-            <p>{{estimate.project}}</p>
-            <p>{{estimate.projectManager}}</p>
+            <div class="col details align-self-start" >
+              
+            <p >{{estimate.project}}</p>
+            <!-- <p>{{projectManager}}</p> -->
             <p>{{estimate.dateCreated}}</p>
             <p>{{estimate.dueDate}}</p>
             </div>
           </div>
-          <div class="pl-3 row details" v-for="estimate in estimates" v-bind:key="estimate.id">
-            <p>{{estimate.mainTaskDescription}}</p>
+          <div class="pl-3 row details" >
+            <p>{{estimate.taskDescription}}</p>
           </div>
         </div>   
     </div>
@@ -56,17 +58,17 @@
         </td>
     </tr>
   </thead>
-  <tbody v-for="estimate in estimates" :key="estimate._id">
+  <tbody v-for="estimation in estimated" :key="estimation._id">
     <tr>
-      <td scope="row">{{estimate.subTask}}</td>
-      <td>{{estimate.research}}</td>
-      <td>{{estimate.planning}}</td>
-      <td>{{estimate.development}}</td>
-      <td>{{estimate.testing}}</td>
-      <td>{{estimate.stabilization}}</td>
-      <td>{{estimate.certainity}}</td>
-      <td>{{estimate.sumHours}}</td>
-      <td>{{estimate.adjustedSumHours}}</td>
+      <td scope="row">{{estimation.subTask}}</td>
+      <td>{{estimation.research}}</td>
+      <td>{{estimation.planning}}</td>
+      <td>{{estimation.development}}</td>
+      <td>{{estimation.testing}}</td>
+      <td>{{estimation.stabilization}}</td>
+      <td>{{estimation.certainity}}</td>
+      <td>{{estimation.sumHours}}</td>
+      <td>{{estimation.adjustedSumHours}}</td>
       <!-- <td></td> -->
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -104,7 +106,6 @@
 </template>
 <script>
 import axios from "axios";
-const baseURL = "http://localhost:8081/estimates";
 
   export default {
     name: 'estimates-table',
@@ -118,16 +119,33 @@ const baseURL = "http://localhost:8081/estimates";
       return {
          isShowing:false,
          isShow: false,
-         estimates: [], 
+         estimated: [],
+          estimate: {
+            dateCreated: "",
+            developer: "",
+            dueDate: "",
+            project: "",
+            taskDescription: "",
+          }
+          
+          // title: ""
+         
+            // project: '',
+            // dateCreated: '',
+            // dueDate: '',
+            // taskDescription: '',
+        
  
       }
     },
-    //fetches estimates when the component is created
+    //fetches estimate when the component is created
     async created(){
       try {
-        const res = await axios.get(`http://localhost:8081/estimates` )
+        // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
+        const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
-        this.estimates = res.data; 
+        this.estimate = res.data; 
+        console.log(res)
       } catch(e){
         console.error(e)
       }

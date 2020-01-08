@@ -21,6 +21,12 @@ const app = express();
 
 //express app middleware
 app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
 app.use(bodyParser.json());
 app.use(cookieSession({
   name: 'mysession',
@@ -30,6 +36,18 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Express session
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Passport Config
+//const passport_handler = require("./config/passport");
+require("./config/passport")(passport);
 
 //database connection
 /* const mongourl =

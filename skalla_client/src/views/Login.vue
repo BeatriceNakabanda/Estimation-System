@@ -100,6 +100,7 @@
         </div>
 </template>
 <script>
+<<<<<<< HEAD
   import router from "../router"
   import axios from "axios";
 
@@ -162,6 +163,62 @@
             }
     }
   }  
+=======
+import axios from "axios";
+export default {
+  name: "login",
+  data() {
+    return {
+      // model: {
+      //   email: '',
+      //   password: ''
+      // }
+      email: "",
+      password: ""
+    };
+  },
+  mounted() {
+    // eslint-disable-next-line no-undef
+    posting();
+  },
+  methods: {
+    posting: function() {
+      var body = {
+        email: "body.email",
+        password: "body.password"
+      };
+
+      axios({
+        method: "post",
+        url: "http://localhost:8081/login",
+        data: body
+      })
+        .then(function(response) {
+          // eslint-disable-next-line no-console
+          console.log(response);
+        })
+        .catch(function(error) {
+          // eslint-disable-next-line no-console
+          console.log(error);
+        });
+    }
+  }
+
+  // async posting() {
+  //   try {
+  //     const res = await axios.post(`http://localhost:8081/login`, {
+  //       email: document.getElementById("email"),
+  //       password: document.getElementById("password")
+  //     });
+
+  //     this.email = res.data;
+  //   } catch (e) {
+  //     // eslint-disable-next-line no-console
+  //     console.error(e);
+  //   }
+  // }
+};
+>>>>>>> c550eb11e0b63e6d06b34cb5c5b49ba5e724f3b2
 </script>
 <style>
 #signin{
