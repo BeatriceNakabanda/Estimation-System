@@ -65,11 +65,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Skalla server");
 });
 app.use("/api", projectsRouter);
-<<<<<<< HEAD
 // app.use("/api", userRouter);
-=======
-// app.use("/api", developersRouter);
->>>>>>> 927135ede14b9e293a0d68f835fe85a87e3d1626
 app.use("/api", estimateRequestRouter);
 // app.use("/api", userRouter);
 

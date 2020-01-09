@@ -38,32 +38,29 @@
                 type="primary"
                 class="shadow-none mt-3 mb-2 px-5 mx-7"
                 id="signin"
-                @click="login"
+                @click="signIn"
                 >Sign in</base-button
               >
             </div>
-
-                        <div class="text-center mt-2">
-                          <small>
-                          <span v-if="error && submitting" class="text-danger error-message text-muted">
-                              Please fill in required email and password fields 
-                          </span>
-                          <span v-else-if="error && submitting" class="text-danger error-message text-muted">
-                              Please fill in a valid email
-                          </span>
-                          <span v-else-if ="error && submitting" class="text-danger error-message text-muted">
-                              Please fill in a valid password
-                          </span>
-                        </small>
-                        </div>
-                    </form>
+            
+              <div class="text-center mt-2">
+                <small>
+                <span v-if="error && submitting" class="text-danger error-message text-muted">
+                    Please fill in required email and password fields 
+                </span>
+                <span v-else-if="error && submitting" class="text-danger error-message text-muted">
+                    Please fill in a valid email
+                </span>
+                <span v-else-if ="error && submitting" class="text-danger error-message text-muted">
+                    Please fill in a valid password
+                </span>
+              </small>
+              </div>
+            </form>
                 </div>
             </div>
-          </form>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 <script>
   import router from "../router"
@@ -81,14 +78,6 @@
           email: '',
           password: ''
         }
-        axios.post(`http://localhost:3000/login`, data)
-        .then((response) => {
-          console.log("logged in")
-          router.push("/estimates")
-        })
-        .catch((errors) => {
-          console.log("Cannot login")
-        })
       }
     },
     //automatically computed properties(functions) to validate form inputs 
@@ -140,7 +129,6 @@
             }
     }
   }
-};
 </script>
 <style>
 #signin {
