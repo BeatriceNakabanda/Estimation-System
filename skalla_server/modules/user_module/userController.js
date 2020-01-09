@@ -1,91 +1,6 @@
+const User = require("./user_model");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const User = require("../user_module/user_model");
-
-class userController {
-  constructor() {}
-  //function for geting all users
-  async getAllUsers(req, res) {
-    return await User.find()
-      .then(response => {
-        res.send(response);
-      })
-      .catch(error => {
-        res.send({
-          status: error.message
-        });
-      });
-  }
-
-  //function for login user
-  async loginUser(req, res) {
-    const userData = req.body;
-    User.findOne(
-      { email: userData.email, password: userData.password },
-      async (error, user) => {
-        // In case of error with Mongo
-        if (error) {
-          console.log(error);
-          res.status(500).send({
-            status: "Error retrieving details from the database"
-          });
-          // No errror occured
-        } else {
-          // No user found with that email
-          if (!user) {
-            res.status(401).send({ status: "Invalid Email or Password" });
-
-            // User found but the passwords do not match
-          } else {
-            // For successfull login
-            const payload = {
-              subject: user.id,
-              role: user.role,
-              name: user.email
-            };
-            const token = jwt.sign(payload, "secretKey");
-            res.status(200).send({
-              token,
-              email: user.email,
-              username: user.username,
-              role: user.role,
-              status: "successful login"
-            });
-          }
-        }
-      }
-    );
-  }
-  //checking for the token match
-  CheckToken(req, res, next) {
-    if (!req.headers.authorization) {
-      return res.status(401).send({
-        status: "Unauthorized request"
-      });
-    }
-    const token = req.headers.authorization.split(" ")[1];
-    if (token == null) {
-      return res.status(401).send({
-        status: "Unauthorized request"
-      });
-    }
-
-    try {
-      const payload = jwt.verify(token, "secretKey");
-      // Add user Id as a property
-      req.body.userId = payload.subject;
-      req.body.userRole = payload.role;
-    } catch (error) {
-      return res.status(401).send({
-        status: "The provided token is incorrect"
-      });
-    }
-
-    next();
-  }
-}
-
-module.exports = new userController();
+mongoose.set("useFindAndModify", false);
 
 exports.singleUser = function(req, res) {
   User.findById({ _id: req.params.userId }, function(next, user) {
@@ -93,6 +8,18 @@ exports.singleUser = function(req, res) {
       res.send(next);
     } else {
       res.json(user);
+    }
+  });
+};
+// .populate('project', 'name')
+//   .populate('developer', 'name')
+exports.getUsers = function(req, res, next) {
+  User.find({})
+  .exec(function(err, users) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(users);
     }
   });
 };
