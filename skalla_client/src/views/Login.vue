@@ -9,16 +9,18 @@
           </div>
         </div>
         <div class="card-body px-lg-5 py-lg-3">
-          <form method="POST" role="form" class="mb-1" @submit.prevent="signIn">
+          <form method="POST" role="form" class="mb-1" @submit.prevent="login">
             <base-input
               class="input-group-alternative mb-3"
               placeholder="Email"
               addon-left-icon="ni ni-circle-08"
-              v-model="model.email"
+              
               name="email"
               :class="{ 'has-error': submitting && invalidEmail }"
-              @keypress="clearForm"
+              
             >
+            <!-- @keypress="clearForm" -->
+            <!-- v-model="model.email" -->
             </base-input>
 
             <base-input
@@ -26,11 +28,13 @@
               placeholder="Password"
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
-              v-model="model.password"
+              
               :class="{ 'has-error': submitting && invalidPassword }"
-              @keypress="clearForm"
+             
               name="password"
             >
+             <!-- @keypress="clearForm" -->
+            <!-- v-model="model.password" -->
             </base-input>
 
             <base-checkbox class="custom-control-alternative text-left">
@@ -42,7 +46,7 @@
                 type="primary"
                 class="shadow-none mt-3 mb-2 px-5 mx-7"
                 id="signin"
-                @click="signIn"
+                @click="login"
                 >Sign in</base-button
               >
             </div>
@@ -74,41 +78,52 @@ export default {
       error: false,
       submitting: false,
       success: false,
-      model: {
-        email: "",
-        password: ""
-      }
+      // model: {
+      //   email: "",
+      //   password: ""
+      // }
     };
   },
   //automatically computed properties(functions) to validate form inputs
-  computed: {
-    invalidEmail() {
-      return this.model.email === "";
-    },
-    invalidPassword() {
-      return this.model.password === "";
-    }
-  },
+  // computed: {
+  //   invalidEmail() {
+  //     return this.model.email === "";
+  //   },
+  //   invalidPassword() {
+  //     return this.model.password === "";
+  //   }
+  // },
   methods: {
-    async signIn() {
-      this.clearForm();
-      this.submitting = true;
-
+    // async signIn() {
+      login:() =>{
+      // validating empty inputs
+      // if (this.invalidEmail || this.invalidPassword) {
+      //   this.error = true;
+      //   return;
+      // }
+      // this.clearForm();
+      // this.submitting = true;
+      
       let email = "user@gmail.com"
       let password ="password"
       let login = () => {
+      
         let data = {
           email: email,
           password: password
         }
-        axios.post("/login")
+        axios.post(`http://localhost:3000/login`, data)
+        .then((response) => {
+          console.log("logged in")
+          router.push("/estimates")
+        })
+        .catch((errors) => {
+          console.log("Cannot login")
+        })
       }
+      login()
 
-      // validating empty inputs
-      if (this.invalidEmail || this.invalidPassword) {
-        this.error = true;
-        return;
-      }
+
 
 
       // let newSignIn = {
@@ -128,7 +143,8 @@ export default {
       this.success = true;
       this.error = false;
       this.submitting = false;
-    },
+      },
+    // },
     clearForm() {
       this.success = false;
       this.error = false;
