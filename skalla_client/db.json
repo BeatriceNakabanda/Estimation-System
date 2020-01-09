@@ -1,0 +1,131 @@
+{
+  "estimates": [
+    {
+      "id": 1,
+      "title": "Dashboard",
+      "project": "Refactory",
+      "developer": "Benjamin",
+      "status": "Estimated",
+      "statusType": "success",
+      "dueDate": "",
+      "taskDescription": ""
+    },
+    {
+      "title": "Footer",
+      "project": "Kanzu Code",
+      "developer": "Beatrice",
+      "status": "",
+      "dueDate": "",
+      "taskDescription": "",
+      "id": 2
+    },
+    {
+      "title": "Navbar",
+      "project": "Refactory",
+      "developer": "Ronnie",
+      "status": "",
+      "dueDate": "17",
+      "taskDescription": "SImple",
+      "id": 3
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Xente"
+    },
+    {
+      "id": 2,
+      "name": "Refactory"
+    },
+    {
+      "id": 3,
+      "name": "Imuka Access"
+    },
+    {
+      "id": 4,
+      "name": "Kanzu Code"
+    },
+    {
+      "name": "Login",
+      "id": 5
+    },
+    {
+      "name": "Footer",
+      "id": 6
+    }
+  ],
+  "developers": [
+    {
+      "id": 1,
+      "name": "Benjamin"
+    },
+    {
+      "id": 2,
+      "name": "Ronnie"
+    },
+    {
+      "id": 3,
+      "name": "Beatrice"
+    },
+    {
+      "id": 4,
+      "name": "Sunday"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Kimbugwe Ronnie",
+      "password": "developer3",
+      "email": "ronnie@gmail.com",
+      "role": "developer"
+    },
+    {
+      "id": 2,
+      "name": "Cindy Wabunoha",
+      "password": "projectManager",
+      "email": "cindy@gmail.com",
+      "role": "project manager"
+    },
+    {
+      "email": "ronnie@gmail.com",
+      "password": "developer3",
+      "id": 3
+    }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "email": "user@gmail.com",
+      "password": "password",
+      "role": "project manager"
+    },
+    {
+      "id": 2,
+      "email": "user2@gmail.com",
+      "password": "password",
+      "role": "developer"
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "password",
+      "id": 3
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "password",
+      "id": 4
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "password",
+      "id": 5
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "password",
+      "id": 6
+    }
+  ]
+}

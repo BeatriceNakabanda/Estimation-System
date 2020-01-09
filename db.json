@@ -1,76 +1,19 @@
 {
-  "estimates": [
+  "posts": [
     {
       "id": 1,
-      "title": "Dashboard",
-      "project": "Refactory",
-      "developer": "Benjamin",
-      "status": "Estimated",
-      "statusType": "success",
-      "dueDate": "",
-      "taskDescription": ""
-    },
-    {
-      "title": "Footer",
-      "project": "Kanzu Code",
-      "developer": "Beatrice",
-      "status": "",
-      "dueDate": "",
-      "taskDescription": "",
-      "id": 2
-    },
-    {
-      "title": "Navbar",
-      "project": "Refactory",
-      "developer": "Ronnie",
-      "status": "",
-      "dueDate": "17",
-      "taskDescription": "SImple",
-      "id": 3
+      "title": "json-server",
+      "author": "typicode"
     }
   ],
-  "projects": [
+  "comments": [
     {
       "id": 1,
-      "name": "Xente"
-    },
-    {
-      "id": 2,
-      "name": "Refactory"
-    },
-    {
-      "id": 3,
-      "name": "Imuka Access"
-    },
-    {
-      "id": 4,
-      "name": "Kanzu Code"
-    },
-    {
-      "name": "Login",
-      "id": 5
-    },
-    {
-      "name": "Footer",
-      "id": 6
+      "body": "some comment",
+      "postId": 1
     }
   ],
-  "developers": [
-    {
-      "id": 1,
-      "name": "Benjamin"
-    },
-    {
-      "id": 2,
-      "name": "Ronnie"
-    },
-    {
-      "id": 3,
-      "name": "Beatrice"
-    },
-    {
-      "id": 4,
-      "name": "Sunday"
-    }
-  ]
+  "profile": {
+    "name": "typicode"
+  }
 }
