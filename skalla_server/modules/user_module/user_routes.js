@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("./userController");
-router.post("/userlogin", (req, res) => userController.loginUser(req, res));
+const UserController = require("./userController");
+const loginController = require("./loginController");
+router.post("/userlogin", (req, res) => loginController.loginUser(req, res));
 
-router.get("/users", (req, res) => userController.getAllUsers(req, res));
-router.get("/user/:id", (req, res) => userController.getUser(req, res));
+//router.get("/users", (req, res) => userController.getAllUsers(req, res));
+router.get("/users", UserController.getUsers);
+router.get("/user/:userId", UserController.singleUser);
 
 module.exports = router;
