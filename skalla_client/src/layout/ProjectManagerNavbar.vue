@@ -14,10 +14,10 @@
             </span> 
            
             <div class="user ml-2" >
-              <p class="text-md font-weight-bold" id="user-name">David Pereira
+              <p class="text-md font-weight-bold" id="user-name">{{ user.name }}
               </p>
               <p class="text-sm">
-                Project Manager
+                {{ user.role }}
               </p>
             </div>
           </div>
@@ -25,12 +25,18 @@
     </base-nav>
 </template>
 <script>
+  import axios from "axios"
+  import router from "../router"
   export default {
     data() {
       return {
         activeNotifications: false,
         showMenu: false,
-        searchQuery: ''
+        searchQuery: '',
+        user: {
+            name: 'David Pereira',
+            role: 'Project Manager'
+        }
       };
     },
     methods: {
@@ -42,7 +48,22 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
+      },
+      getUserData: function(){
+        let self = this
+          axios.get("http://localhost:3000/login")
+                .then((response) => {
+                  console.log(response)
+                  self.$set(this, "user", response.data.user)
+                })
+                .catch((errors) => {
+                  console.log(errors)
+                  router.push("/")
+                })
       }
+    },
+    mounted(){
+      this.getUserData()
     }
   };
 </script>
