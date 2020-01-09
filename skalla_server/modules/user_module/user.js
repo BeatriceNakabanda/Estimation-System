@@ -1,9 +1,13 @@
-const User = require("../user_module/user_model.js");
+const User = require("./user_model");
+const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 
-class userQuery {
-  constructor() {}
-  async getUserById(userId) {
-    return await User.findOne({ _id: userId });
-  }
-}
-module.exports = new userQuery();
+exports.singleUser = function(req, res) {
+  User.findById({ _id: req.params.userId }, function(next, user) {
+    if (next) {
+      res.send(next);
+    } else {
+      res.json(user);
+    }
+  });
+};
