@@ -1,8 +1,42 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const User = require("../user_module/user_model");
+const userQuery = require("./user");
 class loginController {
   constructor() {}
-  async login(req, res) {
+  //function for geting all users
+  async getAllUsers(req, res) {
+    return await User.find()
+      .then(response => {
+        res.send(response);
+      })
+      .catch(error => {
+        res.send({
+          status: error.message
+        });
+      });
+  }
+
+  getUser(req, res, id) {
+    User.findById(
+      id,
+
+      async (error, user) => {
+        if (error) {
+          console.log(error);
+          res.status(401).send({
+            status: "Error retrieving details from the database"
+          });
+          // No errror occured
+        } else {
+          res.status(200).send({ user });
+        }
+      }
+    );
+  }
+
+  //function for login user
+  async loginUser(req, res) {
     const userData = req.body;
     User.findOne(
       { email: userData.email, password: userData.password },
@@ -25,7 +59,7 @@ class loginController {
             const payload = {
               subject: user.id,
               role: user.role,
-              name: user.name
+              name: user.email
             };
             const token = jwt.sign(payload, "secretKey");
             res.status(200).send({
@@ -40,7 +74,8 @@ class loginController {
       }
     );
   }
-  verifyToken(req, res, next) {
+  //checking for the token match
+  CheckToken(req, res, next) {
     if (!req.headers.authorization) {
       return res.status(401).send({
         status: "Unauthorized request"
@@ -63,6 +98,7 @@ class loginController {
         status: "The provided token is incorrect"
       });
     }
+
     next();
   }
 }
