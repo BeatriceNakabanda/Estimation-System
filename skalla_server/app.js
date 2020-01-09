@@ -9,7 +9,6 @@ const cookieSession = require('cookie-session')
 
 //requiring app files
 const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
-const developersRouter = require("../skalla_server/modules/developer_module/developer_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
 
 
@@ -66,7 +65,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Skalla server");
 });
 app.use("/api", projectsRouter);
-app.use("/api", developersRouter);
+// app.use("/api", userRouter);
 app.use("/api", estimateRequestRouter);
 
 //user log in

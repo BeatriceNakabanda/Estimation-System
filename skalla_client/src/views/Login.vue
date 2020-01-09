@@ -12,7 +12,8 @@
                                     addon-left-icon="ni ni-circle-08"
                                     v-model="model.email"
                                     :class="{ 'has-error': submitting && invalidEmail }" 
-                                    @keypress="clearForm"
+                                    
+                                    
                                     >
                         </base-input>
 
@@ -22,7 +23,8 @@
                                     addon-left-icon="ni ni-lock-circle-open"
                                     v-model="model.password"
                                     :class="{ 'has-error': submitting && invalidPassword } "
-                                    @keypress="clearForm"
+                                    
+                                    
                                     >
                         </base-input>
 
@@ -36,8 +38,14 @@
 
                         <div class="text-center mt-2">
                           <small>
-                          <span v-if="error && submitting" class="text-danger error-message text-muted ">
-                              Please fill in email and password fields
+                          <span v-if="error && submitting" class="text-danger error-message text-muted">
+                              Please fill in required email and password fields 
+                          </span>
+                          <span v-else-if="error && submitting" class="text-danger error-message text-muted">
+                              Please fill in a valid email
+                          </span>
+                          <span v-else-if ="error && submitting" class="text-danger error-message text-muted">
+                              Please fill in a valid password
                           </span>
                         </small>
                         </div>
@@ -50,7 +58,7 @@
 <script>
   import router from "../router"
   import axios from "axios";
-
+  
 
   export default {
     name: 'Login',
@@ -72,21 +80,25 @@
         },
       invalidPassword(){
             return this.model.password === ''
-        }
+        },
+      emailIsvalid(){
+            return this.model.email === /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            // return re.test();
+      },
+      passwordIsValid(){
+            return this.model.password > 1 && this.model.password < 8
+      }
     },
     methods: {
       async signIn(){
             this.clearForm()
             this.submitting = true
-
-
-            // validating empty inputs
-            if(this.invalidEmail || this.invalidPassword )
+            // validating inputs
+            if(this.invalidEmail || this.invalidPassword || emailIsvalid || passwordIsValid )
             {
                 this.error = true
                 return
             }
-
     let newSignIn = {
             email: this.model.email,
             password: this.model.password
@@ -105,8 +117,8 @@
             this.submitting = false
     }, 
     clearForm(){
-                this.success = false
-                this.error = false
+            this.success = false
+            this.error = false
             }
     }
   }  
