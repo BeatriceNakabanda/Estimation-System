@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = require("../user_module/user_model");
-const userQuery = require("./user");
-class loginController {
+
+class userController {
   constructor() {}
   //function for geting all users
   async getAllUsers(req, res) {
@@ -15,24 +15,6 @@ class loginController {
           status: error.message
         });
       });
-  }
-
-  getUser(req, res, id) {
-    User.findById(
-      id,
-
-      async (error, user) => {
-        if (error) {
-          console.log(error);
-          res.status(401).send({
-            status: "Error retrieving details from the database"
-          });
-          // No errror occured
-        } else {
-          res.status(200).send({ user });
-        }
-      }
-    );
   }
 
   //function for login user
@@ -103,4 +85,14 @@ class loginController {
   }
 }
 
-module.exports = new loginController();
+module.exports = new userController();
+
+exports.singleUser = function(req, res) {
+  User.findById({ _id: req.params.userId }, function(next, user) {
+    if (next) {
+      res.send(next);
+    } else {
+      res.json(user);
+    }
+  });
+};
