@@ -179,7 +179,7 @@ export default {
             taskDescription: this.estimate.taskDescription
         }
         console.log(edtitedEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/`+ this.$route.params.estimateid, edtitedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/5de652b133653b1fc2ec2ee3`, edtitedEstimate)
             .then((response) =>{
                 console.log(response);
             })

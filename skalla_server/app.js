@@ -10,7 +10,6 @@ const session = require("express-session");
 
 //requiring app files
 const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
-const userRouter = require("../skalla_server/modules/user_module/user_routes");
 const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
 
 //declaring server port
@@ -39,13 +38,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Express session
-app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true
-  })
-);
+// app.use(
+//   session({
+//     secret: "secret",
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
 
 //database connection
 const mongourl =
@@ -66,9 +65,9 @@ app.get("/", (req, res) => {
   res.send("Welcome to Skalla server");
 });
 app.use("/api", projectsRouter);
-
+// app.use("/api", developersRouter);
 app.use("/api", estimateRequestRouter);
-app.use("/api", userRouter);
+// app.use("/api", userRouter);
 
 //user log in
 app.post("/api/login", (req, res, next) => {
