@@ -126,6 +126,11 @@
       "email": "user@gmail.com",
       "password": "password",
       "id": 6
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "password",
+      "id": 7
     }
   ]
 }
