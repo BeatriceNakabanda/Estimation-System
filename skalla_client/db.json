@@ -72,5 +72,22 @@
       "id": 4,
       "name": "Sunday"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Kimbugwe Ronnie",
+      "password": "developer3",
+      "email": "ronnie@gmail.com",
+      "role": "developer"
+    },
+    {
+      "id": 2,
+      "name": "Cindy Wabunoha",
+      "password": "projectManager",
+      "email": "cindy@gmail.com",
+      "role": "project manager"
+    }
+
   ]
 }
