@@ -30,7 +30,7 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                       :class="{ 'has-error': submitting && invalidDeveloper } " 
+                       :class="{ 'has-error': submitting && invalidDeveloper }" 
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
                             <option value="" disabled>Please select a developer</option>
