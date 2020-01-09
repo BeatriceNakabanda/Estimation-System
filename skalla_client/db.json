@@ -87,7 +87,11 @@
       "password": "projectManager",
       "email": "cindy@gmail.com",
       "role": "project manager"
+    },
+    {
+      "email": "ronnie@gmail.com",
+      "password": "developer3",
+      "id": 3
     }
-
   ]
 }

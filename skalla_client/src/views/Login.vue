@@ -15,6 +15,7 @@
               placeholder="Email"
               addon-left-icon="ni ni-circle-08"
               v-model="model.email"
+              name="email"
               :class="{ 'has-error': submitting && invalidEmail }"
               @keypress="clearForm"
             >
@@ -28,6 +29,7 @@
               v-model="model.password"
               :class="{ 'has-error': submitting && invalidPassword }"
               @keypress="clearForm"
+              name="password"
             >
             </base-input>
 
@@ -92,25 +94,36 @@ export default {
       this.clearForm();
       this.submitting = true;
 
+      let email = "user@gmail.com"
+      let password ="password"
+      let login = () => {
+        let data = {
+          email: email,
+          password: password
+        }
+        axios.post("/login")
+      }
+
       // validating empty inputs
       if (this.invalidEmail || this.invalidPassword) {
         this.error = true;
         return;
       }
 
-      let newSignIn = {
-        email: this.model.email,
-        password: this.model.password
-      };
-      console.log(newSignIn);
-      axios
-        .post("http://localhost:8081/api/login", newSignIn)
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+
+      // let newSignIn = {
+      //   email: this.model.email,
+      //   password: this.model.password
+      // };
+      // console.log(newSignIn);
+      //  axios
+      //    .post("http://localhost:3000/users/", newSignIn)
+      //    .then(response => {
+      //      console.log(response);
+      //    })
+      //    .catch(error => {
+      //     console.log(error);
+      //   });
 
       this.success = true;
       this.error = false;
