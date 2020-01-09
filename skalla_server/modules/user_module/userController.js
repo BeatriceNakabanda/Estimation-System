@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = require("../user_module/user_model");
+const userQuery = require("./user");
 class loginController {
   constructor() {}
   //function for geting all users
@@ -14,6 +15,24 @@ class loginController {
           status: error.message
         });
       });
+  }
+
+  getUser(req, res, id) {
+    User.findById(
+      id,
+
+      async (error, user) => {
+        if (error) {
+          console.log(error);
+          res.status(401).send({
+            status: "Error retrieving details from the database"
+          });
+          // No errror occured
+        } else {
+          res.status(200).send({ user });
+        }
+      }
+    );
   }
 
   //function for login user
