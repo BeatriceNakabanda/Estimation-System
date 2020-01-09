@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy; //local authentication type
-const cookieSession = require("cookie-session");
 const session = require("express-session");
 
 //requiring app files
@@ -27,24 +26,18 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(
-  cookieSession({
-    name: "mysession",
-    keys: ["vueauthrandomkey"],
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  })
-);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Express session
-// app.use(
-//   session({
-//     secret: "secret",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
+/* Express session
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+  })
+); */
 
 //database connection
 const mongourl =

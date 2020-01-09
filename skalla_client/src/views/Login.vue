@@ -65,7 +65,6 @@
 <script>
   import router from "../router"
   import axios from "axios";
-  
 
   export default {
     name: 'Login',
@@ -83,25 +82,19 @@
     //automatically computed properties(functions) to validate form inputs 
     computed: {
       invalidEmail(){
+            
             return this.model.email === ''
         },
       invalidPassword(){
             return this.model.password === ''
-        },
-      emailIsvalid(){
-            return this.model.email === /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            // return re.test();
-      },
-      passwordIsValid(){
-            return this.model.password > 1 && this.model.password < 8
-      }
+        }
     },
     methods: {
       async signIn(){
             this.clearForm()
             this.submitting = true
             // validating inputs
-            if(this.invalidEmail || this.invalidPassword || emailIsvalid || passwordIsValid )
+            if(this.invalidEmail || this.invalidPassword)
             {
                 this.error = true
                 return
@@ -124,9 +117,9 @@
             this.submitting = false
     }, 
     clearForm(){
-            this.success = false
-            this.error = false
-            }
+      this.success = false
+      this.error = false
+    }
     }
   }
 </script>
