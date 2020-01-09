@@ -14,7 +14,7 @@ if (!userArgs[0].startsWith('mongodb://')) {
 
 //requiring all models
 const async = require('async')
-const Developer = require('./modules/developer_module/developer_model')
+// const Developer = require('./modules/developer_module/developer_model')
 const ProjectManager = require('./modules/projectManager_module/projectManager_model')
 const EstimateRequest = require('./modules/estimateRequest_module/estimateRequest_model')
 const Estimate = require('./modules/estimate_module/estimate_model')

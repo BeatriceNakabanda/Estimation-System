@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 <template>
         <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
@@ -28,13 +29,19 @@
                                     >
                         </base-input>
 
-                        <base-checkbox class="custom-control-alternative text-left" >
-                            <span class="text-muted">Remember me</span>
-                        </base-checkbox>
+            <base-checkbox class="custom-control-alternative text-left">
+              <span class="text-muted">Remember me</span>
+            </base-checkbox>
 
-                        <div class="text-center">
-                            <base-button type="primary"  class="shadow-none mt-3 mb-2 px-5 mx-7" id="signin" @click="signIn">Sign in</base-button>                        
-                        </div>
+            <div class="text-center">
+              <base-button
+                type="primary"
+                class="shadow-none mt-3 mb-2 px-5 mx-7"
+                id="signin"
+                @click="login"
+                >Sign in</base-button
+              >
+            </div>
 
                         <div class="text-center mt-2">
                           <small>
@@ -52,8 +59,11 @@
                     </form>
                 </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
   import router from "../router"
@@ -71,6 +81,14 @@
           email: '',
           password: ''
         }
+        axios.post(`http://localhost:3000/login`, data)
+        .then((response) => {
+          console.log("logged in")
+          router.push("/estimates")
+        })
+        .catch((errors) => {
+          console.log("Cannot login")
+        })
       }
     },
     //automatically computed properties(functions) to validate form inputs 
@@ -121,15 +139,16 @@
             this.error = false
             }
     }
-  }  
+  }
+};
 </script>
 <style>
-#signin{
+#signin {
   /* margin-left: -15px; */
   padding: 4px 16px;
 }
 
 .text-danger {
-    color: #dc3545!important;
+  color: #dc3545 !important;
 }
 </style>

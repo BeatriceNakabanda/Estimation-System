@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const User = require("../developers_module/developers_model");
+const User = require("./user_model");
+
 class loginController {
   constructor() {}
-  async login(req, res) {
+
+  //function for login user
+  async loginUser(req, res) {
     const userData = req.body;
     User.findOne(
       { email: userData.email, password: userData.password },
@@ -26,7 +29,7 @@ class loginController {
             const payload = {
               subject: user.id,
               role: user.role,
-              name: user.name
+              name: user.email
             };
             const token = jwt.sign(payload, "secretKey");
             res.status(200).send({
@@ -41,7 +44,8 @@ class loginController {
       }
     );
   }
-  verifyToken(req, res, next) {
+  //checking for the token match
+  CheckToken(req, res, next) {
     if (!req.headers.authorization) {
       return res.status(401).send({
         status: "Unauthorized request"
@@ -64,6 +68,7 @@ class loginController {
         status: "The provided token is incorrect"
       });
     }
+
     next();
   }
 }
