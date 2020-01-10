@@ -5,12 +5,12 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy; //local authentication type
-const cookieSession = require("cookie-session");
 const session = require("express-session");
 
 //requiring app files
-const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
-const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
+const projectsRouter = require('../skalla_server/modules/project_module/project_routes');
+const estimateRequestRouter = require('../skalla_server/modules/estimateRequest_module/estimateRequest_routes');
+const usersRouter = require('../skalla_server/modules/user_module/user_routes');
 
 //declaring server port
 const port = process.env.PORT || 8081;
@@ -27,24 +27,10 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(
-  cookieSession({
-    name: "mysession",
-    keys: ["vueauthrandomkey"],
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  })
-);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Express session
-// app.use(
-//   session({
-//     secret: "secret",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
 
 //database connection
 const mongourl =
@@ -65,9 +51,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to Skalla server");
 });
 app.use("/api", projectsRouter);
-// app.use("/api", userRouter);
+app.use("/api", usersRouter);
 app.use("/api", estimateRequestRouter);
-// app.use("/api", userRouter);
 
 //user log in
 app.post("/api/login", (req, res, next) => {

@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 //Defining EstimateRequestSchema
 const EstimateRequestSchema = new Schema({
   project: {type: Schema.ObjectId, ref: 'Project', required: true},
-  developer: {type: Schema.ObjectId, ref: 'Developer', required: true},
+  developer: {type: Schema.ObjectId, ref: 'User'},
   title: { type: String, required: true },
-  projectManager: {type: Schema.ObjectId, ref: 'ProjectManager', required: true},
+  projectManager: {type: Schema.ObjectId, ref: 'User'},
   dueDate: { type: Date, required: true },
   taskDescription: { type: String, required: true },
   status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated']},

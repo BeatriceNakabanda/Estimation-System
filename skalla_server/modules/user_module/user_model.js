@@ -2,8 +2,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//project manager schema and model
-const UserSchema = new Schema({
+//main users schema
+const usersSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -18,12 +18,31 @@ const UserSchema = new Schema({
     },
     role: {
         type: String, 
-        required: true,
-        enum: ['Project Manager', 'Developer']
-    },
-}, {
+        Developer: {type: Schema.ObjectId, ref: 'Developer'},
+        ProjectManager: {type: Schema.ObjectId, ref: 'Project Manager'}
+    }
+},
+{
     timestamps: true
 });
 
+//developers schema specific for developer role
+const developerSchema = new Schema({ 
+    role: {
+        type: String
+    }
+});
 
-module.exports = mongoose.model("User",  UserSchema);
+//projectManagersSchema specific for projectManager role
+const projectManagerSchema = new Schema({
+    role: {
+        type: String
+    }
+});
+
+//users model, developers model, projectManagers model
+const User = mongoose.model('User', usersSchema, 'users');
+User.ProjectManager = mongoose.model('Project Manager', projectManagerSchema, 'users');
+User.Developer = mongoose.model('Developer', developerSchema, 'users');
+
+module.exports = User

@@ -20,7 +20,7 @@ const lineItemSchema = new Schema({
 const estimateSchema = new Schema ({
     dateCreated: {type: Date, default: Date.now},
     submittedDate: {type: Date},
-    developer: {type: Schema.ObjectId, ref: 'Developer', required: true},
+    developer: {type: Schema.ObjectId, ref: 'User', required: true},
     totalSum: mongoose.Types.Decimal128,
     lineItem: [lineItemSchema]
 })

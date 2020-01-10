@@ -40,20 +40,6 @@
                 >Sign in</base-button
               >
             </div>
-            
-              <!-- <div class="text-center mt-2">
-                <small>
-                <span v-if="error && submitting" class="text-danger error-message text-muted">
-                    Please fill in required email and password fields 
-                </span>
-                <span v-else-if="error && submitting" class="text-danger error-message text-muted">
-                    Please fill in a valid email
-                </span>
-                <span v-else-if ="error && submitting" class="text-danger error-message text-muted">
-                    Please fill in a valid password
-                </span>
-              </small>
-              </div> -->
             </form>
                 </div>
             </div>
@@ -101,22 +87,6 @@
         message: null
       }
     },
-    //automatically computed properties(functions) to validate form inputs 
-    // computed: {
-    //   invalidEmail(){
-    //         return this.model.email === ''
-    //     },
-    //   invalidPassword(){
-    //         return this.model.password === ''
-    //     },
-    //   // emailIsvalid(){
-    //   //       return this.model.email ===   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //   //       // return re.test();
-    //   // },
-    //   passwordIsValid(){
-    //         return this.model.password > 1 && this.model.password < 8
-    //   }
-    // },
     methods: {
       
       async signIn(){
@@ -137,16 +107,6 @@
             if (this.valid) {
               alert('HURRAAYYY!! :-)\n\n' + JSON.stringify(this.user))
             }
-            // this.submitting = true
-            // validating inputs
-            
-            // if(this.invalidEmail || this.invalidPassword || this.emailIsvalid || this.passwordIsValid )
-            // {
-            //     this.error = true
-            //     return
-            // }
-            
-            
     let newSignIn = {
             email: this.model.email,
             password: this.model.password
@@ -159,15 +119,11 @@
             .catch((error) => {
                 console.log(error);
             });
-            
-            // this.success = true
-            // this.error = false
-            // this.submitting = false
     }, 
     clearForm(){
-            this.success = false
-            this.error = false
-            }
+      this.success = false
+      this.error = false
+    }
     }
 }  
 </script>
