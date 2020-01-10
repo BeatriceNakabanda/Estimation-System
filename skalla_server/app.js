@@ -8,8 +8,9 @@ const LocalStrategy = require("passport-local").Strategy; //local authentication
 const session = require("express-session");
 
 //requiring app files
-const projectsRouter = require("../skalla_server/modules/project_module/project_routes");
-const estimateRequestRouter = require("../skalla_server/modules/estimateRequest_module/estimateRequest_routes");
+const projectsRouter = require('../skalla_server/modules/project_module/project_routes');
+const estimateRequestRouter = require('../skalla_server/modules/estimateRequest_module/estimateRequest_routes');
+const usersRouter = require('../skalla_server/modules/user_module/user_routes');
 
 //declaring server port
 const port = process.env.PORT || 8081;
@@ -50,9 +51,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to Skalla server");
 });
 app.use("/api", projectsRouter);
-// app.use("/api", userRouter);
+app.use("/api", usersRouter);
 app.use("/api", estimateRequestRouter);
-// app.use("/api", userRouter);
 
 //user log in
 app.post("/api/login", (req, res, next) => {
