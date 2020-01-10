@@ -107,16 +107,20 @@
 
             if (this.valid) {
               console.log(this.user)
-              axios.post('http://localhost:8081/api/user/userlogin', this.user)
+              axios.post('http://localhost:8081/api/login', newSignIn)
             .then((response) =>{
-              
                 console.log(response);
             })
             .catch((error) => {
-              
                 console.log(error);
             });
             }
+    /* let newSignIn = {
+            email: this.model.email,
+            password: this.model.password
+        }
+        console.log(newSignIn) */
+    }, 
     clearForm(){
       this.success = false
       this.error = false
