@@ -112,7 +112,7 @@
             password: this.model.password
         }
         console.log(newSignIn)
-        axios.post('http://localhost:8081/api/login', newSignIn)
+        axios.post('http://localhost:8081/api/signin', newSignIn)
             .then((response) =>{
                 console.log(response);
             })

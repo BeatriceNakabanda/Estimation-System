@@ -4,8 +4,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy; //local authentication type
-const session = require("express-session");
 
 //requiring app files
 const projectsRouter = require('../skalla_server/modules/project_module/project_routes');
@@ -18,19 +16,13 @@ const port = process.env.PORT || 8081;
 //Initializing express app
 const app = express();
 
+require('./modules/auth/auth')
+
 //express app middleware
 app.use(cors());
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-);
-
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
 app.use(passport.initialize());
-app.use(passport.session());
-
 
 //database connection
 const mongourl =
@@ -40,9 +32,9 @@ const mongourl =
 const mongourl_localhost = "mongodb://localhost:27017/skalla_localhost_app";
 
 mongoose
-  .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongourl_localhost, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
-    console.log("Mongodb successfully connected to mongodb database")
+    console.log("Mongodb successfully connected to localhost mongodb database")
   )
   .catch(err => console.log(err));
 
@@ -80,7 +72,7 @@ app.get("/api/logout", function(req, res) {
   return res.send();
 });
 
-//currently logged in user's data
+
 
 //central error handling for errors throughout the express app
 app.use((req, res, next) => {

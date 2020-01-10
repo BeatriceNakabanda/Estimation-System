@@ -19,5 +19,7 @@ router.get("/users/developers", userController.developersList)
 //get a single developer
 router.get("/users/developer/:requestId", userController.singleDeveloperRequest)
 
+//signin user
+router.get("/login", userController.loginUser)
 
 module.exports = router
