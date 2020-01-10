@@ -30,7 +30,7 @@ router.get("/users/developers", userController.developersList)
 router.get("/users/project-manager/:requestId", userController.singleProjectManagerRequest)
 
 //get a single developer
-
+router.get("/users/developer/:requestId", userController.singleDeveloperRequest)
 
 
 module.exports = router
