@@ -5,6 +5,11 @@ console.log('This script populates some users, estimateRequests, estimates and p
 //node command to run script for localhost testing for skalla application
 // node populatedb mongodb://localhost:27017/skalla_localhost_app
 
+//node command to run script for cloud atlas testing for skalla application
+// node populatedb mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority
+
+// add 'mongodb+srv://' => in order to populate cloud atlas mongodb database
+
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
 if (!userArgs[0].startsWith('mongodb://')) {
