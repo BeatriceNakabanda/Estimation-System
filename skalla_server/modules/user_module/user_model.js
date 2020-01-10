@@ -2,32 +2,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-/* const UserSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    role: {
-        type: String, 
-        required: true,
-        enum: ['Project Manager', 'Developer']
-    },
-}, {
-    timestamps: true
-});
-
-
-module.exports = mongoose.model("User",  UserSchema); */
-
 const usersSchema = new Schema({
     name: {
         type: String,
@@ -46,6 +20,9 @@ const usersSchema = new Schema({
         Developer: {type: Schema.ObjectId, ref: 'Developer'},
         ProjectManager: {type: Schema.ObjectId, ref: 'Project Manager'}
     }
+},
+{
+    timestamps: true
 });
 
 const developerSchema = new Schema({ 
