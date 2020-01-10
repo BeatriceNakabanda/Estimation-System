@@ -1,4 +1,4 @@
-const express = require("express");
+/* const express = require("express");
 const router = express.Router();
 const UserController = require("./userController");
 const loginController = require("./loginController");
@@ -9,3 +9,28 @@ router.get("/users", UserController.getUsers);
 router.get("/user/:userId", UserController.singleUser);
 
 module.exports = router;
+ */
+
+//requiring dependecies
+const express = require("express")
+const router = express.Router(); 
+const userController = require('./userController')
+
+//All user routes
+//get all users
+router.get("/users", userController.usersList)
+
+//get all projectManagers
+router.get("/users/project-managers", userController.projectManagersList)
+
+//get all developers
+router.get("/users/developers", userController.developersList)
+
+//get a single projectManager
+router.get("/users/project-manager/:requestId", userController.singleProjectManagerRequest)
+
+//get a single developer
+
+
+
+module.exports = router

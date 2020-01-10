@@ -30,14 +30,6 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* Express session
-app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true
-  })
-); */
 
 //database connection
 const mongourl =
@@ -47,9 +39,9 @@ const mongourl =
 const mongourl_localhost = "mongodb://localhost:27017/skalla_localhost_app";
 
 mongoose
-  .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongourl_localhost, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
-    console.log("Mongodb successfully connected to mongodb database")
+    console.log("Mongodb successfully connected to localhost mongodb database")
   )
   .catch(err => console.log(err));
 
