@@ -6,9 +6,9 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 //requiring app files
-const projectsRouter = require('../skalla_server/modules/project_module/project_routes');
-const estimateRequestRouter = require('../skalla_server/modules/estimateRequest_module/estimateRequest_routes');
-const usersRouter = require('../skalla_server/modules/user_module/user_routes');
+const projectsRouter = require('./modules/project_module/project_routes');
+const estimateRequestRouter = require('./modules/estimateRequest_module/estimateRequest_routes');
+const usersRouter = require('./modules/user_module/user_routes');
 
 //declaring server port
 const port = process.env.PORT || 8081;
