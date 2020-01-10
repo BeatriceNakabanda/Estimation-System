@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+//main users schema
 const usersSchema = new Schema({
     name: {
         type: String,
@@ -25,17 +26,21 @@ const usersSchema = new Schema({
     timestamps: true
 });
 
+//developers schema specific for developer role
 const developerSchema = new Schema({ 
     role: {
         type: String
     }
 });
+
+//projectManagersSchema specific for projectManager role
 const projectManagerSchema = new Schema({
     role: {
         type: String
     }
 });
 
+//users model, developers model, projectManagers model
 const User = mongoose.model('User', usersSchema, 'users');
 User.ProjectManager = mongoose.model('Project Manager', projectManagerSchema, 'users');
 User.Developer = mongoose.model('Developer', developerSchema, 'users');
