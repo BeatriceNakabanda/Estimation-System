@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 
-//requiring app files
+//requiring routes
 const projectsRouter = require('./modules/project_module/project_routes');
 const estimateRequestRouter = require('./modules/estimateRequest_module/estimateRequest_routes');
 const usersRouter = require('./modules/user_module/user_routes');

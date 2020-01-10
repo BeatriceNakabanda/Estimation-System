@@ -74,6 +74,6 @@ class loginController {
 }
 
 module.exports = new loginController();
-
+ 
 
  
