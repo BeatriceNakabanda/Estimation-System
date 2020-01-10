@@ -80,3 +80,14 @@ exports.singleProjectManagerRequest = function(req, res, next){
 }
 
 //get a single developer
+exports.singleDeveloperRequest = function(req, res, next){
+
+  User.findById({_id: req.params.requestId})
+  .exec(function (err, singleDeveloperRequest){
+      if(err){
+          return next(err);
+      }else{
+          res.json(singleDeveloperRequest);
+      }
+  })
+}
