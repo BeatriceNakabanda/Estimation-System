@@ -1,4 +1,4 @@
-/* const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = require("./user_model");
 
@@ -74,6 +74,6 @@ class loginController {
 }
 
 module.exports = new loginController();
- */
+ 
 
  
