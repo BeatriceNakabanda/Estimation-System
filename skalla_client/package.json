@@ -10,7 +10,7 @@
     "app": "concurrently \"npm run serve\" \"cd ../skalla_server && npm start\""
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.1",
     "bootstrap": "4.3.1",
     "bootstrap-vue": "2.0.0-rc.15",
     "chart.js": "2.8.0",
@@ -27,7 +27,9 @@
     "vue-cookies": "^1.6.1",
     "vue-flatpickr-component": "8.1.2",
     "vue-router": "3.0.1",
-    "vue2-transitions": "0.3.0"
+    "vue2-transitions": "0.3.0",
+    "vuex": "^3.1.2",
+    "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
