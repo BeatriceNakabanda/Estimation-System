@@ -10,7 +10,7 @@
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="Email"
                                     addon-left-icon="ni ni-circle-08"
-                                    v-model="user.email"
+                                    v-model="credentials.email"
                                     :class="{ }" 
                                     type="email"
                                     >
@@ -21,7 +21,7 @@
                                     placeholder="Password"
                                     type="password"
                                     addon-left-icon="ni ni-lock-circle-open"
-                                    v-model="user.password"
+                                    v-model="credentials.password"
                                     :class="{  } "
                                     >
                         </base-input>
@@ -39,6 +39,7 @@
                 @click="signIn"
                 >Sign in</base-button
               >
+                  <p v-if="msg">{{ msg }}</p>
             </div>
             </form>
                 </div>
@@ -48,7 +49,9 @@
 </template>
 <script>
   import router from "../router"
-  import axios from "axios";
+  // import axios from "axios"
+  import AuthService from "../services/AuthService"
+  import store from "../store"
 
   // Validating email and password
   const validateEmail = email => {
@@ -78,43 +81,61 @@
         // error: false,
         // submitting: false,
         // success: false,
-        user:{
+        credentials:{
           email: '',
           password: ''
         },
         valid: true,
         success: false,
         errors: {},
-        message: null
+        message: null,
+        msg: ''
       }
     },
     methods: {
       
       async signIn(){
+        try{
             this.errors = {}
             this.clearForm()
 
-            const validEmail = validateEmail(this.user.email);
+            const validEmail = validateEmail(this.credentials.email);
             this.errors.email = validEmail.error;
             if (this.valid) {
               this.valid = validEmail.valid
             }
-            const validPassword = validatePassword(this.user.password)
+            const validPassword = validatePassword(this.credentials.password)
             this.errors.password = validPassword.error
             if (this.valid) {
               this.valid = validPassword.valid
             }
 
             if (this.valid) {
-              console.log(this.user)
-              axios.post('http://localhost:8081/api/user/userlogin', this.user)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+              console.log(this.credentials)
+
+              const response = await AuthService.login(this.credentials)
+              this.msg = response.msg
+
+              const token = response.token
+              const user = response.user
+              
+              store.dispatch('login', { token, user })
+              
+
+              router.push('/estimates')
+            } 
+            } catch (error) {
+              this.msg = error
             }
+
+            //   axios.post('http://localhost:8081/api/user/userlogin', this.user)
+            // .then((response) =>{
+            //     console.log(response);
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            // });
+            // }
     /* let newSignIn = {
             email: this.model.email,
             password: this.model.password

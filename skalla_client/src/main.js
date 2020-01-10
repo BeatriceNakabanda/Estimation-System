@@ -19,16 +19,21 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "./registerServiceWorker";
+import store from "./store";
 import Axios from "axios";
 import ArgonDashboard from "./plugins/argon-dashboard";
 
 Vue.config.productionTip = false;
-Vue.prototype.$http = Axios;
-const accessToken = localStorage.getItem("access_token");
 
-if (accessToken) {
-  Vue.prototype.$http.defaults.headers.common["Authorization"] = accessToken;
-}
+//set auth header
+Axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+
+// Vue.prototype.$http = Axios;
+// const accessToken = localStorage.getItem("access_token");
+
+// if (accessToken) {
+//   Vue.prototype.$http.defaults.headers.common["Authorization"] = accessToken;
+// }
 
 Vue.use(ArgonDashboard);
 new Vue({
