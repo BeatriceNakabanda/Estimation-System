@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router(); 
 const userController = require('./userController')
 
-//All user routes
+//All users routes
 //get all users
 router.get("/users", userController.usersList)
 
