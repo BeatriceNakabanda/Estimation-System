@@ -107,20 +107,16 @@
 
             if (this.valid) {
               console.log(this.user)
+              axios.post('http://localhost:8081/api/user/userlogin', this.user)
+            .then((response) =>{
+              
+                console.log(response);
+            })
+            .catch((error) => {
+              
+                console.log(error);
+            });
             }
-    // let newSignIn = {
-    //         email: this.model.email,
-    //         password: this.model.password
-    //     }
-        // console.log(newSignIn)
-        // axios.post('http://localhost:8081/api/login', newSignIn)
-        //     .then((response) =>{
-        //         console.log(response);
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
-    }, 
     clearForm(){
       this.success = false
       this.error = false
