@@ -49,7 +49,8 @@
 <script>
   import router from "../router"
   import axios from "axios";
-  
+
+  // Validating email and password
   const validateEmail = email => {
     if (!email.length) {
       return { valid: false, error: "Email is required" };
@@ -64,7 +65,7 @@
   if (!password.length) {
     return { valid: false, error: "Password is required" };
   }
-  if (password.length < 8) {
+  if (password.length < 6) {
     return { valid: false, error: "Password is too short" };
   }
   return { valid: true, error: null };
@@ -105,20 +106,20 @@
             }
 
             if (this.valid) {
-              alert('HURRAAYYY!! :-)\n\n' + JSON.stringify(this.user))
+              console.log(this.user)
             }
-    let newSignIn = {
-            email: this.model.email,
-            password: this.model.password
-        }
-        console.log(newSignIn)
-        axios.post('http://localhost:8081/api/signin', newSignIn)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    // let newSignIn = {
+    //         email: this.model.email,
+    //         password: this.model.password
+    //     }
+        // console.log(newSignIn)
+        // axios.post('http://localhost:8081/api/login', newSignIn)
+        //     .then((response) =>{
+        //         console.log(response);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
     }, 
     clearForm(){
       this.success = false
