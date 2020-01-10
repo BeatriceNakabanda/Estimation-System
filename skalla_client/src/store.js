@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
-import AuthService from '@/services/AuthService.js'
+import AuthService from './services/AuthService'
 
 Vue.use(Vuex);
 

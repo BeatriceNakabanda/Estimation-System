@@ -186,7 +186,7 @@ export default {
       async created(){
       try{
         const response = await axios.get(`http://localhost:8081/api/projects`)
-        const resp = await axios.get(`http://localhost:8081/api/developers`)
+        const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
         this.projects = response.data;
