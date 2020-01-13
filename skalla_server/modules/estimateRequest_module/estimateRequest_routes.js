@@ -14,19 +14,22 @@ router.get(
 
 //create estimate
 router.post(
-  "/estimate-request",loginController.CheckToken,
+  "/estimate-request",
+  loginController.CheckToken,
   estimateRequestController.createEstimateRequest
 );
 
 //get single estimate
 router.get(
-  "/estimate-request/:requestId",loginController.CheckToken,
+  "/estimate-request/:requestId",
+  loginController.CheckToken,
   estimateRequestController.singleEstimateRequest
 );
 
 //update single estimate
 router.put(
   "/estimate-request/:requestId",
+  loginController.CheckToken,
   estimateRequestController.updateEstimateRequest
 );
 
