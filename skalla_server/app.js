@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const passport = require("passport");
 
 //requiring routes
 const projectsRouter = require('./modules/project_module/project_routes');
@@ -16,25 +15,19 @@ const port = process.env.PORT || 8081;
 //Initializing express app
 const app = express();
 
-require('./modules/auth/auth')
-
 //express app middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(passport.initialize());
 
 //database connection
 const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
 
-//localhost database connection string for development testing purposes
-const mongourl_localhost = "mongodb://localhost:27017/skalla_localhost_app";
-
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
-    console.log("Mongodb successfully connected to mongodb database")
+    console.log("Successfully connected to mongodb database")
   )
   .catch(err => console.log(err));
 

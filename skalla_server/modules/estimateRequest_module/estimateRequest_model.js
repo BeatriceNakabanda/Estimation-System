@@ -11,7 +11,8 @@ const EstimateRequestSchema = new Schema({
   dueDate: { type: Date, required: true },
   taskDescription: { type: String, required: true },
   status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated']},
-  dateCreated: { type: Date, default: Date.now }
+  dateCreated: { type: Date, default: Date.now },
+  estimateId: {type: Schema.ObjectId, ref: 'Estimate'}
 });
 
 //exporting estimateRequest model
