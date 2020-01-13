@@ -49,7 +49,7 @@
 </template>
 <script>
   import router from "../router"
-  // import axios from "axios"
+  import axios from "axios"
   import AuthService from "../services/AuthService"
   import store from "../store"
 
@@ -89,52 +89,28 @@
         success: false,
         errors: {},
         message: null,
-        msg: ''
+        msg: '',
+        role: ''
       }
     },
     methods: {
       
       async signIn(){
-        try{
-            this.errors = {}
-            this.clearForm()
-
-            const validEmail = validateEmail(this.credentials.email);
-            this.errors.email = validEmail.error;
-            if (this.valid) {
-              this.valid = validEmail.valid
-            }
-            const validPassword = validatePassword(this.credentials.password)
-            this.errors.password = validPassword.error
-            if (this.valid) {
-              this.valid = validPassword.valid
-            }
-
-            if (this.valid) {
-              console.log(this.credentials)
-
-              const response = await AuthService.login(this.credentials)
-              this.msg = response.msg
-
-              const token = response.token
-              const user = response.user
-              
-              store.dispatch('login', { token, user })
-              
-
-              router.push('/estimates')
-            } 
-            } catch (error) {
-              this.msg = error
-            }
-
-            //   axios.post('http://localhost:8081/api/user/userlogin', this.user)
-            // .then((response) =>{
-            //     console.log(response);
-            // })
-            // .catch((error) => {
-            //     console.log(error);
-            // });
+       
+              axios.post('http://localhost:8081/api/user/userlogin', this.credentials)
+            .then((response) =>{
+                console.log(response);
+                console.log(response.data.role)
+                const role = response.data.role
+                if(role === 'Developer'){
+                  router.push('/pendingEstimates')
+                }else if(role === 'Project Manager'){
+                  router.push('/estimates')
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
             // }
     /* let newSignIn = {
             email: this.model.email,
