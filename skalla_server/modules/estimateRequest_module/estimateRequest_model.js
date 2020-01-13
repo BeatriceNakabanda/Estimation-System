@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 //Defining EstimateRequestSchema
 const EstimateRequestSchema = new Schema({
-  estimateId: {type: Schema.ObjectId, ref: 'Estimate'},
   project: {type: Schema.ObjectId, ref: 'Project', required: true},
   developer: {type: Schema.ObjectId, ref: 'User'},
   title: { type: String, required: true },
@@ -13,6 +12,7 @@ const EstimateRequestSchema = new Schema({
   taskDescription: { type: String, required: true },
   status: {type: String, required: true, enum: ['Created', 'Draft', 'Submitted', 'Estimated']},
   dateCreated: { type: Date, default: Date.now },
+  estimateId: {type: Schema.ObjectId, ref: 'Estimate'}
 });
 
 //exporting estimateRequest model
