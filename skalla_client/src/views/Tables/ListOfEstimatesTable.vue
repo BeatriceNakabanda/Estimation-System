@@ -76,7 +76,7 @@
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                       </template>
                       <!-- Edit Estimate Form -->
-                      <EditEstimateForm  />
+                      <!-- <EditEstimateForm  /> -->
                   </modal>
             
             </span>
@@ -101,7 +101,9 @@
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
 import EditEstimateForm from "../Forms/EditEstimateForm";
 import axios from "axios";
-import { format, compareAsc } from 'date-fns'
+import store from "../../store"
+import { format, compareAsc } from 'date-fns' 
+// import AuthService from '../services/AuthService';
 
 const baseURL = "http://localhost:8081/api/estimate-requests";
 
@@ -183,10 +185,14 @@ export default {
             this.submitting = false               
         
         },
+        
       async created(){
       try{
+        if (!this.store.getters.isLoggedIn) {
+          this.router.push('/');
+        }
         const response = await axios.get(`http://localhost:8081/api/projects`)
-        const resp = await axios.get(`http://localhost:8081/api/developers`)
+        const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
         this.projects = response.data;

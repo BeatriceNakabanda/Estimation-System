@@ -28,7 +28,7 @@ const mongourl =
 const mongourl_localhost = "mongodb://localhost:27017/skalla_localhost_app_version2";
 
 mongoose
-  .connect(mongourl_localhost, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
     console.log("Successfully connected to mongodb database")
   )

@@ -12,9 +12,10 @@
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
         <div id="signout-position">
-          <router-link  to="/login" >
-              <i class="ni ni-user-run text-white" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sign Out</i>
-        </router-link>
+          <p v-for="user in users" :key="user.id">{{user.role}}</p>
+          <!-- <router-link  to="/login" > -->
+              <i class="ni ni-user-run text-white" aria-hidden="true" >&nbsp;&nbsp;&nbsp;Sign Out</i>
+        <!-- </router-link> -->
         </div>
       </template>
     </side-bar>
@@ -35,6 +36,10 @@
   import ProjectManagerNavbar from './ProjectManagerNavbar.vue';
   import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
+  import AuthService from '../services/AuthService';
+  import store from '../store';
+  import router from '../router';
+  import axios from "axios"
 
   export default {
     components: {
@@ -44,15 +49,43 @@
     },
     data() {
       return {
-        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
+        sidebarBackground: 'vue', //vue|blue|orange|green|red|primary
+        role: '',
+        secretMessage: '',
+        users:{
+          name: '',
+          role: ''
+        }
+
       };
     },
+     async created(){
+      try{
+        const res = await axios.get(`http://localhost:8081/api/users`)
+
+        this.users = res.data;
+      }catch(e){
+        console.error(e)
+      }
+    },
+    // async created() {
+    // if (!this.store.getters.isLoggedIn) {
+    //   this.router.push('/');
+    // }
+    // this.role = this.store.getters.getUser.role
+    // this.secretMessage = await AuthService.getSecretContent()
+    // },
     methods: {
       toggleSidebar() {
         if (this.$sidebar.showSidebar) {
           this.$sidebar.displaySidebar(false);
         }
-      }
+        
+      },
+    //   logout() {
+    //   this.$store.dispatch('logout');
+    //   this.$router.push('/');
+    // }
     }
   };
 </script>
