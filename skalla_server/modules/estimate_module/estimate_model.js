@@ -18,6 +18,7 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema ({
+    estimateRequestId: {type: Schema.ObjectId, ref: 'EstimateRequest'},
     dateCreated: {type: Date, default: Date.now},
     submittedDate: {type: Date},
     developer: {type: Schema.ObjectId, ref: 'User', required: true},
