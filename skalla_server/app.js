@@ -24,9 +24,6 @@ app.use(bodyParser.json());
 const mongourl =
   "mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority";
 
-//localhost database connection string for development testing purposes
-const mongourl_localhost = "mongodb://localhost:27017/skalla_localhost_app_version2";
-
 mongoose
   .connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
