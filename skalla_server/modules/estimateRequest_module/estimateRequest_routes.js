@@ -20,7 +20,7 @@ router.post(
 
 //get single estimate
 router.get(
-  "/estimate-request/:requestId",
+  "/estimate-request/:requestId",loginController.CheckToken,
   estimateRequestController.singleEstimateRequest
 );
 
