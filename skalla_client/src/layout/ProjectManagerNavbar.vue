@@ -25,8 +25,9 @@
     </base-nav>
 </template>
 <script>
-  import axios from "axios"
-  import router from "../router"
+  // import axios from "axios"
+  // import router from "../router"
+  import store from "../store"
   export default {
     data() {
       return {
@@ -42,11 +43,11 @@
       };
     },
     async created() {
-    if (!this.$store.getters.isLoggedIn) {
+    if (!store.getters.isLoggedIn) {
       this.$router.push('/login')
     }
-    this.name = this.store.getters.getUser.name
-    this.role = this.store.getters.getUser.role
+    this.name = store.getters.getUser.name
+    this.role = store.getters.getUser.role
     },
     methods: {
       toggleSidebar() {
