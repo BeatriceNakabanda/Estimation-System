@@ -29,10 +29,10 @@ Vue.config.productionTip = false;
 Axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
 
 // Vue.prototype.$http = Axios;
-// const accessToken = localStorage.getItem("access_token");
+// const token = localStorage.getItem("token");
 
-// if (accessToken) {
-//   Vue.prototype.$http.defaults.headers.common["Authorization"] = accessToken;
+// if (token) {
+//   Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
 // }
 
 Vue.use(ArgonDashboard);

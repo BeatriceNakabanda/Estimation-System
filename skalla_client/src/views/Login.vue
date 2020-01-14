@@ -48,23 +48,23 @@
       </div>
 </template>
 <script>
-  import router from "../router"
-  import axios from "axios"
-  // import AuthService from "../services/AuthService"
-  import store from "../store"
+import router from "../router";
+import axios from "axios";
+import AuthService from "../services/AuthService";
+import store from "../store";
 
-  // Validating email and password
-  const validateEmail = email => {
-    if (!email.length) {
-      return { valid: false, error: "Email is required" };
-    }
-    if (!email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)) {
-      return { valid: false, error: "Please, enter a valid email." };
-    }
-    return { valid: true, error: null };
-  };
+// Validating email and password
+const validateEmail = email => {
+  if (!email.length) {
+    return { valid: false, error: "Email is required" };
+  }
+  if (!email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)) {
+    return { valid: false, error: "Please, enter a valid email." };
+  }
+  return { valid: true, error: null };
+};
 
-  const validatePassword = password => {
+const validatePassword = password => {
   if (!password.length) {
     return { valid: false, error: "Password is required" };
   }
@@ -74,75 +74,78 @@
   return { valid: true, error: null };
 };
 
-  export default {
-    name: 'Login',
-    data(){
-      return {
-        // error: false,
-        // submitting: false,
-        // success: false,
-        credentials:{
-          email: '',
-          password: ''
-        },
-        valid: true,
-        success: false,
-        errors: {},
-        message: null,
-        msg: '',
+export default {
+  name: "Login",
+  data() {
+    return {
+      // error: false,
+      // submitting: false,
+      // success: false,
+      credentials: {
+        email: "",
+        password: ""
+      },
+      valid: true,
+      success: false,
+      errors: {},
+      message: null,
+      msg: ""
+    };
+  },
+  methods: {
+    async signIn() {
+      try {
+        this.errors = {};
+        //Validating input fields
+        const validEmail = validateEmail(this.credentials.email);
+        this.errors.email = validEmail.error;
+        if (this.valid) {
+          this.valid = validEmail.valid;
+        }
+        const validPassword = validatePassword(this.credentials.password);
+        this.errors.password = validPassword.error;
+        if (this.valid) {
+          this.valid = validPassword.valid;
+        }
+        //sending captured data to the server
+        axios.post(
+          "http://localhost:8081/api/user/userlogin",
+          this.credentials
+        );
+        const response = await AuthService.login(this.credentials);
+        // .then((response) =>{
+
+        const token = response.token;
+        const user = response.user;
+
+        store.dispatch("login", { token, user });
+        // eslint-disable-next-line no-console
+        console.log(token);
+
+        // const role = response.data.role
+        // console.log(role)
+        // if(role === 'Developer'){
+        //   router.push('/pendingEstimates')
+        // }else if(role === 'Project Manager'){
+        //   router.push('/estimates')
+        // }
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        // });
+      } catch (error) {
+        this.msg = error;
       }
-    },
-    methods: {
-      
-      async signIn(){
-       try{
-          this.errors = {}
-            //Validating input fields
-            const validEmail = validateEmail(this.credentials.email)
-            this.errors.email = validEmail.error;
-            if (this.valid) {
-              this.valid = validEmail.valid
-            }
-            const validPassword = validatePassword(this.credentials.password)
-            this.errors.password = validPassword.error
-            if (this.valid) {
-              this.valid = validPassword.valid
-            }
-          //sending captured data to the server
-          axios.post('http://localhost:8081/api/user/userlogin', this.credentials)
-            .then((response) =>{
-
-              const token = response.token;
-              const user = response.user
-              
-              store.dispatch('login', {token, user})
-
-                const role = response.data.role
-                console.log(role)
-                if(role === 'Developer'){
-                  router.push('/pendingEstimates')
-                }else if(role === 'Project Manager'){
-                  router.push('/estimates')
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-       }catch (error) {
-              this.msg = error
-            }
-
-      
     }
-    }
-}  
+  }
+};
 </script>
 <style>
-#signin{
+#signin {
   /* margin-left: -15px; */
   padding: 4px 16px;
 }
 .text-danger {
-    color: #dc3545!important;
+  color: #dc3545 !important;
 }
 </style>
