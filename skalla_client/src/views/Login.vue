@@ -50,7 +50,7 @@
 <script>
   import router from "../router"
   import axios from "axios"
-  import AuthService from "../services/AuthService"
+  // import AuthService from "../services/AuthService"
   import store from "../store"
 
   // Validating email and password
@@ -90,18 +90,35 @@
         errors: {},
         message: null,
         msg: '',
-        role: ''
       }
     },
     methods: {
       
       async signIn(){
-       
-              axios.post('http://localhost:8081/api/user/userlogin', this.credentials)
+       try{
+          this.errors = {}
+            //Validating input fields
+            const validEmail = validateEmail(this.credentials.email)
+            this.errors.email = validEmail.error;
+            if (this.valid) {
+              this.valid = validEmail.valid
+            }
+            const validPassword = validatePassword(this.credentials.password)
+            this.errors.password = validPassword.error
+            if (this.valid) {
+              this.valid = validPassword.valid
+            }
+          //sending captured data to the server
+          axios.post('http://localhost:8081/api/user/userlogin', this.credentials)
             .then((response) =>{
-                console.log(response);
-                console.log(response.data.role)
+
+              const token = response.token;
+              const user = response.user
+              
+              store.dispatch('login', {token, user})
+
                 const role = response.data.role
+                console.log(role)
                 if(role === 'Developer'){
                   router.push('/pendingEstimates')
                 }else if(role === 'Project Manager'){
@@ -111,16 +128,11 @@
             .catch((error) => {
                 console.log(error);
             });
-            // }
-    /* let newSignIn = {
-            email: this.model.email,
-            password: this.model.password
-        }
-        console.log(newSignIn) */
-    }, 
-    clearForm(){
-      this.success = false
-      this.error = false
+       }catch (error) {
+              this.msg = error
+            }
+
+      
     }
     }
 }  
