@@ -70,11 +70,11 @@ export default new Router({
     //routes for developer
     {
       path: '/',
-      redirect: 'pendingEstimates',
+      redirect: 'pending-estimates',
       component: DeveloperLayout,
       children: [
     {
-      path: '/pendingEstimates',
+      path: '/pending-estimates',
       name: 'Pending Estimates',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
@@ -100,7 +100,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "demo" */ './views/SubmittedEstimates.vue')
     },
     {
-      path: '/estimateDetails',
+      path: '/estimate-details',
       name: 'estimate Details',
       component: () => import('./views/EstimateDetails.vue')
     },
