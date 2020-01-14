@@ -55,7 +55,10 @@ export default new Vuex.Store({
 });
 
 const NameRole = {
-  state: {},
+  state: {
+    name: "",
+    role: ""
+  },
   mutations: {},
   actions: {},
   getters: {}
