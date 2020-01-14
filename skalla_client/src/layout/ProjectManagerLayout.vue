@@ -11,7 +11,7 @@
         <sidebar-item  :link="{name: 'Drafts', icon: 'ni ni-box-2 text-blue', path: '/draftrequests'}"/>
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
-        <div id="signout-position">
+        <div id="signout-position" @click="logout">
           <!-- <router-link  to="/login" > -->
               <i class="ni ni-user-run text-white" aria-hidden="true" >&nbsp;&nbsp;&nbsp;Sign Out</i>
         <!-- </router-link> -->
@@ -38,7 +38,7 @@
   import AuthService from '../services/AuthService';
   import store from '../store';
   import router from '../router';
-  import axios from "axios"
+  // import axios from "axios"
 
   export default {
     components: {
@@ -50,30 +50,10 @@
       return {
         sidebarBackground: 'vue', //vue|blue|orange|green|red|primary
         role: '',
-        secretMessage: '',
-        users:{
-          name: '',
-          role: ''
-        }
+        secretMessage: ''
 
       };
     },
-    //  async created(){
-    //   try{
-    //     const res = await axios.get(`http://localhost:8081/api/users`)
-
-    //     this.users = res.data;
-    //   }catch(e){
-    //     console.error(e)
-    //   }
-    // },
-    // async created() {
-    // if (!this.store.getters.isLoggedIn) {
-    //   this.router.push('/');
-    // }
-    // this.role = this.store.getters.getUser.role
-    // this.secretMessage = await AuthService.getSecretContent()
-    // },
     methods: {
       toggleSidebar() {
         if (this.$sidebar.showSidebar) {
@@ -81,10 +61,10 @@
         }
         
       },
-    //   logout() {
-    //   this.$store.dispatch('logout');
-    //   this.$router.push('/');
-    // }
+      logout() {
+      store.dispatch('logout');
+      router.push('/');
+    }
     }
   };
 </script>

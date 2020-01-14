@@ -25,6 +25,7 @@
     </base-nav>
 </template>
 <script>
+<<<<<<< HEAD
 import axios from "axios";
 import router from "../router";
 export default {
@@ -89,6 +90,59 @@ export default {
   //   this.getUserData()
   // }
 };
+=======
+  // import axios from "axios"
+  // import router from "../router"
+  import store from "../store"
+  export default {
+    data() {
+      return {
+        activeNotifications: false,
+        showMenu: false,
+        searchQuery: '',
+        user: {
+            name: 'David Pereira',
+            role: 'Project Manager'
+        },
+        name: '',
+        role: ''
+      };
+    },
+    async created() {
+    if (!store.getters.isLoggedIn) {
+      this.$router.push('/login')
+    }
+    this.name = store.getters.getUser.name
+    this.role = store.getters.getUser.role
+    },
+    methods: {
+      toggleSidebar() {
+        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+      },
+      hideSidebar() {
+        this.$sidebar.displaySidebar(false);
+      },
+      toggleMenu() {
+        this.showMenu = !this.showMenu;
+      },
+      // getUserData: function(){
+      //   let self = this
+      //     axios.get("http://localhost:8081/api/users")
+      //           .then((response) => {
+      //             console.log(response)
+      //             self.$set(this, "user", response.data.user)
+      //           })
+      //           .catch((errors) => {
+      //             console.log(errors)
+      //             router.push("/")
+      //           })
+      // }
+    },
+    // mounted(){
+    //   this.getUserData()
+    // }
+  };
+>>>>>>> b60f15c0748cf67778be1e1c02ac1b0baf75c848
 </script>
 <style>
 .users {
