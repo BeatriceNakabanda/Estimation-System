@@ -14,10 +14,10 @@
             </span> 
            
             <div class="user ml-2" >
-              <p class=" text-md font-weight-bold" id="user-name">Benjamin Lutaaya
+              <p class=" text-md font-weight-bold" id="user-name">{{ name }}
               </p>
               <p class="text-sm " >
-                Developer
+                {{ role }}
               </p>
             </div>
           </div>
@@ -30,8 +30,17 @@
       return {
         activeNotifications: false,
         showMenu: false,
-        searchQuery: ''
+        searchQuery: '',
+        name: '',
+        role: ''
       };
+    },
+    async created() {
+    if (!this.store.getters.isLoggedIn) {
+      this.$router.push('/login')
+    }
+    this.name = this.store.getters.getUser.name
+    this.role = this.store.getters.getUser.role
     },
     methods: {
       toggleSidebar() {

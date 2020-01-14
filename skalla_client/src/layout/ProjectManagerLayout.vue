@@ -12,7 +12,6 @@
         <sidebar-item  :link="{name: 'Projects', icon: 'ni ni-books text-blue', path: '/projects'}"/>
         <sidebar-item  :link="{name: 'Developers', icon: 'fa fa-users text-blue', path: '/developers'}"/>
         <div id="signout-position">
-          <p v-for="user in users" :key="user.id">{{user.role}}</p>
           <!-- <router-link  to="/login" > -->
               <i class="ni ni-user-run text-white" aria-hidden="true" >&nbsp;&nbsp;&nbsp;Sign Out</i>
         <!-- </router-link> -->
@@ -59,15 +58,15 @@
 
       };
     },
-     async created(){
-      try{
-        const res = await axios.get(`http://localhost:8081/api/users`)
+    //  async created(){
+    //   try{
+    //     const res = await axios.get(`http://localhost:8081/api/users`)
 
-        this.users = res.data;
-      }catch(e){
-        console.error(e)
-      }
-    },
+    //     this.users = res.data;
+    //   }catch(e){
+    //     console.error(e)
+    //   }
+    // },
     // async created() {
     // if (!this.store.getters.isLoggedIn) {
     //   this.router.push('/');
