@@ -27,10 +27,6 @@ export default new Vuex.Store({
         getUser: state => {
             return state.user
         },
-        // getRole: state => {
-        //     return state.role
-        // }
-
 
     },
     mutations: {
@@ -40,9 +36,6 @@ export default new Vuex.Store({
         SET_USER: (state, user) => {
             state.user = user
         },
-        // SET_ROLE:(state, role) => {
-        //     state.user.role = role
-        // },
         RESET: state => {
             Object.assign(state, getDefaultState)
         }
@@ -52,7 +45,6 @@ export default new Vuex.Store({
         login: ({ commit, dispatch }, { token, user}) => {
             commit('SET_TOKEN', token)
             commit('SET_USER', user)
-            // commit('SET_ROLE', role)
 
             //setting Auth header
             Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`

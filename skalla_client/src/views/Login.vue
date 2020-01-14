@@ -50,8 +50,10 @@
 <script>
   import router from "../router"
   import axios from "axios"
-  // import AuthService from "../services/AuthService"
+  import AuthService from "../services/AuthService"
   import store from "../store"
+
+  
 
   // Validating email and password
   const validateEmail = email => {
@@ -109,25 +111,27 @@
               this.valid = validPassword.valid
             }
           //sending captured data to the server
-          axios.post('http://localhost:8081/api/user/userlogin', this.credentials)
-            .then((response) =>{
+          // axios.post('http://localhost:8081/api/user/userlogin', this.credentials)
+          const response = await AuthService.login(this.credentials)
+            // .then((response) =>{
 
               const token = response.token;
               const user = response.user
               
-              store.dispatch('login', {token, user})
+              store.dispatch('login', { token, user });
+              console.log(token)
 
-                const role = response.data.role
-                console.log(role)
-                if(role === 'Developer'){
-                  router.push('/pendingEstimates')
-                }else if(role === 'Project Manager'){
-                  router.push('/estimates')
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                // const role = response.data.role
+                // console.log(role)
+                // if(role === 'Developer'){
+                //   router.push('/pendingEstimates')
+                // }else if(role === 'Project Manager'){
+                //   router.push('/estimates')
+                // }
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            // });
        }catch (error) {
               this.msg = error
             }
