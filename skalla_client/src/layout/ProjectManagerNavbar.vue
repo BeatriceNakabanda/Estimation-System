@@ -25,6 +25,72 @@
     </base-nav>
 </template>
 <script>
+<<<<<<< HEAD
+import axios from "axios";
+import router from "../router";
+export default {
+  data() {
+    return {
+      name: "",
+      role: ""
+    };
+  },
+
+  async created() {}
+  //   if (!this.$store.getters.isLoggedIn) {
+  //     this.$router.push("/login");
+  //   }
+  //   this.name = this.store.getters.getUser.name;
+  //   this.role = this.store.getters.getUser.role;
+  // }
+  // data() {
+  //   return {
+  //     activeNotifications: false,
+  //     showMenu: false,
+  //     searchQuery: '',
+  //     user: {
+  //         name: 'David Pereira',
+  //         role: 'Project Manager'
+  //     },
+  //     name: '',
+  //     role: ''
+  //   };
+  // },
+  // async created() {
+  // if (!this.$store.getters.isLoggedIn) {
+  //   this.$router.push('/login')
+  // }
+  // this.name = this.store.getters.getUser.name
+  // this.role = this.store.getters.getUser.role
+  // },
+  // methods: {
+  //   toggleSidebar() {
+  //     this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+  //   },
+  //   hideSidebar() {
+  //     this.$sidebar.displaySidebar(false);
+  //   },
+  //   toggleMenu() {
+  //     this.showMenu = !this.showMenu;
+  //   },
+  //   // getUserData: function(){
+  //   //   let self = this
+  //   //     axios.get("http://localhost:8081/api/users")
+  //   //           .then((response) => {
+  //   //             console.log(response)
+  //   //             self.$set(this, "user", response.data.user)
+  //   //           })
+  //   //           .catch((errors) => {
+  //   //             console.log(errors)
+  //   //             router.push("/")
+  //   //           })
+  //   // }
+  // },
+  // mounted(){
+  //   this.getUserData()
+  // }
+};
+=======
   // import axios from "axios"
   // import router from "../router"
   import store from "../store"
@@ -76,25 +142,23 @@
     //   this.getUserData()
     // }
   };
+>>>>>>> b60f15c0748cf67778be1e1c02ac1b0baf75c848
 </script>
 <style>
-
-.users{
+.users {
   margin-top: 0px;
   padding-top: 2px;
-  
 }
-#user-image{
+#user-image {
   margin-bottom: -5px;
-  margin-top: -5px; 
+  margin-top: -5px;
 }
-.user{
+.user {
   color: #fff;
   float: right;
 }
 
-.avatar{
+.avatar {
   border: 4px solid red;
 }
-
 </style>
