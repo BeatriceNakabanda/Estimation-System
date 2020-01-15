@@ -13,12 +13,24 @@ router.get(
 );
 
 //get a single estimate
-router.get("/estimate/:requestId", estimateController.singleEstimate);
+router.get(
+  "/estimate/:requestId",
+  loginController.CheckToken,
+  estimateController.singleEstimate
+);
 
 //create a single estimate
-router.post("/estimate", estimateController.createEstimate);
+router.post(
+  "/estimate",
+  loginController.CheckToken,
+  estimateController.createEstimate
+);
 
 //update a single estimate
-router.put("/estimate/:requestId", estimateController.updateEstimate);
+router.put(
+  "/estimate/:requestId",
+  loginController.CheckToken,
+  estimateController.updateEstimate
+);
 
 module.exports = router;
