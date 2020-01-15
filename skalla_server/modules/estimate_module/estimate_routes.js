@@ -20,7 +20,11 @@ router.get(
 );
 
 //create a single estimate
-router.post("/estimate", estimateController.createEstimate);
+router.post(
+  "/estimate",
+  loginController.CheckToken,
+  estimateController.createEstimate
+);
 
 //update a single estimate
 router.put("/estimate/:requestId", estimateController.updateEstimate);
