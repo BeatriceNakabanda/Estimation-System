@@ -141,7 +141,7 @@ export default {
             // });
        }catch (error) {
               
-              this.msg = 'Invalid user login'
+              this.msg = 'Wrong email or password'
               
               // console.log(error);
             }
