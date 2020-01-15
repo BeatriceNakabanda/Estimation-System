@@ -83,23 +83,20 @@ import store from "../store"
   };
 </script>
 <style>
-
-.users{
+.users {
   margin-top: 0px;
   padding-top: 2px;
-  
 }
-#user-image{
+#user-image {
   margin-bottom: -5px;
-  margin-top: -5px; 
+  margin-top: -5px;
 }
-.user{
+.user {
   color: #fff;
   float: right;
 }
 
-.avatar{
+.avatar {
   border: 4px solid red;
 }
-
 </style>

@@ -5,6 +5,9 @@ console.log('This script populates some users, estimateRequests, estimates and p
 //node command to run script for localhost testing for skalla application
 // node populatedb mongodb://localhost:27017/skalla_localhost_app
 
+//node command to run script for localhost testing for skalla application
+// node populatedb mongodb://localhost:27017/skalla_localhost_app_version2
+
 //node command to run script for cloud atlas testing for skalla application
 // node populatedb mongodb+srv://accessgranted:skalla001@skallacluster-dv66v.mongodb.net/skalla?retryWrites=true&w=majority
 
@@ -57,7 +60,7 @@ function developerCreate(name, password, email, role, cb) {
 
 function projectManagerCreate(name, password, email, role, cb) {
 //object for projectManager details
-projectManagerDetail = {name:name , password: password, email: email, role:role }    
+projectManagerDetail = {name: name , password: password, email: email, role:role }    
 
 const projectManager = new User(projectManagerDetail);
         
@@ -87,9 +90,10 @@ project.save(function (err) {
 }
 
 
-function estimateRequestCreate(project, developerCreate, title, projectManagerCreate, dueDate, taskDescription, status, cb) {
+function estimateRequestCreate(estimateId, project, developerCreate, title, projectManagerCreate, dueDate, taskDescription, status, cb) {
 
-  estimateRequestDetail = { 
+  estimateRequestDetail = {
+    estimateId: estimateId, 
     project: project,
     developer: developerCreate,
     title: title,
@@ -99,28 +103,31 @@ function estimateRequestCreate(project, developerCreate, title, projectManagerCr
     status: status
 }
 
+if (estimateId != false) estimateRequestDetail.estimateId = estimateId
 if (dueDate != false) estimateRequestDetail.dueDate = dueDate
 if (status != false) estimateRequestDetail.status = status
-    
+
 const estimateRequest = new EstimateRequest(estimateRequestDetail);    
 estimateRequest.save(function (err) {
     if (err) {
     cb(err, null)
     return
-    }
+    }else
     console.log('New Estimate Request: ' + estimateRequest);
     estimateRequests.push(estimateRequest)
     cb(null, estimateRequest)
 }  );
 }
 
-function estimateCreate(submittedDate, user, totalSum, lineItem, cb) {
-estimateDetail = { 
-    submittedDate: submittedDate,
-    developer: user,
-    totalSum: totalSum,
-    lineItem: lineItem
+function estimateCreate(estimateRequestId, submittedDate, user, totalSum, lineItem, cb) {
+estimateDetail = {
+  estimateRequestId: estimateRequestId,
+  submittedDate: submittedDate,
+  developer: user,
+  totalSum: totalSum,
+  lineItem: lineItem
 }    
+
 if (lineItem != false) estimateDetail.lineItem = lineItem
     
 const estimate = new Estimate(estimateDetail);    
@@ -199,25 +206,25 @@ function createProjectManagers(cb) {
 function createEstimateRequests(cb) {
     async.parallel([
         function(callback) {
-          estimateRequestCreate(projects[0], users[0], 'Navigation', users[5], '2020-01-15', 'Let us add a navigation bar.', 'Created', callback);
+          estimateRequestCreate(estimates[0],projects[0], users[0], 'Navigation', users[5], '2020-01-15', 'Let us add a navigation bar.', 'Created', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[1], users[1], 'Dashboard', users[6], '2020-01-10', 'Let us add a dashboard.', 'Submitted', callback);
+            estimateRequestCreate(estimates[1],projects[1], users[1], 'Dashboard', users[6], '2020-01-10', 'Let us add a dashboard.', 'Submitted', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[2], users[2], 'Deals', users[7], '2020-01-16', 'Let us add deals.', 'Estimated', callback);
+            estimateRequestCreate(estimates[2], projects[2], users[2], 'Deals', users[7], '2020-01-16', 'Let us add deals.', 'Estimated', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[3], users[3], 'Categories', users[8], '2020-01-18', 'Let us add categories.', 'Draft', callback);
+            estimateRequestCreate(estimates[3],projects[3], users[3], 'Categories', users[8], '2020-01-18', 'Let us add categories.', 'Draft', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[4], users[4], 'Credit', users[9], '2020-01-19', 'Let us add a credit section.', 'Created', callback);
+            estimateRequestCreate(estimates[0],projects[4], users[4], 'Credit', users[9], '2020-01-19', 'Let us add a credit section.', 'Created', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[0], users[0], 'Main Section', users[10], '2020-01-15', 'Let us add a main section.', 'Submitted', callback);
+            estimateRequestCreate(estimates[1],projects[0], users[0], 'Main Section', users[10], '2020-01-15', 'Let us add a main section.', 'Submitted', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[1], users[1], 'Content', users[11], '2020-01-15', 'Let us add some dummy content.', 'Created', callback);
+            estimateRequestCreate(estimates[2],projects[1], users[1], 'Content', users[11], '2020-01-15', 'Let us add some dummy content.', 'Created', callback);
           }
         ],
         // optional callback
@@ -227,16 +234,16 @@ function createEstimateRequests(cb) {
 function createEstimates(cb) {
     async.parallel([
         function(callback) {
-          estimateCreate('2020-01-10', users[0], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: ''}], callback)
+          estimateCreate(estimateRequests[2],'2020-01-10', users[0], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: ''}], estimateRequests[0], callback)
         },
         function(callback) {
-            estimateCreate('2020-01-11', users[1], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: ''}], callback)
+            estimateCreate(estimateRequests[0],'2020-01-11', users[1], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: ''}], callback)
         },
         function(callback) {
-            estimateCreate('2020-01-12', users[2], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: 'Will be accomplished earlier than estimated.'}], callback)
+            estimateCreate(estimateRequests[1],'2020-01-12', users[2], '16.00', [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: 'Will be accomplished earlier than estimated.'}], callback)
         },
         function(callback) {
-            estimateCreate('2020-01-13', users[3], 16.00, [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: 'Will be accomplished earlier than estimated.'}], callback)
+            estimateCreate(estimateRequests[3],'2020-01-13', users[3], 16.00, [{description: '2.00'}, {research: '2.00'}, {planning: '2.00'}, {development: '2.00'}, {testing: '2.00'}, {stabilization: '2.00'}, {certainty: '75'}, {sum: '12.00'}, {adjustedSum: '14.00'}, {comments: 'Will be accomplished earlier than estimated.'}], callback)
         }
         ],
         // Optional callback
