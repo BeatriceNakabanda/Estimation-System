@@ -34,6 +34,7 @@ class loginController {
             const token = jwt.sign(payload, "secretKey");
             res.status(200).send({
               token,
+              id: user._id,
               email: user.email,
               name: user.name,
               role: user.role,
@@ -74,6 +75,3 @@ class loginController {
 }
 
 module.exports = new loginController();
- 
-
- 
