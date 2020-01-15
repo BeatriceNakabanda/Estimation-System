@@ -39,7 +39,7 @@
                 @click="signIn"
                 >Sign in</base-button
               >
-                  <p v-if="msg">{{ msg }}</p>
+                  <p class="text-danger" v-if="msg">{{ msg }}</p>
             </div>
             </form>
                 </div>
@@ -48,10 +48,10 @@
       </div>
 </template>
 <script>
-import router from "../router";
+// import router from "../router";
 import axios from "axios";
 import AuthService from "../services/AuthService";
-import store from "../store";
+// import store from "../store";
 
 // Validating email and password
 const validateEmail = email => {
@@ -108,10 +108,10 @@ export default {
           this.valid = validPassword.valid;
         }
         //sending captured data to the server
-        axios.post(
-          "http://localhost:8081/api/user/userlogin",
-          this.credentials
-        );
+        // axios.post(
+        //   "http://localhost:8081/api/user/userlogin",
+        //   this.credentials
+        // );
         const response = await AuthService.login(this.credentials);
         // .then((response) =>{
 
