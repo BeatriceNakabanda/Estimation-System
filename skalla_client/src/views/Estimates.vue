@@ -16,7 +16,6 @@
 import EstimatesTable from "./Tables/ListOfEstimatesTable";
 import axios from "axios";
 import router from "../router"
-import {MapGetter} from "../store"
 
 
   export default {

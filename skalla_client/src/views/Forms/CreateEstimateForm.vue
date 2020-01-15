@@ -112,7 +112,6 @@ import axios from 'axios';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 
-const baseURL = "http://localhost:8081/api/estimate-request"
 
 export default {
     name: 'create-estimate-form',

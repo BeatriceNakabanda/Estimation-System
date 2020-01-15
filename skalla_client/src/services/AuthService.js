@@ -14,15 +14,15 @@ export default {
             const role = response.data.role
             const email = response.data.email
             const name = response.data.name
+            const userId = response.data._id
 
             const user ={
                 name,
                 email,
-                role
+                role,
             }
             // console.log(role)
             // console.log(response);
-
             return {
                 user,
                 token
@@ -30,5 +30,14 @@ export default {
         })
         
     },
+    // addEstimate(newEstimate){
+    //     return axios
+    //     .post(url + 'estimate-request', newEstimate)
+    //     .then(response => {
+    //         const
+    //     })
+
+
+    // }
 
 }

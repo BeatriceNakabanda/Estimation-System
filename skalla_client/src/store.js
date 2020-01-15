@@ -1,23 +1,23 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 
-import AuthService from "./services/AuthService";
 
 Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
     token: "",
-    user: {}
+    user: {},
+    estimateRequest: {}
   };
 };
 
 export default new Vuex.Store({
   strict: true,
   //intergrating vuex-persistedstate to get data even after reloading the page
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
   state: getDefaultState(),
   getters: {
     isLoggedIn: state => {
@@ -34,6 +34,9 @@ export default new Vuex.Store({
     SET_USER: (state, user) => {
       state.user = user;
     },
+    SET_ESTIMATE_REQUEST: (state, estimateRequest) => {
+      state.estimateRequest = estimateRequest
+    },
     RESET: state => {
       Object.assign(state, getDefaultState);
     }
@@ -47,19 +50,11 @@ export default new Vuex.Store({
       //setting Auth header
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     },
+    addEstimate: ({commit}, estimateRequest) => {
+      commit("SET_ESTIMATE_REQUEST", estimateRequest)
+    },
     logout: ({ commit }) => {
       commit("RESET", "");
     }
   },
-//   modules: NameRole
 });
-
-// const NameRole = {
-//   state: {
-//     name: "",
-//     role: ""
-//   },
-//   mutations: {},
-//   actions: {},
-//   getters: {}
-// };

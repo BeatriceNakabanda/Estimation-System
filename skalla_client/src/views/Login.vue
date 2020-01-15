@@ -49,7 +49,6 @@
 </template>
 <script>
 import router from "../router";
-import axios from "axios";
 import AuthService from "../services/AuthService";
 // import store from "../store";
 
@@ -108,10 +107,7 @@ export default {
           this.valid = validPassword.valid;
         }
         //sending captured data to the server
-        // axios.post(
-        //   "http://localhost:8081/api/user/userlogin",
-        //   this.credentials
-        // );
+      
         const response = await AuthService.login(this.credentials);
         // .then((response) =>{
 
@@ -121,7 +117,7 @@ export default {
 
         // const email = response.email
 
-        console.log(response);
+        // console.log(response);
 
         //console.log(role)
 
