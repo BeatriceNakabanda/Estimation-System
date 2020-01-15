@@ -38,5 +38,6 @@ Axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
 Vue.use(ArgonDashboard);
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");
