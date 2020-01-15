@@ -135,45 +135,14 @@ export default {
                 }else if(role === 'Project Manager'){
                   router.push('/estimates')
                 }
-            // })
-            // .catch((error) => {
-            //     console.log(error);
-            // });
        }catch (error) {
               
               this.msg = 'Wrong email or password'
               
-              // console.log(error);
             }
 
-        // const role = response.data.role
-        // console.log(role)
-        if (role === "Developer") {
-          router.push("/pending-estimates");
-        } else if (role === "Project Manager") {
-          router.push("/estimates");
-        }
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // });
-      } catch (error) {
-        this.msg = "Invalid user login";
 
-        // console.log(error);
-      }
-
-      // const role = response.data.role
-      // console.log(role)
-      // if(role === 'Developer'){
-      //   router.push('/pendingEstimates')
-      // }else if(role === 'Project Manager'){
-      //   router.push('/estimates')
-      // }
-      // })
-      // .catch((error) => {
-      //     console.log(error);
-      // });
+      
     }
   }
 };
