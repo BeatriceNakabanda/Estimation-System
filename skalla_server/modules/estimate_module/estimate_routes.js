@@ -2,10 +2,11 @@
 const express = require("express");
 const router = express.Router();
 const estimateController = require("./estimate_controllers");
+const loginController = require("../user_module/loginController");
 // const loginController = require("../user_module/loginController");
 
 //get all estimates
-router.get("/estimates", estimateController.estimateList );
+router.get("/estimates", estimateController.estimateList);
 
 //get a single estimate
 router.get("/estimate/:requestId", estimateController.singleEstimate);
@@ -17,4 +18,3 @@ router.post("/estimate", estimateController.createEstimate);
 router.put("/estimate/:requestId", estimateController.updateEstimate);
 
 module.exports = router;
-
