@@ -27,6 +27,10 @@ router.post(
 );
 
 //update a single estimate
-router.put("/estimate/:requestId", estimateController.updateEstimate);
+router.put(
+  "/estimate/:requestId",
+  loginController.CheckToken,
+  estimateController.updateEstimate
+);
 
 module.exports = router;
