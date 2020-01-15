@@ -35,8 +35,6 @@
   import ProjectManagerNavbar from './ProjectManagerNavbar.vue';
   import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
-  import AuthService from '../services/AuthService';
-  import store from '../store';
   import router from '../router';
   // import axios from "axios"
 
@@ -62,7 +60,7 @@
         
       },
       logout() {
-      store.dispatch('logout');
+      this.$store.dispatch('logout');
       router.push('/');
     }
     }

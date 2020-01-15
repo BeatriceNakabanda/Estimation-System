@@ -25,70 +25,62 @@
     </base-nav>
 </template>
 <script>
-import axios from "axios";
-import router from "../router";
-export default {
-  data() {
-    return {
-      name: "",
-      role: ""
-    };
-  },
+  // import axios from "axios"
+// import { mapGetters } from 'vuex';
+import router from "../router"
+import store from "../store"
+  export default {
+    data() {
+      return {
+        activeNotifications: false,
+        showMenu: false,
+        searchQuery: '',
+        user: {
+            name: 'David Pereira',
+            role: 'Project Manager'
+        },
+        name: '',
+        role: ''
+      };
+    },
 
-  async created() {}
-  //   if (!this.$store.getters.isLoggedIn) {
-  //     this.$router.push("/login");
-  //   }
-  //   this.name = this.store.getters.getUser.name;
-  //   this.role = this.store.getters.getUser.role;
-  // }
-  // data() {
-  //   return {
-  //     activeNotifications: false,
-  //     showMenu: false,
-  //     searchQuery: '',
-  //     user: {
-  //         name: 'David Pereira',
-  //         role: 'Project Manager'
-  //     },
-  //     name: '',
-  //     role: ''
-  //   };
-  // },
-  // async created() {
-  // if (!this.$store.getters.isLoggedIn) {
-  //   this.$router.push('/login')
-  // }
-  // this.name = this.store.getters.getUser.name
-  // this.role = this.store.getters.getUser.role
-  // },
-  // methods: {
-  //   toggleSidebar() {
-  //     this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-  //   },
-  //   hideSidebar() {
-  //     this.$sidebar.displaySidebar(false);
-  //   },
-  //   toggleMenu() {
-  //     this.showMenu = !this.showMenu;
-  //   },
-  //   // getUserData: function(){
-  //   //   let self = this
-  //   //     axios.get("http://localhost:8081/api/users")
-  //   //           .then((response) => {
-  //   //             console.log(response)
-  //   //             self.$set(this, "user", response.data.user)
-  //   //           })
-  //   //           .catch((errors) => {
-  //   //             console.log(errors)
-  //   //             router.push("/")
-  //   //           })
-  //   // }
-  // },
-  // mounted(){
-  //   this.getUserData()
-  // }
-};
+    async created() {
+    if (!this.$store.getters.isLoggedIn) {
+      router.push('/')
+    }else{
+      this.name = this.$store.getters.getUser.name
+      this.role = this.$store.getters.getUser.role
+      console.log(this.role)
+    }
+    
+    },
+    methods: {
+      toggleSidebar() {
+        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+      },
+      hideSidebar() {
+        this.$sidebar.displaySidebar(false);
+      },
+      toggleMenu() {
+        this.showMenu = !this.showMenu;
+      },
+      // getUserData: function(){
+      //   let self = this
+      //     axios.get("http://localhost:8081/api/users")
+      //           .then((response) => {
+      //             console.log(response)
+      //             self.$set(this, "user", response.data.user)
+      //           })
+      //           .catch((errors) => {
+      //             console.log(errors)
+      //             router.push("/")
+      //           })
+      // }
+    },
+    // mounted(){
+    //   this.getUserData()
+    // }
+  };
 </script>
 <style>
 .users {

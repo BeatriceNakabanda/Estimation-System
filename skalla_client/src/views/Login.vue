@@ -115,12 +115,29 @@ export default {
         const response = await AuthService.login(this.credentials);
         // .then((response) =>{
 
-        const token = response.token;
-        const user = response.user;
+              const token = response.token;
+              const user = response.user
+              
+              this.$store.dispatch('login', { token, user });
+              
 
-        store.dispatch("login", { token, user });
-        // eslint-disable-next-line no-console
-        console.log(token);
+                // const role = response.data.role
+                // console.log(role)
+                // if(role === 'Developer'){
+                //   router.push('/pendingEstimates')
+                // }else if(role === 'Project Manager'){
+                //   router.push('/estimates')
+                // }
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            // });
+       }catch (error) {
+              
+              this.msg = 'Invalid user login'
+              
+              // console.log(error);
+            }
 
         // const role = response.data.role
         // console.log(role)
@@ -133,9 +150,7 @@ export default {
         // .catch((error) => {
         //     console.log(error);
         // });
-      } catch (error) {
-        this.msg = error;
-      }
+     
     }
   }
 };

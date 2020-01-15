@@ -15,6 +15,9 @@
 <script>
 import EstimatesTable from "./Tables/ListOfEstimatesTable";
 import axios from "axios";
+import router from "../router"
+import {MapGetter} from "../store"
+
 
   export default {
     name: 'estimates',
@@ -30,12 +33,15 @@ import axios from "axios";
     },
     //fetches estimates when the component is created
     async created(){
+      if (!this.$store.getters.isLoggedIn) {
+      router.push('/')
+    }
       try {
         const res = await axios.get(`http://localhost:8081/api/estimate-requests`)
 
         this.estimates = res.data;
       } catch(e){
-        console.error(e)
+        // console.error(e)
       }
     },
 
