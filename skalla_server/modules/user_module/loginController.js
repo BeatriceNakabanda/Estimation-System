@@ -35,7 +35,7 @@ class loginController {
             res.status(200).send({
               token,
               email: user.email,
-              username: user.username,
+              name: user.name,
               role: user.role,
               status: "successful login"
             });

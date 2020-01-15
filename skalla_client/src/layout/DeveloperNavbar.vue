@@ -25,6 +25,8 @@
     </base-nav>
 </template>
 <script>
+import router from "../router"
+import store from "../store"
   export default {
     data() {
       return {
@@ -35,12 +37,13 @@
         role: ''
       };
     },
+
     async created() {
-    if (!this.store.getters.isLoggedIn) {
-      this.$router.push('/login')
+    if (!this.$store.getters.isLoggedIn) {
+      router.push('/login')
     }
-    this.name = this.store.getters.getUser.name
-    this.role = this.store.getters.getUser.role
+    this.name = this.$store.getters.getUser.name
+    this.role = this.$store.getters.getUser.role
     },
     methods: {
       toggleSidebar() {

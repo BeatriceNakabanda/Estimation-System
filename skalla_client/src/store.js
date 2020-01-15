@@ -40,7 +40,7 @@ export default new Vuex.Store({
   },
   // creating login and logout actions
   actions: {
-    login: ({ commit, dispatch }, { token, user }) => {
+    login: ({ commit }, { token, user }) => {
       commit("SET_TOKEN", token);
       commit("SET_USER", user);
 
@@ -51,15 +51,15 @@ export default new Vuex.Store({
       commit("RESET", "");
     }
   },
-  modules: NameRole
+//   modules: NameRole
 });
 
-const NameRole = {
-  state: {
-    name: "",
-    role: ""
-  },
-  mutations: {},
-  actions: {},
-  getters: {}
-};
+// const NameRole = {
+//   state: {
+//     name: "",
+//     role: ""
+//   },
+//   mutations: {},
+//   actions: {},
+//   getters: {}
+// };

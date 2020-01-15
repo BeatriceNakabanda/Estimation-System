@@ -10,15 +10,23 @@ export default {
         .post(url + 'user/userlogin', credentials)
         .then(response => {
             response.data
+            const token = response.data.token
             const role = response.data.role
-            const name = response.data.name;
-            console.log(role)
-            console.log(name);
-            if(role === 'Developer'){
-                router.push('/pending-estimates')
-              }else if(role === 'Project Manager'){
-                router.push('/estimates')
-              }
+            const email = response.data.email
+            const name = response.data.name
+
+            const user ={
+                name,
+                email,
+                role
+            }
+            // console.log(role)
+            // console.log(response);
+
+            return {
+                user,
+                token
+            }
         })
         
     },

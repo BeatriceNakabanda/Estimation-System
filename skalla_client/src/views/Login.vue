@@ -39,7 +39,7 @@
                 @click="signIn"
                 >Sign in</base-button
               >
-                  <p v-if="msg">{{ msg }}</p>
+                  <p class="text-danger" v-if="msg">{{ msg }}</p>
             </div>
             </form>
                 </div>
@@ -51,7 +51,7 @@
 import router from "../router";
 import axios from "axios";
 import AuthService from "../services/AuthService";
-import store from "../store";
+// import store from "../store";
 
 // Validating email and password
 const validateEmail = email => {
@@ -108,49 +108,72 @@ export default {
           this.valid = validPassword.valid;
         }
         //sending captured data to the server
-        axios.post(
-          "http://localhost:8081/api/user/userlogin",
-          this.credentials
-        );
+        // axios.post(
+        //   "http://localhost:8081/api/user/userlogin",
+        //   this.credentials
+        // );
         const response = await AuthService.login(this.credentials);
         // .then((response) =>{
 
-              const token = response.token;
-              const user = response.user
-              
-              this.$store.dispatch('login', { token, user });
+        const token = response.token;
+        const user = response.user;
+        const role = response.user.role;
+
+        // const email = response.email
+
+        console.log(response);
+
+        //console.log(role)
+
+              this.$store.dispatch('login', { token, user});
               
 
                 // const role = response.data.role
                 // console.log(role)
-                // if(role === 'Developer'){
-                //   router.push('/pendingEstimates')
-                // }else if(role === 'Project Manager'){
-                //   router.push('/estimates')
-                // }
+                if(role === 'Developer'){
+                  router.push('/pending-estimates')
+                }else if(role === 'Project Manager'){
+                  router.push('/estimates')
+                }
             // })
             // .catch((error) => {
             //     console.log(error);
             // });
        }catch (error) {
               
-              this.msg = 'Invalid user login'
+              this.msg = 'Wrong email or password'
               
               // console.log(error);
             }
 
         // const role = response.data.role
         // console.log(role)
-        // if(role === 'Developer'){
-        //   router.push('/pendingEstimates')
-        // }else if(role === 'Project Manager'){
-        //   router.push('/estimates')
-        // }
+        if (role === "Developer") {
+          router.push("/pending-estimates");
+        } else if (role === "Project Manager") {
+          router.push("/estimates");
+        }
         // })
         // .catch((error) => {
         //     console.log(error);
         // });
-     
+      } catch (error) {
+        this.msg = "Invalid user login";
+
+        // console.log(error);
+      }
+
+      // const role = response.data.role
+      // console.log(role)
+      // if(role === 'Developer'){
+      //   router.push('/pendingEstimates')
+      // }else if(role === 'Project Manager'){
+      //   router.push('/estimates')
+      // }
+      // })
+      // .catch((error) => {
+      //     console.log(error);
+      // });
     }
   }
 };
