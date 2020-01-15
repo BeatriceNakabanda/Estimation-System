@@ -20,7 +20,7 @@ export default {
         })
         
     },
-    
+
     getSecretContent(){
         return axios.get(url + 'secret-route/').then(response => response.data)
     }

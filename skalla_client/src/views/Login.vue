@@ -118,8 +118,8 @@
               const token = response.token;
               const user = response.user
               
-              store.dispatch('login', { token, user });
-              console.log(token)
+              this.$store.dispatch('login', { token, user });
+              
 
                 // const role = response.data.role
                 // console.log(role)
@@ -133,7 +133,10 @@
             //     console.log(error);
             // });
        }catch (error) {
-              this.msg = error
+              
+              this.msg = 'Invalid user login'
+              
+              // console.log(error);
             }
 
       

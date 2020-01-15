@@ -26,8 +26,9 @@
 </template>
 <script>
   // import axios from "axios"
-  // import router from "../router"
-  import store from "../store"
+// import { mapGetters } from 'vuex';
+import router from "../router"
+import store from "../store"
   export default {
     data() {
       return {
@@ -42,12 +43,16 @@
         role: ''
       };
     },
+
     async created() {
-    if (!store.getters.isLoggedIn) {
-      this.$router.push('/login')
+    if (!this.$store.getters.isLoggedIn) {
+      router.push('/')
+    }else{
+      this.name = this.$store.getters.getUser.name
+      this.role = this.$store.getters.getUser.role
+      console.log(this.role)
     }
-    this.name = store.getters.getUser.name
-    this.role = store.getters.getUser.role
+    
     },
     methods: {
       toggleSidebar() {
