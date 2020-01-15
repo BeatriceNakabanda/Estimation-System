@@ -28,7 +28,7 @@ exports.singleEstimate = function(req, res, next) {
 };
 
 //create estimate
-/* exports.createEstimate = function(req, res, next) {
+exports.createEstimate = function(req, res, next) {
     const newEstimate = new Estimate(req.body);
     newEstimate.save({})
       .exec(function(err, estimate) {
@@ -38,7 +38,7 @@ exports.singleEstimate = function(req, res, next) {
           res.json(estimate);
         }
       });
-  }; */
+  };
 
 //update a single estimate
 /* exports.updateEstimate = function(req, res, next) {
