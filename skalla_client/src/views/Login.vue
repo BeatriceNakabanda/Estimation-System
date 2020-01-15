@@ -48,7 +48,7 @@
       </div>
 </template>
 <script>
-// import router from "../router";
+import router from "../router";
 import axios from "axios";
 import AuthService from "../services/AuthService";
 // import store from "../store";
@@ -115,19 +115,26 @@ export default {
         const response = await AuthService.login(this.credentials);
         // .then((response) =>{
 
-              const token = response.token;
+              const token = response.token
               const user = response.user
-              
-              this.$store.dispatch('login', { token, user });
+              const role = response.user.role
+
+              // const email = response.email
+
+              console.log(response)
+
+              console.log(role)
+
+              this.$store.dispatch('login', { token, user});
               
 
                 // const role = response.data.role
                 // console.log(role)
-                // if(role === 'Developer'){
-                //   router.push('/pendingEstimates')
-                // }else if(role === 'Project Manager'){
-                //   router.push('/estimates')
-                // }
+                if(role === 'Developer'){
+                  router.push('/pending-estimates')
+                }else if(role === 'Project Manager'){
+                  router.push('/estimates')
+                }
             // })
             // .catch((error) => {
             //     console.log(error);

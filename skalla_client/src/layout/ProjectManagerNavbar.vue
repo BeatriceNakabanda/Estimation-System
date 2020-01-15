@@ -35,10 +35,7 @@ import store from "../store"
         activeNotifications: false,
         showMenu: false,
         searchQuery: '',
-        user: {
-            name: 'David Pereira',
-            role: 'Project Manager'
-        },
+        
         name: '',
         role: ''
       };
