@@ -14,7 +14,7 @@ router.get("/estimate/:requestId", estimateController.singleEstimate);
 router.post("/estimate", estimateController.createEstimate);
 
 //update a single estimate
-// router.put("/estimate/:requestId", () => { estimateController.updateEstimate });
+router.put("/estimate/:requestId", estimateController.updateEstimate);
 
 module.exports = router;
 
