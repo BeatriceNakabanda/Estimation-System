@@ -25,8 +25,6 @@
     </base-nav>
 </template>
 <script>
-  // import axios from "axios"
-// import { mapGetters } from 'vuex';
 import router from "../router"
 import store from "../store"
   export default {

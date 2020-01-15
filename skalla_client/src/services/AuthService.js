@@ -21,18 +21,12 @@ export default {
                 role
             }
             // console.log(role)
-            console.log(name);
-            console.log(response);
+            // console.log(response);
 
             return {
                 user,
                 token
             }
-            // if(role === 'Developer'){
-            //     router.push('/pending-estimates')
-            //   }else if(role === 'Project Manager'){
-            //     router.push('/estimates')
-            //   }
         })
         
     },
