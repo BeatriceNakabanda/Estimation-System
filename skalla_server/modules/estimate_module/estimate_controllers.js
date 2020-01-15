@@ -16,7 +16,7 @@ exports.estimateList = function(req, res, next) {
 };
 
 //get a single estimate
-/* exports.singleEstimate = function(req, res, next) {
+exports.singleEstimate = function(req, res, next) {
     Estimate.findById({ _id: req.params.requestId })
       .exec(function(err, estimate) {
         if (err) {
@@ -26,7 +26,7 @@ exports.estimateList = function(req, res, next) {
         }
       });
 };
- */
+
 //create estimate
 /* exports.createEstimate = function(req, res, next) {
     const newEstimate = new Estimate(req.body);
