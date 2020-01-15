@@ -11,7 +11,7 @@ router.get("/estimates", estimateController.estimateList );
 router.get("/estimate/:requestId", estimateController.singleEstimate);
 
 //create a single estimate
-// router.post("/estimate", () => { estimateController.createEstimate });
+router.post("/estimate", estimateController.createEstimate);
 
 //update a single estimate
 // router.put("/estimate/:requestId", () => { estimateController.updateEstimate });
