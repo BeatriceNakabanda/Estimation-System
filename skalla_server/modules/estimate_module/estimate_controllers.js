@@ -41,7 +41,7 @@ exports.createEstimate = function(req, res, next) {
   };
 
 //update a single estimate
-/* exports.updateEstimate = function(req, res, next) {
+exports.updateEstimate = function(req, res, next) {
     Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body)
       .exec(function(err, estimate) {
         if (err) {
@@ -50,4 +50,4 @@ exports.createEstimate = function(req, res, next) {
           res.json(estimate);
         }
       });
-}; */
+};
