@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const projectsRouter = require('./modules/project_module/project_routes');
 const estimateRequestRouter = require('./modules/estimateRequest_module/estimateRequest_routes');
 const usersRouter = require('./modules/user_module/user_routes');
+const estimateRouter = require('./modules/estimate_module/estimate_routes')
 
 //declaring server port
 const port = process.env.PORT || 8081;
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 app.use("/api", projectsRouter);
 app.use("/api", usersRouter);
 app.use("/api", estimateRequestRouter);
+app.use("/api", estimateRouter);
 
 //user log in
 app.post("/api/login", (req, res, next) => {
