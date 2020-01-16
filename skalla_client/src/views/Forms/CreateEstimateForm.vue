@@ -180,7 +180,7 @@ export default {
             taskDescription: this.estimate.taskDescription
         }
         console.log(newEstimate)
-        axios.post('http://localhost:8081/api/estimate-request', newEstimate)
+        axios.get('http://localhost:8081/api/estimate-request')
             .then((response) =>{
                 console.log(response);
             })

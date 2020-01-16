@@ -11,6 +11,11 @@ router.get(
   loginController.CheckToken,
   estimateRequestController.estimateRequestList
 );
+router.get(
+  "/draft-estimates",
+  loginController.CheckToken,
+  estimateRequestController.draftEstimatelist
+);
 
 //create estimate
 router.post(
