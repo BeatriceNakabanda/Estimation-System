@@ -16,7 +16,16 @@ router.get(
   loginController.CheckToken,
   estimateRequestController.draftEstimatelist
 );
+router.put(
+  "/draft/:requestId",
+  loginController.CheckToken,
+  estimateRequestController.changingDraft
+);
+router.put(
+  "/estimate/:requestId",
 
+  estimateRequestController.changingEstimated
+);
 //create estimate
 router.post(
   "/estimate-request",
