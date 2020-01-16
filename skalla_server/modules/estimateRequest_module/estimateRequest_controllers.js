@@ -30,7 +30,7 @@ exports.Estimatedlist = function(req, res, next) {
 exports.changingDraft = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId },
-    // { status: "Draft" },
+    { status: "Draft" },
     req.body,
     function(next, estimateRequest) {
       if (estimateRequest !== null) {
