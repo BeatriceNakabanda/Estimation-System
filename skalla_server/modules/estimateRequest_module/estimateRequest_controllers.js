@@ -3,11 +3,22 @@ const EstimateRequest = require("./estimateRequest_model");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
+exports.draftEstimatelist = function(req, res, next) {
+  EstimateRequest.find({ status: "Draft" })
+  .exec(function(err, estimateRequest) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimateRequest);
+    }
+  });
+};
+
 //get all estimateRequests
 exports.estimateRequestList = function(req, res, next) {
   EstimateRequest.find({})
-    .populate('project', 'name')
-    .populate('developer', 'name')
+    .populate("project", "name")
+    .populate("developer", "name")
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);
