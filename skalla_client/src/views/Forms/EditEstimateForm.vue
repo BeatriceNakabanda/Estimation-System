@@ -191,10 +191,17 @@ export default {
         // const id = this.estimate.developer.id
         // console.log(id)
 
-
         // console.log(projectManager)
         // console.log(newEstimate)
         // const response = await AuthService.addEstimate(newEstimate);
+        console.log(editedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`, editedEstimate)
+            .then((response) =>{
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
     
             
