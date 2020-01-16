@@ -14,9 +14,9 @@
                         
                         @keypress="clearForm"
                        >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project">
+                        <select class="custom-select" id="inputGroupSelect01" v-model="selectedProject">
                         <option value="" disabled>Please select a project</option>
-                        <option v-for="project in projects" v-bind:key="project.id">{{project.name}}</option>
+                        <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                         </select>
             </base-input>
    
@@ -32,11 +32,16 @@
                         placeholder="Add developer here..."
                        :class="{ 'has-error': submitting && invalidDeveloper }" 
                         >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer">
+                        <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
                             <option value="" disabled>Please select a developer</option>
-                            <option v-for="developer in developers" v-bind:key="developer.id">{{developer.name}}</option>
+                            <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
             </base-input>
+            <!-- <p>id: {{selectedProject.id}}</p>
+            <p>name: {{selectedProject.name}}</p>
+            <p>id: {{selectedDeveloper.id}}</p>
+            <p>name: {{selectedDeveloper.name}}</p> -->
+
             </div>
             </div>
             <div class="row">
@@ -44,14 +49,6 @@
                 <h6 class="heading-small text-muted mb-4 float-left">Due Date</h6>
             </div>
             <div class="col-sm">
-                <!-- <base-input addon-left-icon="ni ni-calendar-grid-58"
-                            alternative
-                            class="mb-3"
-                            placeholder="17-07-2019"
-                            v-model="estimate.dueDate"
-                >
-                    
-                </base-input> -->
                 <base-input addon-left-icon="ni ni-calendar-grid-58">
                     <flat-picker slot-scope="{focus, blur}"
                                 @on-open="focus"
@@ -111,6 +108,7 @@
 import axios from 'axios';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
+import AuthService from "../../services/AuthService";
 
 
 export default {
@@ -120,16 +118,20 @@ export default {
         },
     data(){
         return{
+            selectedProject: '',
+            selectedDeveloper: '',
             error: false,
             submitting: false,
             success: false,
             projects: [],
             developers: [],
+
+            
            
         estimate:
           {
-            project: '',
-            developer: '',
+            selectedProject: '',
+            selectedDeveloper: '',
             status: '',
             statusType: '',
             dueDate: '',
@@ -170,27 +172,31 @@ export default {
                 this.error = true
                 return
             }
-
+        // const projectManager = this.$store.getters.getUser.id
         let newEstimate = {
-            project: this.estimate.project,
-            developer: this.estimate.developer,
+            project: this.selectedProject.id,
+            developer: this.selectedDeveloper.id,
             dueDate: this.estimate.dueDate,
             title: this.estimate.title,
-            taskDescription: this.estimate.taskDescription
+            taskDescription: this.estimate.taskDescription,
+            projectManager: this.$store.getters.getUser.id
+
         }
-        console.log(newEstimate)
-        axios.post('http://localhost:8081/api/estimate-request', newEstimate)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        // const id = this.estimate.developer.id
+        // console.log(id)
+
+
+        // console.log(projectManager)
+        // console.log(newEstimate)
+        const response = await AuthService.addEstimate(newEstimate);
+
+    
             
+            console.log(response)
             this.success = true
             this.error = false
-            this.submitting = false               
-        
+            this.submitting = false 
+                         
         },
 
 
@@ -210,6 +216,7 @@ export default {
         this.projects = response.data;
         this.developers = resp.data;
         // window.location.reload();
+        // console.log(this.projects)
       }catch(e){
         console.error(e)
         

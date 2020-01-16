@@ -109,7 +109,6 @@ export default {
         //sending captured data to the server
       
         const response = await AuthService.login(this.credentials);
-        // .then((response) =>{
 
         const token = response.token;
         const user = response.user;
@@ -140,6 +139,18 @@ export default {
 
       
     }
+
+    // const role = response.data.role
+    // console.log(role)
+    // if(role === 'Developer'){
+    //   router.push('/pendingEstimates')
+    // }else if(role === 'Project Manager'){
+    //   router.push('/estimates')
+    // }
+    // })
+    // .catch((error) => {
+    //     console.log(error);
+    // });
   }
 };
 </script>

@@ -9,8 +9,7 @@ Vue.use(Vuex);
 const getDefaultState = () => {
   return {
     token: "",
-    user: {},
-    estimateRequest: {}
+    user: {}
   };
 };
 
@@ -34,9 +33,6 @@ export default new Vuex.Store({
     SET_USER: (state, user) => {
       state.user = user;
     },
-    SET_ESTIMATE_REQUEST: (state, estimateRequest) => {
-      state.estimateRequest = estimateRequest
-    },
     RESET: state => {
       Object.assign(state, getDefaultState);
     }
@@ -49,9 +45,6 @@ export default new Vuex.Store({
 
       //setting Auth header
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    },
-    addEstimate: ({commit}, estimateRequest) => {
-      commit("SET_ESTIMATE_REQUEST", estimateRequest)
     },
     logout: ({ commit }) => {
       commit("RESET", "");
