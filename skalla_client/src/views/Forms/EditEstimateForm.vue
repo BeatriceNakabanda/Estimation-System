@@ -18,6 +18,7 @@
                         <option value="" disabled>Please select a project</option>
                         <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                         </select>
+                        
             </base-input>
    
             </div>
@@ -37,10 +38,10 @@
                             <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
             </base-input>
-            <!-- <p>id: {{selectedProject.id}}</p>
+            <p>id: {{selectedProject.id}}</p>
             <p>name: {{selectedProject.name}}</p>
             <p>id: {{selectedDeveloper.id}}</p>
-            <p>name: {{selectedDeveloper.name}}</p> -->
+            <p>name: {{selectedDeveloper.name}}</p>
 
             </div>
             </div>
@@ -100,7 +101,12 @@
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
             <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
-
+            <!-- <ul v-for="project in projects" :key="project.id">
+                <li>{{project.name}}</li>
+            </ul> -->
+            <ul v-for="estimate in estimates" :key="estimate.id">
+                <li>{{estimate.title}}</li>
+            </ul>
         </form>
         
 </template>
@@ -173,7 +179,7 @@ export default {
                 return
             }
         // const projectManager = this.$store.getters.getUser.id
-        let newEstimate = {
+        let editedEstimate = {
             project: this.selectedProject.id,
             developer: this.selectedDeveloper.id,
             dueDate: this.estimate.dueDate,
@@ -185,10 +191,17 @@ export default {
         // const id = this.estimate.developer.id
         // console.log(id)
 
-
         // console.log(projectManager)
         // console.log(newEstimate)
         // const response = await AuthService.addEstimate(newEstimate);
+        console.log(editedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`, editedEstimate)
+            .then((response) =>{
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
     
             
@@ -214,9 +227,11 @@ export default {
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         // const respons = await axios.get(`http://localhost:8081/api/estimate-request/5e202bf35dfb7025a93e779d` )
 
-        const res = await axios.get(`http://localhost:8081/api/estimate-request/5e202bf35dfb7025a93e779d`)
+        const res = await axios.get(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`)
 
-        this.estimates = res.data;
+        // this.estimates = res.data;
+        this.estimate = res.data; 
+        console.log(res)
         this.projects = response.data;
         this.developers = resp.data;
         // this.estimate = respons.data;
