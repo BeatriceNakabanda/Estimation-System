@@ -1,6 +1,5 @@
 //making requests to the server
 import axios from "axios";
-import router from "../router";
 
 const url = "http://localhost:8081/api/";
 
@@ -23,7 +22,6 @@ export default {
                 id
             }
             // console.log(role)
-            console.log(id)
             // console.log(response);
             return {
                 user,
