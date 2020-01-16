@@ -15,6 +15,18 @@ exports.draftEstimatelist = function(req, res, next) {
     }
   });
 };
+exports.Estimatedlist = function(req, res, next) {
+  EstimateRequest.find({ status: "Estimated" }).exec(function(
+    err,
+    estimateRequest
+  ) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimateRequest);
+    }
+  });
+};
 exports.changingDraft = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId },

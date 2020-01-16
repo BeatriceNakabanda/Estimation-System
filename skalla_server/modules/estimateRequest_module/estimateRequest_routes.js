@@ -23,7 +23,7 @@ router.put(
 );
 router.put(
   "/estimate/:requestId",
-
+  loginController.CheckToken,
   estimateRequestController.changingEstimated
 );
 //create estimate
