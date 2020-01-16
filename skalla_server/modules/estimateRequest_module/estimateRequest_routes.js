@@ -20,7 +20,7 @@ router.get(
 
 router.get(
   "/estimated",
-
+  loginController.CheckToken,
   estimateRequestController.Estimatedlist
 );
 router.put(
