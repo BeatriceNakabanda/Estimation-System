@@ -179,7 +179,7 @@ export default {
                 return
             }
         // const projectManager = this.$store.getters.getUser.id
-        let newEstimate = {
+        let editedEstimate = {
             project: this.selectedProject.id,
             developer: this.selectedDeveloper.id,
             dueDate: this.estimate.dueDate,
