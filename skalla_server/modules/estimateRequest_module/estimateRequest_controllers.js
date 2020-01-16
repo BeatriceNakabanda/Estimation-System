@@ -31,6 +31,7 @@ exports.changingDraft = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId },
     { status: "Draft" },
+    req.body,
     function(next, estimateRequest) {
       if (estimateRequest !== null) {
         res.json(estimateRequest);
