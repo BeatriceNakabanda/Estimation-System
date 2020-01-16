@@ -49,7 +49,6 @@
 </template>
 <script>
 import router from "../router";
-import axios from "axios";
 import AuthService from "../services/AuthService";
 // import store from "../store";
 
@@ -108,12 +107,8 @@ export default {
           this.valid = validPassword.valid;
         }
         //sending captured data to the server
-        // axios.post(
-        //   "http://localhost:8081/api/user/userlogin",
-        //   this.credentials
-        // );
+      
         const response = await AuthService.login(this.credentials);
-        // .then((response) =>{
 
         const token = response.token;
         const user = response.user;
@@ -121,38 +116,28 @@ export default {
 
         // const email = response.email
 
-        console.log(response);
+        // console.log(response);
 
         //console.log(role)
 
-        this.$store.dispatch("login", { token, user });
+              this.$store.dispatch('login', { token, user});
+              
 
-        // const role = response.data.role
-        // console.log(role)
-        if (role === "Developer") {
-          router.push("/pending-estimates");
-        } else if (role === "Project Manager") {
-          router.push("/estimates");
-        }
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // });
-      } catch (error) {
-        this.msg = "Wrong email or password";
+                // const role = response.data.role
+                // console.log(role)
+                if(role === 'Developer'){
+                  router.push('/pending-estimates')
+                }else if(role === 'Project Manager'){
+                  router.push('/estimates')
+                }
+       }catch (error) {
+              
+              this.msg = 'Wrong email or password'
+              
+            }
 
-        // console.log(error);
-      }
 
-      // const role = response.data.role
-      // console.log(role)
-
-      // })
-      // .catch((error) => {
-      //     console.log(error);
-      // });
-
-      // console.log(error);
+      
     }
 
     // const role = response.data.role

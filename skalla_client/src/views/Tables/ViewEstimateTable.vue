@@ -6,7 +6,7 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}} 
+            {{estimate.title}} 
           </h3>
         </div>
         <div class="col">
@@ -20,15 +20,15 @@
             <div class="col- pl-3 align-self-start">
              
               <p>Project </p>
-              <!-- <p>Project Manager </p> -->
+              <p>Project Manager </p>
               <p>Date Created </p>
               <p>Due Date </p>
               <p>Main Task Description </p>
             </div>
             <div class="col details align-self-start" >
               
-            <p >{{estimate.project}}</p>
-            <!-- <p>{{projectManager}}</p> -->
+            <p >{{estimate.project.name}}</p>
+            <p>{{estimate.projectManager.name}}</p>
             <p>{{estimate.dateCreated}}</p>
             <p>{{estimate.dueDate}}</p>
             </div>
@@ -122,10 +122,12 @@ import axios from "axios";
          estimated: [],
           estimate: {
             dateCreated: "",
+            projectManager: "",
             developer: "",
             dueDate: "",
             project: "",
             taskDescription: "",
+            title: ""
           }
           
           // title: ""

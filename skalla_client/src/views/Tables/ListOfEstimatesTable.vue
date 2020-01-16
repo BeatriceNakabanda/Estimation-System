@@ -69,14 +69,14 @@
             </span>
             <span class="action-icons" id="view" >
               <router-link :to="{params: {id: row._id}}">
-                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click.stop="modal3 = true, addEstimate(`${row._id}`)"></i>
+                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true"></i>
               </router-link>
                     <modal :show.sync="modal3" >
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                       </template>
                       <!-- Edit Estimate Form -->
-                      <!-- <EditEstimateForm  /> -->
+                      <EditEstimateForm  />
                   </modal>
             
             </span>
@@ -100,12 +100,12 @@
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
 import EditEstimateForm from "../Forms/EditEstimateForm";
-import axios from "axios";
-import store from "../../store"
-import { format, compareAsc } from 'date-fns' 
+// import axios from "axios";
+// import store from "../../store"
+import { format } from 'date-fns' 
 // import AuthService from '../services/AuthService';
 
-const baseURL = "http://localhost:8081/api/estimate-requests";
+// const baseURL = "http://localhost:8081/api/estimate-requests";
 
 export default {
   name: "estimates-table",
@@ -128,17 +128,17 @@ export default {
       modal2: false,
       modal3: false,
       format,
-      estimate:
-          {
-            _id: '',
-            project: '',
-            developer: '',
-            status: '',
-            statusType: '',
-            dueDate: '',
-            title: '',
-            taskDescription: '',
-          },
+      // estimate:
+      //     {
+      //       _id: '',
+      //       project: '',
+      //       developer: '',
+      //       status: '',
+      //       statusType: '',
+      //       dueDate: '',
+      //       title: '',
+      //       taskDescription: '',
+      //     },
     };
   },
     // fetches a single estimate when the component is created
@@ -153,51 +153,51 @@ export default {
     // },
   methods: {
     
-    async addEstimate(estimateid){
+    // async addEstimate(estimateid){
             
-            this.submitting = true
+    //         this.submitting = true
 
-                // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-            {
-                this.error = true
-                return
-            }
+    //             // validating empty inputs
+    //         if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+    //         {
+    //             this.error = true
+    //             return
+    //         }
 
-        let edtitedEstimate = {
-            project: this.estimate.project,
-            developer: this.estimate.developer,
-            dueDate: this.estimate.dueDate,
-            title: this.estimate.title,
-            taskDescription: this.estimate.taskDescription
-        }
-        console.log(edtitedEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid, edtitedEstimate)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    //     let edtitedEstimate = {
+    //         project: this.estimate.project,
+    //         developer: this.estimate.developer,
+    //         dueDate: this.estimate.dueDate,
+    //         title: this.estimate.title,
+    //         taskDescription: this.estimate.taskDescription
+    //     }
+    //     console.log(edtitedEstimate)
+    //     axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid, edtitedEstimate)
+    //         .then((response) =>{
+    //             console.log(response);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
             
-            this.success = true
-            this.error = false
-            this.submitting = false               
+    //         this.success = true
+    //         this.error = false
+    //         this.submitting = false               
         
-        },
+    //     },
         
       async created(){
       try{
         if (!this.store.getters.isLoggedIn) {
           this.router.push('/');
         }
-        const response = await axios.get(`http://localhost:8081/api/projects`)
-        const resp = await axios.get(`http://localhost:8081/api/users/developers`)
-        const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
+        // const response = await axios.get(`http://localhost:8081/api/projects`)
+        // const resp = await axios.get(`http://localhost:8081/api/users/developers`)
+        // const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
-        this.projects = response.data;
-        this.developers = resp.data;
-        this.estimate = respons.data;
+        // this.projects = response.data;
+        // this.developers = resp.data;
+        // this.estimate = respons.data;
         // window.location.reload();
       }catch(e){
         console.error(e)

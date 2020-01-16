@@ -83,17 +83,17 @@ exports.createEstimateRequest = function(req, res) {
 };
 
 //get single estimate request
-exports.singleEstimateRequest = function(req, res) {
-  EstimateRequest.findById({ _id: req.params.requestId }, function(
-    next,
-    estimateRequest
-  ) {
-    if (next) {
-      res.send(next);
-    } else {
-      res.json(estimateRequest);
-    }
-  });
+exports.singleEstimateRequest = function(req, res, next) {
+  EstimateRequest.findById({ _id: req.params.requestId })
+    .populate('projectManager', 'name')
+    .populate('project', 'name')
+    .exec(function(err, estimateRequest) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimateRequest);
+      }
+    });
 };
 
 //update single estimate request
