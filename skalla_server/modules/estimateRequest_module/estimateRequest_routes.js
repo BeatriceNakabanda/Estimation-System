@@ -11,10 +11,17 @@ router.get(
   loginController.CheckToken,
   estimateRequestController.estimateRequestList
 );
+
 router.get(
   "/draft-estimates",
   loginController.CheckToken,
   estimateRequestController.draftEstimatelist
+);
+
+router.get(
+  "/estimated",
+
+  estimateRequestController.Estimatedlist
 );
 router.put(
   "/draft/:requestId",
