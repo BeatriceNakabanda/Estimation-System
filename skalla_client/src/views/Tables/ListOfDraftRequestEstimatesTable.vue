@@ -11,12 +11,12 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
+                  :data="draftEstimateRequests" id="left">
         <template  slot="columns"  >
-          <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Developer</th>
+          <th class="bgcolor">Date Created</th>
           <th class="bgcolor"></th>
           <!-- <th class="bgcolor">Action</th> -->
         </template>
@@ -29,18 +29,18 @@
               </div>
             </div>
           </td> -->
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          
           <td class="title">
             {{row.title}}
           </td>
+          
           <td class="project">
             {{row.project}}
           </td>
-          <td class="project-manager">
+          <td class="developer">
             {{row.developer}}
+          </td>
+          <td class="date-created">
+            {{row.dateCreated}}
           </td>
          
           <td >
@@ -73,6 +73,7 @@
   export default {
     name: 'drafts-estimates-table',
     props: {
+      draftEstimateRequests: Array,
       type: {
         type: String
       },
@@ -81,39 +82,6 @@
     data() {
       return {
         modal: false,
-        tableData: [
-          {
-            id: 1,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Refactory',
-            developer: 'Beatrice Nakabanda',
-          },
-          {
-            id: 2,
-            dateCreated: '20-09-2018',
-            title: 'login',
-            project: 'Xente',
-            developer: 'Benjamin Kyamanywa',
-           
-          },
-          {
-           id: 3,
-            dateCreated: '31-02-2019',
-            title: 'Navbar',
-            project: 'Refactory',
-            developer: 'Ronnie Kimbugwe',
-          },
-          {
-            id: 4,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Xente',
-            developer: 'Odong Sunday',
-           
-          },
-         
-        ]
       }
     }
   }
