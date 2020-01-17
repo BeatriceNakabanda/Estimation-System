@@ -40,20 +40,27 @@
             {{row.developer}}
           </td>
           <td class="date-created">
-            {{row.dateCreated}}
+            {{ formatDate(row.dateCreated) }}
           </td>
          
           <td >
-            <span class="action-icons">
+            <!-- Commented out eye icon for viewing as we only need to edit a draft estimate -->
+            <!-- <span class="action-icons">
               <router-link  to="#" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
-            </span>
+            </span> -->
             <span class="action-icons">
-              <router-link  to="#" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
-                
+              <router-link  to="" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="editDraftModal = true"></i>
               </router-link>
+              <modal :show.sync="editDraftModal" >
+                      <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel">Edit Draft Estimate Request</h3>
+                      </template>
+                      <!-- Edit Draft Estimate Request Form -->
+                      <EditDraftEstimateRequestForm  />
+                  </modal>
             </span>
             
           </td>
@@ -70,8 +77,15 @@
   </div>
 </template>
 <script>
+
+import EditDraftEstimateRequestForm from "../Forms/EditDraftEstimateRequestForm";
+import { format } from 'date-fns';
+
   export default {
     name: 'drafts-estimates-table',
+    components: {
+       EditDraftEstimateRequestForm,
+    },
     props: {
       draftEstimateRequests: Array,
       type: {
@@ -81,7 +95,12 @@
     },
     data() {
       return {
-        modal: false,
+        editDraftModal: false,
+      }
+    },
+    methods: {
+      formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd/MM/yyy')
       }
     }
   }
