@@ -13,7 +13,7 @@ router.get(
 );
 
 router.get(
-  "/draft-estimates",
+  "/draft-estimates/request",
   loginController.CheckToken,
   estimateRequestController.draftEstimatelist
 );
