@@ -2,31 +2,37 @@
 const EstimateRequest = require("./estimateRequest_model");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
-
+//getting draft estimate request
 exports.draftEstimatelist = function(req, res, next) {
-  EstimateRequest.find({ status: "Draft" }).exec(function(
-    err,
-    estimateRequest
-  ) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimateRequest);
-    }
-  });
+  EstimateRequest.find({ status: "Draft" })
+    .populate("project", "name")
+    .populate("developer", "name")
+
+    .exec(function(err, estimateRequest) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimateRequest);
+      }
+    });
 };
+
+//getting estimated requests
 exports.Estimatedlist = function(req, res, next) {
-  EstimateRequest.find({ status: "Estimated" }).exec(function(
-    err,
-    estimateRequest
-  ) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimateRequest);
-    }
-  });
+  EstimateRequest.find({ status: "Estimated" })
+    .populate("project", "name")
+    .populate("developer", "name")
+
+    .exec(function(err, estimateRequest) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimateRequest);
+      }
+    });
 };
+
+//changing status to draft
 exports.changingDraft = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId },
@@ -42,6 +48,7 @@ exports.changingDraft = function(req, res) {
   );
 };
 
+//changing status to estimated
 exports.changingEstimated = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId },
@@ -58,7 +65,7 @@ exports.changingEstimated = function(req, res) {
 //Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
 //get all estimateRequests
 exports.estimateRequestList = function(req, res, next) {
-  EstimateRequest.find({})
+  EstimateRequest.find({ status: "Estimated" }, { status: "Submitted" })
     .populate("project", "name")
     .populate("developer", "name")
     .exec(function(err, estimateRequest) {
