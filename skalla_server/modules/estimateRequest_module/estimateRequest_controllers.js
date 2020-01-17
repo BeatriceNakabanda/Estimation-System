@@ -85,8 +85,8 @@ exports.createEstimateRequest = function(req, res) {
 //get single estimate request
 exports.singleEstimateRequest = function(req, res, next) {
   EstimateRequest.findById({ _id: req.params.requestId })
-    .populate('projectManager', 'name')
-    .populate('project', 'name')
+    .populate("projectManager", "name")
+    .populate("project", "name")
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);
