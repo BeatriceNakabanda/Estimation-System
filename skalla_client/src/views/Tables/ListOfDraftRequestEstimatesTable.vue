@@ -32,12 +32,12 @@
           <td class="title">
             {{row.title}}
           </td>
-          
+
           <td class="project">
-            {{row.project}}
+            {{row.project.name}}
           </td>
           <td class="developer">
-            {{row.developer}}
+            {{row.developer.name}}
           </td>
           <td class="date-created">
             {{ formatDate(row.dateCreated) }}
@@ -100,7 +100,7 @@ import { format } from 'date-fns';
     },
     methods: {
       formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd/MM/yyy')
+      return format(new Date(dateCreated), 'dd / MM / yyy')
       }
     }
   }

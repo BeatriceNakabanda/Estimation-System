@@ -65,7 +65,7 @@ exports.changingEstimated = function(req, res) {
 //Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
 //get all estimateRequests
 exports.estimateRequestList = function(req, res, next) {
-  EstimateRequest.find({ status: "Estimated" }, { status: "Submitted" })
+  EstimateRequest.find({})
     .populate("project", "name")
     .populate("developer", "name")
     .exec(function(err, estimateRequest) {
