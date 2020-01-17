@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="addEstimate">
+    <form method="POST" role="form" @submit.prevent="editEstimate">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -168,7 +168,7 @@ export default {
     },
 
     methods: {
-        async addEstimate(){
+        async editEstimate(){
             this.clearForm()
             this.submitting = true
 
@@ -195,7 +195,7 @@ export default {
         // console.log(newEstimate)
         // const response = await AuthService.addEstimate(newEstimate);
         console.log(editedEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`, editedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.id, editedEstimate)
             .then((response) =>{
                 console.log(response);
             })
@@ -227,7 +227,7 @@ export default {
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         // const respons = await axios.get(`http://localhost:8081/api/estimate-request/5e202bf35dfb7025a93e779d` )
 
-        const res = await axios.get(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`)
+        const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
         // this.estimates = res.data;
         this.estimate = res.data; 

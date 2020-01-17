@@ -68,9 +68,9 @@
               </router-link>
             </span>
             <span class="action-icons" id="view" >
-              <router-link :to="{params: {id: row._id}}">
-                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true"></i>
-              </router-link>
+              <!-- <router-link :to=""> -->
+                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true, row._id"></i>
+              <!-- </router-link> -->
                     <modal :show.sync="modal3" >
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
