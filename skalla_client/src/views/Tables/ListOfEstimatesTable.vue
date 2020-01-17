@@ -73,7 +73,7 @@
               </router-link>
                     <modal :show.sync="modal3" >
                       <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
+                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate Request</h3>
                       </template>
                       <!-- Edit Estimate Form -->
                       <EditEstimateForm  />
@@ -220,7 +220,7 @@ export default {
       // },
 
     formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd/MM/yyy')
+      return format(new Date(dateCreated), 'dd / MM / yyy')
     }
   }
 };
