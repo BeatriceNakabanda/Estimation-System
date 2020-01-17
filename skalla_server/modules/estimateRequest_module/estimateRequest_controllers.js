@@ -64,16 +64,10 @@ exports.changingEstimated = function(req, res) {
   );
 };
 //Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
+//mongoose.find({title: {$in: ['some title', 'some other title']}})
 //get all estimateRequests
 exports.estimateRequestList = function(req, res, next) {
-  // EstimateRequest.find({ status: "Submitted" })
-
-  //   .populate("project", "name")
-  //   .populate("developer", "name");
-  //mongoose.find({title: {$in: ['some title', 'some other title']}})
-
   EstimateRequest.find({ status: { $in: ["Estimated", "Submitted"] } })
-
     .populate("project", "name")
     .populate("developer", "name")
     .exec(function(err, estimateRequest) {
