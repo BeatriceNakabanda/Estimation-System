@@ -6,6 +6,8 @@ mongoose.set("useFindAndModify", false);
 //get all estimates
 exports.estimateList = function(req, res, next) {
   Estimate.find({})
+    .populate("developer", "name")
+    .populate("estimateRequestId")
     .exec(function(err, estimates) {
       if (err) {
         return next(err);

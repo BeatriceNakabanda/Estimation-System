@@ -7,7 +7,7 @@ const loginController = require("../user_module/loginController");
 
 //get all estimates
 router.get(
-  "/estimates",
+  "/pending-estimates",
   loginController.CheckToken,
   estimateController.estimateList
 );
