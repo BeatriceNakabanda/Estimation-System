@@ -7,7 +7,7 @@ const loginController = require("../user_module/loginController");
 //get all projects
 router.get(
   "/projects",
-  loginController.CheckToken,
+  // loginController.CheckToken,
   projectController.projectList
 );
 
