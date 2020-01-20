@@ -1,25 +1,18 @@
 //requiring dependencies
-const Estimate = require("./estimate_model");
+const Estimate = require("../estimateRequest_module/estimateRequest_model");
+
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
 //get all estimates
 exports.estimateList = function(req, res, next) {
-  Estimate.find()
-
-    .populate({
-      path: "estimateRequestId",
-      path: "developer",
-      select: "name -_id"
-    })
-
-    .exec(function(err, estimates) {
-      if (err) {
-        return next(err);
-      } else {
-        res.json(estimates);
-      }
-    });
+  Estimate.find().exec(function(err, estimates) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimates);
+    }
+  });
 };
 
 //get a single estimate
