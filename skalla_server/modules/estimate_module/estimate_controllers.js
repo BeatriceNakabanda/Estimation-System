@@ -6,13 +6,21 @@ mongoose.set("useFindAndModify", false);
 
 //get all estimates
 exports.estimateList = function(req, res, next) {
-  Estimate.find().exec(function(err, estimates) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimates);
-    }
-  });
+  Estimate.find()
+
+    .populate({
+      path: "estimateRequestId",
+      path: "project",
+      select: "name -_id"
+    })
+
+    .exec(function(err, estimates) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimates);
+      }
+    });
 };
 
 //get a single estimate
