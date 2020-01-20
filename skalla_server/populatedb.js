@@ -15,7 +15,7 @@ console.log('This script populates some users, estimateRequests, estimates and p
 
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
-if (!userArgs[0].startsWith('mongodb://')) {
+if (!userArgs[0].startsWith('mongodb+srv://')) {
     console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
     return
 }
@@ -136,7 +136,7 @@ estimate.save(function (err) {
     }
     console.log('New Estimate: ' + estimate);
     estimates.push(estimate)
-    cb(null, estimate)
+    cb (null, estimate)
 }  );
 }
 
@@ -203,7 +203,7 @@ function createProjectManagers(cb) {
 function createEstimateRequests(cb) {
     async.parallel([
         function(callback) {
-          estimateRequestCreate(projects[0], users[0], 'Navigation', users[5], '2020-01-15', 'Let us add a navigation bar.', 'Created', callback);
+          estimateRequestCreate(projects[0], users[0], 'Navigation', users[5], '2020-01-15', 'Let us add a navigation bar.', 'Submitted', callback);
         },
         function(callback) {
             estimateRequestCreate(projects[1], users[1], 'Dashboard', users[6], '2020-01-10', 'Let us add a dashboard.', 'Submitted', callback);
@@ -215,13 +215,13 @@ function createEstimateRequests(cb) {
             estimateRequestCreate(projects[3], users[3], 'Categories', users[8], '2020-01-18', 'Let us add categories.', 'Draft', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[4], users[4], 'Credit', users[9], '2020-01-19', 'Let us add a credit section.', 'Created', callback);
+            estimateRequestCreate(projects[4], users[4], 'Credit', users[9], '2020-01-19', 'Let us add a credit section.', 'Draft', callback);
         },
         function(callback) {
             estimateRequestCreate(projects[0], users[0], 'Main Section', users[10], '2020-01-15', 'Let us add a main section.', 'Submitted', callback);
         },
         function(callback) {
-            estimateRequestCreate(projects[1], users[1], 'Content', users[11], '2020-01-15', 'Let us add some dummy content.', 'Created', callback);
+            estimateRequestCreate(projects[1], users[1], 'Content', users[11], '2020-01-15', 'Let us add some dummy content.', 'Draft', callback);
           }
         ],
         // optional callback
