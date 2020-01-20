@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="editEstimate">
+    <form method="POST" role="form" @submit.prevent="handleEdit">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -38,10 +38,10 @@
                             <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
             </base-input>
-            <p>id: {{selectedProject.id}}</p>
+            <!-- <p>id: {{selectedProject.id}}</p>
             <p>name: {{selectedProject.name}}</p>
             <p>id: {{selectedDeveloper.id}}</p>
-            <p>name: {{selectedDeveloper.name}}</p>
+            <p>name: {{selectedDeveloper.name}}</p> -->
 
             </div>
             </div>
@@ -100,13 +100,8 @@
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
-            <!-- <ul v-for="project in projects" :key="project.id">
-                <li>{{project.name}}</li>
-            </ul> -->
-            <ul v-for="estimate in estimates" :key="estimate.id">
-                <li>{{estimate.title}}</li>
-            </ul>
+            <base-button class="shadow-none mt-4" type="primary" @click="handleEdit()">Send request</base-button>
+            <p>Prop:{{ this.estimateId }}</p>
         </form>
         
 </template>
@@ -122,6 +117,15 @@ export default {
     components: {
         flatPicker
         },
+    props: {
+        estimates: Array,
+        type: {
+            type: String
+        },
+        estimateId: String
+
+        },
+
     data(){
         return{
             selectedProject: '',
@@ -131,8 +135,6 @@ export default {
             success: false,
             projects: [],
             developers: [],
-
-            estimates: [],
            
         estimate:
           {
@@ -168,7 +170,7 @@ export default {
     },
 
     methods: {
-        async editEstimate(){
+        async handleEdit(){
             this.clearForm()
             this.submitting = true
 
@@ -188,14 +190,15 @@ export default {
             projectManager: this.$store.getters.getUser.id
 
         }
+        
         // const id = this.estimate.developer.id
         // console.log(id)
 
         // console.log(projectManager)
         // console.log(newEstimate)
-        // const response = await AuthService.addEstimate(newEstimate);
+        console.log(this.estimateId)
         console.log(editedEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.id, editedEstimate)
+        axios.put(`http://localhost:8081/api/estimate-request/${this.estimateId}`, editedEstimate)
             .then((response) =>{
                 console.log(response);
             })
@@ -210,6 +213,9 @@ export default {
             this.error = false
             this.submitting = false 
                          
+        },
+        getId(){
+            this.$ref
         },
 
 
@@ -227,17 +233,18 @@ export default {
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         // const respons = await axios.get(`http://localhost:8081/api/estimate-request/5e202bf35dfb7025a93e779d` )
 
-        const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
+        // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
         // this.estimates = res.data;
-        this.estimate = res.data; 
-        console.log(res)
+        // this.estimate = res.data; 
+        // console.log(res)
         this.projects = response.data;
         this.developers = resp.data;
         // this.estimate = respons.data;
         // window.location.reload();
         // console.log(this.projects)
         // console.log(this.estimate)
+        
       }catch(e){
         console.error(e)
         

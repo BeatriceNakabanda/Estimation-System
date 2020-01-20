@@ -5,8 +5,8 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Request Estimate</base-button>
-          <modal :show.sync="modal1">
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="requestEstimatesModel = true">Request Estimate</base-button>
+          <modal :show.sync="requestEstimatesModel">
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
                       </template>
@@ -69,14 +69,16 @@
             </span>
             <span class="action-icons" id="view" >
               <!-- <router-link :to=""> -->
-                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal3 = true, row._id"></i>
+                <i  class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="handleEdit(row._id)"></i>
               <!-- </router-link> -->
-                    <modal :show.sync="modal3" >
+                    <modal :show.sync="editEstimateModel" >
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
                       </template>
                       <!-- Edit Estimate Form -->
-                      <EditEstimateForm  />
+                      <EditEstimateForm :function = "handleEdit"/>
+                      <EditEstimateForm v-bind:estimateId="estimateId"/>
+
                   </modal>
             
             </span>
@@ -111,80 +113,42 @@ export default {
   name: "estimates-table",
   components: {
     CreateEstimateForm,
-    EditEstimateForm
+    EditEstimateForm 
   },
   props: {
     estimates: Array,
     type: {
       type: String
     },
-    title: String
+    
+    
+    title: String,
   },
   data() {
     return {
-      // editing: null,
       modal: false,
-      modal1: false,
+      requestEstimatesModel: false,
       modal2: false,
-      modal3: false,
+      editEstimateModel: false,
       format,
-      // estimate:
-      //     {
-      //       _id: '',
-      //       project: '',
-      //       developer: '',
-      //       status: '',
-      //       statusType: '',
-      //       dueDate: '',
-      //       title: '',
-      //       taskDescription: '',
-      //     },
+      estimateId: ''
+
+      
     };
   },
-    // fetches a single estimate when the component is created
-    // async created(){
-    //   try {
-    //     const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id) 
-
-    //     this.estimate = res.data; 
-    //   } catch(e){
-    //     console.error(e)
-    //   }
-    // },
   methods: {
+    handleEdit(id){
+       let estimateId = id
+      this.editEstimateModel = true
+      // console.log(estimateId)
+
+
+      return {
+        estimateId: estimateId
+      }
+    },
     
-    // async addEstimate(estimateid){
-            
-    //         this.submitting = true
-
-    //             // validating empty inputs
-    //         if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-    //         {
-    //             this.error = true
-    //             return
-    //         }
-
-    //     let edtitedEstimate = {
-    //         project: this.estimate.project,
-    //         developer: this.estimate.developer,
-    //         dueDate: this.estimate.dueDate,
-    //         title: this.estimate.title,
-    //         taskDescription: this.estimate.taskDescription
-    //     }
-    //     console.log(edtitedEstimate)
-    //     axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid, edtitedEstimate)
-    //         .then((response) =>{
-    //             console.log(response);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-            
-    //         this.success = true
-    //         this.error = false
-    //         this.submitting = false               
-        
-    //     },
+    
         
       async created(){
       try{
@@ -205,19 +169,6 @@ export default {
       }
     },
 
-
-    // editEstimate(id, updatedEstimate){
-    //   this.estimates = this.estimates.map(estimate => estimate.id === id? updatedEstimate : estimate)
-    // },
-    // editEstimate(estimateid){
-    //   this.$router.push({
-    //     name: 'EditEstimate',
-    //     params: { id: estimateid }
-    //   })
-    // },
-      // editMode(id) {
-      //   this.editing = id
-      // },
 
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
