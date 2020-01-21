@@ -11,23 +11,26 @@ router.get(
   loginController.CheckToken,
   estimateRequestController.estimateRequestList
 );
-
+//getting draft estimates
 router.get(
-  "/draft-estimates",
+  "/draft-estimate-requests",
   loginController.CheckToken,
   estimateRequestController.draftEstimatelist
 );
-
+//getting estimated estimate requests
 router.get(
   "/estimated",
   loginController.CheckToken,
   estimateRequestController.Estimatedlist
 );
+
+//changing to draft estimates
 router.put(
   "/draft/:requestId",
   loginController.CheckToken,
   estimateRequestController.changingDraft
 );
+//changing to estimated request
 router.put(
   "/estimate/:requestId",
   loginController.CheckToken,

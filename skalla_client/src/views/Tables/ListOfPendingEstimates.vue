@@ -11,12 +11,12 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
+                  :data="pendingEstimates" id="left">
         <template  slot="columns"  >
-          <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Project Manager</th>
+          <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Action</th>
         </template>
           <template class="table-row" slot-scope="{row} ">
@@ -27,18 +27,18 @@
               </div>
             </div>
           </td> -->
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          
           <td class="title">
             {{row.title}}
           </td>
+          
           <td class="project">
             {{row.project}}
           </td>
           <td class="project-manager">
             {{row.projectManager}}
+          </td>
+          <td class="date-created">
+            {{formatDate(row.dateCreated)}}
           </td>
          
           <td >
@@ -66,9 +66,12 @@
   </div>
 </template>
 <script>
+  import { format } from 'date-fns' 
+
   export default {
     name: 'pending-estimates-table',
     props: {
+      pendingEstimates: Array,
       type: {
         type: String
       },
@@ -110,6 +113,13 @@
          
         ]
       }
+    },
+    methods: {
+
+      formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd / MM / yyy')
+      }
+
     }
   }
 </script>

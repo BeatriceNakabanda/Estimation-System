@@ -74,7 +74,7 @@
               <!-- <template class="edit-estimate-model"  slot-scope="{row}"> -->
                     <modal :show.sync="editEstimateModel" >
                       <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate</h3>
+                          <h3 class="modal-title " id="exampleModalLabel">Edit Estimate Request</h3>
                       </template>
                       <!-- Edit Estimate Form -->
                       <!-- <EditEstimateForm :function = "handleEdit"/>

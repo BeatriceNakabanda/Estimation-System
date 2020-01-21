@@ -11,12 +11,12 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
+                  :data="draftEstimateRequests" id="left">
         <template  slot="columns"  >
-          <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Developer</th>
+          <th class="bgcolor">Date Created</th>
           <th class="bgcolor"></th>
           <!-- <th class="bgcolor">Action</th> -->
         </template>
@@ -29,31 +29,38 @@
               </div>
             </div>
           </td> -->
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          
           <td class="title">
             {{row.title}}
           </td>
+
           <td class="project">
-            {{row.project}}
+            {{row.project.name}}
           </td>
-          <td class="project-manager">
-            {{row.developer}}
+          <td class="developer">
+            {{row.developer.name}}
+          </td>
+          <td class="date-created">
+            {{ formatDate(row.dateCreated) }}
           </td>
          
           <td >
-            <span class="action-icons">
+            <!-- Commented out eye icon for viewing as we only need to edit a draft estimate -->
+            <!-- <span class="action-icons">
               <router-link  to="#" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
-            </span>
+            </span> -->
             <span class="action-icons">
-              <router-link  to="#" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
-                
+              <router-link  to="" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="editDraftModal = true"></i>
               </router-link>
+              <modal :show.sync="editDraftModal" >
+                      <template slot="header">
+                          <h3 class="modal-title " id="exampleModalLabel">Edit Draft Estimate Request</h3>
+                      </template>
+                      <!-- Edit Draft Estimate Request Form -->
+                      <EditDraftEstimateRequestForm  />
+                  </modal>
             </span>
             
           </td>
@@ -70,9 +77,17 @@
   </div>
 </template>
 <script>
+
+import EditDraftEstimateRequestForm from "../Forms/EditDraftEstimateRequestForm";
+import { format } from 'date-fns';
+
   export default {
     name: 'drafts-estimates-table',
+    components: {
+       EditDraftEstimateRequestForm,
+    },
     props: {
+      draftEstimateRequests: Array,
       type: {
         type: String
       },
@@ -80,40 +95,12 @@
     },
     data() {
       return {
-        modal: false,
-        tableData: [
-          {
-            id: 1,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Refactory',
-            developer: 'Beatrice Nakabanda',
-          },
-          {
-            id: 2,
-            dateCreated: '20-09-2018',
-            title: 'login',
-            project: 'Xente',
-            developer: 'Benjamin Kyamanywa',
-           
-          },
-          {
-           id: 3,
-            dateCreated: '31-02-2019',
-            title: 'Navbar',
-            project: 'Refactory',
-            developer: 'Ronnie Kimbugwe',
-          },
-          {
-            id: 4,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Xente',
-            developer: 'Odong Sunday',
-           
-          },
-         
-        ]
+        editDraftModal: false,
+      }
+    },
+    methods: {
+      formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd / MM / yyy')
       }
     }
   }
