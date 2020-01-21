@@ -89,7 +89,7 @@ exports.estimatesubmittedList = function(req, res, next) {
 //changing status to draft
 exports.changingStatusToDraft = function(req, res) {
   Estimate.findByIdAndUpdate(
-    { developer: req.params.requestedId },
+    { _id: req.params.requestedId },
     { status: "Draft" },
     function(next, estimate) {
       if (estimate !== null) {
@@ -103,7 +103,7 @@ exports.changingStatusToDraft = function(req, res) {
 //changing status to submitted
 exports.changingStatusToSubmitted = function(req, res) {
   Estimate.findByIdAndUpdate(
-    { developer: req.params.requestedId },
+    { _id: req.params.requestedId },
     { status: "Submitted" },
     function(next, estimate) {
       if (estimate !== null) {
