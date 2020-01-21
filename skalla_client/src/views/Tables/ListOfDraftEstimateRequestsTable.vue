@@ -154,14 +154,14 @@
                                 <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleCancel" >Cancel</base-button>
                                 <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
                                 <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Edit request</base-button>
-                                <!-- <base-button class="shadow-none mt-4" type="primary" @click="handleSendRequest(row._id)">Send request</base-button> -->
+                                <base-button class="shadow-none mt-4" type="primary" @click="handleSendRequest(row._id)">Send request</base-button>
                               
                             </form>
                   </modal>
             </span>
-             <span class="action-icons" id="view" >
+             <!-- <span class="action-icons" id="view" >
               <i class="rounded-circle ni ni-curved-next" aria-hidden="true" id="my-icons" @click="handleSendRequest(row._id)"></i>
-            </span>
+            </span> -->
             
           </td>
           </template>
@@ -266,8 +266,21 @@ import axios from 'axios'
           handleCancel(){
             this.editDraftModal = false
           },
-          handleSendRequest(){
-            
+          
+          async handleSendRequest(estimateId){
+            // let newEstimateId = this.openEditModel(estimateId)
+            let editedEstimate = {
+                  status: this.estimate.status = "Submitted"
+
+              }
+            axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
+                  .then((response) =>{
+                      console.log(response);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
+
           },
 
           clearForm(){
