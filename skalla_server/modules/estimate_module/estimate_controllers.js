@@ -21,6 +21,36 @@ exports.estimateList = function(req, res, next) {
     });
 };
 
+//getting pending draft estimates
+exports.estimatedraftList = function(req, res, next) {
+  Estimate.find({ status: "Draft" }).exec(function(err, estimate) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimate);
+    }
+  });
+};
+//getting pending draft estimates
+exports.estimatependingList = function(req, res, next) {
+  Estimate.find({ status: "Pending" }).exec(function(err, estimate) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimate);
+    }
+  });
+};
+//getting submitted draft estimates
+exports.estimatesubmittedList = function(req, res, next) {
+  Estimate.find({ status: "Submitted" }).exec(function(err, estimate) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimate);
+    }
+  });
+};
 //get a single estimate
 exports.singleEstimate = function(req, res, next) {
   Estimate.findById({ _id: req.params.requestId }).exec(function(
