@@ -151,12 +151,16 @@
                                 <p v-if="success" class="success-message">
                                     ✅ Request successfully sent
                                 </p>
-                                <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
+                                <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleCancel" >Cancel</base-button>
                                 <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-                                <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Send request</base-button>
+                                <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Edit request</base-button>
+                                <!-- <base-button class="shadow-none mt-4" type="primary" @click="handleSendRequest(row._id)">Send request</base-button> -->
                               
                             </form>
                   </modal>
+            </span>
+             <span class="action-icons" id="view" >
+              <i class="rounded-circle ni ni-curved-next" aria-hidden="true" id="my-icons" @click="handleSendRequest(row._id)"></i>
             </span>
             
           </td>
@@ -256,21 +260,52 @@ import axios from 'axios'
 
                   this.success = true
                   this.error = false
-                  this.submitting = false 
 
               
+          },
+          handleCancel(){
+            this.editDraftModal = false
+          },
+          handleSendRequest(){
+            
           },
 
           clearForm(){
                 this.success = false
                 this.error = false
                 },
-          handleSave() {
-          console.log('testing save' )
-          },
       formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd / MM / yyy')
       },
+      // async handleSendRequest(estimateId){
+      //       this.submitting = true
+      //       let newEstimateId = this.openEditModel(estimateId)
+            
+      //       console.log(newEstimateId)
+      //       // debugger
+      //       let createdEstimate = this.submitting = true
+      //       if(createdEstimate){
+      //       let editedEstimate = {
+      //             project: this.selectedProject.id,
+      //             developer: this.selectedDeveloper.id,
+      //             dueDate: this.estimate.dueDate,
+      //             title: this.estimate.title,
+      //             taskDescription: this.estimate.taskDescription,
+      //             projectManager: this.$store.getters.getUser.id,
+      //             status: this.estimate.status = "Submitted"
+
+      //         }
+      //       axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+      //             .then((response) =>{
+      //                 console.log(response);
+      //             })
+      //             .catch((error) => {
+      //                 console.log(error);
+      //             });
+
+      //       }
+
+      // },
       async created(){
       try{
         if (!this.store.getters.isLoggedIn) {

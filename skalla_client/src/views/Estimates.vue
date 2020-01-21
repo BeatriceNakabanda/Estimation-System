@@ -16,8 +16,6 @@
 import EstimatesTable from "./Tables/ListOfEstimatesTable";
 import axios from "axios";
 import router from "../router"
-
-
   export default {
     name: 'estimates',
     components: {
@@ -26,7 +24,6 @@ import router from "../router"
     data(){
       return{
          estimates: [],
-
         
       }
     },
@@ -37,14 +34,11 @@ import router from "../router"
     }
       try {
         const res = await axios.get(`http://localhost:8081/api/estimate-requests`)
-
         this.estimates = res.data;
       } catch(e){
         // console.error(e)
       }
     },
-
-
       
     
   }
