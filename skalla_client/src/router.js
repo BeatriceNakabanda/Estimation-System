@@ -105,7 +105,7 @@ export default new Router({
             )
         },
         {
-          path: "/pending",
+          path: "/view-pending-estimate/:id",
           name: "Pending Estimate",
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
