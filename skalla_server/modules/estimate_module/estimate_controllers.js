@@ -1,23 +1,22 @@
 //requiring dependencies
+
 const Estimate = require("./estimate_model");
+const EstimateRequest = require("../estimateRequest_module/estimateRequest_model");
+
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
-//get all estimates
+//getting a project,project manager according to developer id
 exports.estimateList = function(req, res, next) {
-  Estimate.find()
-
-    .populate({
-      path: "estimateRequestId",
-      path: "developer",
-      select: "name -_id"
-    })
-
-    .exec(function(err, estimates) {
+  EstimateRequest.find({ developer: req.params.requestedId })
+    .populate({ path: "project", select: "name-_id" })
+    .populate({ path: "projectManager", select: "name-_id" })
+    .populate({ path: "developer", select: "name-_id" })
+    .exec(function(err, estimate) {
       if (err) {
         return next(err);
       } else {
-        res.json(estimates);
+        res.json(estimate);
       }
     });
 };
