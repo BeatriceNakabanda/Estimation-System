@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="addEstimate">
+    <form method="POST" role="form" @submit.prevent="handleEditt()">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -13,14 +13,14 @@
                         :class="{ 'has-error': submitting && invalidProjectName } " 
                         
                         @keypress="clearForm"
-                       >
+                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selectedProject">
                         <option value="" disabled>Please select a project</option>
                         <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                         </select>
                         
             </base-input>
-   
+    
             </div>
             </div>
             <div class="row">
@@ -31,17 +31,17 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                       :class="{ 'has-error': submitting && invalidDeveloper }" 
+                        :class="{ 'has-error': submitting && invalidDeveloper }" 
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
                             <option value="" disabled>Please select a developer</option>
                             <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
             </base-input>
-            <p>id: {{selectedProject.id}}</p>
+            <!-- <p>id: {{selectedProject.id}}</p>
             <p>name: {{selectedProject.name}}</p>
             <p>id: {{selectedDeveloper.id}}</p>
-            <p>name: {{selectedDeveloper.name}}</p>
+            <p>name: {{selectedDeveloper.name}}</p> -->
 
             </div>
             </div>
@@ -72,7 +72,7 @@
                             class="mb-3"
                             placeholder="Add title here..."
                             v-model="estimate.title" 
-                           
+                            
                             :class="{ 'has-error': submitting && invalidTitle }"
                         >
                 </base-input>
@@ -100,13 +100,9 @@
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
-            <!-- <ul v-for="project in projects" :key="project.id">
-                <li>{{project.name}}</li>
-            </ul> -->
-            <ul v-for="estimate in estimates" :key="estimate.id">
-                <li>{{estimate.title}}</li>
-            </ul>
+            <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Send request</base-button>
+            <!-- <p>Prop:{{ this.estimateId }}</p> -->
+            
         </form>
         
 </template>
@@ -122,6 +118,15 @@ export default {
     components: {
         flatPicker
         },
+    props: {
+        estimates: Array,
+        type: {
+            type: String
+        },
+        estimateId: String
+
+        },
+
     data(){
         return{
             selectedProject: '',
@@ -131,8 +136,6 @@ export default {
             success: false,
             projects: [],
             developers: [],
-
-            estimates: [],
            
         estimate:
           {
@@ -168,49 +171,46 @@ export default {
     },
 
     methods: {
-        async addEstimate(){
-            this.clearForm()
-            this.submitting = true
-
+            handleEditt(estimateId){
+                this.submitting = true
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-            {
-                this.error = true
-                return
-            }
-        // const projectManager = this.$store.getters.getUser.id
-        let editedEstimate = {
-            project: this.selectedProject.id,
-            developer: this.selectedDeveloper.id,
-            dueDate: this.estimate.dueDate,
-            title: this.estimate.title,
-            taskDescription: this.estimate.taskDescription,
-            projectManager: this.$store.getters.getUser.id
+                if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+                {
+                    this.error = true
+                    return
+                }
+                console.log()
+                let newEstimateId = this.openEditModel(estimateId)
+                
+                console.log(newEstimateId)
+                // debugger
+                let editedEstimate = {
+                        project: this.selectedProject.id,
+                        developer: this.selectedDeveloper.id,
+                        dueDate: this.estimate.dueDate,
+                        title: this.estimate.title,
+                        taskDescription: this.estimate.taskDescription,
+                        projectManager: this.$store.getters.getUser.id
 
-        }
-        // const id = this.estimate.developer.id
-        // console.log(id)
+                    }
+                axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+                        .then((response) =>{
+                            console.log(response);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
 
-        // console.log(projectManager)
-        // console.log(newEstimate)
-        // const response = await AuthService.addEstimate(newEstimate);
-        console.log(editedEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`, editedEstimate)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                        this.success = true
+                        this.error = false
+                        this.submitting = false 
 
-    
-            
-            // console.log(response)
-            this.success = true
-            this.error = false
-            this.submitting = false 
-                         
-        },
+                    
+                },
+        
+        // this.success = true
+        //     this.error = false
+        //     this.submitting = false 
 
 
     clearForm(){
@@ -227,22 +227,26 @@ export default {
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         // const respons = await axios.get(`http://localhost:8081/api/estimate-request/5e202bf35dfb7025a93e779d` )
 
-        const res = await axios.get(`http://localhost:8081/api/estimate-request/5e180b39b4b5d024f49de02a`)
+        // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
 
         // this.estimates = res.data;
-        this.estimate = res.data; 
-        console.log(res)
+        // this.estimate = res.data; 
+        // console.log(res)
         this.projects = response.data;
         this.developers = resp.data;
         // this.estimate = respons.data;
         // window.location.reload();
         // console.log(this.projects)
         // console.log(this.estimate)
+        
       }catch(e){
         console.error(e)
         
       }
+      
+
     },
+   
     
     
 }
