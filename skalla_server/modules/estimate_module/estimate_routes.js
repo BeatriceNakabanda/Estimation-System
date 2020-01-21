@@ -37,20 +37,20 @@ router.get(
   estimateController.estimatesubmittedList
 );
 
-router.post(
+router.put(
   "/change-draft/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.changingStatusToDraft
 );
-router.post(
+router.put(
   "/change-submitted/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.changingStatusToSubmitted
 );
 //get a single estimate
 router.get(
   "/estimate/:requestId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
   estimateController.singleEstimate
 );
 
