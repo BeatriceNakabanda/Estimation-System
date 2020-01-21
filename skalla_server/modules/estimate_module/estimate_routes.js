@@ -5,9 +5,16 @@ const estimateController = require("./estimate_controllers");
 const loginController = require("../user_module/loginController");
 // const loginController = require("../user_module/loginController");
 
-//get all estimates
+//get all estimates for a given developer
 router.get(
-  "/pending-estimates",
+  "/pending-estimates/:requestedId",
+  //loginController.CheckToken,
+
+  estimateController.estimateList
+);
+//get all draft estimates
+router.get(
+  "/draft-estimates",
   // loginController.CheckToken,
   estimateController.estimateList
 );
