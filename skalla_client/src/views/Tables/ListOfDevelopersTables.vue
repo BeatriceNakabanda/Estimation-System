@@ -45,7 +45,6 @@
 
 <script>
 import axios from "axios";
-import EditEstimateForm from "../Forms/EditEstimateForm";
 
 export default {
   name: "developers-table",
@@ -63,9 +62,6 @@ export default {
         developers: ""
       }
     };
-  },
-  mounted() {
-    created();
   },
 
   async created() {

@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-  import EstimatesTable from './Tables/ListOfDraftRequestEstimatesTable'
+  import EstimatesTable from './Tables/ListOfDraftEstimateRequestsTable'
   import axios from "axios";
   import router from "../router"
 

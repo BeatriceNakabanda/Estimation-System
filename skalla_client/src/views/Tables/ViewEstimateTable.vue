@@ -25,17 +25,17 @@
               <p>Due Date </p>
               <p>Main Task Description </p>
             </div>
-            <div class="col details align-self-start" >
-              
-            <p >{{estimate.project.name}}</p>
-            <p>{{estimate.projectManager.name}}</p>
-            <p>{{estimate.dateCreated}}</p>
-            <p>{{estimate.dueDate}}</p>
+            <div class="col details align-self-start" > 
+              <p>{{estimate.project.name}}</p>
+              <p>{{estimate.projectManager.name}}</p>
+              <p>{{estimate.dateCreated}}</p>
+              <p>{{estimate.dueDate}}</p>
+              <p>{{estimate.taskDescription}}</p>
             </div>
           </div>
-          <div class="pl-3 row details" >
+          <!-- <div class="pl-3 row details" >
             <p>{{estimate.taskDescription}}</p>
-          </div>
+          </div> -->
         </div>   
     </div>
     <div class="table-responsive table-hover">
