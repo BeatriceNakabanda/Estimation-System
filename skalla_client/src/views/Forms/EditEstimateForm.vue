@@ -1,5 +1,5 @@
 <template>
-    <form method="POST" role="form" @submit.prevent="handleEdit">
+    <form method="POST" role="form" @submit.prevent="handleEditt()">
         <div>
             <div class="row">
             <div class="col-sm-3">          
@@ -13,14 +13,14 @@
                         :class="{ 'has-error': submitting && invalidProjectName } " 
                         
                         @keypress="clearForm"
-                       >
+                        >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selectedProject">
                         <option value="" disabled>Please select a project</option>
                         <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                         </select>
                         
             </base-input>
-   
+    
             </div>
             </div>
             <div class="row">
@@ -31,7 +31,7 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                       :class="{ 'has-error': submitting && invalidDeveloper }" 
+                        :class="{ 'has-error': submitting && invalidDeveloper }" 
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
                             <option value="" disabled>Please select a developer</option>
@@ -72,7 +72,7 @@
                             class="mb-3"
                             placeholder="Add title here..."
                             v-model="estimate.title" 
-                           
+                            
                             :class="{ 'has-error': submitting && invalidTitle }"
                         >
                 </base-input>
@@ -100,8 +100,9 @@
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="handleEdit()">Send request</base-button>
-            <p>Prop:{{ this.estimateId }}</p>
+            <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Send request</base-button>
+            <!-- <p>Prop:{{ this.estimateId }}</p> -->
+            
         </form>
         
 </template>
@@ -170,53 +171,46 @@ export default {
     },
 
     methods: {
-        async handleEdit(){
-            this.clearForm()
-            this.submitting = true
-
+            handleEditt(estimateId){
+                this.submitting = true
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-            {
-                this.error = true
-                return
-            }
-        // const projectManager = this.$store.getters.getUser.id
-        let editedEstimate = {
-            project: this.selectedProject.id,
-            developer: this.selectedDeveloper.id,
-            dueDate: this.estimate.dueDate,
-            title: this.estimate.title,
-            taskDescription: this.estimate.taskDescription,
-            projectManager: this.$store.getters.getUser.id
+                if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+                {
+                    this.error = true
+                    return
+                }
+                console.log()
+                let newEstimateId = this.openEditModel(estimateId)
+                
+                console.log(newEstimateId)
+                // debugger
+                let editedEstimate = {
+                        project: this.selectedProject.id,
+                        developer: this.selectedDeveloper.id,
+                        dueDate: this.estimate.dueDate,
+                        title: this.estimate.title,
+                        taskDescription: this.estimate.taskDescription,
+                        projectManager: this.$store.getters.getUser.id
 
-        }
+                    }
+                axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+                        .then((response) =>{
+                            console.log(response);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                        this.success = true
+                        this.error = false
+                        this.submitting = false 
+
+                    
+                },
         
-        // const id = this.estimate.developer.id
-        // console.log(id)
-
-        // console.log(projectManager)
-        // console.log(newEstimate)
-        console.log(this.estimateId)
-        console.log(editedEstimate)
-        axios.put(`http://localhost:8081/api/estimate-request/${this.estimateId}`, editedEstimate)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-    
-            
-            // console.log(response)
-            this.success = true
-            this.error = false
-            this.submitting = false 
-                         
-        },
-        getId(){
-            this.$ref
-        },
+        // this.success = true
+        //     this.error = false
+        //     this.submitting = false 
 
 
     clearForm(){
@@ -249,7 +243,10 @@ export default {
         console.error(e)
         
       }
+      
+
     },
+   
     
     
 }
