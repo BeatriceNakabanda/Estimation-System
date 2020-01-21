@@ -43,13 +43,13 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="#" id="view">
+              <router-link  :to="`/view-pending-estimate/${row._id}`" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span>
             <!-- <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+              <router-link  :to="#" id="view">
+                <i class="rounded-circle fas fa-pen" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span> -->
           </td>
@@ -79,39 +79,7 @@
     },
     data() {
       return {
-        tableData: [
-          {
-            id: 1,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Refactory',
-            projectManager: 'David Pereira',
-          },
-          {
-            id: 2,
-            dateCreated: '20-09-2018',
-            title: 'login',
-            project: 'Xente',
-            projectManager: 'David Pereira',
-           
-          },
-          {
-           id: 3,
-            dateCreated: '31-02-2019',
-            title: 'Navbar',
-            project: 'Refactory',
-            projectManager: 'David Pereira',
-          },
-          {
-            id: 4,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Xente',
-            projectManager: 'Cindy',
-           
-          },
-         
-        ]
+
       }
     },
     methods: {
