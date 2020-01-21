@@ -97,7 +97,7 @@
             <p v-if="success" class="success-message">
                 ✅ Request successfully sent
             </p>
-            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
+            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
             <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
 
@@ -173,26 +173,22 @@ export default {
                 return
             }
         // const projectManager = this.$store.getters.getUser.id
-        let newEstimate = {
-            project: this.selectedProject.id,
-            developer: this.selectedDeveloper.id,
-            dueDate: this.estimate.dueDate,
-            title: this.estimate.title,
-            taskDescription: this.estimate.taskDescription,
-            projectManager: this.$store.getters.getUser.id
+        let createdEstimate = this.submitting = true
+        if(createdEstimate){
+            let newEstimate = {
+                project: this.selectedProject.id,
+                developer: this.selectedDeveloper.id,
+                dueDate: this.estimate.dueDate,
+                title: this.estimate.title,
+                taskDescription: this.estimate.taskDescription,
+                projectManager: this.$store.getters.getUser.id,
+                status: this.estimate.status = "Submitted"
 
         }
-        // const id = this.estimate.developer.id
-        // console.log(id)
-
-
-        // console.log(projectManager)
-        // console.log(newEstimate)
         const response = await AuthService.addEstimate(newEstimate);
+        console.log(response)
 
-    
-            
-            console.log(response)
+        }
             this.success = true
             this.error = false
             this.submitting = false 
@@ -204,8 +200,35 @@ export default {
                 this.success = false
                 this.error = false
             },
-      handleSave() {
+      async handleSaveDraft() {
       console.log('testing save' )
+        this.clearForm()
+        this.submitting = true
+            // validating empty inputs
+            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+            {
+                this.error = true
+                return
+            }
+            let draftedEstimate = this.submitting = true
+            if(draftedEstimate){
+                let newEstimate = {
+                project: this.selectedProject.id,
+                developer: this.selectedDeveloper.id,
+                dueDate: this.estimate.dueDate,
+                title: this.estimate.title,
+                taskDescription: this.estimate.taskDescription,
+                projectManager: this.$store.getters.getUser.id,
+                status: this.estimate.status = "Draft"
+
+                }
+            const response = await AuthService.addEstimate(newEstimate);
+            console.log(response)
+
+            }
+            this.success = true
+            this.error = false
+
       },  
     },
     async created(){

@@ -5,8 +5,8 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="requestEstimatesModel = true">Request Estimate</base-button>
-          <modal :show.sync="requestEstimatesModel">
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Request Estimate</base-button>
+          <modal :show.sync="modal1">
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
                       </template>
@@ -67,7 +67,7 @@
                 </modal>
               </router-link>
             </span>
-         
+           
             
             
           </td>
@@ -87,154 +87,122 @@
 </template>
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
-import flatPicker from "vue-flatpickr-component";
-import "flatpickr/dist/flatpickr.css";
-import axios from "axios";
+import EditEstimateForm from "../Forms/EditEstimateForm";
+// import axios from "axios";
+// import store from "../../store"
 import { format } from 'date-fns' 
+// import AuthService from '../services/AuthService';
+// const baseURL = "http://localhost:8081/api/estimate-requests";
 export default {
-
   name: "estimates-table",
   components: {
     CreateEstimateForm,
-    // EditEstimateForm 
-    flatPicker
+    EditEstimateForm
   },
   props: {
     estimates: Array,
     type: {
       type: String
     },
-    title: String,
+    title: String
   },
-  
-  
   data() {
     return {
+      // editing: null,
       modal: false,
-      requestEstimatesModel: false,
+      modal1: false,
       modal2: false,
-      editEstimateModel: false,
+      modal3: false,
       format,
-      // estimateId: '',
-            selectedProject: '',
-            selectedDeveloper: '',
-            error: false,
-            submitting: false,
-            success: false,
-            projects: [],
-            developers: [],
-           
-        estimate:
-          {
-            selectedProject: '',
-            selectedDeveloper: '',
-            status: '',
-            statusType: '',
-            dueDate: '',
-            title: '',
-            taskDescription: '',
-          },
-
-      
+      // estimate:
+      //     {
+      //       _id: '',
+      //       project: '',
+      //       developer: '',
+      //       status: '',
+      //       statusType: '',
+      //       dueDate: '',
+      //       title: '',
+      //       taskDescription: '',
+      //     },
     };
   },
-       // automatically computed properties(functions) to validate form inputs 
-    computed: {
-        invalidProjectName(){
-            return this.estimate.project === ''
-        },
-        invalidDeveloper(){
-            return this.estimate.developers === ''
-        },
-        invalidDueDate(){
-            return this.estimate.dueDate === ''
-        },
-        invalidTitle(){
-            return this.estimate.title === ''
-        },
-        invalidTaskDescription(){
-            return this.estimate.taskDescription === ''
-        }
-
-    },
+    // fetches a single estimate when the component is created
+    // async created(){
+    //   try {
+    //     const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id) 
+    //     this.estimate = res.data; 
+    //   } catch(e){
+    //     console.error(e)
+    //   }
+    // },
   methods: {
-    openEditModel(estimateId){
-      this.editEstimateModel = true
-      // this.estimateId
-      console.log(estimateId)
-      
-      return estimateId
-    },
-    handleEditt(estimateId){
-      this.submitting = true
-      this.clearForm()
-      // validating empty inputs
-        if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-            {
-                this.error = true
-                return
-            }
-      let newEstimateId = this.openEditModel(estimateId)
-      
-      console.log(newEstimateId)
-      // debugger
-      let editedEstimate = {
-            project: this.selectedProject.id,
-            developer: this.selectedDeveloper.id,
-            dueDate: this.estimate.dueDate,
-            title: this.estimate.title,
-            taskDescription: this.estimate.taskDescription,
-            projectManager: this.$store.getters.getUser.id
-
-        }
-      axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-            this.success = true
-            this.error = false
-            this.submitting = false 
-
-        
-    },
-    clearForm(){
-                this.success = false
-                this.error = false
-            },
-      handleSave() {
-      console.log('testing save' )
-      }, 
     
-    formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd/MM/yyy')
-    }
-  },
-  async created(){
+    // async addEstimate(estimateid){
+            
+    //         this.submitting = true
+    //             // validating empty inputs
+    //         if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+    //         {
+    //             this.error = true
+    //             return
+    //         }
+    //     let edtitedEstimate = {
+    //         project: this.estimate.project,
+    //         developer: this.estimate.developer,
+    //         dueDate: this.estimate.dueDate,
+    //         title: this.estimate.title,
+    //         taskDescription: this.estimate.taskDescription
+    //     }
+    //     console.log(edtitedEstimate)
+    //     axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid, edtitedEstimate)
+    //         .then((response) =>{
+    //             console.log(response);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+            
+    //         this.success = true
+    //         this.error = false
+    //         this.submitting = false               
+        
+    //     },
+        
+      async created(){
       try{
         if (!this.store.getters.isLoggedIn) {
           this.router.push('/');
         }
-        const response = await axios.get(`http://localhost:8081/api/projects`)
-        const resp = await axios.get(`http://localhost:8081/api/users/developers`)
-        // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + estimateId)
-
-        this.projects = response.data;
-        this.developers = resp.data;
-        // this.estimate = res.data; 
+        // const response = await axios.get(`http://localhost:8081/api/projects`)
+        // const resp = await axios.get(`http://localhost:8081/api/users/developers`)
+        // const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
+        // this.projects = response.data;
+        // this.developers = resp.data;
+        // this.estimate = respons.data;
         // window.location.reload();
       }catch(e){
         console.error(e)
         
       }
     },
-    
+    // editEstimate(id, updatedEstimate){
+    //   this.estimates = this.estimates.map(estimate => estimate.id === id? updatedEstimate : estimate)
+    // },
+    // editEstimate(estimateid){
+    //   this.$router.push({
+    //     name: 'EditEstimate',
+    //     params: { id: estimateid }
+    //   })
+    // },
+      // editMode(id) {
+      //   this.editing = id
+      // },
+    formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'dd/MM/yyy')
+    }
+  }
 };
-
-
 </script>
 <style>
 #view {
@@ -248,7 +216,6 @@ export default {
 .table-row {
   cursor: pointer;
 }
-
 .spacing {
   padding-left: 16px;
   padding-right: 16px;
@@ -258,7 +225,6 @@ export default {
   font-size: 13px;
   font-weight: 700;
 }
-
 /* First column of table font adjustment */
 .text-sm {
   font-weight: 400;
@@ -269,12 +235,10 @@ export default {
   border: 1px solid rgb(201, 201, 199);
   padding: 6px;
 }
-
 /* Status column font size adjustment */
 span .status {
   font-size: 13px;
 }
-
 .bgcolor {
   background: #e7eaec !important;
 }
@@ -308,24 +272,10 @@ table > tbody > tr:hover .action-icons {
   border-color: #d10572;
   color: #eee7eb;
 }
-
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
   .card {
     margin-top: 30px;
   }
 }
-[class*='-message'] {
-    font-weight: 500;
-  }
-
-  .error-message {
-    color: #d33c40;
-    text-align: left;
-  }
-
-  .success-message {
-    color: #32a95d;
-    text-align: left;
-  }
 </style>
