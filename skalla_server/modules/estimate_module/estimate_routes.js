@@ -50,7 +50,7 @@ router.put(
 //get a single estimate
 router.get(
   "/estimate/:requestId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.singleEstimate
 );
 
