@@ -6,7 +6,7 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}} 
+            {{estimate.title}} 
           </h3>
         </div>
         <div class="col">
@@ -24,15 +24,13 @@
               <p>Due Date </p>
               <p>Main Task Description </p>
             </div>
-            <div class="col details align-self-start" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.project}}</p>
-            <p>{{tableDataDetail.projectManager}}</p>
-            <p>{{tableDataDetail.dateCreated}}</p>
-            <p>{{tableDataDetail.dueDate}}</p>
+            <div class="col details align-self-start">
+            <p>{{estimate.project.name}}</p>
+            <p>{{estimate.projectManager.name}}</p>
+            <p>{{formatDate(estimate.dateCreated)}}</p>
+            <p>{{estimate.dueDate}}</p>
+            <p>{{estimate.taskDescription}}</p>
             </div>
-          </div>
-          <div class="pl-3 row details" v-for="tableDataDetail in tableDataDetails" v-bind:key="tableDataDetail.id">
-            <p>{{tableDataDetail.mainTaskDescription}}</p>
           </div>
         </div>   
     </div>
@@ -137,6 +135,8 @@
 </template>
 <script>
 import AddTaskForm from '../Forms/AddTaskForm'
+import axios from "axios";
+import { format } from 'date-fns'
 
   export default {
     name: 'pending-table',
@@ -162,6 +162,14 @@ import AddTaskForm from '../Forms/AddTaskForm'
                 dueDate: '',
                 taskDescription: ''
             },
+        estimate: {
+            dateCreated: "",
+            projectManager: "",
+            dueDate: "",
+            project: "",
+            taskDescription: "",
+            title: ""
+        },
         tableData: [
           {
             id: 1,
@@ -189,20 +197,25 @@ import AddTaskForm from '../Forms/AddTaskForm'
             adjustedSumHours: '9.90hrs',
             comments: 'The hours are accurate.',
           },
-        ],
-        tableDataDetails: [
-           {
-             id: 1,
-              project: 'Refactory',
-              projectManager: 'David Pereira',
-              dateCreated: '20-10-2019',
-              dueDate: '23-10-2019',
-              mainTaskDescription: 'There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students. There is need for a dashboard representing different navigation links for students',
-           }
-        ],
+        ]
         
       }
-    }
+    },
+    methods: {
+        formatDate: function(dateCreated){
+      return format(new Date(dateCreated), 'yyy-MM-dd')
+      }
+    },
+    //fetches estimate when the component is created
+    async created(){
+      try {
+        const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
+        this.estimate = res.data; 
+        console.log(res)
+      } catch(e){
+        console.error(e)
+      }
+    },
     
   }
 </script>
