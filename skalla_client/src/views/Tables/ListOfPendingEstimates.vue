@@ -85,7 +85,7 @@
     methods: {
 
       formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd / MM / yyy')
+      return format(new Date(dateCreated), 'dd-MM-yyy')
       }
 
     }
