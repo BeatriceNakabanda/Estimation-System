@@ -11,7 +11,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="pendingEstimates" id="left">
+                  :data="estimates" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
@@ -32,10 +32,10 @@
           </td>
           
           <td class="project">
-            {{row.project}}
+            {{row.project.name}}
           </td>
           <td class="project-manager">
-            {{row.projectManager}}
+            {{row.projectManager.name}}
           </td>
           <td class="date-created">
             {{formatDate(row.dateCreated)}}
@@ -71,7 +71,7 @@
   export default {
     name: 'pending-estimates-table',
     props: {
-      pendingEstimates: Array,
+      estimates: Array,
       type: {
         type: String
       },

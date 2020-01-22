@@ -182,7 +182,7 @@ export default {
                 title: this.estimate.title,
                 taskDescription: this.estimate.taskDescription,
                 projectManager: this.$store.getters.getUser.id,
-                status: this.estimate.status = "Submitted",
+                status: "Submitted",
                 statusType: this.estimate.statusType = "info"
 
         }
