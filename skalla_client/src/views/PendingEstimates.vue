@@ -6,7 +6,7 @@
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                    <PendingEstimatesTable :pendingEstimates="pendingEstimates" title="Light Table" />
+                    <PendingEstimatesTable :estimates="estimates" title="Light Table" />
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
     },
     data(){
       return{
-         pendingEstimates: [],
+         estimates: [],
       }
     },
     //fetches pending estimates when the component is created
@@ -34,9 +34,10 @@
       router.push('/')
     }
       try {
+        // Getting the id of the loggedInDeveloper and showing pending estimates specific to them
         const loggedInDeveloper = this.$store.getters.getUser.id
         const res = await axios.get(`http://localhost:8081/api/pending-estimates/` + loggedInDeveloper)
-        this.pendingEstimates = res.data;
+        this.estimates = res.data;
       } catch(e){
         // console.error(e)
       }
