@@ -10,8 +10,8 @@ mongoose.set("useFindAndModify", false);
 
 exports.estimateList = function(req, res, next) {
   EstimateRequest.find({
-    status: "Submitted",
-    developer: req.params.requestedId
+    developer: req.params.requestedId,
+    status: "Submitted"
   })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "projectManager", select: "name-_id" })
