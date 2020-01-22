@@ -36,12 +36,6 @@
           </td>
          
           <td >
-            <!-- Commented out eye icon for viewing as we only need to edit a draft estimate -->
-            <!-- <span class="action-icons">
-              <router-link  to="#" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
-              </router-link>
-            </span> -->
             <span class="action-icons">
               <router-link  to="" id="view">
                 <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="openEditModel(row._id)"></i>
@@ -151,16 +145,33 @@
                                 <p v-if="success" class="success-message">
                                     ✅ Request successfully sent
                                 </p>
-                                <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleCancel" >Cancel</base-button>
+                                <div class="row  ">
+                                <div class="col text-left">
+                                  <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleCancel" >Cancel</base-button>
+                                </div>
                                 <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-                                <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Edit request</base-button>
-                                <!-- <base-button class="shadow-none mt-4" type="primary" @click="handleSendRequest(row._id)">Send request</base-button> -->
-                              
+                                <div class="col text-right">
+                                  <base-button class="shadow-none mt-4" type="primary" id="save-draft" @click="handleEditt(row._id)">Edit request</base-button>
+                                  <base-button class="shadow-none mt-4" type="primary" id="submit" @click="openSendRequestModel(row._id)">Send request</base-button>
+                                </div>
+                                </div>
                             </form>
                   </modal>
             </span>
              <span class="action-icons" id="view" >
-              <i class="rounded-circle ni ni-curved-next" aria-hidden="true" id="my-icons" @click="handleSendRequest(row._id)"></i>
+              <i class="rounded-circle ni ni-curved-next" aria-hidden="true" id="my-icons" @click="handleSendRequest2(row._id)"></i>
+              <modal :show.sync="sendEstimateRequest" >
+                <template slot="header">
+                    <h3 class="modal-title " id="exampleModalLabel">Send Estimate Request</h3>
+                </template>
+                <P><b id="details">Project:</b>  {{row.project.name}}</P>
+                <p><b id="details">Developer:</b>  {{row.developer.name}}</p>
+                <p><b id="details">Due Date:</b>  {{row.dueDate}}</p>
+                <p><b id="details">Title: </b>  {{row.title}}</p>
+                <p><b id="details">Main Task Description:</b>  {{row.taskDescription}}</p>
+                <base-button class="shadow-none mt-4" type="primary" @click="handleSendRequest2(row._id)">Send request</base-button>
+                
+              </modal>
             </span>
             
           </td>
@@ -200,6 +211,7 @@ import axios from 'axios'
     data() {
       return {
         editDraftModal: false,
+        sendEstimateRequest: false,
         selectedProject: '',
         selectedDeveloper: '',
         error: false,
@@ -266,8 +278,47 @@ import axios from 'axios'
           handleCancel(){
             this.editDraftModal = false
           },
-          handleSendRequest(){
+          
+          async handleSendRequest(estimateId){
+            // let newEstimateId = this.openEditModel(estimateId)
+            let editedEstimate = {
+                  project: this.selectedProject.id,
+                  developer: this.selectedDeveloper.id,
+                  dueDate: this.estimate.dueDate,
+                  title: this.estimate.title,
+                  taskDescription: this.estimate.taskDescription,
+                  projectManager: this.$store.getters.getUser.id,
+                  status: this.estimate.status = "Submitted"
+
+              }
+            axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
+                  .then((response) =>{
+                      console.log(response);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
+
+          },
+          openSendRequestModel(estimateId){
+            this.sendEstimateRequest = true
+            return estimateId
+          },
+          async handleSendRequest2(estimateId){
+            let newEstimateId = this.openSendRequestModel(estimateId)
             
+            let editedEstimate = {
+                  status: this.estimate.status = "Submitted"
+
+              }
+            axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+                  .then((response) =>{
+                      console.log(response);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
+
           },
 
           clearForm(){
@@ -277,35 +328,6 @@ import axios from 'axios'
       formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd / MM / yyy')
       },
-      // async handleSendRequest(estimateId){
-      //       this.submitting = true
-      //       let newEstimateId = this.openEditModel(estimateId)
-            
-      //       console.log(newEstimateId)
-      //       // debugger
-      //       let createdEstimate = this.submitting = true
-      //       if(createdEstimate){
-      //       let editedEstimate = {
-      //             project: this.selectedProject.id,
-      //             developer: this.selectedDeveloper.id,
-      //             dueDate: this.estimate.dueDate,
-      //             title: this.estimate.title,
-      //             taskDescription: this.estimate.taskDescription,
-      //             projectManager: this.$store.getters.getUser.id,
-      //             status: this.estimate.status = "Submitted"
-
-      //         }
-      //       axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
-      //             .then((response) =>{
-      //                 console.log(response);
-      //             })
-      //             .catch((error) => {
-      //                 console.log(error);
-      //             });
-
-      //       }
-
-      // },
       async created(){
       try{
         if (!this.store.getters.isLoggedIn) {
@@ -350,6 +372,11 @@ import axios from 'axios'
   font-size: 13px;
   font-weight: 700;
 }
+#save-draft{
+  background-color: #faf9f9;
+  color: #5e72e4;
+  border: 1px solid #5e72e4;
+}
 
 /* First column of table font adjustment */
 .text-sm {
@@ -387,6 +414,10 @@ table > tbody > tr:hover .action-icons{
 base-button{
   border-radius: 4px;
   
+}
+#details{
+  font-size: 17px;
+  color: rgb(17, 16, 19);
 }
 #my-icons {
   background-color: #5e72e4;

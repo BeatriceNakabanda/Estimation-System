@@ -5,8 +5,8 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row ">
         <div class="col text-right">
-          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="modal1 = true">Request Estimate</base-button>
-          <modal :show.sync="modal1">
+          <base-button type="primary" id="create-estimate" size="md" class="shadow-none spacing btn-md" @click="requestEstimateModal = true">Request Estimate</base-button>
+          <modal :show.sync="requestEstimateModal">
                       <template slot="header">
                           <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
                       </template>
@@ -50,19 +50,24 @@
             {{row.dateEstimated}}
           </td>
           <td>
-            <badge class="badge-dot mr-4" :type="row.statusType">
+            <!-- <badge class="badge-dot mr-4" :type="row.statusType">
               <i :class="`bg-${row.statusType}`"></i>
               <span class="status">{{row.status}}</span>
-            </badge>
+            </badge> -->
+              
+              <span v-if="row.status === 'Submitted'" class="status" id="status-submitted">
+                {{row.status}}
+              </span>
+              <span v-else class="status" id="status-estimated">{{row.status}}</span>           
           </td>
          
           <td >
             <span class="action-icons">
               <router-link  :to="`/view-estimate/${row._id}`" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
-                <modal :show.sync="modal2">
+                <modal :show.sync="estimateModal">
                   <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel"> Estimate</h3>
+                          <h3 class="modal-title " id="exampleModalLabel">Estimate</h3>
                       </template>
                 </modal>
               </router-link>
@@ -108,95 +113,25 @@ export default {
   },
   data() {
     return {
-      // editing: null,
-      modal: false,
-      modal1: false,
-      modal2: false,
-      modal3: false,
+      requestEstimateModal: false,
+      estimateModal: false,
       format,
-      // estimate:
-      //     {
-      //       _id: '',
-      //       project: '',
-      //       developer: '',
-      //       status: '',
-      //       statusType: '',
-      //       dueDate: '',
-      //       title: '',
-      //       taskDescription: '',
-      //     },
     };
   },
-    // fetches a single estimate when the component is created
-    // async created(){
-    //   try {
-    //     const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id) 
-    //     this.estimate = res.data; 
-    //   } catch(e){
-    //     console.error(e)
-    //   }
-    // },
-  methods: {
     
-    // async addEstimate(estimateid){
-            
-    //         this.submitting = true
-    //             // validating empty inputs
-    //         if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-    //         {
-    //             this.error = true
-    //             return
-    //         }
-    //     let edtitedEstimate = {
-    //         project: this.estimate.project,
-    //         developer: this.estimate.developer,
-    //         dueDate: this.estimate.dueDate,
-    //         title: this.estimate.title,
-    //         taskDescription: this.estimate.taskDescription
-    //     }
-    //     console.log(edtitedEstimate)
-    //     axios.put(`http://localhost:8081/api/estimate-request/` + this.$route.params.estimateid, edtitedEstimate)
-    //         .then((response) =>{
-    //             console.log(response);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-            
-    //         this.success = true
-    //         this.error = false
-    //         this.submitting = false               
+  methods: {
+
         
-    //     },
       async created(){
       try{
         if (!this.store.getters.isLoggedIn) {
           this.router.push('/');
         }
-        // const response = await axios.get(`http://localhost:8081/api/projects`)
-        // const resp = await axios.get(`http://localhost:8081/api/users/developers`)
-        // const respons = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
-        // this.projects = response.data;
-        // this.developers = resp.data;
-        // this.estimate = respons.data;
-        // window.location.reload();
       }catch(e){
         console.error(e)
         
       }
     },
-    // editEstimate(id, updatedEstimate){
-    //   this.estimates = this.estimates.map(estimate => estimate.id === id? updatedEstimate : estimate)
-    // },
-    // editEstimate(estimateid){
-    //   this.$router.push({
-    //     name: 'EditEstimate',
-    //     params: { id: estimateid }
-    //   })
-    // },
-      // editMode(id) {
-      //   this.editing = id
-      // },
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     }
@@ -270,6 +205,12 @@ table > tbody > tr:hover .action-icons {
   background-color: #d10572;
   border-color: #d10572;
   color: #eee7eb;
+}
+#status-submitted{
+  color: #fb6340;
+}
+#status-estimated{
+  color: #2dce89;
 }
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
