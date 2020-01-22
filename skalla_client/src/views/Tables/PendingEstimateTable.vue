@@ -28,7 +28,7 @@
             <p>{{estimate.project.name}}</p>
             <p>{{estimate.projectManager.name}}</p>
             <p>{{formatDate(estimate.dateCreated)}}</p>
-            <p>{{estimate.dueDate}}</p>
+            <p>{{formatDate(estimate.dueDate)}}</p>
             <p>{{estimate.taskDescription}}</p>
             </div>
           </div>
@@ -203,7 +203,7 @@ import { format } from 'date-fns'
     },
     methods: {
         formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'yyy-MM-dd')
+        return format(new Date(dateCreated), 'dd-MM-yyy')
       }
     },
     //fetches estimate when the component is created
