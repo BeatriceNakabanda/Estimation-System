@@ -5,9 +5,15 @@ mongoose.set("useFindAndModify", false);
 
 //getting draft estimate request
 exports.draftEstimatelist = function(req, res, next) {
-  EstimateRequest.find({ status: "Draft" })
-    .populate("project", "name")
-    .populate("developer", "name")
+  EstimateRequest.find({
+    projectManager: req.params.requestedId,
+    status: "Draft"
+  })
+    .populate({ path: "estimateRequestId", select: "title" })
+    .populate({ path: "projectManager", select: "name-_id" })
+    .populate({ path: "project", select: "name-_id" })
+    .populate({ path: "developer", select: "name-_id" })
+    .populate({ path: "estimateRequestId", select: "dateCreated" })
 
     .exec(function(err, estimateRequest) {
       if (err) {
@@ -76,7 +82,7 @@ exports.estimateRequestList = function(req, res, next) {
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "developer", select: "name-_id" })
     .populate({ path: "estimateRequestId", select: "dateCreated" })
-    // .populate({ path: "developer", select: "name-_id" })
+
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);
