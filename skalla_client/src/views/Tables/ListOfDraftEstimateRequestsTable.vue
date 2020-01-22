@@ -11,7 +11,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="draftEstimateRequests" id="left">
+                  :data="estimates" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
@@ -57,13 +57,13 @@
                                             ref="first"
                                             class="mb-3"
                                             placeholder="Add project here..." 
-                                            :class="{ 'has-error': submitting && invalidProjectName } " 
+                                            :class="{ 'has-error': submitting } " 
                                             
                                             @keypress="clearForm"
                                           >
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="selectedProject">
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="row.project.name">
                                             <option value="" disabled>Please select a project</option>
-                                            <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
+                                            <option v-for="project in projects" :key="project.id">{{project.name}}</option>
                                             </select>
                                             
                                 </base-input>
@@ -78,11 +78,11 @@
                                     <base-input alternative
                                             class="mb-3"
                                             placeholder="Add developer here..."
-                                          :class="{ 'has-error': submitting && invalidDeveloper }" 
+                                          :class="{ 'has-error': submitting }" 
                                             >
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="row.developer.name">
                                                 <option value="" disabled>Please select a developer</option>
-                                                <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
+                                                <option v-for="developer in developers" :key="developer.id">{{developer.name}}</option>
                                             </select>
                                 </base-input>
                                 <!-- <p>id: {{selectedProject.id}}</p>
@@ -104,8 +104,8 @@
                                                     :config="{allowInput: true, dateFormat: 'd-m-Y'}"
                                                     placeholder="17-07-2019"
                                                     class="form-control datepicker"
-                                                    :class="{ 'has-error': submitting && invalidDueDate }"
-                                                    v-model="estimate.dueDate">
+                                                    :class="{ 'has-error': submitting  }"
+                                                    v-model="row.dueDate">
                                         </flat-picker>
                                     </base-input>
                                 </div>
@@ -118,9 +118,9 @@
                                         <base-input alternative
                                                 class="mb-3"
                                                 placeholder="Add title here..."
-                                                v-model="estimate.title" 
+                                                v-model="row.title" 
                                               
-                                                :class="{ 'has-error': submitting && invalidTitle }"
+                                                :class="{ 'has-error': submitting  }"
                                             >
                                     </base-input>
                                     </div>
@@ -131,10 +131,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <base-input alternative=""
-                                    :class="{ 'has-error': submitting && invalidTaskDescription }"
-                                    
-                                    >
-                                        <textarea rows="4" v-model="estimate.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                                    :class="{ 'has-error': submitting }">
+                                        <textarea rows="4" v-model="row.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
                                     </base-input>
                                 </div>
                                 </div>
@@ -180,10 +178,10 @@
       </base-table>
     </div>
 
-    <div class="card-footer d-flex justify-content-end"
+    <!-- <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <base-pagination total="30"></base-pagination>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -202,7 +200,7 @@ import axios from 'axios'
       //  EditDraftEstimateRequestForm,
     },
     props: {
-      draftEstimateRequests: Array,
+      estimates: Array,
       type: {
         type: String
       },
@@ -212,8 +210,8 @@ import axios from 'axios'
       return {
         editDraftModal: false,
         sendEstimateRequest: false,
-        selectedProject: '',
-        selectedDeveloper: '',
+        // selectedProject: '',
+        // selectedDeveloper: '',
         error: false,
         submitting: false,
         success: false,
@@ -222,8 +220,8 @@ import axios from 'axios'
            
         estimate:
           {
-            selectedProject: '',
-            selectedDeveloper: '',
+            project: '',
+            developer: '',
             status: '',
             statusType: '',
             dueDate: '',
@@ -244,18 +242,18 @@ import axios from 'axios'
             this.submitting = true
             this.clearForm()
             // validating empty inputs
-              if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-                  {
-                      this.error = true
-                      return
-                  }
+              // if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+              //     {
+              //         this.error = true
+              //         return
+              //     }
             let newEstimateId = this.openEditModel(estimateId)
             
             console.log(newEstimateId)
             // debugger
             let editedEstimate = {
-                  project: this.selectedProject.id,
-                  developer: this.selectedDeveloper.id,
+                  project: this.estimate.project.id,
+                  developer: this.estimate.developer.id,
                   dueDate: this.estimate.dueDate,
                   title: this.estimate.title,
                   taskDescription: this.estimate.taskDescription,
@@ -272,8 +270,7 @@ import axios from 'axios'
 
                   this.success = true
                   this.error = false
-
-              
+     
           },
           handleCancel(){
             this.editDraftModal = false
@@ -327,26 +324,22 @@ import axios from 'axios'
                 },
       formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd / MM / yyy')
-      },
-      async created(){
+      }
+    },
+    async created(){
       try{
-        if (!this.store.getters.isLoggedIn) {
-          this.router.push('/');
-        }
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
-        // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + estimateId)
 
         this.projects = response.data;
         this.developers = resp.data;
-        // this.estimate = res.data; 
         // window.location.reload();
+        // console.log(this.projects)
       }catch(e){
         console.error(e)
         
       }
     },
-    }
     
   }
 </script>

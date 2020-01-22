@@ -182,8 +182,7 @@ export default {
                 title: this.estimate.title,
                 taskDescription: this.estimate.taskDescription,
                 projectManager: this.$store.getters.getUser.id,
-                status: this.estimate.status = "Submitted",
-                statusType: this.estimate.statusType = "info"
+                status: "Submitted",
 
         }
         const response = await AuthService.addEstimate(newEstimate);
