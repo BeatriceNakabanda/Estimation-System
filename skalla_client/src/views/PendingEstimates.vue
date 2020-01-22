@@ -34,8 +34,8 @@
       router.push('/')
     }
       try {
-        const res = await axios.get(`http://localhost:8081/api/pending-estimates`)
-
+        const loggedInDeveloper = this.$store.getters.getUser.id
+        const res = await axios.get(`http://localhost:8081/api/pending-estimates/` + loggedInDeveloper)
         this.pendingEstimates = res.data;
       } catch(e){
         // console.error(e)
