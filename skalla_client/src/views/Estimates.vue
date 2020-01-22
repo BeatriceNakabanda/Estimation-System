@@ -33,7 +33,9 @@ import router from "../router"
       router.push('/')
     }
       try {
-        const res = await axios.get(`http://localhost:8081/api/estimate-requests`)
+        // Getting the id of the loggedInProjectManager and showing estimate requests specific to them
+        const loggedInProjectManager = this.$store.getters.getUser.id
+        const res = await axios.get(`http://localhost:8081/api/estimate-requests/` + loggedInProjectManager)
         this.estimates = res.data;
       } catch(e){
         // console.error(e)
