@@ -168,7 +168,6 @@ export default {
     //         this.submitting = false               
         
     //     },
-        
       async created(){
       try{
         if (!this.store.getters.isLoggedIn) {
