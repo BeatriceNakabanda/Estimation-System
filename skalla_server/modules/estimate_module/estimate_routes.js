@@ -36,12 +36,13 @@ router.get(
   loginController.CheckToken,
   estimateController.estimatesubmittedList
 );
-
+//changing to draft
 router.put(
   "/change-draft/:requestedId",
   loginController.CheckToken,
   estimateController.changingStatusToDraft
 );
+//changing to submitted
 router.put(
   "/change-submitted/:requestedId",
   loginController.CheckToken,
