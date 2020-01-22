@@ -67,9 +67,16 @@ exports.changingEstimated = function(req, res) {
 //mongoose.find({title: {$in: ['some title', 'some other title']}})
 //get all estimateRequests
 exports.estimateRequestList = function(req, res, next) {
-  EstimateRequest.find({ status: { $in: ["Estimated", "Submitted"] } })
-    .populate("project", "name")
-    .populate("developer", "name")
+  EstimateRequest.find({
+    projectManager: req.params.requestedId,
+    status: { $in: ["Estimated", "Submitted"] }
+  })
+    .populate({ path: "estimateRequestId", select: "title" })
+    .populate({ path: "projectManager", select: "name-_id" })
+    .populate({ path: "project", select: "name-_id" })
+    .populate({ path: "developer", select: "name-_id" })
+    .populate({ path: "estimateRequestId", select: "dateCreated" })
+    // .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);
