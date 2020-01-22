@@ -30,7 +30,7 @@ router.get(
   loginController.CheckToken,
   estimateController.estimatePendingList
 );
-//get all pending estimates
+//get all submitted estimates
 router.get(
   "/submitted-estimates/:requestedId",
   loginController.CheckToken,
