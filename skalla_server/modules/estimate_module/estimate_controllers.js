@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
 //getting a project,project manager according to developer id when pending and draft
-
+//for pending and drafts
 exports.estimateList = function(req, res, next) {
   EstimateRequest.find({
     developer: req.params.requestedId,
@@ -26,6 +26,7 @@ exports.estimateList = function(req, res, next) {
 };
 
 //getting when a developer estimates and sends back to project manager
+//for Submitted
 exports.estimatedList = function(req, res, next) {
   EstimateRequest.find({
     developer: req.params.requestedId,
@@ -41,13 +42,27 @@ exports.estimatedList = function(req, res, next) {
       }
     });
 };
-//getting pending draft estimates
-exports.estimatedraftList = function(req, res, next) {
+//creating an estimate
+exports.createEstimate = function(req, res) {
+  const newEstimate = new Estimate(req.body);
+  newEstimate.save(function(estimate, next) {
+    if (next) {
+      res.send(next);
+    } else {
+      res.json(estimate);
+    }
+  });
+};
+
+//getting all estimates
+exports.estimatesList = function(req, res, next) {
   Estimate.find({
-    developer: req.params.requestedId,
-    status: "Draft"
+    developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
+
+    .populate({ path: "task" })
+
     .exec(function(err, estimate) {
       if (err) {
         return next(err);
@@ -55,6 +70,33 @@ exports.estimatedraftList = function(req, res, next) {
         res.json(estimate);
       }
     });
+};
+//editng an estimate
+exports.editingEstimate = function(req, res) {
+  Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body, function(
+    next,
+    estimate
+  ) {
+    if (estimate !== null) {
+      res.json(estimate);
+    } else {
+      res.send(next);
+    }
+  });
+};
+
+//get a single estimate
+exports.singleEstimate = function(req, res, next) {
+  Estimate.findById({ _id: req.params.requestId }).exec(function(
+    err,
+    estimate
+  ) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimate);
+    }
+  });
 };
 //getting pending draft estimates
 exports.estimatePendingList = function(req, res, next) {
@@ -86,20 +128,7 @@ exports.estimatesubmittedList = function(req, res, next) {
       }
     });
 };
-//changing status to draft
-exports.changingStatusToDraft = function(req, res) {
-  Estimate.findByIdAndUpdate(
-    { _id: req.params.requestedId },
-    { status: "Draft" },
-    function(next, estimate) {
-      if (estimate !== null) {
-        res.json(estimate);
-      } else {
-        res.send(next);
-      }
-    }
-  );
-};
+
 //changing status to submitted
 exports.changingStatusToSubmitted = function(req, res) {
   Estimate.findByIdAndUpdate(
@@ -113,19 +142,6 @@ exports.changingStatusToSubmitted = function(req, res) {
       }
     }
   );
-};
-//get a single estimate
-exports.singleEstimate = function(req, res, next) {
-  Estimate.findById({ _id: req.params.requestId }).exec(function(
-    err,
-    estimate
-  ) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimate);
-    }
-  });
 };
 
 //create estimate

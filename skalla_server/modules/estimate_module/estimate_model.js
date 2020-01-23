@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 //lineItemSchema
 const lineItemSchema = new Schema({
-  description: { type: String },
   research: mongoose.Types.Decimal128,
   planning: mongoose.Types.Decimal128,
   development: mongoose.Types.Decimal128,
@@ -18,17 +17,15 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema({
+  task: { type: String },
   estimateRequestId: { type: Schema.ObjectId, ref: "EstimateRequest" },
   dateCreated: { type: Date, default: Date.now },
   submittedDate: { type: Date },
   developer: { type: Schema.ObjectId, ref: "User", required: true },
   totalSum: mongoose.Types.Decimal128,
-  lineItem: [lineItemSchema],
-  status: {
-    type: String,
-    enum: ["Draft", "Submitted"]
-  }
+  lineItem: [lineItemSchema]
 });
 
 //estimate model
 module.exports = mongoose.model("Estimate", estimateSchema);
+//module.exports = mongoose.model("Estimate", lineItemSchema);
