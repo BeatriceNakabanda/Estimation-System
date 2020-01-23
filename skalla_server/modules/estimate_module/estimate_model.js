@@ -23,7 +23,11 @@ const estimateSchema = new Schema({
   submittedDate: { type: Date },
   developer: { type: Schema.ObjectId, ref: "User", required: true },
   totalSum: mongoose.Types.Decimal128,
-  lineItem: [lineItemSchema]
+  lineItem: [lineItemSchema],
+  status: {
+    type: String,
+    enum: ["Draft", "Submitted"]
+  }
 });
 
 //estimate model
