@@ -38,7 +38,7 @@
             {{row.projectManager.name}}
           </td>
           <td class="date-created">
-            {{formatDate(row.dateCreated)}}
+            {{row.dateCreated}}
           </td>
          
           <td >
@@ -84,9 +84,7 @@
     },
     methods: {
 
-      formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd-MM-yyy')
-      }
+      
 
     }
   }

@@ -27,8 +27,8 @@
             <div class="col details align-self-start">
             <p>{{estimate.project.name}}</p>
             <p>{{estimate.projectManager.name}}</p>
-            <p>{{formatDate(estimate.dateCreated)}}</p>
-            <p>{{formatDate(estimate.dueDate)}}</p>
+            <p>{{ estimate.dateCreated }}</p>
+            <p>{{estimate.dueDate}}</p>
             <p>{{estimate.taskDescription}}</p>
             </div>
           </div>
@@ -136,7 +136,7 @@
 <script>
 import AddTaskForm from '../Forms/AddTaskForm'
 import axios from "axios";
-import { format } from 'date-fns'
+
 
   export default {
     name: 'pending-table',
@@ -183,27 +183,9 @@ import { format } from 'date-fns'
             sumHours: '9.00hrs',
             adjustedSumHours: '9.90hrs',
             comments: 'This should work well enough.',
-          },
-          {
-            id: 2,
-            subTask: 'Table',
-            research: '1.00hrs',
-            planning: '2.00hrs',
-            development: '2.00hrs',
-            testing: '2.00hrs',
-            stabilization: '2.00hrs',
-            certainity: '90%',
-            sumHours: '9.00hrs',
-            adjustedSumHours: '9.90hrs',
-            comments: 'The hours are accurate.',
-          },
+          }
         ]
         
-      }
-    },
-    methods: {
-        formatDate: function(dateCreated){
-        return format(new Date(dateCreated), 'dd-MM-yyy')
       }
     },
     //fetches estimate when the component is created
