@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col">
           <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
-          <estimates-table :estimates="estimates"></estimates-table>
+          <estimates-table :estimate="estimates" />
         </div>
       </div>
     </div>
@@ -21,10 +21,14 @@ import router from "../router"
     components: {
       EstimatesTable
     },
+    props: {
+      estiamteData:{
+        type: String
+      }
+    },
     data(){
       return{
          estimates: [],
-        
       }
     },
     //fetches estimates when the component is created

@@ -99,7 +99,7 @@
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate()">Send request</base-button>
 
         </form>
         
@@ -116,6 +116,7 @@ export default {
     components: {
         flatPicker
         },
+    // props: ['estimate'],
     data(){
         return{
             selectedProject: '',
@@ -183,11 +184,11 @@ export default {
                 taskDescription: this.estimate.taskDescription,
                 projectManager: this.$store.getters.getUser.id,
                 status: "Submitted",
-
         }
         const response = await AuthService.addEstimate(newEstimate);
         console.log(response)
-
+        
+        this.$emit("newEstimate", this.newEstimate)
         }
             this.success = true
             this.error = false

@@ -54,12 +54,11 @@
                                     <base-input alternative
                                             ref="first"
                                             class="mb-3"
-                                            placeholder="Add project here..." 
+                                            :placeholder="estimate.project.name" 
                                             :class="{ 'has-error': submitting } " 
                                             
-                                            @keypress="clearForm"
-                                          >
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project.name">
+                                            @keypress="clearForm">
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.project.name">
                                             <option value="" disabled>Please select a project</option>
                                             <option v-for="project in projects" :key="project.id">{{project.name}}</option>
                                             </select>
@@ -75,10 +74,9 @@
                                 <div class="col-sm">
                                     <base-input alternative
                                             class="mb-3"
-                                            placeholder="Add developer here..."
-                                          :class="{ 'has-error': submitting }" 
-                                            >
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer.name">
+                                            :placeholder="[[estimate.developer.name]]"
+                                          :class="{ 'has-error': submitting }">
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.developer.name">
                                                 <option value="" disabled>Please select a developer</option>
                                                 <option v-for="developer in developers" :key="developer.id">{{developer.name}}</option>
                                             </select>
@@ -100,10 +98,10 @@
                                                     @on-open="focus"
                                                     @on-close="blur"
                                                     :config="{allowInput: true, dateFormat: 'd-m-Y'}"
-                                                    placeholder="17-07-2019"
+                                                    :placeholder="[[estimate.dueDate]]"
                                                     class="form-control datepicker"
                                                     :class="{ 'has-error': submitting  }"
-                                                    v-model="estimate.dueDate">
+                                                    v-model="newEstimate.dueDate">
                                         </flat-picker>
                                     </base-input>
                                 </div>
@@ -115,9 +113,8 @@
                                     <div class="col-sm">
                                         <base-input alternative
                                                 class="mb-3"
-                                                placeholder="Add title here..."
-                                                v-model="estimate.title" 
-                                                
+                                                :placeholder="[[ estimate.title ]]"
+                                                v-model="newEstimate.title" 
                                                 :class="{ 'has-error': submitting  }"
                                             >
                                     </base-input>
@@ -130,7 +127,7 @@
                                 <div class="col-sm-12">
                                     <base-input alternative=""
                                     :class="{ 'has-error': submitting }">
-                                        <textarea rows="4" v-model="estimate.taskDescription"  class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                                        <textarea rows="4" v-model="newEstimate.taskDescription"  class="form-control form-control-alternative" :placeholder="[[estimate.taskDescription]]"></textarea>
                                     </base-input>
                                 </div>
                                 </div>
@@ -229,6 +226,15 @@ import axios from 'axios'
             title: '',
             taskDescription: '',
           },
+          newEstimate:{
+            project: '',
+            developer: '',
+            status: '',
+            statusType: '',
+            dueDate: '',
+            title: '',
+            taskDescription: '',
+          }
       }
     },
     methods: {
