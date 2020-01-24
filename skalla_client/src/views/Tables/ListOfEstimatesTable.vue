@@ -12,7 +12,7 @@
                       </template>
                       <!-- create estimate form -->
                       <CreateEstimateForm @inputData="updateEstimate" />
-                  </modal>
+            </modal>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
             </tr>
           </thead>
             <tbody>
-              <tr v-for="estimate in estimates" :key="estimate.id" @updateEstimate="updateEstimate">
+              <tr v-for="estimate in estimates" :key="estimate.id" >
             <td class="title">
               {{estimate.title}}
             </td>
@@ -76,13 +76,14 @@
           </tr>
           </tbody>
       </table>
+   
     </div>
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <!-- <base-pagination total="30"></base-pagination> -->
       <base-pagination></base-pagination>
-
+      
     </div>
     
   </div>
@@ -107,10 +108,9 @@ export default {
       type: String
     },
     title: String,
-
-    estimate: {
+    newestimate: {
       type: Array
-    },  
+    },
     
   },
   data() {
@@ -118,13 +118,16 @@ export default {
       requestEstimateModal: false,
       estimateModal: false,
       format,
-      estimateData: ""
+      // estimate: []
+      // estimateData: [],
+      name: "beatrice"
       
     };
   },
+  
   watch: {
-    estimate() {
-      this.estimates.push(this.estimate)
+    newestimate() {
+      this.estimates.push(this.newestimate)
     }
   }, 
   methods: {   
@@ -132,17 +135,16 @@ export default {
       try{
         if (!this.store.getters.isLoggedIn) {
           this.router.push('/');
-          // const res = await axios.get(`http://localhost:8081/api/estimate-requests`)
-          // this.estimates = res.data;
         }
       }catch(e){
         console.error(e)
         
       }
     },
-    updateEstimate(estimatte){
-      this.estimateData = estimatte
+    updateEstimate(estimate){
+      this.estimateData = estimate
     },
+
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     }

@@ -21,14 +21,16 @@ import router from "../router"
     components: {
       EstimatesTable
     },
-    props: {
-      estiamteData:{
-        type: String
-      }
-    },
+    // props: {
+    //   estimateData:{
+    //     type: String
+    //   }
+    // },
     data(){
       return{
          estimates: [],
+        //  estimateData: ""
+        
       }
     },
     //fetches estimates when the component is created
@@ -40,7 +42,7 @@ import router from "../router"
         const res = await axios.get(`http://localhost:8081/api/estimate-requests`)
         this.estimates = res.data;
       } catch(e){
-        // console.error(e)
+        console.error(e)
       }
     },
       

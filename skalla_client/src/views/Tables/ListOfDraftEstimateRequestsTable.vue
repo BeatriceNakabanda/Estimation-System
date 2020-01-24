@@ -54,11 +54,11 @@
                                     <base-input alternative
                                             ref="first"
                                             class="mb-3"
-                                            :placeholder="estimate.project.name" 
+                                            
                                             :class="{ 'has-error': submitting } " 
                                             
                                             @keypress="clearForm">
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.project.name">
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project.name">
                                             <option value="" disabled>Please select a project</option>
                                             <option v-for="project in projects" :key="project.id">{{project.name}}</option>
                                             </select>
@@ -74,9 +74,9 @@
                                 <div class="col-sm">
                                     <base-input alternative
                                             class="mb-3"
-                                            :placeholder="[[estimate.developer.name]]"
+                                            :placeholder="[[estimate.developer]]"
                                           :class="{ 'has-error': submitting }">
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.developer.name">
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer.name">
                                                 <option value="" disabled>Please select a developer</option>
                                                 <option v-for="developer in developers" :key="developer.id">{{developer.name}}</option>
                                             </select>
@@ -101,7 +101,7 @@
                                                     :placeholder="[[estimate.dueDate]]"
                                                     class="form-control datepicker"
                                                     :class="{ 'has-error': submitting  }"
-                                                    v-model="newEstimate.dueDate">
+                                                    v-model="estimate.dueDate">
                                         </flat-picker>
                                     </base-input>
                                 </div>
@@ -114,7 +114,7 @@
                                         <base-input alternative
                                                 class="mb-3"
                                                 :placeholder="[[ estimate.title ]]"
-                                                v-model="newEstimate.title" 
+                                                v-model="estimate.title" 
                                                 :class="{ 'has-error': submitting  }"
                                             >
                                     </base-input>
@@ -127,7 +127,10 @@
                                 <div class="col-sm-12">
                                     <base-input alternative=""
                                     :class="{ 'has-error': submitting }">
-                                        <textarea rows="4" v-model="newEstimate.taskDescription"  class="form-control form-control-alternative" :placeholder="[[estimate.taskDescription]]"></textarea>
+                                        <textarea rows="4"
+                                         v-model="estimate.taskDescription"  
+                                         class="form-control form-control-alternative" 
+                                         :placeholder="[[estimate.taskDescription]]"></textarea>
                                     </base-input>
                                 </div>
                                 </div>
@@ -226,15 +229,15 @@ import axios from 'axios'
             title: '',
             taskDescription: '',
           },
-          newEstimate:{
-            project: '',
-            developer: '',
-            status: '',
-            statusType: '',
-            dueDate: '',
-            title: '',
-            taskDescription: '',
-          }
+          // newEstimate:{
+          //   project: '',
+          //   developer: '',
+          //   status: '',
+          //   statusType: '',
+          //   dueDate: '',
+          //   title: '',
+          //   taskDescription: '',
+          // }
       }
     },
     methods: {
@@ -255,25 +258,24 @@ import axios from 'axios'
             // debugger
             const title = this.estimate.title
 
-            // const editedEstimate = {
-            //       project: this.estimate.project.id,
-            //       developer: this.estimate.developer.id,
-            //       dueDate: this.estimate.dueDate,
-            //       title = this.estimate.title,
-            //       taskDescription = this.estimate.taskDescription,
-            //       projectManager = this.$store.getters.getUser.id
-            //   }
-              console.log(this.taskDescription)
-              // console.log(editedEstimate)
-          //   axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
-          //         .then((response) =>{
-          //             console.log(response);
-          //         })
-          //         .catch((error) => {
-          //             console.log(error);
-          //         });
-          //         this.success = true
-          //         this.error = false
+            const editedEstimate = {
+                  project: this.estimate.project.id,
+                  developer: this.estimate.developer.id,
+                  dueDate: this.estimate.dueDate,
+                  title: this.estimate.title,
+                  taskDescription: this.estimate.taskDescription,
+                  projectManager: this.$store.getters.getUser.id
+              }
+              console.log(editedEstimate)
+            axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+                  .then((response) =>{
+                      console.log(response);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
+                  this.success = true
+                  this.error = false
      
           },
           handleCancel(){

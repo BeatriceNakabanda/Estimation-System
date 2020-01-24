@@ -14,7 +14,7 @@
                         
                         @keypress="clearForm"
                        >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="selectedProject">
+                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.selectedProject">
                         <option value="" disabled>Please select a project</option>
                         <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                         </select>
@@ -32,7 +32,7 @@
                         placeholder="Add developer here..."
                        :class="{ 'has-error': submitting && invalidDeveloper }" 
                         >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
+                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.selectedDeveloper">
                             <option value="" disabled>Please select a developer</option>
                             <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
@@ -168,7 +168,7 @@ export default {
             this.submitting = true
 
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+            if(this.invalidProjectName || this.invalidDueDate  || this.invalidTitle || this.invalidTaskDescription)
             {
                 this.error = true
                 return
@@ -177,8 +177,8 @@ export default {
         let createdEstimate = this.submitting = true
         if(createdEstimate){
             let newEstimate = {
-                project: this.selectedProject.id,
-                developer: this.selectedDeveloper.id,
+                project: this.estimate.selectedProject.id,
+                developer: this.estimate.selectedDeveloper.id,
                 dueDate: this.estimate.dueDate,
                 title: this.estimate.title,
                 taskDescription: this.estimate.taskDescription,
@@ -187,8 +187,9 @@ export default {
         }
         const response = await AuthService.addEstimate(newEstimate);
         console.log(response)
+        this.$emit("inputData", this.estimate)
+        console.log(this.estimate)
         
-        this.$emit("newEstimate", this.newEstimate)
         }
             this.success = true
             this.error = false
