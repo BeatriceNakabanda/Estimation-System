@@ -14,7 +14,7 @@
                         
                         @keypress="clearForm"
                        >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="selectedProject">
+                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.selectedProject">
                         <option value="" disabled>Please select a project</option>
                         <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                         </select>
@@ -32,7 +32,7 @@
                         placeholder="Add developer here..."
                        :class="{ 'has-error': submitting && invalidDeveloper }" 
                         >
-                        <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
+                        <select class="custom-select" id="inputGroupSelect01" v-model="estimate.selectedDeveloper">
                             <option value="" disabled>Please select a developer</option>
                             <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
@@ -97,9 +97,9 @@
             <p v-if="success" class="success-message">
                 ✅ Request successfully sent
             </p>
-            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft" >Save as draft</base-button>
+            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft()" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="addEstimate()">Send request</base-button>
 
         </form>
         
@@ -109,13 +109,12 @@ import axios from 'axios';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import AuthService from "../../services/AuthService";
-
-
 export default {
     name: 'create-estimate-form',
     components: {
         flatPicker
         },
+    // props: ['estimate'],
     data(){
         return{
             selectedProject: '',
@@ -125,7 +124,6 @@ export default {
             success: false,
             projects: [],
             developers: [],
-
             
            
         estimate:
@@ -158,16 +156,13 @@ export default {
         invalidTaskDescription(){
             return this.estimate.taskDescription === ''
         }
-
     },
-
     methods: {
         async addEstimate(){
             this.clearForm()
             this.submitting = true
-
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+            if(this.invalidProjectName || this.invalidDueDate  || this.invalidTitle || this.invalidTaskDescription)
             {
                 this.error = true
                 return
@@ -176,27 +171,25 @@ export default {
         let createdEstimate = this.submitting = true
         if(createdEstimate){
             let newEstimate = {
-                project: this.selectedProject.id,
-                developer: this.selectedDeveloper.id,
+                project: this.estimate.selectedProject.id,
+                developer: this.estimate.selectedDeveloper.id,
                 dueDate: this.estimate.dueDate,
                 title: this.estimate.title,
                 taskDescription: this.estimate.taskDescription,
                 projectManager: this.$store.getters.getUser.id,
                 status: "Submitted",
-                statusType: this.estimate.statusType = "info"
-
         }
         const response = await AuthService.addEstimate(newEstimate);
         console.log(response)
-
+        this.$emit("inputData", this.estimate)
+        console.log(this.estimate)
+        
         }
             this.success = true
             this.error = false
             this.submitting = false 
                          
         },
-
-
     clearForm(){
                 this.success = false
                 this.error = false
@@ -214,30 +207,27 @@ export default {
             let draftedEstimate = this.submitting = true
             if(draftedEstimate){
                 let newEstimate = {
-                project: this.selectedProject.id,
-                developer: this.selectedDeveloper.id,
+                project: this.estimate.selectedProject.id,
+                developer: this.estimate.selectedDeveloper.id,
                 dueDate: this.estimate.dueDate,
                 title: this.estimate.title,
                 taskDescription: this.estimate.taskDescription,
                 projectManager: this.$store.getters.getUser.id,
                 status: this.estimate.status = "Draft",
                 statusType: this.estimate.statusType = "warning"
-
                 }
+            console.log(newEstimate)
             const response = await AuthService.addEstimate(newEstimate);
             console.log(response)
-
             }
             this.success = true
             this.error = false
-
       },  
     },
     async created(){
       try{
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
-
         this.projects = response.data;
         this.developers = resp.data;
         // window.location.reload();
@@ -255,12 +245,10 @@ export default {
 [class*='-message'] {
     font-weight: 500;
   }
-
   .error-message {
     color: #d33c40;
     text-align: left;
   }
-
   .success-message {
     color: #32a95d;
     text-align: left;
