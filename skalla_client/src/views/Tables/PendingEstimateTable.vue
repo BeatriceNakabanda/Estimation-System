@@ -279,7 +279,7 @@ import axios from "axios";
                     stabilization: 0,
                     certainty: 0,
                     sumHours: 0,
-                    adjustedSumHours: 0,
+                    adjustedSumHours: '',
                     comments: '',
                 },
          /* form : {
