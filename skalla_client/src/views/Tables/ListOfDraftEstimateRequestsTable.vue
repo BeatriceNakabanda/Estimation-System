@@ -11,7 +11,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="draftEstimateRequests" id="left">
+                  :data="estimates" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
@@ -202,7 +202,7 @@ import axios from 'axios'
       //  EditDraftEstimateRequestForm,
     },
     props: {
-      draftEstimateRequests: Array,
+      estimates: Array,
       type: {
         type: String
       },

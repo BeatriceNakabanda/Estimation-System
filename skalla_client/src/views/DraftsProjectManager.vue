@@ -6,7 +6,7 @@
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                    <estimates-table :draftEstimateRequests="draftEstimateRequests" title="Light Table"></estimates-table>
+                    <EstimatesTable :estimates="estimates" title="Light Table" />
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
     },
     data(){
       return {
-        draftEstimateRequests: [],
+        estimates: [],
       }
     },
     //fetches draftEstimateRequests when the component is created
@@ -34,11 +34,12 @@
       router.push('/')
     }
       try {
-        const res = await axios.get(`http://localhost:8081/api/draft-estimate-requests`)
+        const loggedInProjectManager = this.$store.getters.getUser.id 
+        const res = await axios.get(`http://localhost:8081/api/draft-estimate-requests/` + loggedInProjectManager)
 
-        this.draftEstimateRequests = res.data;
+        this.estimates = res.data;
       } catch(e){
-        // console.error(e)
+        console.error(e)
       }
     },
   };
