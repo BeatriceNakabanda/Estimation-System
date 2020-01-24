@@ -29,7 +29,6 @@ import router from "../router"
     data(){
       return{
          estimates: [],
-        //  estimateData: ""
         
       }
     },

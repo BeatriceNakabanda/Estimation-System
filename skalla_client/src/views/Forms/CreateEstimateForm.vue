@@ -109,8 +109,6 @@ import axios from 'axios';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import AuthService from "../../services/AuthService";
-
-
 export default {
     name: 'create-estimate-form',
     components: {
@@ -126,7 +124,6 @@ export default {
             success: false,
             projects: [],
             developers: [],
-
             
            
         estimate:
@@ -159,14 +156,11 @@ export default {
         invalidTaskDescription(){
             return this.estimate.taskDescription === ''
         }
-
     },
-
     methods: {
         async addEstimate(){
             this.clearForm()
             this.submitting = true
-
                 // validating empty inputs
             if(this.invalidProjectName || this.invalidDueDate  || this.invalidTitle || this.invalidTaskDescription)
             {
@@ -196,8 +190,6 @@ export default {
             this.submitting = false 
                          
         },
-
-
     clearForm(){
                 this.success = false
                 this.error = false
@@ -223,22 +215,18 @@ export default {
                 projectManager: this.$store.getters.getUser.id,
                 status: this.estimate.status = "Draft",
                 statusType: this.estimate.statusType = "warning"
-
                 }
             const response = await AuthService.addEstimate(newEstimate);
             console.log(response)
-
             }
             this.success = true
             this.error = false
-
       },  
     },
     async created(){
       try{
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
-
         this.projects = response.data;
         this.developers = resp.data;
         // window.location.reload();
@@ -256,12 +244,10 @@ export default {
 [class*='-message'] {
     font-weight: 500;
   }
-
   .error-message {
     color: #d33c40;
     text-align: left;
   }
-
   .success-message {
     color: #32a95d;
     text-align: left;

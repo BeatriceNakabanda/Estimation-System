@@ -144,7 +144,6 @@ export default {
     updateEstimate(estimate){
       this.estimateData = estimate
     },
-
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     }
