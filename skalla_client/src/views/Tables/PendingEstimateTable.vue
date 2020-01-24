@@ -108,9 +108,125 @@
           <h3 class="modal-title" id="exampleModalLabel">New Task</h3>
       </template>
       <!-- Add task form -->
-      <div>
+      <form role="form " >  
+         <div class="row mt--4">
+           <div class="col-sm-3"></div>
+            <div class="col-sm-2">
+              <h6 class="heading-small text-capitalize float-left  text-resize">Sum hours: </h6>
+            </div>
+            <div class="col-sm-2 ml-2">
+              <h6 class="heading-small  text-capitalize float-left  text-resize" >{{calculatedSumHours}}</h6>
+            </div> 
+            <div class="col-sm-3 ">
+              <h6 class="heading-small text-capitalize float-left  text-resize ">Adjusted Sum:</h6>
+            </div>
+            <div class="col-sm-1 ml--3">
+              <h6 class="heading-small  text-capitalize float-left  text-resize">0.00 hrs</h6>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-sm-3 ">
+              <h6 class="text-resize heading-small text-muted float-left text-capitalize">Task</h6>
+            </div>
+              <div class="col-sm">
+                  <base-input alternative
+                          class=""
+                          placeholder="Add sub task here..."
+                          v-model="form.task"
+                          >
+                </base-input>
+              </div>  
+          </div>
+          <div class="row mt--2">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Research</h6>
+            </div>
+            <div class="col-sm-3">  
+              <base-input alternative
+                      class=""
+                      placeholder="0.00hrs"
+                      v-model="form.research"
+                      >
+            </base-input>
+            </div>
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Planning</h6>
+            </div>
+            <div class="col-sm-3">  
+              <base-input alternative
+                      class=""
+                      placeholder="0.00hrs"
+                      v-model="form.planning"
+                      >
+            </base-input>
+            </div>
+          </div>
+                    <div class="row mt--2">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Development</h6>
+            </div>
+            <div class="col-sm-3">  
+              <base-input alternative
+                      class=""
+                      placeholder="0.00hrs"
+                      v-model="form.development"
+                      >
+            </base-input>
+            </div>
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Testing</h6>
+            </div>
+            <div class="col-sm-3">  
+              <base-input alternative
+                      class=""
+                      placeholder="0.00hrs"
+                      v-model="form.testing"
+                      >
+            </base-input>
+            </div>
+          </div>
+            <div class="row mt--2">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Stabilization</h6>
+              <i class="fas fa-info-circle ml-2 mt-2  btn-tooltip" id="myicon" v-b-tooltip.hover.right title="Stabilization ...."></i>
+            </div>
+            <div class="col-sm-3">  
+              <base-input alternative
+                      class=""
+                      placeholder="0.00hrs"
+                      v-model="form.stabilization"
+                      >
+            </base-input>
+            </div>
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Certainty</h6>
+              <i class="fas fa-info-circle  mr-2 mt-2 " id="myicon"></i>
+            </div>
+            <div class="col-sm-3">  
+              <base-input alternative
+                      class=""
+                      placeholder="0.00hrs"
+                      v-model="form.certainty"
+                      >
+            </base-input>
+            </div>
+          </div>
+      
+ 
+          <div class="row mt--2">
+            <div class="col-sm-3">
+              <h6 class="heading-small text-muted float-left text-capitalize text-resize">Comment</h6>
+            </div>
+            <div class="col-sm">
+              <base-input alternative="">
+                  <textarea rows="3" v-model="form.comment" class="form-control form-control-alternative" placeholder="Add comment here ..."></textarea>
+              </base-input>
+            </div>
+          </div>
+        </form>
+      <!-- <div>
         <AddTaskForm />
-      </div>
+      </div> -->
         <template slot="footer">
             <base-button class="shadow-none cancel-color mt--5" type="secondary" @click="modal = false">Close</base-button>
             <base-button class="shadow-none mt--5" type="primary">Add</base-button>
@@ -134,14 +250,14 @@
   </div>
 </template>
 <script>
-import AddTaskForm from '../Forms/AddTaskForm'
+// import AddTaskForm from '../Forms/AddTaskForm'
 import axios from "axios";
-
+// import { format } from 'date-fns'
 
   export default {
     name: 'pending-table',
     components: {
-      AddTaskForm,
+      // AddTaskForm,
     },
     props: {
       type: {
@@ -155,13 +271,25 @@ import axios from "axios";
          isShowing:false,
          isShow: false,
          form : {
+                    task: '',
+                    research: 0,
+                    planning: 0,
+                    development: 0,
+                    testing: 0,
+                    stabilization: 0,
+                    certainty: 0,
+                    sumHours: 0,
+                    adjustedSumHours: 0,
+                    comments: '',
+                },
+         /* form : {
                 id: '',
                 subtask: '',
                 developer: '',
                 project: '',
                 dueDate: '',
                 taskDescription: ''
-            },
+            }, */
         estimate: {
             dateCreated: "",
             projectManager: "",
@@ -170,23 +298,32 @@ import axios from "axios";
             taskDescription: "",
             title: ""
         },
-        tableData: [
+/*         tableData: [
           {
-            id: 1,
-            subTask: 'Navbar',
-            research: '1.00hrs',
-            planning: '2.00hrs',
-            development: '2.00hrs',
-            testing: '2.00hrs',
-            stabilization: '2.00hrs',
-            certainity: '90%',
-            sumHours: '9.00hrs',
-            adjustedSumHours: '9.90hrs',
-            comments: 'This should work well enough.',
+            subTask: '',
+            research: '',
+            planning: '',
+            development: '',
+            testing: '',
+            stabilization: '',
+            certainity: '',
+            sumHours: '',
+            adjustedSumHours: '',
+            comments: '',
           }
-        ]
+        ] */
         
       }
+    },
+    computed: {
+      calculatedSumHours: function(){
+        return parseInt(this.form.research) + parseInt(this.form.planning) + parseInt(this.form.development) + parseInt(this.form.testing) + parseInt(this.form.stabilization);
+      }
+    },
+    methods: {
+        /* formatDate: function(date){
+        return format(new Date(date), 'dd-MM-yyy')
+      } */
     },
     //fetches estimate when the component is created
     async created(){
@@ -350,4 +487,12 @@ iframe {
 .card{
   width: 79vw;
 } */
+#myicon{
+  color: #5e72e4;
+}
+#myicon:hover {
+  cursor:pointer;
+  color: #d10572;
+}
+#myicon:hover, #myiconactive {font-size: 120%;}
 </style>
