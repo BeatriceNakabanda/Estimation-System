@@ -10,7 +10,7 @@
                         ref="first"
                         class="mb-3"
                         placeholder="Add project here..." 
-                        :class="{ 'has-error': submitting && invalidProjectName } " 
+                        :class="{ 'has-error': submitting  } " 
                         
                         @keypress="clearForm"
                         >
@@ -31,13 +31,14 @@
                 <base-input alternative
                         class="mb-3"
                         placeholder="Add developer here..."
-                        :class="{ 'has-error': submitting && invalidDeveloper }" 
+                        :class="{ 'has-error': submitting  }" 
                         >
                         <select class="custom-select" id="inputGroupSelect01" v-model="selectedDeveloper">
                             <option value="" disabled>Please select a developer</option>
                             <option v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                         </select>
             </base-input>
+            
             <!-- <p>id: {{selectedProject.id}}</p>
             <p>name: {{selectedProject.name}}</p>
             <p>id: {{selectedDeveloper.id}}</p>
@@ -57,7 +58,7 @@
                                 :config="{allowInput: true, dateFormat: 'd-m-Y'}"
                                 placeholder="17-07-2019"
                                 class="form-control datepicker"
-                                :class="{ 'has-error': submitting && invalidDueDate }"
+                                :class="{ 'has-error': submitting  }"
                                 v-model="estimate.dueDate">
                     </flat-picker>
                 </base-input>
@@ -73,7 +74,7 @@
                             placeholder="Add title here..."
                             v-model="estimate.title" 
                             
-                            :class="{ 'has-error': submitting && invalidTitle }"
+                            :class="{ 'has-error': submitting }"
                         >
                 </base-input>
                 </div>
@@ -84,7 +85,7 @@
             </div>
             <div class="col-sm-12">
                 <base-input alternative=""
-                :class="{ 'has-error': submitting && invalidTaskDescription }"
+                :class="{ 'has-error': submitting }"
                 
                 >
                     <textarea rows="4" v-model="estimate.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
@@ -100,7 +101,7 @@
             </p>
             <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSave" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
-            <base-button class="shadow-none mt-4" type="primary" @click="handleEditt(row._id)">Send request</base-button>
+            <base-button class="shadow-none mt-4" type="primary" @click="handleEditt()">Send request</base-button>
             <!-- <p>Prop:{{ this.estimateId }}</p> -->
             
         </form>
@@ -111,22 +112,18 @@ import axios from 'axios';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 // import AuthService from "../../services/AuthService";
-
-
 export default {
     name: 'create-estimate-form',
     components: {
         flatPicker
         },
     props: {
-        estimates: Array,
-        type: {
-            type: String
-        },
+        // estimates: Array,
+        // type: {
+            // type: String
+        // },
         estimateId: String
-
         },
-
     data(){
         return{
             selectedProject: '',
@@ -152,37 +149,38 @@ export default {
     },
      // automatically computed properties(functions) to validate form inputs 
     computed: {
-        invalidProjectName(){
-            return this.estimate.project === ''
-        },
-        invalidDeveloper(){
-            return this.estimate.developers === ''
-        },
-        invalidDueDate(){
-            return this.estimate.dueDate === ''
-        },
-        invalidTitle(){
-            return this.estimate.title === ''
-        },
-        invalidTaskDescription(){
-            return this.estimate.taskDescription === ''
-        }
-
+        // invalidProjectName(){
+        //     return this.estimate.project === ''
+        // },
+        // invalidDeveloper(){
+        //     return this.estimate.developers === ''
+        // },
+        // invalidDueDate(){
+        //     return this.estimate.dueDate === ''
+        // },
+        // invalidTitle(){
+        //     return this.estimate.title === ''
+        // },
+        // invalidTaskDescription(){
+        //     return this.estimate.taskDescription === ''
+        // }
     },
-
     methods: {
             handleEditt(estimateId){
                 this.submitting = true
                 // validating empty inputs
-                if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
-                {
-                    this.error = true
-                    return
-                }
+                // if(this.invalidProjectName || this.invalidDueDate || this.invalidTitle || this.invalidTaskDescription)
+                // {
+                //     this.error = true
+                //     return
+                // }
                 console.log()
-                let newEstimateId = this.openEditModel(estimateId)
+                // let newEstimateId = this.openEditModel(estimateId)
+                // debugger
+                let newEstimateId = this.estimateId
                 
                 console.log(newEstimateId)
+                // console.log(estimates)
                 // debugger
                 let editedEstimate = {
                         project: this.selectedProject.id,
@@ -191,28 +189,23 @@ export default {
                         title: this.estimate.title,
                         taskDescription: this.estimate.taskDescription,
                         projectManager: this.$store.getters.getUser.id
-
                     }
-                axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
-                        .then((response) =>{
-                            console.log(response);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-
-                        this.success = true
-                        this.error = false
-                        this.submitting = false 
-
+                // axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+                //         .then((response) =>{
+                //             console.log(response);
+                //         })
+                //         .catch((error) => {
+                //             console.log(error);
+                //         });
+                        // this.success = true
+                        // this.error = false
+                        // this.submitting = false 
                     
                 },
         
         // this.success = true
         //     this.error = false
         //     this.submitting = false 
-
-
     clearForm(){
                 this.success = false
                 this.error = false
@@ -226,9 +219,7 @@ export default {
         const response = await axios.get(`http://localhost:8081/api/projects`)
         const resp = await axios.get(`http://localhost:8081/api/users/developers`)
         // const respons = await axios.get(`http://localhost:8081/api/estimate-request/5e202bf35dfb7025a93e779d` )
-
         // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
-
         // this.estimates = res.data;
         // this.estimate = res.data; 
         // console.log(res)
@@ -244,7 +235,6 @@ export default {
         
       }
       
-
     },
    
     
@@ -255,12 +245,10 @@ export default {
 [class*='-message'] {
     font-weight: 500;
   }
-
   .error-message {
     color: #d33c40;
     text-align: left;
   }
-
   .success-message {
     color: #32a95d;
     text-align: left;

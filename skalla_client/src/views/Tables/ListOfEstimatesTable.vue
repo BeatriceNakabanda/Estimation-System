@@ -11,81 +11,79 @@
                           <h3 class="modal-title " id="exampleModalLabel">Request Estimate</h3>
                       </template>
                       <!-- create estimate form -->
-                      <CreateEstimateForm  />
-                  </modal>
+                      <CreateEstimateForm @inputData="updateEstimate" />
+            </modal>
         </div>
       </div>
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table table-flush"
-                  :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
-                  tbody-classes="list"
-                  :data="estimates" id="left">
-        <template  slot="columns"  >
-          <th class="bgcolor">Title</th>
-          <th class="bgcolor">Project</th>
-          <th class="bgcolor">Developer</th>
-          <th class="bgcolor">Date Created</th>
-          <th class="bgcolor">Date Estimated</th>
-          <th class="bgcolor">Status</th>
-          <th class="bgcolor"></th>
-        </template>
-          <template class="table-row" slot-scope="{row}">
-          <td class="title">
-            {{row.title}}
-          </td>
-          <td class="project">
-            {{row.project.name}}
-          </td>
-          <td class="developer">
-            {{row.developer.name}}
-          </td>
-          <td class="dateCreated">
-            {{ formatDate(row.dateCreated) }}
-            <!-- {{ row.dateCreated }} -->
-          </td>
-          <td class="dateEstimated">
-            {{row.dateEstimated}}
-          </td>
-          <td>
-            <!-- <badge class="badge-dot mr-4" :type="row.statusType">
-              <i :class="`bg-${row.statusType}`"></i>
-              <span class="status">{{row.status}}</span>
-            </badge> -->
-              
-              <span v-if="row.status === 'Submitted'" class="status" id="status-submitted">
-                {{row.status}}
+      <table class="table table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th class="bgcolor">Title</th>
+            <th class="bgcolor">Project</th>
+            <th class="bgcolor">Developer</th>
+            <th class="bgcolor">Date Created</th>
+            <th class="bgcolor">Date Estimated</th>
+            <th class="bgcolor">Status</th>
+            <th class="bgcolor"></th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr v-for="estimate in estimates" :key="estimate.id" >
+            <td class="title">
+              {{estimate.title}}
+            </td>
+            <td class="project">
+              {{estimate.project.name}}
+            </td>
+            <td class="developer">
+              {{estimate.developer.name}}
+            </td>
+            <td class="dateCreated">
+              {{ formatDate(estimate.dateCreated) }}
+              <!-- {{ row.dateCreated }} -->
+            </td>
+            <td class="dateEstimated">
+              {{estimate.dateEstimated}}
+            </td>
+            <td>
+              <!-- <badge class="badge-dot mr-4" :type="row.statusType">
+                <i :class="`bg-${row.statusType}`"></i>
+                <span class="status">{{row.status}}</span>
+              </badge> -->
+                
+                <span v-if="estimate.status === 'Submitted'" class="status" id="status-submitted">
+                  {{estimate.status}}
+                </span>
+                <span v-else class="status" id="status-estimated">{{estimate.status}}</span>           
+            </td>
+          
+            <td >
+              <span class="action-icons"> 
+                <router-link  :to="`/view-estimate/${estimate._id}`" id="view">
+                  <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
+                  <modal :show.sync="estimateModal">
+                    <template slot="header">
+                            <h3 class="modal-title " id="exampleModalLabel">Estimate</h3>
+                        </template>
+                  </modal>
+                </router-link>
               </span>
-              <span v-else class="status" id="status-estimated">{{row.status}}</span>           
-          </td>
-         
-          <td >
-            <span class="action-icons">
-              <router-link  :to="`/view-estimate/${row._id}`" id="view">
-                <i class="rounded-circle fa fa-eye fa-1x" aria-hidden="true" id="my-icons" ></i>
-                <modal :show.sync="estimateModal">
-                  <template slot="header">
-                          <h3 class="modal-title " id="exampleModalLabel">Estimate</h3>
-                      </template>
-                </modal>
-              </router-link>
-            </span>
-           
-            
-            
-          </td>
-          </template>
-
-      </base-table>
+          
+            </td>
+          </tr>
+          </tbody>
+      </table>
+   
     </div>
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <!-- <base-pagination total="30"></base-pagination> -->
       <base-pagination></base-pagination>
-
+      
     </div>
     
   </div>
@@ -93,7 +91,7 @@
 <script>
 import CreateEstimateForm from "../Forms/CreateEstimateForm";
 import EditEstimateForm from "../Forms/EditEstimateForm";
-// import axios from "axios";
+import axios from "axios";
 // import store from "../../store"
 import { format } from 'date-fns' 
 // import AuthService from '../services/AuthService';
@@ -109,19 +107,30 @@ export default {
     type: {
       type: String
     },
-    title: String
+    title: String,
+    newestimate: {
+      type: Array
+    },
+    
   },
   data() {
     return {
       requestEstimateModal: false,
       estimateModal: false,
       format,
+      // estimate: []
+      // estimateData: [],
+      name: "beatrice"
+      
     };
   },
-    
-  methods: {
-
-        
+  
+  watch: {
+    newestimate() {
+      this.estimates.push(this.newestimate)
+    }
+  }, 
+  methods: {   
       async created(){
       try{
         if (!this.store.getters.isLoggedIn) {
@@ -131,6 +140,9 @@ export default {
         console.error(e)
         
       }
+    },
+    updateEstimate(estimate){
+      this.estimateData = estimate
     },
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')

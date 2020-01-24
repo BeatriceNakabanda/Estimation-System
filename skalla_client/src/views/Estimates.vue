@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col">
           <!-- <estimates-table title="Light Table" :estimates="estimates" @edit:estimate="editEstimate"></estimates-table>                     -->
-          <estimates-table :estimates="estimates"></estimates-table>
+          <estimates-table :estimate="estimates" />
         </div>
       </div>
     </div>
@@ -21,6 +21,11 @@ import router from "../router"
     components: {
       EstimatesTable
     },
+    // props: {
+    //   estimateData:{
+    //     type: String
+    //   }
+    // },
     data(){
       return{
          estimates: [],
@@ -38,7 +43,7 @@ import router from "../router"
         const res = await axios.get(`http://localhost:8081/api/estimate-requests/` + loggedInProjectManager)
         this.estimates = res.data;
       } catch(e){
-        // console.error(e)
+        console.error(e)
       }
     },
       
