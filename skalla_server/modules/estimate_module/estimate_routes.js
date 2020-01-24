@@ -4,51 +4,79 @@ const router = express.Router();
 const estimateController = require("./estimate_controllers");
 const loginController = require("../user_module/loginController");
 
-//get all estimates for a given developer
+//get all estimates information for a given developer
 router.get(
   "/pending-estimates/:requestedId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
 
   estimateController.estimateList
 );
-//get all draft estimates
+//get all estimated  estimates information
 router.get(
-  "/draft-estimates",
+  "/estimated-estimates/:requestedId",
   loginController.CheckToken,
-  estimateController.estimatedraftList
-);
-
-//get all pending estimates
-router.get(
-  "/pending-estimates",
-  loginController.CheckToken,
-  estimateController.estimatependingList
-);
-//get all pending estimates
-router.get(
-  "/submitted-estimates",
-  loginController.CheckToken,
-  estimateController.estimatesubmittedList
-);
-//get a single estimate
-router.get(
-  "/estimate/:requestId",
-  loginController.CheckToken,
-  estimateController.singleEstimate
+  estimateController.estimatedList
 );
 
 //create a single estimate
 router.post(
-  "/estimate",
+  "/create-estimate/:requestedId",
   loginController.CheckToken,
   estimateController.createEstimate
 );
-
-//update a single estimate
-router.put(
-  "/estimate/:requestId",
+//getting all to estimates
+router.get(
+  "/get-all-estimates/:requestedId",
   loginController.CheckToken,
-  estimateController.updateEstimate
+  estimateController.estimatesList
 );
+
+//editing an estimate
+router.put(
+  "/editing-estimate/:requestedId",
+  //loginController.CheckToken,
+  estimateController.editingEstimate
+);
+
+//get a single estimate
+router.get(
+  "/estimate/:requestId",
+  //loginController.CheckToken,
+  estimateController.singleEstimate
+);
+
+//getting draft estimates
+// router.get(
+//   "/draft-estimates/:requestedId",
+//   //loginController.CheckToken,
+//   estimateController.estimatedraftList
+// );
+
+//get all pending estimates
+// router.get(
+//   "/pending-estimate/:requestedId",
+//   loginController.CheckToken,
+//   estimateController.estimatePendingList
+// );
+// //get all submitted estimates
+// router.get(
+//   "/submitted-estimates/:requestedId",
+//   loginController.CheckToken,
+//   estimateController.estimatesubmittedList
+// );
+
+//changing to submitted
+// router.put(
+//   "/change-submitted/:requestedId",
+//   loginController.CheckToken,
+//   estimateController.changingStatusToSubmitted
+// );
+
+// //update a single estimate
+// router.put(
+//   "/estimate/:requestId",
+//   loginController.CheckToken,
+//   estimateController.updateEstimate
+// );
 
 module.exports = router;

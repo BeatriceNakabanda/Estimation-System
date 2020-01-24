@@ -13,10 +13,10 @@
                   tbody-classes="list"
                   :data="tableData" id="left">
         <template  slot="columns"  >
-          <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Project Manager</th>
+          <th class="bgcolor">Date Created</th>
           <th class="bgcolor"></th>
           <!-- <th class="bgcolor">Action</th> -->
         </template>
@@ -29,29 +29,29 @@
               </div>
             </div>
           </td> -->
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          
           <td class="title">
             {{row.title}}
           </td>
+          
           <td class="project">
             {{row.project}}
           </td>
           <td class="project-manager">
             {{row.projectManager}}
           </td>
+          <td class="project-created">
+            {{row.dateCreated}}
+          </td>
          
           <td >
-            <span class="action-icons">
+            <!-- <span class="action-icons">
               <router-link  to="#" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
-            </span>
+            </span> -->
             <span class="action-icons">
-              <router-link  to="#" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons" @click="modal = true"></i>
+              <router-link  :to="`/view-pending-estimate/${row._id}`" id="view">
+                <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons"></i>
                 
               </router-link>
             </span>
@@ -73,6 +73,7 @@
   export default {
     name: 'drafts-estimates-table',
     props: {
+    
       type: {
         type: String
       },
@@ -80,7 +81,7 @@
     },
     data() {
       return {
-        modal: false,
+        draftEstimates: Array,
         tableData: [
           {
             id: 1,

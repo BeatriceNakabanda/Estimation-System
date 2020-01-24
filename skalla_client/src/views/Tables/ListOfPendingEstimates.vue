@@ -11,7 +11,7 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="pendingEstimates" id="left">
+                  :data="estimates" id="left">
         <template  slot="columns"  >
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
@@ -32,10 +32,10 @@
           </td>
           
           <td class="project">
-            {{row.project}}
+            {{row.project.name}}
           </td>
           <td class="project-manager">
-            {{row.projectManager}}
+            {{row.projectManager.name}}
           </td>
           <td class="date-created">
             {{formatDate(row.dateCreated)}}
@@ -43,13 +43,13 @@
          
           <td >
             <span class="action-icons">
-              <router-link  to="#" id="view">
+              <router-link  :to="`/view-pending-estimate/${row._id}`" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span>
             <!-- <span class="action-icons">
-              <router-link  to="/" id="view">
-                <i class="rounded-circle fas fa-pen" aria-hidden="true"></i>
+              <router-link  :to="#" id="view">
+                <i class="rounded-circle fas fa-pen" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span> -->
           </td>
@@ -71,7 +71,7 @@
   export default {
     name: 'pending-estimates-table',
     props: {
-      pendingEstimates: Array,
+      estimates: Array,
       type: {
         type: String
       },
@@ -79,45 +79,13 @@
     },
     data() {
       return {
-        tableData: [
-          {
-            id: 1,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Refactory',
-            projectManager: 'David Pereira',
-          },
-          {
-            id: 2,
-            dateCreated: '20-09-2018',
-            title: 'login',
-            project: 'Xente',
-            projectManager: 'David Pereira',
-           
-          },
-          {
-           id: 3,
-            dateCreated: '31-02-2019',
-            title: 'Navbar',
-            project: 'Refactory',
-            projectManager: 'David Pereira',
-          },
-          {
-            id: 4,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Xente',
-            projectManager: 'Cindy',
-           
-          },
-         
-        ]
+
       }
     },
     methods: {
 
       formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd / MM / yyy')
+      return format(new Date(dateCreated), 'dd-MM-yyy')
       }
 
     }

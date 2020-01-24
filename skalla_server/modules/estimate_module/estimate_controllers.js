@@ -6,9 +6,13 @@ const EstimateRequest = require("../estimateRequest_module/estimateRequest_model
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
-//getting a project,project manager according to developer id
+//getting a project,project manager according to developer id when pending and draft
+//for pending and drafts
 exports.estimateList = function(req, res, next) {
-  EstimateRequest.find({ developer: req.params.requestedId })
+  EstimateRequest.find({
+    developer: req.params.requestedId,
+    status: "Submitted"
+  })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "projectManager", select: "name-_id" })
     .populate({ path: "developer", select: "name-_id" })
@@ -21,36 +25,66 @@ exports.estimateList = function(req, res, next) {
     });
 };
 
-//getting pending draft estimates
-exports.estimatedraftList = function(req, res, next) {
-  Estimate.find({ status: "Draft" }).exec(function(err, estimate) {
-    if (err) {
-      return next(err);
+//getting when a developer estimates and sends back to project manager
+//for Submitted
+exports.estimatedList = function(req, res, next) {
+  EstimateRequest.find({
+    developer: req.params.requestedId,
+    status: "Estimated"
+  })
+    .populate({ path: "project", select: "name-_id" })
+    .populate({ path: "projectManager", select: "name-_id" })
+    .exec(function(err, estimate) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimate);
+      }
+    });
+};
+//creating an estimate
+exports.createEstimate = function(req, res) {
+  const newEstimate = new Estimate(req.body);
+  newEstimate.save(function(estimate, next) {
+    if (next) {
+      res.send(next);
     } else {
       res.json(estimate);
     }
   });
 };
-//getting pending draft estimates
-exports.estimatependingList = function(req, res, next) {
-  Estimate.find({ status: "Pending" }).exec(function(err, estimate) {
-    if (err) {
-      return next(err);
-    } else {
+
+//getting all estimates
+exports.estimatesList = function(req, res, next) {
+  Estimate.find({
+    developer: req.params.requestedId
+  })
+    .populate({ path: "developer", select: "name-_id" })
+
+    .populate({ path: "task" })
+
+    .exec(function(err, estimate) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimate);
+      }
+    });
+};
+//editng an estimate
+exports.editingEstimate = function(req, res) {
+  Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body, function(
+    next,
+    estimate
+  ) {
+    if (estimate !== null) {
       res.json(estimate);
+    } else {
+      res.send(next);
     }
   });
 };
-//getting submitted draft estimates
-exports.estimatesubmittedList = function(req, res, next) {
-  Estimate.find({ status: "Submitted" }).exec(function(err, estimate) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimate);
-    }
-  });
-};
+
 //get a single estimate
 exports.singleEstimate = function(req, res, next) {
   Estimate.findById({ _id: req.params.requestId }).exec(function(
@@ -63,6 +97,51 @@ exports.singleEstimate = function(req, res, next) {
       res.json(estimate);
     }
   });
+};
+//getting pending draft estimates
+exports.estimatePendingList = function(req, res, next) {
+  Estimate.find({
+    developer: req.params.requestedId,
+    status: "Pending"
+  })
+    .populate({ path: "developer", select: "name-_id" })
+    .exec(function(err, estimate) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimate);
+      }
+    });
+};
+//getting submitted  estimates
+exports.estimatesubmittedList = function(req, res, next) {
+  Estimate.find({
+    developer: req.params.requestedId,
+    status: "Submitted"
+  })
+    .populate({ path: "developer", select: "name-_id" })
+    .exec(function(err, estimate) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimate);
+      }
+    });
+};
+
+//changing status to submitted
+exports.changingStatusToSubmitted = function(req, res) {
+  Estimate.findByIdAndUpdate(
+    { _id: req.params.requestedId },
+    { status: "Submitted" },
+    function(next, estimate) {
+      if (estimate !== null) {
+        res.json(estimate);
+      } else {
+        res.send(next);
+      }
+    }
+  );
 };
 
 //create estimate

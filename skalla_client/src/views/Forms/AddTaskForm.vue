@@ -110,7 +110,7 @@
             </div>
             <div class="col-sm">
               <base-input alternative="">
-                  <textarea rows="3" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add main task description here ..."></textarea>
+                  <textarea rows="3" v-model="form.taskDescription" class="form-control form-control-alternative" placeholder="Add comment here ..."></textarea>
               </base-input>
             </div>
           </div>
