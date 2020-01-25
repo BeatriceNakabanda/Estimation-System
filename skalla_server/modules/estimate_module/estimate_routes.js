@@ -11,11 +11,22 @@ router.get(
 
   estimateController.estimateList
 );
+
+//getting a single estimate request information for a single developer
+
 router.get(
   "/Unique-estimate/:requestId/:requestedId",
   loginController.CheckToken,
 
-  estimateController.UniqueEstimate
+  estimateController.UniqueEstimateRequest
+);
+
+// updating a single estimate request information for a single developer
+router.put(
+  "/update-estimateRequest/:requestId/:requestedId",
+  loginController.CheckToken,
+
+  estimateController.EstimateRequestUpdate
 );
 //get all estimated  estimates information
 router.get(
