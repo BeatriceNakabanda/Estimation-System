@@ -142,7 +142,7 @@ exports.changingStatusToEstimated = function(req, res) {
   );
 };
 
-exports.UniqueEstimate = function(req, res) {
+exports.UniqueEstimateRequest = function(req, res, next) {
   EstimateRequest.find(
     {
       _id: req.params.requestId,
@@ -153,6 +153,7 @@ exports.UniqueEstimate = function(req, res) {
     .populate({ path: "developer", select: "name-_id" })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "projectManager", select: "name-_id" })
+
     .exec(function(err, estimate) {
       if (err) {
         return next(err);
@@ -160,6 +161,24 @@ exports.UniqueEstimate = function(req, res) {
         res.json(estimate);
       }
     });
+};
+//finding an estimate request and updating it according to developer
+exports.EstimateRequestUpdate = function(req, res, next) {
+  var today = Date.now;
+  EstimateRequest.findByIdAndUpdate(
+    {
+      _id: req.params.requestId,
+      developer: req.params.requestedId
+    },
+    { status: "Estimated", dueDate: today }
+    //dueDate: Date.now
+  ).exec(function(err, estimate) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(estimate);
+    }
+  });
 };
 
 //create estimate
