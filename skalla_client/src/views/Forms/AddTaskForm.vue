@@ -23,7 +23,7 @@
                   <base-input alternative
                           class=""
                           placeholder="Add sub task here..."
-                          v-model="form.subtask"
+                          v-model="form.task"
                           >
                 </base-input>
               </div>  
@@ -76,7 +76,7 @@
             </base-input>
             </div>
           </div>
-                    <div class="row mt--2">
+            <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Stabilization</h6>
               <i class="fas fa-info-circle ml-2 mt-2  btn-tooltip" id="myicon" v-b-tooltip.hover.right title="Stabilization ...."></i>
@@ -122,15 +122,17 @@ export default {
     data(){
         return{
             form : {
-                    id: '',
-                    subtask: '',
-                    developer: '',
-                    project: '',
-                    dueDate: '',
-                    taskDescription: ''
-                }, 
+                    task: '',
+                    research: '',
+                    planning: '',
+                    development: '',
+                    testing: '',
+                    stabilization: '',
+                    certainty: '',
+                    taskDescription: '',
+                },
         }       
-    }
+    },
 }
 </script>
 <style>

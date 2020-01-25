@@ -7,30 +7,32 @@
     </div>
 
     <div class="table-responsive table-hover">
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th class="bgcolor">Title</th>
-            <th class="bgcolor">Project</th>
-            <th class="bgcolor">Developer</th>
-            <th class="bgcolor">Date Created</th>
-            <th class="bgcolor"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="estimate in estimates" :key="estimate.id">
+      <base-table class="table table-flush"
+                  :class="type === 'dark' ? 'table-dark': ''"
+                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
+                  tbody-classes="list"
+                  :data="estimates" id="left">
+        <template  slot="columns"  >
+          <th class="bgcolor">Title</th>
+          <th class="bgcolor">Project</th>
+          <th class="bgcolor">Developer</th>
+          <th class="bgcolor">Date Created</th>
+          <th class="bgcolor"></th>
+          <!-- <th class="bgcolor">Action</th> -->
+        </template>
+          <template class="table-row" slot-scope="{row} ">
           <td class="title">
-            {{estimate.title}}
+            {{row.title}}
           </td>
 
           <td class="project">
-            {{estimate.project.name}}
+            {{row.project.name}}
           </td>
           <td class="developer">
-            {{estimate.developer.name}}
+            {{row.developer.name}}
           </td>
           <td class="date-created">
-            {{ formatDate(estimate.dateCreated) }}
+            {{ formatDate(row.dateCreated) }}
           </td>
          
           <td >
@@ -172,10 +174,9 @@
             </span>
             
           </td>
-          </tr>
-        </tbody>
-
-      </table>
+          
+          </template>
+      </base-table>
     </div>
 
     <!-- <div class="card-footer d-flex justify-content-end"

@@ -97,7 +97,7 @@
             <p v-if="success" class="success-message">
                 ✅ Request successfully sent
             </p>
-            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft" >Save as draft</base-button>
+            <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft()" >Save as draft</base-button>
             <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
             <base-button class="shadow-none mt-4" type="primary" @click="addEstimate()">Send request</base-button>
 
@@ -207,8 +207,8 @@ export default {
             let draftedEstimate = this.submitting = true
             if(draftedEstimate){
                 let newEstimate = {
-                project: this.selectedProject.id,
-                developer: this.selectedDeveloper.id,
+                project: this.estimate.selectedProject.id,
+                developer: this.estimate.selectedDeveloper.id,
                 dueDate: this.estimate.dueDate,
                 title: this.estimate.title,
                 taskDescription: this.estimate.taskDescription,
@@ -216,6 +216,7 @@ export default {
                 status: this.estimate.status = "Draft",
                 statusType: this.estimate.statusType = "warning"
                 }
+            console.log(newEstimate)
             const response = await AuthService.addEstimate(newEstimate);
             console.log(response)
             }
