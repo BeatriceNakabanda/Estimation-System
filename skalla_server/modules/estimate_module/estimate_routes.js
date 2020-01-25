@@ -7,9 +7,15 @@ const loginController = require("../user_module/loginController");
 //get all estimates information for a given developer
 router.get(
   "/pending-estimates/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
 
   estimateController.estimateList
+);
+router.get(
+  "/Unique-estimate/:requestId/:requestedId",
+  loginController.CheckToken,
+
+  estimateController.UniqueEstimate
 );
 //get all estimated  estimates information
 router.get(
@@ -20,8 +26,8 @@ router.get(
 
 //create a single estimate
 router.post(
-  "/create-estimate/:requestedId",
-  loginController.CheckToken,
+  "/create-estimate",
+  //loginController.CheckToken,
   estimateController.createEstimate
 );
 //getting all to estimates
@@ -34,23 +40,23 @@ router.get(
 //editing an estimate
 router.put(
   "/editing-estimate/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.editingEstimate
 );
 
 //get a single estimate
 router.get(
   "/estimate/:requestId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.singleEstimate
 );
 
 //getting draft estimates
-// router.get(
-//   "/draft-estimates/:requestedId",
-//   //loginController.CheckToken,
-//   estimateController.estimatedraftList
-// );
+router.put(
+  "/submitted-estimates/:requestedId",
+  loginController.CheckToken,
+  estimateController.changingStatusToEstimated
+);
 
 //get all pending estimates
 // router.get(
