@@ -63,37 +63,11 @@ router.get(
 );
 
 //getting draft estimates
+
 router.put(
   "/submitted-estimates/:requestedId",
   loginController.CheckToken,
   estimateController.changingStatusToEstimated
 );
-
-//get all pending estimates
-// router.get(
-//   "/pending-estimate/:requestedId",
-//   loginController.CheckToken,
-//   estimateController.estimatePendingList
-// );
-// //get all submitted estimates
-// router.get(
-//   "/submitted-estimates/:requestedId",
-//   loginController.CheckToken,
-//   estimateController.estimatesubmittedList
-// );
-
-//changing to submitted
-// router.put(
-//   "/change-submitted/:requestedId",
-//   loginController.CheckToken,
-//   estimateController.changingStatusToSubmitted
-// );
-
-// //update a single estimate
-// router.put(
-//   "/estimate/:requestId",
-//   loginController.CheckToken,
-//   estimateController.updateEstimate
-// );
 
 module.exports = router;

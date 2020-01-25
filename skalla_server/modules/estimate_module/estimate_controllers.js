@@ -143,13 +143,10 @@ exports.changingStatusToEstimated = function(req, res) {
 };
 
 exports.UniqueEstimateRequest = function(req, res, next) {
-  EstimateRequest.find(
-    {
-      _id: req.params.requestId,
-      developer: req.params.requestedId
-    }
-    // { status: "Estimated", dueDate: Date.now }
-  )
+  EstimateRequest.find({
+    _id: req.params.requestId,
+    developer: req.params.requestedId
+  })
     .populate({ path: "developer", select: "name-_id" })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "projectManager", select: "name-_id" })
