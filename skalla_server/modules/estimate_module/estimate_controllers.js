@@ -61,8 +61,6 @@ exports.estimatesList = function(req, res, next) {
   })
     .populate({ path: "developer", select: "name-_id" })
 
-    .populate({ path: "task" })
-
     .exec(function(err, estimate) {
       if (err) {
         return next(err);
@@ -129,11 +127,11 @@ exports.estimatesubmittedList = function(req, res, next) {
     });
 };
 
-//changing status to submitted
-exports.changingStatusToSubmitted = function(req, res) {
-  Estimate.findByIdAndUpdate(
-    { _id: req.params.requestedId },
-    { status: "Submitted" },
+//changing status from submitted to estimated
+exports.changingStatusToEstimated = function(req, res) {
+  EstimateRequest.findByIdAndUpdate(
+    { _id: req.params.requestId, developer: req.params.requestedId },
+    { status: "Estimated" },
     function(next, estimate) {
       if (estimate !== null) {
         res.json(estimate);
@@ -142,6 +140,26 @@ exports.changingStatusToSubmitted = function(req, res) {
       }
     }
   );
+};
+
+exports.UniqueEstimate = function(req, res) {
+  EstimateRequest.find(
+    {
+      _id: req.params.requestId,
+      developer: req.params.requestedId
+    }
+    // { status: "Estimated", dueDate: Date.now }
+  )
+    .populate({ path: "developer", select: "name-_id" })
+    .populate({ path: "project", select: "name-_id" })
+    .populate({ path: "projectManager", select: "name-_id" })
+    .exec(function(err, estimate) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimate);
+      }
+    });
 };
 
 //create estimate
@@ -168,3 +186,15 @@ exports.updateEstimate = function(req, res, next) {
     }
   );
 };
+
+// EstimateRequest.findByIdAndUpdate(
+//   { _id: req.params.requestId, developer: req.params.requestedId },
+//   { status: "Estimated" },
+//   function(next, estimate) {
+//     if (estimate !== null) {
+//       res.json(estimate);
+//     } else {
+//       res.send(next);
+//     }
+//   }
+// );
