@@ -41,6 +41,8 @@ export default {
             const title = response.data.title
             const taskDescription = response.data.taskDescription
             const projectManager = response.data.projectManager
+            const status = response.data.status
+            const dateCreated = response.data.dateCreated
 
             const newEstimateRequest = {
                 project,
@@ -48,8 +50,11 @@ export default {
                 dueDate,
                 title,
                 taskDescription,
-                projectManager
+                projectManager,
+                status,
+                dateCreated
             }
+            
             return{
                 newEstimateRequest
             } 
