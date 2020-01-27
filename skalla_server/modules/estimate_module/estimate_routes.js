@@ -24,9 +24,9 @@ router.get(
 // updating a single estimate request information for a single developer
 router.put(
   "/update-estimateRequest/:requestId/:requestedId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
 
-  estimateController.EstimateRequestUpdate
+  estimateController.EstimateRequestUpdateEstimated
 );
 //get all estimated  estimates information
 router.get(
@@ -38,7 +38,7 @@ router.get(
 //create a single estimate
 router.post(
   "/create-estimate",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.createEstimate
 );
 //getting all to estimates
@@ -62,7 +62,7 @@ router.get(
   estimateController.singleEstimate
 );
 
-//getting draft estimates
+//getting submitted estimates
 
 router.put(
   "/submitted-estimates/:requestedId",

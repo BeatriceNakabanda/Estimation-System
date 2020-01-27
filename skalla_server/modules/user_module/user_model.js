@@ -1,6 +1,7 @@
 //requiring dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
 mongoose.set('useCreateIndex', true);
 
 //main users schema
@@ -44,7 +45,11 @@ const projectManagerSchema = new Schema({
 
 //making sure that the user trying to log in has the correct credentials
 usersSchema.methods.isValidPassword = async function(password){
-    const user = this;
+    //const user = this;
+    const salt = await bcrypt.genSalt(10);
+        var hashPassword = await bcrypt.hash(password, salt);
+          password = hashPassword;
+
     //Hashes the password sent by the user for login and checks if the hashed password stored in the 
     //database matches the one sent. Returns true if it does else false.
     const compare = await compare(password, user.password);

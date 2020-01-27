@@ -12,7 +12,7 @@ const EstimateRequestSchema = new Schema({
   taskDescription: { type: String },
   status: {
     type: String,
-    enum: ["Draft", "Submitted", "Estimated"]
+    enum: ["Draft", "Submitted", "Estimated", "In Progress"]
   },
   dateCreated: { type: Date, default: Date.now }
 });

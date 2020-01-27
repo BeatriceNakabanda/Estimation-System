@@ -160,8 +160,11 @@ exports.UniqueEstimateRequest = function(req, res, next) {
     });
 };
 //finding an estimate request and updating it according to developer
-exports.EstimateRequestUpdate = function(req, res, next) {
-  var today = Date.now;
+exports.EstimateRequestUpdateEstimated = function(req, res, next) {
+  var time = new Date().getTime();
+  var date = new Date(time);
+  today = date.toString();
+
   EstimateRequest.findByIdAndUpdate(
     {
       _id: req.params.requestId,
@@ -169,11 +172,13 @@ exports.EstimateRequestUpdate = function(req, res, next) {
     },
     { status: "Estimated", dueDate: today }
     //dueDate: Date.now
+    //var n = d.getMonth();
   ).exec(function(err, estimate) {
     if (err) {
       return next(err);
     } else {
       res.json(estimate);
+      console.log(today);
     }
   });
 };
