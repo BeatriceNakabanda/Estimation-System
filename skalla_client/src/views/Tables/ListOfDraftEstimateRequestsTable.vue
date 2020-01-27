@@ -7,32 +7,30 @@
     </div>
 
     <div class="table-responsive table-hover">
-      <base-table class="table table-flush"
-                  :class="type === 'dark' ? 'table-dark': ''"
-                  :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
-                  tbody-classes="list"
-                  :data="estimates" id="left">
-        <template  slot="columns"  >
-          <th class="bgcolor">Title</th>
-          <th class="bgcolor">Project</th>
-          <th class="bgcolor">Developer</th>
-          <th class="bgcolor">Date Created</th>
-          <th class="bgcolor"></th>
-          <!-- <th class="bgcolor">Action</th> -->
-        </template>
-          <template class="table-row" slot-scope="{row} ">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th class="bgcolor">Title</th>
+            <th class="bgcolor">Project</th>
+            <th class="bgcolor">Developer</th>
+            <th class="bgcolor">Date Created</th>
+            <th class="bgcolor"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="estimate in estimates" :key="estimate.id">
           <td class="title">
-            {{row.title}}
+            {{estimate.title}}
           </td>
 
           <td class="project">
-            {{row.project.name}}
+            {{estimate.project.name}}
           </td>
           <td class="developer">
-            {{row.developer.name}}
+            {{estimate.developer.name}}
           </td>
           <td class="date-created">
-            {{ formatDate(row.dateCreated) }}
+            {{ formatDate(estimate.dateCreated) }}
           </td>
          
           <td >
@@ -47,7 +45,7 @@
                       <!-- Edit Draft Estimate Request Form -->
                       <!-- <EditDraftEstimateRequestForm  /> -->
                           <form method="POST" role="form" >
-                            <div>
+                            <div >
                                 <div class="row">
                                 <div class="col-sm-3">          
                                     <h6 class="heading-small text-muted mb-4 float-left">Project</h6>
@@ -56,17 +54,15 @@
                                     <base-input alternative
                                             ref="first"
                                             class="mb-3"
+                                            placeholder="Add project here..." 
                                             
-                                            :class="{ 'has-error': submitting } " 
-                                            
-                                            @keypress="clearForm">
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="estimate.project.name">
-                                            <option value="" disabled>Please select a project</option>
-                                            <option v-for="project in projects" :key="project.id">{{project.name}}</option>
+                                            @keypress="clearForm"
+                                          >
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.project">
+                                            <option value="" disabled>{{estimate.project.name}}</option>
+                                            <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                                             </select>
-                                            
                                 </base-input>
-                      
                                 </div>
                                 </div>
                                 <div class="row">
@@ -76,11 +72,12 @@
                                 <div class="col-sm">
                                     <base-input alternative
                                             class="mb-3"
-                                            :placeholder="[[estimate.developer]]"
-                                          :class="{ 'has-error': submitting }">
-                                            <select class="custom-select" id="inputGroupSelect01" v-model="estimate.developer.name">
-                                                <option value="" disabled>Please select a developer</option>
-                                                <option v-for="developer in developers" :key="developer.id">{{developer.name}}</option>
+                                            placeholder="Add developer here..."
+                                          
+                                            >
+                                            <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.developer">
+                                                <option value="" disabled>{{estimate.developer.name}}</option>
+                                                <option  v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                                             </select>
                                 </base-input>
                                 <!-- <p>id: {{selectedProject.id}}</p>
@@ -100,10 +97,11 @@
                                                     @on-open="focus"
                                                     @on-close="blur"
                                                     :config="{allowInput: true, dateFormat: 'd-m-Y'}"
-                                                    :placeholder="[[estimate.dueDate]]"
+                                                    :placeholder="[estimate.dueDate]"
                                                     class="form-control datepicker"
                                                     :class="{ 'has-error': submitting  }"
-                                                    v-model="estimate.dueDate">
+                                                    v-model="newEstimate.dueDate"
+                                                    >
                                         </flat-picker>
                                     </base-input>
                                 </div>
@@ -115,8 +113,8 @@
                                     <div class="col-sm">
                                         <base-input alternative
                                                 class="mb-3"
-                                                :placeholder="[[ estimate.title ]]"
-                                                v-model="estimate.title" 
+                                                :placeholder="[estimate.title]"
+                                                v-model="newEstimate.title"
                                                 :class="{ 'has-error': submitting  }"
                                             >
                                     </base-input>
@@ -129,10 +127,10 @@
                                 <div class="col-sm-12">
                                     <base-input alternative=""
                                     :class="{ 'has-error': submitting }">
-                                        <textarea rows="4"
-                                         v-model="estimate.taskDescription"  
-                                         class="form-control form-control-alternative" 
-                                         :placeholder="[[estimate.taskDescription]]"></textarea>
+                                        <textarea rows="4" 
+                                        class="form-control form-control-alternative" 
+                                        :placeholder="[estimate.taskDescription]"
+                                        v-model="newEstimate.taskDescription"></textarea>
                                     </base-input>
                                 </div>
                                 </div>
@@ -174,9 +172,10 @@
             </span>
             
           </td>
-          
-          </template>
-      </base-table>
+          </tr>
+        </tbody>
+
+      </table>
     </div>
 
     <!-- <div class="card-footer d-flex justify-content-end"
@@ -217,7 +216,6 @@ import axios from 'axios'
         projects: [],
         developers: [],
         taskDescription: '',
-
         // newEstimateId: '',
            
         estimate:
@@ -230,22 +228,22 @@ import axios from 'axios'
             title: '',
             taskDescription: '',
           },
-          // newEstimate:{
-          //   project: '',
-          //   developer: '',
-          //   status: '',
-          //   statusType: '',
-          //   dueDate: '',
-          //   title: '',
-          //   taskDescription: '',
-          // }
+          newEstimate:{
+            project: '',
+            developer: '',
+            status: '',
+            statusType: '',
+            dueDate: '',
+            title: '',
+            taskDescription: '',
+          }
       }
     },
     methods: {
           openEditModel(estimateId){
             this.editDraftModal = true
             // this.estimateId
-            // console.log(estimateId)
+            console.log(estimateId)
             
             return estimateId
           },
@@ -256,17 +254,16 @@ import axios from 'axios'
            
             let newEstimateId = this.openEditModel(estimateId)
             console.log(newEstimateId)
-            // debugger
-            const title = this.estimate.title
-
+           
             const editedEstimate = {
-                  project: this.estimate.project.id,
-                  developer: this.estimate.developer.id,
-                  dueDate: this.estimate.dueDate,
-                  title: this.estimate.title,
-                  taskDescription: this.estimate.taskDescription,
+                  project: this.newEstimate.project.id,
+                  developer: this.newEstimate.developer.id,
+                  dueDate: this.newEstimate.dueDate,
+                  title: this.newEstimate.title,
+                  taskDescription: this.newEstimate.taskDescription,
                   projectManager: this.$store.getters.getUser.id
               }
+             
               console.log(editedEstimate)
             axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
                   .then((response) =>{
@@ -295,13 +292,13 @@ import axios from 'axios'
                   status: this.estimate.status = "Submitted"
               }
               console.log(editedEstimate)
-            // axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
-            //       .then((response) =>{
-            //           console.log(response);
-            //       })
-            //       .catch((error) => {
-            //           console.log(error);
-            //       });
+            axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
+                  .then((response) =>{
+                      console.log(response);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
           },
           openSendRequestModel(estimateId){
             this.sendEstimateRequest = true

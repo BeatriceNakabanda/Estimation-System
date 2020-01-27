@@ -74,11 +74,10 @@ exports.estimateRequestList = function(req, res, next) {
     projectManager: req.params.requestedId,
     status: { $in: ["Estimated", "Submitted"] }
   })
-    .populate({ path: "estimateRequestId", select: "title" })
-    .populate({ path: "projectManager", select: "name-_id" })
+ 
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "developer", select: "name-_id" })
-    .populate({ path: "estimateRequestId", select: "dateCreated" })
+  
 
     .exec(function(err, estimateRequest) {
       if (err) {
@@ -96,16 +95,18 @@ exports.createEstimateRequest = function(req, res) {
     if (next) {
       res.send(next);
     } else {
+      // let finalObject = {...estimateRequest,developerName:"",ProjectName:""}
       res.json(estimateRequest);
     }
+
   });
 };
 
 //get single estimate request
 exports.singleEstimateRequest = function(req, res, next) {
   EstimateRequest.findById({ _id: req.params.requestId })
-    .populate("projectManager", "name")
-    .populate("project", "name")
+  .populate({ path: "project", select: "name-_id" })
+  .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);

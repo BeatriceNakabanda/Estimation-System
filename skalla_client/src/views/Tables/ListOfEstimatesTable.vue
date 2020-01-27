@@ -113,8 +113,6 @@
                                 <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft()" >Save as draft</base-button>
                                 <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
                                 <base-button class="shadow-none mt-4" type="primary" @click="addEstimate()">Send request</base-button>
-                                
-
                             </form>
                   </modal>
         </div>
@@ -140,7 +138,7 @@
           <td class="title">
             {{row.title}}
           </td>
-          <td class="project">
+          <!-- <td class="project">
             {{row.project.name}}
           </td>
           <td class="developer">
@@ -149,7 +147,7 @@
           <td class="dateCreated">
             {{ formatDate(row.dateCreated) }}
            
-          </td>
+          </td> -->
           <td class="dateEstimated">
             {{row.dateEstimated}}
           </td>
@@ -304,16 +302,17 @@ export default {
         // console.log(newEstimate)
         const response = await AuthService.addEstimate(newEstimate);
         // console.log(response)
+
         
-        this.estimates.push({
-          project: response.project,
-          developer: response.developer,
-          dueDate: response.dueDate,
-          title: response.title,
-          taskDescription: response.taskDescription,
-          dateCreated: response.dateCreated,
-          status: response.status,
-        })
+        // this.estimates.push({
+        //   project: response.project,
+        //   developer: response.developer,
+        //   dueDate: response.dueDate,
+        //   title: response.title,
+        //   taskDescription: response.taskDescription,
+        //   dateCreated: response.dateCreated,
+        //   status: response.status,
+        // })
         
         }
             this.success = true
@@ -347,6 +346,7 @@ export default {
                 console.log(newEstimate)
                 const response = await AuthService.addEstimate(newEstimate);
                 console.log(response)
+                
                 }
                 this.success = true
                 this.error = false

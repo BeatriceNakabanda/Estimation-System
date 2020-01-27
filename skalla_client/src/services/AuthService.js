@@ -33,7 +33,9 @@ export default {
     addEstimate(newEstimate){
         return axios
         .post(url + 'estimate-request', newEstimate)
-        .then(response => {
+        
+        .then(
+            response => {
             response.data
             const project = response.data.project
             const developer = response.data.developer
@@ -54,6 +56,7 @@ export default {
                 status,
                 dateCreated
             }
+            
             
             return{
                 newEstimateRequest
