@@ -30,6 +30,7 @@ export default {
         })
         
     },
+    //Sending project manager estimate request to the server
     addEstimate(newEstimate){
         return axios
         .post(url + 'estimate-request', newEstimate)
@@ -60,9 +61,41 @@ export default {
             } 
             // console.log(response)
         })
-
-
     },
+    //sending developer estimation to the server
+    addEstimation(newEstimate){
+        return axios
+        .post(url + 'create-estimate', newEstimate)
+        .then(response =>{
+            response.data
+            const task = response.data.task
+            const research = response.data.research
+            const planning = response.data.planning
+            const development = response.data.development
+            const testing = response.data.testing
+            const stabilization = response.data.stabilization
+            const certainty = response.data.certainty
+            const sumHours = response.data.sumHours
+            const adjustedSumHours = response.data.adjustedSumHours
+            const comments = response.data.comments
+
+            const estimation ={
+                task,
+                research,
+                planning,
+                development,
+                testing,
+                stabilization,
+                certainty,
+                sumHours,
+                adjustedSumHours,
+                comments
+            }
+            return {
+                estimation
+            }
+        })
+    }
     
 
 }

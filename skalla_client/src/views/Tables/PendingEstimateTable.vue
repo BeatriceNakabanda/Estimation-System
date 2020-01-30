@@ -110,7 +110,7 @@
           <h3 class="modal-title" id="exampleModalLabel">New Task</h3>
       </template>
       <!-- Add task form -->
-      <form role="form " >  
+      <form role="form" method="POST">  
          <div class="row mt--4">
            <div class="col-sm-3"></div>
             <div class="col-sm-2">
@@ -134,7 +134,8 @@
                   <base-input alternative
                           class=""
                           placeholder="Add sub task here..."
-                          v-model="form.task"
+                          v-model="estimateData.task"
+                          :class="{ 'has-error': submitting && invalidTask } " 
                           >
                 </base-input>
               </div>  
@@ -147,7 +148,8 @@
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      v-model="form.research"
+                      v-model="estimateData.research"
+                      :class="{ 'has-error': submitting && invalidResearchTime } " 
                       >
             </base-input>
             </div>
@@ -158,7 +160,8 @@
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      v-model="form.planning"
+                      v-model="estimateData.planning"
+                      :class="{ 'has-error': submitting && invalidPlanningTime } " 
                       >
             </base-input>
             </div>
@@ -171,7 +174,9 @@
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      v-model="form.development"
+                      v-model="estimateData.development"
+                      :class="{ 'has-error': submitting && invalidDevelopmentTime } " 
+
                       >
             </base-input>
             </div>
@@ -182,7 +187,8 @@
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      v-model="form.testing"
+                      v-model="estimateData.testing"
+                      :class="{ 'has-error': submitting && invalidTestingTime } " 
                       >
             </base-input>
             </div>
@@ -196,7 +202,9 @@
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      v-model="form.stabilization"
+                      v-model="estimateData.stabilization"
+                      :class="{ 'has-error': submitting && invalidStabilizationTime } " 
+
                       >
             </base-input>
             </div>
@@ -207,8 +215,11 @@
             <div class="col-sm-3">  
               <base-input alternative
                       class=""
-                      placeholder="0.00hrs">
-                      <select class="custom-select" id="inputGroupSelect01" v-model="form.certainty">
+                      placeholder="0.00hrs"
+                      :class="{ 'has-error': submitting && invalidCertainty } " 
+
+                      >
+                      <select class="custom-select" id="inputGroupSelect01" v-model="estimateData.certainty">
                         <option value="" disabled>60</option>
                         <option v-for="certntyValue in certainty" :key="certntyValue.id">{{certntyValue.certaintyValue}}</option>
                         </select>
@@ -223,18 +234,25 @@
             </div>
             <div class="col-sm">
               <base-input alternative="">
-                  <textarea rows="3" v-model="form.comment" class="form-control form-control-alternative" placeholder="Add comment here ..."></textarea>
+                  <textarea rows="3" v-model="estimateData.comment" class="form-control form-control-alternative" placeholder="Add comment here ..."></textarea>
               </base-input>
             </div>
           </div>
+           <p v-if="error && submitting" class="error-message">
+                ❗Please fill in all fields
+            </p>
+            <p v-if="success" class="success-message">
+                ✅ Successfully sent
+            </p>
         </form>
       <!-- <div>
         <AddTaskForm />
       </div> -->
         <template slot="footer">
             <base-button class="shadow-none cancel-color mt--5" type="secondary" @click="modal = false">Close</base-button>
-            <base-button class="shadow-none mt--5" type="primary">Add</base-button>
+            <base-button class="shadow-none mt--5" type="primary" @click="addEstimate">Add</base-button>
         </template>
+        
     </modal>
   </td>
 </tr>
@@ -255,6 +273,7 @@
 </template>
 <script>
 // import AddTaskForm from '../Forms/AddTaskForm'
+import AuthService from '../../services/AuthService'
 import axios from "axios";
 // import { format } from 'date-fns'
 
@@ -274,7 +293,10 @@ import axios from "axios";
          modal: false,
          isShowing:false,
          isShow: false,
-         form : {
+         submitting: false,
+         error: false,
+         success: false,
+         estimateData : {
                     task: '',
                     research: 0,
                     planning: 0,
@@ -351,21 +373,72 @@ import axios from "axios";
       }
     },
     computed: {
+
       calculatedSumHours: function(){
-        if (this.form.research === '' || this.form.planning === ''|| this.form.development === '' || this.form.testing === '' || this.form.stabilization === '') {
+        if (this.estimateData.research === '' || this.estimateData.planning === ''|| this.estimateData.development === '' || this.estimateData.testing === '' || this.estimateData.stabilization === '') {
           return 0
         }else{
-          return parseInt(this.form.research) + parseInt(this.form.planning) + parseInt(this.form.development) + parseInt(this.form.testing) + parseInt(this.form.stabilization) ;
+          return parseInt(this.estimateData.research) + parseInt(this.estimateData.planning) + parseInt(this.estimateData.development) + parseInt(this.estimateData.testing) + parseInt(this.estimateData.stabilization) ;
         }
+        
       },
       calculatedAdjustedSumHours: function(){
-        return parseInt(this.calculatedSumHours) * (1 + (1 - parseInt(this.form.certainty) / 100))
+        return parseInt(this.calculatedSumHours) * (1 + (1 - parseInt(this.estimateData.certainty) / 100))
       },
+      invalidTask(){
+        return this.estimateData.task === ''
+      },
+      invalidResearchTime(){
+          return this.estimateData.research=== '' || isNaN( this.estimateData.research)
+      },
+      invalidPlanningTime(){
+          return this.estimateData.planning === '' || isNaN(this.estimateData.planning)
+      },
+      invalidTestingTime(){
+          return this.estimateData.testing === '' || isNaN(this.estimateData.testing)
+      },
+      invalidDevelopmentTime(){
+          return this.estimateData.development === '' || isNaN(this.estimateData.development)
+      },
+      invalidStabilizationTime(){
+          return this.estimateData.stabilization === '' || isNaN(this.estimateData.stabilization)
+      },
+      invalidCertainty(){
+          return this.estimateData.testing === ''
+      },
+      
     },
     methods: {
-        /* formatDate: function(date){
+        /* estimateatDate: function(date){
         return format(new Date(date), 'dd-MM-yyy')
       } */
+      
+      async addEstimate(){
+        this.submitting = true
+        if(this.invalidTask || this.invalidResearchTime || this.invalidPlanningTime || this.invalidTestingTime || this.invalidDevelopmentTime || this.invalidStabilizationTime || this.invalidCertainty){
+          this.error = true
+          return
+        }
+        let newEstimate ={
+            task: this.estimateData.task,
+            research: this.estimateData.research,
+            planning: this.estimateData.planning,
+            development: this.estimateData.development,
+            testing: this.estimateData.testing,
+            stabilization: this.estimateData.stabilization,
+            certainty: this.estimateData.certainty,
+            sumHours: this.calculatedSumHours,
+            adjustedSumHours: this.calculatedAdjustedSumHours,
+            comments: this.estimateData.comment,
+            developer: this.$store.getters.getUser.id,
+        }
+        this.success=true
+          const response = await AuthService.addEstimation(newEstimate)
+          console.log(newEstimate)
+          console.log(response)
+          
+
+      }
     },
     //fetches estimate when the component is created
     async created(){
@@ -537,4 +610,15 @@ iframe {
   color: #d10572;
 }
 #myicon:hover, #myiconactive {font-size: 120%;}
+[class*='-message'] {
+    font-weight: 500;
+  }
+  .error-message {
+    color: #d33c40;
+    text-align: left;
+  }
+  .success-message {
+    color: #32a95d;
+    text-align: left;
+  }
 </style>

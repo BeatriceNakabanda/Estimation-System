@@ -2,27 +2,27 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// mongoose.Types.Decimal128
 //lineItemSchema
 const lineItemSchema = new Schema({
-  research: mongoose.Types.Decimal128,
-  planning: mongoose.Types.Decimal128,
-  development: mongoose.Types.Decimal128,
-  testing: mongoose.Types.Decimal128,
-  stabilization: mongoose.Types.Decimal128,
-  certainty: { type: Number },
-  sum: mongoose.Types.Decimal128,
-  adjustedSum: mongoose.Types.Decimal128,
-  comments: { type: String }
+  task: String,
+  research: Number,
+  planning: Number,
+  development: Number,
+  testing: Number,
+  stabilization: Number,
+  certainty: Number,
+  sum: Number,
+  adjustedSum: Number,
+  comments: String
 });
 
 //estimate schema
 const estimateSchema = new Schema({
-  task: { type: String },
-  estimateRequestId: { type: Schema.ObjectId, ref: "EstimateRequest" },
-  dateCreated: { type: Date, default: Date.now },
-  submittedDate: { type: Date },
+  // dateCreated: { type: Date, default: Date.now },
+  submittedDate: { type: Date, default: Date.now },
   developer: { type: Schema.ObjectId, ref: "User", required: true },
-  totalSum: mongoose.Types.Decimal128,
+  totalSum: Number,
   lineItem: [lineItemSchema]
 });
 
