@@ -2,8 +2,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// mongoose.Types.Decimal128
-//lineItemSchema
 const lineItemSchema = new Schema({
   task: String,
   research: Number,
