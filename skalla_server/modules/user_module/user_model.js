@@ -1,7 +1,7 @@
 //requiring dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 mongoose.set('useCreateIndex', true);
 
 //main users schema

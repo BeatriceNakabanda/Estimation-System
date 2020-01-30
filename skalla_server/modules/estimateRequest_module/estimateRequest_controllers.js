@@ -74,12 +74,13 @@ exports.estimateRequestList = function(req, res, next) {
     projectManager: req.params.requestedId,
     status: { $in: ["Estimated", "Submitted"] }
   })
+  
     .populate({ path: "estimateRequestId", select: "title" })
     .populate({ path: "projectManager", select: "name-_id" })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "developer", select: "name-_id" })
     .populate({ path: "estimateRequestId", select: "dateCreated" })
-
+ 
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);

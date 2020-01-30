@@ -54,6 +54,8 @@
           </span>
         </td>
         <td class="table-head"  scope="col"></td>
+        <td class="table-head" scope="col"></td>
+        <td class="table-head" scope="col"><b></b></td> 
     </tr>
   </thead>
   <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
@@ -88,14 +90,14 @@
   </tbody>
   <tr>
   <th scope="col">Total</th>
-  <th scope="col">2.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">90%</th>
-  <th scope="col">18.00hrs</th>
-  <th scope="col">19.80hrs</th>
+  <th scope="col"></th>
+  <th scope="col"></th>
+  <th scope="col"></th>
+  <th scope="col"></th>
+  <th scope="col"></th>
+  <th scope="col"></th>
+  <th scope="col"></th>
+  <th scope="col"></th>
   <th></th>
   <th></th>
 
@@ -115,13 +117,13 @@
               <h6 class="heading-small text-capitalize float-left  text-resize">Sum hours: </h6>
             </div>
             <div class="col-sm-2 ml-2">
-              <h6 class="heading-small  text-capitalize float-left  text-resize" >{{calculatedSumHours}}</h6>
+              <h6 class="heading-small  text-capitalize float-left  text-resize" >{{calculatedSumHours}} hrs</h6>
             </div> 
             <div class="col-sm-3 ">
-              <h6 class="heading-small text-capitalize float-left  text-resize ">Adjusted Sum:</h6>
+              <h6 class="heading-small text-capitalize float-left  text-resize" >Adjusted Sum: </h6>
             </div>
             <div class="col-sm-1 ml--3">
-              <h6 class="heading-small  text-capitalize float-left  text-resize">0.00 hrs</h6>
+              <h6 class="heading-small  text-capitalize float-left  text-resize">{{calculatedAdjustedSumHours}} hrs</h6>
             </div>
           </div>
           <div class="row ">
@@ -205,9 +207,11 @@
             <div class="col-sm-3">  
               <base-input alternative
                       class=""
-                      placeholder="0.00hrs"
-                      v-model="form.certainty"
-                      >
+                      placeholder="0.00hrs">
+                      <select class="custom-select" id="inputGroupSelect01" v-model="form.certainty">
+                        <option value="" disabled>60</option>
+                        <option v-for="certntyValue in certainty" :key="certntyValue.id">{{certntyValue.certaintyValue}}</option>
+                        </select>
             </base-input>
             </div>
           </div>
@@ -279,7 +283,7 @@ import axios from "axios";
                     stabilization: 0,
                     certainty: 0,
                     sumHours: 0,
-                    adjustedSumHours: '',
+                    adjustedSumHours: 0,
                     comments: '',
                 },
          /* form : {
@@ -298,7 +302,38 @@ import axios from "axios";
             taskDescription: "",
             title: ""
         },
-/*         tableData: [
+        certainty: [
+          { 
+            id: 1,
+            certaintyValue: 60 
+          },
+          { 
+            id: 2,
+            certaintyValue: 65 
+          },
+          { 
+            id: 3,
+            certaintyValue: 70 
+          },
+          { 
+            id: 4,
+            certaintyValue: 75
+          },
+          { 
+            id: 5,
+            certaintyValue: 80
+          },
+          { 
+            id: 6,
+            certaintyValue: 85 
+          },
+          { 
+            id: 7,
+            certaintyValue: 90 
+          }
+        ],
+        /*
+         tableData: [
           {
             subTask: '',
             research: '',
@@ -317,8 +352,15 @@ import axios from "axios";
     },
     computed: {
       calculatedSumHours: function(){
-        return parseInt(this.form.research) + parseInt(this.form.planning) + parseInt(this.form.development) + parseInt(this.form.testing) + parseInt(this.form.stabilization);
-      }
+        if (this.form.research === '' || this.form.planning === ''|| this.form.development === '' || this.form.testing === '' || this.form.stabilization === '') {
+          return 0
+        }else{
+          return parseInt(this.form.research) + parseInt(this.form.planning) + parseInt(this.form.development) + parseInt(this.form.testing) + parseInt(this.form.stabilization) ;
+        }
+      },
+      calculatedAdjustedSumHours: function(){
+        return parseInt(this.calculatedSumHours) * (1 + (1 - parseInt(this.form.certainty) / 100))
+      },
     },
     methods: {
         /* formatDate: function(date){
