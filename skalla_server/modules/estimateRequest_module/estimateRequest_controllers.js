@@ -113,6 +113,7 @@ exports.createEstimateRequest = async function(req, res) {
 //get single estimate request
 exports.singleEstimateRequest = function(req, res, next) {
   EstimateRequest.findById({ _id: req.params.requestId })
+    .populate({ path: "project", select: "name-_id" })
     .populate({ path: "projectManager", select: "name-_id" })
 
     .populate({ path: "developer", select: "name-_id" })
