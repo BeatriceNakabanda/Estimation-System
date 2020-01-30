@@ -18,7 +18,6 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema({
-  // dateCreated: { type: Date, default: Date.now },
   submittedDate: { type: Date, default: Date.now },
   developer: { type: Schema.ObjectId, ref: "User", required: true },
   totalSum: Number,
