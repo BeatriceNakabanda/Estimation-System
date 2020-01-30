@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 // mongoose.Types.Decimal128
 //lineItemSchema
 const lineItemSchema = new Schema({
+  task: String,
   research: Number,
   planning: Number,
   development: Number,
@@ -18,6 +19,7 @@ const lineItemSchema = new Schema({
 
 //estimate schema
 const estimateSchema = new Schema({
+  // dateCreated: { type: Date, default: Date.now },
   submittedDate: { type: Date, default: Date.now },
   developer: { type: Schema.ObjectId, ref: "User", required: true },
   totalSum: Number,
