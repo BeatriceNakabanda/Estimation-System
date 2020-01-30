@@ -95,15 +95,15 @@ exports.createEstimateRequest = async function(req, res) {
   const estimateRequest = new EstimateRequest(req.body);
 
   try {
-    const createdEstimate = await estimateRequest.save(estimateRequest);
+    const createdEstimateRequest = await estimateRequest.save(estimateRequest);
 
     const project = await projectmodel.findById(estimateRequest.project);
 
     const developer = await developermodel.findById(estimateRequest.developer);
 
-    createdEstimate.developer = developer;
-    createdEstimate.project = project;
-    res.send(createdEstimate);
+    createdEstimateRequest.developer = developer;
+    createdEstimateRequest.project = project;
+    res.send(createdEstimateRequest);
   } catch (e) {
     console.log(e);
     res.send(e);
