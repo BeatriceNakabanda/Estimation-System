@@ -206,14 +206,14 @@ exports.updateEstimate = function(req, res, next) {
     });
 };
 
-// EstimateRequest.findByIdAndUpdate(
-//   { _id: req.params.requestId, developer: req.params.requestedId },
-//   { status: "Estimated" },
-//   function(next, estimate) {
-//     if (estimate !== null) {
-//       res.json(estimate);
-//     } else {
-//       res.send(next);
-//     }
-//   }
-// );
+EstimateRequest.findByIdAndUpdate(
+  { _id: req.params.requestId, developer: req.params.requestedId },
+  { status: "Estimated" },
+  function(next, estimate) {
+    if (estimate !== null) {
+      res.json(estimate);
+    } else {
+      res.send(next);
+    }
+  }
+);
