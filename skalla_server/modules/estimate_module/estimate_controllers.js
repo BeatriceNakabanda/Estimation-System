@@ -45,9 +45,9 @@ exports.estimatedList = function(req, res, next) {
 //creating an estimate
 exports.createEstimate = function(req, res) {
   const newEstimate = new Estimate(req.body);
-  newEstimate.save(function(estimate, next) {
-    if (next) {
-      res.send(next);
+  newEstimate.save(function(error, estimate) {
+    if (error) {
+      res.send(error);
     } else {
       res.json(estimate);
     }
