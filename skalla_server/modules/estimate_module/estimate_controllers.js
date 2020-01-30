@@ -58,7 +58,7 @@ exports.createEstimate = async function(req, res) {
   const newEstimate = new Estimate(req.body);
   try {
     const createdEstimate = await newEstimate.save(newEstimate);
-    console.log("hello");
+
     res.send(createdEstimate);
   } catch (error) {
     res.send(e);
@@ -66,11 +66,13 @@ exports.createEstimate = async function(req, res) {
 };
 
 //getting all estimates
+//Person.findById(user1._id).populate("stories stories.creator"}).exec(function(err, doc)
 exports.estimatesList = function(req, res, next) {
   Estimate.find({
     developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
+    .populate("lineItem[0]")
 
     .exec(function(err, estimate) {
       if (err) {
@@ -107,10 +109,10 @@ exports.singleEstimate = function(req, res, next) {
     });
 };
 //getting pending draft estimates
-exports.estimatePendingList = function(req, res, next) {
+exports.estimateDraftList = function(req, res, next) {
   Estimate.find({
     developer: req.params.requestedId,
-    status: "Pending"
+    status: "Draft"
   })
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
