@@ -38,7 +38,7 @@ router.get(
 //create a single estimate
 router.post(
   "/create-estimate",
-  loginController.CheckToken,
+  //loginController.CheckToken,
   estimateController.createEstimate
 );
 //getting all to estimates
