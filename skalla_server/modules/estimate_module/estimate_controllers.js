@@ -43,7 +43,7 @@ exports.estimatedList = function(req, res, next) {
     });
 };
 //creating an estimate
-exports.createEstimate = function(req, res) {
+exports.createEstimatex = function(req, res) {
   const newEstimate = new Estimate(req.body);
   newEstimate.save(function(error, estimate) {
     if (error) {
@@ -52,6 +52,16 @@ exports.createEstimate = function(req, res) {
       res.json(estimate);
     }
   });
+};
+
+exports.createEstimate = async function(req, res) {
+  const newEstimate = new Estimate(req.body);
+  try {
+    const createdEstimate = await newEstimate.save(newEstimate);
+    res.send(createdEstimate);
+  } catch (error) {
+    res.send(e);
+  }
 };
 
 //getting all estimates
