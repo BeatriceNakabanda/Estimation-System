@@ -95,7 +95,7 @@ exports.estimateRequestList = function(req, res, next) {
 
 exports.createEstimateRequest = async function(req, res) {
   const estimateRequest = new EstimateRequest(req.body);
-  console.log("ask");
+
   try {
     const createdEstimate = await estimateRequest.save(estimateRequest);
 
