@@ -68,9 +68,7 @@ exports.changingEstimated = function(req, res) {
     }
   );
 };
-//Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
-//mongoose.find({title: {$in: ['some title', 'some other title']}})
-//get all estimateRequests
+
 exports.estimateRequestList = function(req, res, next) {
   EstimateRequest.find({
     projectManager: req.params.requestedId,
@@ -99,11 +97,9 @@ exports.createEstimateRequest = async function(req, res) {
   try {
     const createdEstimate = await estimateRequest.save(estimateRequest);
 
-    const project = await projectmodel.findById(estimateRequest.project).exec();
+    const project = await projectmodel.findById(estimateRequest.project);
 
-    const developer = await developermodel
-      .findById(estimateRequest.developer)
-      .exec();
+    const developer = await developermodel.findById(estimateRequest.developer);
 
     createdEstimate.developer = developer;
     createdEstimate.project = project;
