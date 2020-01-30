@@ -92,45 +92,6 @@ exports.estimateRequestList = function(req, res, next) {
 };
 
 //create estimate request
-// exports.createEstimateRequest = function(req, res) {
-//   const newEstimateRequest = new EstimateRequest(req.body);
-//   newEstimateRequest.save(function(estimateRequest, next) {
-//     if (next) {
-//       res.send(next);
-//     } else {
-//       res.json(estimateRequest.project);
-//       console.log(estimateRequest.project);
-//     }
-//   });
-// };
-
-//create estimate request
-exports.createEstimateRequestx = function(req, res) {
-  const newEstimateRequest = new EstimateRequest(req.body);
-  newEstimateRequest.save(function(error, estimateRequest) {
-    if (error) {
-      res.send(error);
-    } else {
-      //console.log(estimateRequest.project);
-      projectmodel
-        .findById({
-          _id: estimateRequest.project
-        })
-        .exec(function(err, project) {
-          if (err) {
-            res.send(err);
-          } else {
-            res.json(project);
-
-            console.log(estimateRequest);
-          }
-        });
-    }
-    // res.json(estimateRequest);
-    // console.log("hello");
-    // console.log(estimateRequest);
-  });
-};
 
 exports.createEstimateRequest = async function(req, res) {
   const estimateRequest = new EstimateRequest(req.body);
