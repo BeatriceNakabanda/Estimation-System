@@ -7,6 +7,7 @@
             <div class="row">
                 <div class="col">
                     <EstimatesTable :estimates="estimates" title="Light Table" />
+                   
                 </div>
             </div>
         </div>
@@ -21,7 +22,7 @@
   export default {
     name: 'estimates',
     components: {
-      EstimatesTable
+      EstimatesTable,
     },
     data(){
       return {

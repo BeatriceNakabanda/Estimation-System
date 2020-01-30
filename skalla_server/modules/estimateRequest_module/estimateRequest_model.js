@@ -7,7 +7,7 @@ const EstimateRequestSchema = new Schema({
   project: { type: Schema.ObjectId, ref: "Project", required: true },
   developer: { type: Schema.ObjectId, ref: "User", required: true },
   title: { type: String },
-  projectManager: { type: Schema.ObjectId, ref: "User", required: true },
+  projectManager: { type: Schema.ObjectId, ref: "User" },
   dueDate: { type: String },
   taskDescription: { type: String },
   status: {

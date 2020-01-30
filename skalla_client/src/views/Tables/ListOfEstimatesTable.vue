@@ -113,8 +113,6 @@
                                 <base-button class="shadow-none mt-4 cancel-color" type="secondary" @click="handleSaveDraft()" >Save as draft</base-button>
                                 <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
                                 <base-button class="shadow-none mt-4" type="primary" @click="addEstimate()">Send request</base-button>
-                                
-
                             </form>
                   </modal>
         </div>
@@ -303,7 +301,7 @@ export default {
         }
         // console.log(newEstimate)
         const response = await AuthService.addEstimate(newEstimate);
-        // console.log(response)
+        console.log(response)
         
         this.estimates.push({
           project: response.project,
@@ -316,6 +314,7 @@ export default {
         })
         
         }
+         
             this.success = true
             this.error = false
             this.submitting = false 
@@ -347,6 +346,7 @@ export default {
                 console.log(newEstimate)
                 const response = await AuthService.addEstimate(newEstimate);
                 console.log(response)
+                
                 }
                 this.success = true
                 this.error = false

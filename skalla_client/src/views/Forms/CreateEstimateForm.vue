@@ -238,6 +238,7 @@ export default {
       this.success = true;
       this.error = false;
     }
+
   },
   async created() {
     try {
@@ -253,7 +254,7 @@ export default {
       console.error(e);
     }
   }
-};
+}
 </script>
 <style scoped>
 [class*="-message"] {
