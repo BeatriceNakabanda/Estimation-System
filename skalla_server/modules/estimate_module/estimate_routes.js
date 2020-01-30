@@ -24,9 +24,9 @@ router.get(
 // updating a single estimate request information for a single developer
 router.put(
   "/update-estimateRequest/:requestId/:requestedId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
 
-  estimateController.EstimateRequestUpdate
+  estimateController.EstimateRequestUpdateEstimated
 );
 //get all estimated  estimates information
 router.get(
@@ -62,38 +62,12 @@ router.get(
   estimateController.singleEstimate
 );
 
-//getting draft estimates
+//getting submitted estimates
+
 router.put(
   "/submitted-estimates/:requestedId",
   loginController.CheckToken,
   estimateController.changingStatusToEstimated
 );
-
-//get all pending estimates
-// router.get(
-//   "/pending-estimate/:requestedId",
-//   loginController.CheckToken,
-//   estimateController.estimatePendingList
-// );
-// //get all submitted estimates
-// router.get(
-//   "/submitted-estimates/:requestedId",
-//   loginController.CheckToken,
-//   estimateController.estimatesubmittedList
-// );
-
-//changing to submitted
-// router.put(
-//   "/change-submitted/:requestedId",
-//   loginController.CheckToken,
-//   estimateController.changingStatusToSubmitted
-// );
-
-// //update a single estimate
-// router.put(
-//   "/estimate/:requestId",
-//   loginController.CheckToken,
-//   estimateController.updateEstimate
-// );
 
 module.exports = router;

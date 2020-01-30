@@ -14,37 +14,61 @@
 </template>
 <script>
 import EstimatesTable from "./Tables/ListOfEstimatesTable";
+import CreateEstimateForm from "./Forms/CreateEstimateForm";
 import axios from "axios";
-import router from "../router"
-  export default {
-    name: 'estimates',
-    components: {
-      EstimatesTable
-    },
-    data(){
-      return{
-         estimates: [],
-        
-      }
-    },
-    //fetches estimates when the component is created
-    async created(){
-      if (!this.$store.getters.isLoggedIn) {
-      router.push('/')
+import service from "../services/AuthService";
+import router from "../router";
+export default {
+  name: "estimates",
+  components: {
+    EstimatesTable
+  },
+  data() {
+    return {
+      estimates: []
+    };
+  },
+  //fetches estimates when the component is created
+  async created() {
+    if (!this.$store.getters.isLoggedIn) {
+      router.push("/");
     }
-      try {
-        // Getting the id of the loggedInProjectManager and showing estimate requests specific to them
-        const loggedInProjectManager = this.$store.getters.getUser.id
-        const res = await axios.get(`http://localhost:8081/api/estimate-requests/` + loggedInProjectManager)
-        this.estimates = res.data;
-      } catch(e){
-        // console.error(e)
-      }
-    },
-      
-    
+    try {
+      // Getting the id of the loggedInProjectManager and showing estimate requests specific to them
+      const loggedInProjectManager = this.$store.getters.getUser.id;
+      const res = await axios.get(
+        `http://localhost:8081/api/estimate-requests/` + loggedInProjectManager
+      );
+      const project = res.data.project;
+      const developer = res.data.developer;
+      const dueDate = res.data.dueDate;
+      const title = res.data.title;
+      const taskDescription = res.data.taskDescription;
+      const projectManager = res.data.projectManager;
+      const status = res.data.status;
+      const dateCreated = res.data.dateCreated;
+      const newEstimate = {
+        project,
+        developer,
+        dueDate,
+        title,
+        taskDescription,
+        projectManager,
+        status,
+        dateCreated
+      };
+
+      this.estimates = res.data;
+      this.estimates = this.estimate.push(
+        await service.addEstimate(newEstimate)
+      );
+
+      console.log(this.estimates);
+    } catch (e) {
+      // console.error(e)
+    }
   }
-  
+};
 </script>
 <style>
 #table-head {

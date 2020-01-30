@@ -40,13 +40,14 @@ router.put(
 router.post(
   "/estimate-request",
   //loginController.CheckToken,
+
   estimateRequestController.createEstimateRequest
 );
 
 //get single estimate
 router.get(
   "/estimate-request/:requestId",
-  // loginController.CheckToken,
+  //loginController.CheckToken,
   estimateRequestController.singleEstimateRequest
 );
 

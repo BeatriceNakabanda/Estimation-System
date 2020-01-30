@@ -1,5 +1,7 @@
 //requiring dependencies
 const EstimateRequest = require("./estimateRequest_model");
+const projectmodel = require("../project_module/project_model");
+const developermodel = require("../user_module/user_model");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
@@ -89,24 +91,34 @@ exports.estimateRequestList = function(req, res, next) {
 };
 
 //create estimate request
-exports.createEstimateRequest = function(req, res) {
-  const newEstimateRequest = new EstimateRequest(req.body);
-  newEstimateRequest.save(function(estimateRequest, next) {
-    if (next) {
-      res.send(next);
-    } else {
-      // let finalObject = {...estimateRequest,developerName:"",ProjectName:""}
-      res.json(estimateRequest);
-    }
 
-  });
+exports.createEstimateRequest = async function(req, res) {
+  const estimateRequest = new EstimateRequest(req.body);
+  console.log("ask");
+  try {
+    const createdEstimate = await estimateRequest.save(estimateRequest);
+
+    const project = await projectmodel.findById(estimateRequest.project).exec();
+
+    const developer = await developermodel
+      .findById(estimateRequest.developer)
+      .exec();
+
+    createdEstimate.developer = developer;
+    createdEstimate.project = project;
+    res.send(createdEstimate);
+  } catch (e) {
+    console.log(e);
+    res.send(e);
+  }
 };
 
 //get single estimate request
 exports.singleEstimateRequest = function(req, res, next) {
   EstimateRequest.findById({ _id: req.params.requestId })
-  .populate({ path: "project", select: "name-_id" })
-  .populate({ path: "developer", select: "name-_id" })
+    .populate({ path: "projectManager", select: "name-_id" })
+
+    .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimateRequest) {
       if (err) {
         return next(err);
