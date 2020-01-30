@@ -301,12 +301,11 @@ export default {
         }
         // console.log(newEstimate)
         const response = await AuthService.addEstimate(newEstimate);
-        // console.log(response)
-
+        console.log(response)
         
         this.estimates.push({
-          // project: response.project.name,
-          // developer: response.developer.name,
+          project: response.project,
+          developer: response.developer,
           dueDate: response.dueDate,
           title: response.title,
           taskDescription: response.taskDescription,
@@ -315,6 +314,7 @@ export default {
         })
         
         }
+         
             this.success = true
             this.error = false
             this.submitting = false 

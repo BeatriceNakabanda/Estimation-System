@@ -26,10 +26,8 @@
       class="shadow-none cancel-color"
       type="secondary"
       @click="modal1 = false"
-      >Close</base-button
-    >
-    <base-button class="shadow-none" type="primary" @click="addProject">Add</base-button
-    >
+      >Close</base-button>
+    <base-button class="shadow-none" type="primary" @click="addProject">Add</base-button>
   </form>
 </template>
 <script>
@@ -68,10 +66,10 @@ export default {
       }
       const res = await axios.post(baseURL, {
         name: this.project.name
+        
       });
-      this.projects = [...this.projects, res.dat];
       this.name = "";
-
+    
       this.success = true
       this.error = false
       this.submitting = false

@@ -198,19 +198,8 @@ export default {
         this.error = true;
         return;
       }
-      // const projectManager = this.$store.getters.getUser.id
-      //import service from "../services/AuthService";
-      // let createdEstimate = (this.submitting = true);
-      // if (createdEstimate) {
-        
-      //   };
-        // //const response = await AuthService.addEstimate(newEstimate);
-        // //console.log(response);
-        // this.$emit("inputData", this.estimate);
-        console.log(this.estimate);
+  
       },
-      
-    
     clearForm() {
       this.success = false;
       this.error = false;
