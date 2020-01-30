@@ -14,7 +14,7 @@
                                             @keypress="clearForm"
                                           >
                                             <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.project">
-                                            <option value="" disabled>{{estimate.project.name}}</option>
+                                            <option value="" disabled>Please select a project</option>
                                             <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
                                             </select>
                                 </base-input>
@@ -31,7 +31,7 @@
                                           
                                             >
                                             <select class="custom-select" id="inputGroupSelect01" v-model="newEstimate.developer">
-                                                <option value="" disabled>{{estimate.developer.name}}</option>
+                                                <option value="" disabled>Please select a developer</option>
                                                 <option  v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                                             </select>
                                 </base-input>
@@ -116,7 +116,7 @@ import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 // import AuthService from "../../services/AuthService";
 export default {
-    name: 'create-estimate-form',
+    name: 'edit-estimate-form',
     components: {
         flatPicker
         },
@@ -183,8 +183,9 @@ export default {
             this.clearForm()
             
            
-            let newEstimateId = this.openEditModel(estimateId)
-            console.log(newEstimateId)
+            // let newEstimateId = this.openEditModel(estimateId)
+            // console.log(newEstimateId)
+            console.log(estimateId)
            
             const editedEstimate = {
                   project: this.newEstimate.project.id,
@@ -196,7 +197,7 @@ export default {
               }
              
               console.log(editedEstimate)
-            axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+            axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
                   .then((response) =>{
                       console.log(response);
                   })

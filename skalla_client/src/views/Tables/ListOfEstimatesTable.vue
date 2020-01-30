@@ -138,7 +138,7 @@
           <td class="title">
             {{row.title}}
           </td>
-          <!-- <td class="project">
+          <td class="project">
             {{row.project.name}}
           </td>
           <td class="developer">
@@ -147,7 +147,7 @@
           <td class="dateCreated">
             {{ formatDate(row.dateCreated) }}
            
-          </td> -->
+          </td>
           <td class="dateEstimated">
             {{row.dateEstimated}}
           </td>
@@ -304,15 +304,15 @@ export default {
         // console.log(response)
 
         
-        // this.estimates.push({
-        //   project: response.project,
-        //   developer: response.developer,
-        //   dueDate: response.dueDate,
-        //   title: response.title,
-        //   taskDescription: response.taskDescription,
-        //   dateCreated: response.dateCreated,
-        //   status: response.status,
-        // })
+        this.estimates.push({
+          // project: response.project.name,
+          // developer: response.developer.name,
+          dueDate: response.dueDate,
+          title: response.title,
+          taskDescription: response.taskDescription,
+          dateCreated: response.dateCreated,
+          status: response.status,
+        })
         
         }
             this.success = true

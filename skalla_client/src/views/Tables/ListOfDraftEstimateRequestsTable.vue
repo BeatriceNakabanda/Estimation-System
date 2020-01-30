@@ -99,7 +99,6 @@
                                                     :config="{allowInput: true, dateFormat: 'd-m-Y'}"
                                                     :placeholder="[estimate.dueDate]"
                                                     class="form-control datepicker"
-                                                    :class="{ 'has-error': submitting  }"
                                                     v-model="newEstimate.dueDate"
                                                     >
                                         </flat-picker>
@@ -115,7 +114,6 @@
                                                 class="mb-3"
                                                 :placeholder="[estimate.title]"
                                                 v-model="newEstimate.title"
-                                                :class="{ 'has-error': submitting  }"
                                             >
                                     </base-input>
                                     </div>
@@ -125,8 +123,7 @@
                                     <h6 class="heading-small text-muted mb-4 float-left">Main Task Description </h6>
                                 </div>
                                 <div class="col-sm-12">
-                                    <base-input alternative=""
-                                    :class="{ 'has-error': submitting }">
+                                    <base-input alternative="">
                                         <textarea rows="4" 
                                         class="form-control form-control-alternative" 
                                         :placeholder="[estimate.taskDescription]"
@@ -148,28 +145,23 @@
                                 <!-- <base-button class="shadow-none mt-4" type="primary" @click="addEstimate">Send request</base-button> -->
                                 <div class="col text-right">
                                   <base-button class="shadow-none mt-4" type="primary" id="save-draft" @click="handleEditt(estimate._id)">Edit request</base-button>
-                                  <base-button class="shadow-none mt-4" type="primary" id="submit" @click="openSendRequestModel(estimate._id)">Send request</base-button>
+                                  <base-button class="shadow-none mt-4" type="primary" id="submit" @click="handleSendRequest2(estimate._id)">Send request</base-button>
                                 </div>
                                 </div>
                                 <!-- <p>{{newEstimateId}}</p> -->
                             </form>
                   </modal>
             </span>
-             <span class="action-icons" id="view" >
+             <!-- <span class="action-icons" id="view" >
               <i class="rounded-circle ni ni-curved-next" aria-hidden="true" id="my-icons" @click="handleSendRequest2(estimate._id)"></i>
-              <modal :show.sync="sendEstimateRequest" >
-                <template slot="header">
-                    <h3 class="modal-title " id="exampleModalLabel">Send Estimate Request</h3>
-                </template>
-                <P><b id="details">Project:</b>  {{estimate.project.name}}</P>
-                <p><b id="details">Developer:</b>  {{estimate.developer.name}}</p>
-                <p><b id="details">Due Date:</b>  {{estimate.dueDate}}</p>
-                <p><b id="details">Title: </b>  {{estimate.title}}</p>
-                <p><b id="details">Main Task Description:</b>  {{estimate.taskDescription}}</p>
-                <base-button class="shadow-none mt-4" type="primary" @click="handleSendRequest2(estimate._id)">Send request</base-button>
-                
-              </modal>
-            </span>
+              <p v-if="error && submitting" class="error-message">
+                  ❗Please fill in all fields
+              </p>
+              <p v-if="success" class="success-message">
+                  ✅ Request successfully sent
+              </p>
+            </span> -->
+     
             
           </td>
           </tr>
@@ -218,16 +210,16 @@ import axios from 'axios'
         taskDescription: '',
         // newEstimateId: '',
            
-        estimate:
-          {
-            project: '',
-            developer: '',
-            status: '',
-            statusType: '',
-            dueDate: '',
-            title: '',
-            taskDescription: '',
-          },
+        // estimate:
+        //   {
+        //     project: '',
+        //     developer: '',
+        //     status: '',
+        //     statusType: '',
+        //     dueDate: '',
+        //     title: '',
+        //     taskDescription: '',
+        //   },
           newEstimate:{
             project: '',
             developer: '',
@@ -268,12 +260,23 @@ import axios from 'axios'
             axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
                   .then((response) =>{
                       console.log(response);
+                       this.estimates.push({
+                        project: this.response.project.name,
+                        developer: response.developer.name,
+                        dueDate: response.dueDate,
+                        title: response.title,
+                        taskDescription: response.taskDescription,
+                        dateCreated: response.dateCreated,
+                        status: response.status,
+                })
                   })
                   .catch((error) => {
                       console.log(error);
                   });
                   this.success = true
                   this.error = false
+               
+
      
           },
           handleCancel(){
@@ -281,18 +284,13 @@ import axios from 'axios'
           },
           
           async handleSendRequest(estimateId){
-            // let newEstimateId = this.openEditModel(estimateId)
+            let newEstimateId = this.openEditModel(estimateId)
             let editedEstimate = {
-                  project: this.estimate.project.id,
-                  developer: this.estimate.developer.id,
-                  dueDate: this.estimate.dueDate,
-                  title: this.estimate.title,
-                  taskDescription: this.estimate.taskDescription,
-                  projectManager: this.$store.getters.getUser.id,
-                  status: this.estimate.status = "Submitted"
+                  
+                  status: "Submitted"
               }
               console.log(editedEstimate)
-            axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
+            axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
                   .then((response) =>{
                       console.log(response);
                   })
@@ -305,12 +303,12 @@ import axios from 'axios'
             return estimateId
           },
           async handleSendRequest2(estimateId){
-            let newEstimateId = this.openSendRequestModel(estimateId)
+           
             
             let editedEstimate = {
-                  status: this.estimate.status = "Submitted"
+                  status: "Submitted"
               }
-            axios.put(`http://localhost:8081/api/estimate-request/` + newEstimateId , editedEstimate)
+            axios.put(`http://localhost:8081/api/estimate-request/` + estimateId , editedEstimate)
                   .then((response) =>{
                       console.log(response);
                   })
