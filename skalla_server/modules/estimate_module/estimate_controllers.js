@@ -56,6 +56,28 @@ exports.createEstimate = async function(req, res) {
   }
 };
 
+exports.listOfEstimateRequest = async function(req, res) {
+  try {
+    const request = await EstimateRequest.find({
+      _id: req.params.requestId,
+      projectManager: req.params.projectManagerId
+    })
+      // .populate({ path: "developer", select: "name-_id" })
+      .populate({ path: "projectManager", select: "name-_id" })
+      .exec();
+
+    const estimates = await Estimate.find({
+      developer: request[0].developer
+    })
+      .populate({ path: "developer", select: "name-_id" })
+      .exec();
+    res.send(estimates);
+    // res.send(request);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 //getting all estimates
 
 exports.estimatesList = function(req, res) {
@@ -144,7 +166,7 @@ exports.changingStatusToEstimated = function(req, res) {
   );
 };
 
-exports.UniqueEstimateRequest = function(req, res, next) {
+exports.UniqueEstimateRequest = function(req, res) {
   EstimateRequest.find({
     _id: req.params.requestId,
     developer: req.params.requestedId
@@ -155,7 +177,7 @@ exports.UniqueEstimateRequest = function(req, res, next) {
 
     .exec(function(err, estimate) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimate);
       }
