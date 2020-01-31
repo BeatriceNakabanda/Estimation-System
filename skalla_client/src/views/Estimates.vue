@@ -36,33 +36,8 @@ export default {
     try {
       // Getting the id of the loggedInProjectManager and showing estimate requests specific to them
       const loggedInProjectManager = this.$store.getters.getUser.id;
-      const res = await axios.get(
-        `http://localhost:8081/api/estimate-requests/` + loggedInProjectManager
-      );
-      const project = res.data.project;
-      const developer = res.data.developer;
-      const dueDate = res.data.dueDate;
-      const title = res.data.title;
-      const taskDescription = res.data.taskDescription;
-      const projectManager = res.data.projectManager;
-      const status = res.data.status;
-      const dateCreated = res.data.dateCreated;
-      const newEstimate = {
-        project,
-        developer,
-        dueDate,
-        title,
-        taskDescription,
-        projectManager,
-        status,
-        dateCreated
-      };
-      //const newdata= await service.addEstimate(newEstimate)
-
+      const res = await axios.get( `http://localhost:8081/api/estimate-requests/` + loggedInProjectManager );
       this.estimates = res.data;
-      this.estimates = this.estimate.push(
-        await service.addEstimate(newEstimate)
-      );
 
       console.log(this.estimates);
     } catch (e) {

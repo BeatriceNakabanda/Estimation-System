@@ -4,12 +4,12 @@ const router = express.Router();
 const estimateController = require("./estimate_controllers");
 const loginController = require("../user_module/loginController");
 
-//get all estimates information for a given developer
+//get all  draft estimates information for a given developer
 router.get(
-  "/pending-estimates/:requestedId",
-  loginController.CheckToken,
+  "/request-estimates/:requestedId",
+  //loginController.CheckToken,
 
-  estimateController.estimateList
+  estimateController.estimateRequestList
 );
 
 //getting a single estimate request information for a single developer
@@ -24,7 +24,7 @@ router.get(
 // updating a single estimate request information for a single developer
 router.put(
   "/update-estimateRequest/:requestId/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
 
   estimateController.EstimateRequestUpdateEstimated
 );
@@ -38,7 +38,7 @@ router.get(
 //create a single estimate
 router.post(
   "/create-estimate",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.createEstimate
 );
 //getting all to estimates

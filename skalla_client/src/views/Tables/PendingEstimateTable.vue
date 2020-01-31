@@ -36,39 +36,39 @@
     </div>
     <div class="table-responsive table-hover">
       <table class="table">
-  <thead class="thead-light">
+        <thead class="thead-light">
+            <tr>
+          <td class="table-head" scope="col"><b>Task</b></td>
+          <td class="table-head" scope="col"><b>Research</b></td>
+          <td class="table-head" scope="col"><b>Planning</b></td>
+          <td class="table-head" scope="col"><b>Development</b></td>
+          <td class="table-head" scope="col"><b>Testing</b></td>
+          <td class="table-head" scope="col"><b>Stablization</b></td>
+          <td class="table-head" scope="col"><b>Certainty</b></td>
+          <!-- <td class="table-head" scope="col"><b>Sum Hours</b></td>
+          <td class="table-head" scope="col"><b>Adjusted Sum Hours</b></td> -->
+          <td class="table-head" scope="col">
+            <span class="action-icons">
+              <!-- <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i> -->
+              <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
+            </span>
+          </td>
+          <td class="table-head"  scope="col"></td>
+          <td class="table-head" scope="col"></td>
+          <td class="table-head" scope="col"><b></b></td> 
+      </tr>
+    </thead>
+  <tbody v-for="estimationInfo in estimationData" :key="estimationInfo.id">
     <tr>
-        <td class="table-head" scope="col"><b>Task</b></td>
-        <td class="table-head" scope="col"><b>Research</b></td>
-        <td class="table-head" scope="col"><b>Planning</b></td>
-        <td class="table-head" scope="col"><b>Development</b></td>
-        <td class="table-head" scope="col"><b>Testing</b></td>
-        <td class="table-head" scope="col"><b>Stablization</b></td>
-        <td class="table-head" scope="col"><b>Certainity</b></td>
-        <!-- <td class="table-head" scope="col"><b>Sum Hours</b></td>
-        <td class="table-head" scope="col"><b>Adjusted Sum Hours</b></td> -->
-        <td class="table-head" scope="col">
-          <span class="action-icons">
-            <!-- <i v-on:click="isShowing = !isShowing" class="far fa-comments fa-1x" id="comments"></i> -->
-            <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
-          </span>
-        </td>
-        <td class="table-head"  scope="col"></td>
-        <td class="table-head" scope="col"></td>
-        <td class="table-head" scope="col"><b></b></td> 
-    </tr>
-  </thead>
-  <tbody v-for="tableInfo in tableData" :key="tableInfo.id">
-    <tr>
-      <td scope="row">{{tableInfo.subTask}}</td>
-      <td>{{tableInfo.research}}</td>
-      <td>{{tableInfo.planning}}</td>
-      <td>{{tableInfo.development}}</td>
-      <td>{{tableInfo.testing}}</td>
-      <td>{{tableInfo.stabilization}}</td>
-      <td>{{tableInfo.certainity}}</td>
-      <td>{{tableInfo.sumHours}}</td>
-      <td>{{tableInfo.adjustedSumHours}}</td>
+      <td scope="row">{{estimationInfo.task}}</td>
+      <td>{{estimationInfo.research}}</td>
+      <td>{{estimationInfo.planning}}</td>
+      <td>{{estimationInfo.development}}</td>
+      <td>{{estimationInfo.testing}}</td>
+      <td>{{estimationInfo.stabilization}}</td>
+      <td>{{estimationInfo.certainty}}</td>
+      <!-- <td>{{estimationInfo.sumHours}}</td>
+      <td>{{estimationInfo.adjustedSumHours}}</td> -->
       <td></td>
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -85,7 +85,7 @@
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
-      <td colspan="10">{{tableInfo.comments}}</td>
+      <td colspan="10">{{estimationInfo.comments}}</td>
     </tr>
   </tbody>
   <tr>
@@ -196,31 +196,27 @@
             <div class="row mt--2">
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Stabilization</h6>
-              <i class="fas fa-info-circle ml-2 mt-2  btn-tooltip" id="myicon" v-b-tooltip.hover.right title="Stabilization ...."></i>
+              <!-- <i class="fas fa-info-circle ml-2 mt-2  btn-tooltip" id="myicon" v-b-tooltip.hover.right title="Stabilization ...."></i> -->
             </div>
             <div class="col-sm-3">  
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
                       v-model="estimateData.stabilization"
-                      :class="{ 'has-error': submitting && invalidStabilizationTime } " 
-
-                      >
+                      :class="{ 'has-error': submitting && invalidStabilizationTime } " >
             </base-input>
             </div>
             <div class="col-sm-3">
               <h6 class="heading-small text-muted  float-left text-capitalize text-resize">Certainty</h6>
-              <i class="fas fa-info-circle  mr-2 mt-2 " id="myicon"></i>
+              <!-- <i class="fas fa-info-circle  mr-2 mt-2 " id="myicon"  v-b-tooltip.hover.right title="Certainty must be les"></i> -->
             </div>
             <div class="col-sm-3">  
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      :class="{ 'has-error': submitting && invalidCertainty } " 
-
-                      >
+                      :class="{ 'has-error': submitting && invalidCertainty } ">
                       <select class="custom-select" id="inputGroupSelect01" v-model="estimateData.certainty">
-                        <option value="" disabled>60</option>
+                        <option disabled value="">Please select</option>
                         <option v-for="certntyValue in certainty" :key="certntyValue.id">{{certntyValue.certaintyValue}}</option>
                         </select>
             </base-input>
@@ -297,25 +293,19 @@ import axios from "axios";
          error: false,
          success: false,
          estimateData : {
-                    task: '',
-                    research: 0,
-                    planning: 0,
-                    development: 0,
-                    testing: 0,
-                    stabilization: 0,
-                    certainty: 0,
-                    sumHours: 0,
-                    adjustedSumHours: 0,
-                    comments: '',
-                },
-         /* form : {
-                id: '',
-                subtask: '',
-                developer: '',
-                project: '',
-                dueDate: '',
-                taskDescription: ''
-            }, */
+           task: '',
+           research: 0,
+           planning: 0,
+           development: 0,
+           testing: 0,
+           stabilization: 0,
+           certainty: 0,
+           sum: 0,
+           adjustedSum: 0,
+           comments: '',
+          },
+          estimationData: [],
+
         estimate: {
             dateCreated: "",
             projectManager: "",
@@ -354,21 +344,7 @@ import axios from "axios";
             certaintyValue: 90 
           }
         ],
-        /*
-         tableData: [
-          {
-            subTask: '',
-            research: '',
-            planning: '',
-            development: '',
-            testing: '',
-            stabilization: '',
-            certainity: '',
-            sumHours: '',
-            adjustedSumHours: '',
-            comments: '',
-          }
-        ] */
+
         
       }
     },
@@ -378,12 +354,12 @@ import axios from "axios";
         if (this.estimateData.research === '' || this.estimateData.planning === ''|| this.estimateData.development === '' || this.estimateData.testing === '' || this.estimateData.stabilization === '') {
           return 0
         }else{
-          return parseInt(this.estimateData.research) + parseInt(this.estimateData.planning) + parseInt(this.estimateData.development) + parseInt(this.estimateData.testing) + parseInt(this.estimateData.stabilization) ;
+          return (parseInt(this.estimateData.research) + parseInt(this.estimateData.planning) + parseInt(this.estimateData.development) + parseInt(this.estimateData.testing) + parseInt(this.estimateData.stabilization)).toFixed(2);
         }
         
       },
       calculatedAdjustedSumHours: function(){
-        return parseInt(this.calculatedSumHours) * (1 + (1 - parseInt(this.estimateData.certainty) / 100))
+        return (parseInt(this.calculatedSumHours) * (1 + (1 - parseInt(this.estimateData.certainty) / 100))).toFixed(2)
       },
       invalidTask(){
         return this.estimateData.task === ''
@@ -419,7 +395,10 @@ import axios from "axios";
           this.error = true
           return
         }
+        let sum = this.calculatedSumHours
+        let adjustedSum = this.calculatedAdjustedSumHours
         let newEstimate ={
+            developer: this.$store.getters.getUser.id,
             task: this.estimateData.task,
             research: this.estimateData.research,
             planning: this.estimateData.planning,
@@ -427,15 +406,30 @@ import axios from "axios";
             testing: this.estimateData.testing,
             stabilization: this.estimateData.stabilization,
             certainty: this.estimateData.certainty,
-            sumHours: this.calculatedSumHours,
-            adjustedSumHours: this.calculatedAdjustedSumHours,
+            sum,
+            adjustedSum,
             comments: this.estimateData.comment,
-            developer: this.$store.getters.getUser.id,
+            
         }
+        console.log(sum)
+        console.log(adjustedSum)
         this.success=true
           const response = await AuthService.addEstimation(newEstimate)
-          console.log(newEstimate)
-          console.log(response)
+          // console.log(newEstimate)
+          // console.log(response.addedEstimate.submittedDate)
+
+          this.estimationData.push({
+            task: response.task,
+            research: response.research,
+            planning: response.planning,
+            development: response.development,
+            testing: response.testing,
+            stabilization: response.stabilization,
+            certainty: response.certainty,
+            comments: response.comments,
+            sumHours: response.sumHours,
+            adjustedSumHours: response.adjustedSumHours
+          })
           
 
       }
@@ -445,7 +439,13 @@ import axios from "axios";
       try {
         const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
         this.estimate = res.data; 
-        console.log(res)
+        // console.log(res.data )
+
+        const loggedInDeveloper = this.$store.getters.getUser.id;
+        const response = await axios.get(`http://localhost:8081/api/get-all-estimates/` + loggedInDeveloper)
+        this.estimationData = response.data
+        // console.log(response)
+        
       } catch(e){
         console.error(e)
       }

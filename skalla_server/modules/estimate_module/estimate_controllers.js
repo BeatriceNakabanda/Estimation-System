@@ -8,7 +8,7 @@ mongoose.set("useFindAndModify", false);
 
 //getting a project,project manager according to developer id when pending and draft
 //for pending and drafts
-exports.estimateList = function(req, res, next) {
+exports.estimateRequestList = function(req, res) {
   EstimateRequest.find({
     developer: req.params.requestedId,
     status: "Submitted"
@@ -43,21 +43,13 @@ exports.estimatedList = function(req, res, next) {
     });
 };
 //creating an estimate
-exports.createEstimatex = function(req, res) {
-  const newEstimate = new Estimate(req.body);
-  newEstimate.save(function(error, estimate) {
-    if (error) {
-      res.send(error);
-    } else {
-      res.json(estimate);
-    }
-  });
-};
 
+//create estimate
 exports.createEstimate = async function(req, res) {
   const newEstimate = new Estimate(req.body);
   try {
     const createdEstimate = await newEstimate.save(newEstimate);
+
     res.send(createdEstimate);
   } catch (error) {
     res.send(e);
@@ -65,7 +57,8 @@ exports.createEstimate = async function(req, res) {
 };
 
 //getting all estimates
-exports.estimatesList = function(req, res, next) {
+//Person.findById(user1._id).populate("stories stories.creator"}).exec(function(err, doc)
+exports.estimatesList = function(req, res) {
   Estimate.find({
     developer: req.params.requestedId
   })
@@ -73,7 +66,7 @@ exports.estimatesList = function(req, res, next) {
 
     .exec(function(err, estimate) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimate);
       }
@@ -82,35 +75,34 @@ exports.estimatesList = function(req, res, next) {
 //editng an estimate
 exports.editingEstimate = function(req, res) {
   Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body, function(
-    next,
+    error,
     estimate
   ) {
     if (estimate !== null) {
       res.json(estimate);
     } else {
-      res.send(next);
+      res.send(error);
     }
   });
 };
 
 //get a single estimate
 exports.singleEstimate = function(req, res, next) {
-  Estimate.findById({ _id: req.params.requestId }).exec(function(
-    err,
-    estimate
-  ) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimate);
-    }
-  });
+  Estimate.findById({ _id: req.params.requestId })
+
+    .populate({ path: "developer", select: "name-_id" })
+    .exec(function(err, estimate) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(estimate);
+      }
+    });
 };
 //getting pending draft estimates
-exports.estimatePendingList = function(req, res, next) {
+exports.estimateDraftList = function(req, res, next) {
   Estimate.find({
-    developer: req.params.requestedId,
-    status: "Pending"
+    developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
@@ -142,11 +134,11 @@ exports.changingStatusToEstimated = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId, developer: req.params.requestedId },
     { status: "Estimated" },
-    function(next, estimate) {
+    function(error, estimate) {
       if (estimate !== null) {
         res.json(estimate);
       } else {
-        res.send(next);
+        res.send(error);
       }
     }
   );
@@ -193,18 +185,6 @@ exports.EstimateRequestUpdateEstimated = function(req, res, next) {
   });
 };
 
-//create estimate
-exports.createEstimate = function(req, res, next) {
-  const newEstimate = new Estimate(req.body);
-  newEstimate.save({}).exec(function(err, estimate) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(estimate);
-    }
-  });
-};
-
 //update a single estimate
 exports.updateEstimate = function(req, res, next) {
   Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body).exec(
@@ -217,15 +197,3 @@ exports.updateEstimate = function(req, res, next) {
     }
   );
 };
-
-// EstimateRequest.findByIdAndUpdate(
-//   { _id: req.params.requestId, developer: req.params.requestedId },
-//   { status: "Estimated" },
-//   function(next, estimate) {
-//     if (estimate !== null) {
-//       res.json(estimate);
-//     } else {
-//       res.send(next);
-//     }
-//   }
-// );

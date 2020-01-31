@@ -42,20 +42,15 @@ export default {
             const projectManager = response.data.projectManager
             const status = response.data.status
             const dateCreated = response.data.dateCreated
-
-            const newEstimateRequest = {
-                project,
-                developer,
-                dueDate,
-                title,
-                taskDescription,
-                projectManager,
-                status,
-                dateCreated
-            }
-            
             return{
-                newEstimateRequest
+                    project,
+                    developer,
+                    dueDate,
+                    title,
+                    taskDescription,
+                    projectManager,
+                    status,
+                    dateCreated
             } 
             // console.log(response)
         })
@@ -66,6 +61,7 @@ export default {
         .post(url + 'create-estimate', newEstimate)
         .then(response =>{
             response.data
+            // let addedEstimate = response.data
             const task = response.data.task
             const research = response.data.research
             const planning = response.data.planning
@@ -73,11 +69,11 @@ export default {
             const testing = response.data.testing
             const stabilization = response.data.stabilization
             const certainty = response.data.certainty
-            const sumHours = response.data.sumHours
-            const adjustedSumHours = response.data.adjustedSumHours
+            const sumHours = response.data.sum
+            const adjustedSumHours = response.data.adjustedSum
             const comments = response.data.comments
-
-            const estimation ={
+            // console.log(addedEstimate)
+            return {
                 task,
                 research,
                 planning,
@@ -88,9 +84,6 @@ export default {
                 sumHours,
                 adjustedSumHours,
                 comments
-            }
-            return {
-                estimation
             }
         })
     }
