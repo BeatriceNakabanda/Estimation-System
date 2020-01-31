@@ -98,8 +98,9 @@ exports.editingEstimate = function(req, res) {
 
 //get a single estimate
 exports.singleEstimate = function(req, res, next) {
-  estimate
-    .findById({ _id: req.params.requestId })
+  Estimate.findById({ _id: req.params.requestId })
+
+    .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
         return next(err);
@@ -197,13 +198,13 @@ exports.EstimateRequestUpdateEstimated = function(req, res, next) {
 
 //update a single estimate
 exports.updateEstimate = function(req, res, next) {
-  estimate
-    .findByIdAndUpdate({ _id: req.params.requestId }, req.body)
-    .exec(function(err, estimate) {
+  Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body).exec(
+    function(err, estimate) {
       if (err) {
         return next(err);
       } else if (estimate !== null) {
         res.json(estimate);
       }
-    });
+    }
+  );
 };
