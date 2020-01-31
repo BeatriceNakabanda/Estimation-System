@@ -58,7 +58,7 @@
           <td class="table-head" scope="col"><b></b></td> 
       </tr>
     </thead>
-  <tbody v-for="estimationInfo in estimationData" :key="estimationInfo.id">
+  <!-- <tbody v-for="estimationInfo in estimationData" :key="estimationInfo.id"> -->
     <tr>
       <td scope="row">{{estimationInfo.task}}</td>
       <td>{{estimationInfo.research}}</td>
@@ -356,7 +356,7 @@ import axios from "axios";
         if (this.estimateData.research === '' || this.estimateData.planning === ''|| this.estimateData.development === '' || this.estimateData.testing === '' || this.estimateData.stabilization === '') {
           return 0
         }else{
-          return parseInt(this.estimateData.research) + parseInt(this.estimateData.planning) + parseInt(this.estimateData.development) + parseInt(this.estimateData.testing) + parseInt(this.estimateData.stabilization);
+          return (parseInt(this.estimateData.research) + parseInt(this.estimateData.planning) + parseInt(this.estimateData.development) + parseInt(this.estimateData.testing) + parseInt(this.estimateData.stabilization)).toFixed(2);
         }
         
       },
