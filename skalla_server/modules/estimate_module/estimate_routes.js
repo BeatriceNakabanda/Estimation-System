@@ -11,6 +11,12 @@ router.get(
 
   estimateController.estimateRequestList
 );
+router.get(
+  "/get/:requestId/:projectManagerId",
+  //loginController.CheckToken,
+
+  estimateController.listOfEstimateRequest
+);
 
 //getting a single estimate request information for a single developer
 
@@ -44,7 +50,7 @@ router.post(
 //getting all to estimates
 router.get(
   "/get-all-estimates/:requestedId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
   estimateController.estimatesList
 );
 
