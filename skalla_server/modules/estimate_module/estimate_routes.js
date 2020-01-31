@@ -7,7 +7,7 @@ const loginController = require("../user_module/loginController");
 //get all  draft estimates information for a given developer
 router.get(
   "/request-estimates/:requestedId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
 
   estimateController.estimateRequestList
 );
@@ -44,7 +44,7 @@ router.post(
 //getting all to estimates
 router.get(
   "/get-all-estimates/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.estimatesList
 );
 
