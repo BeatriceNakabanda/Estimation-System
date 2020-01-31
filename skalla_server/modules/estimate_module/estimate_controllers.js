@@ -8,7 +8,7 @@ mongoose.set("useFindAndModify", false);
 
 //getting a project,project manager according to developer id when pending and draft
 //for pending and drafts
-exports.estimateList = function(req, res, next) {
+exports.estimateRequestList = function(req, res, next) {
   EstimateRequest.find({
     developer: req.params.requestedId,
     status: "Submitted"
@@ -67,16 +67,15 @@ exports.createEstimate = async function(req, res) {
 
 //getting all estimates
 //Person.findById(user1._id).populate("stories stories.creator"}).exec(function(err, doc)
-exports.estimatesList = function(req, res, next) {
+exports.estimatesList = function(req, res) {
   Estimate.find({
     developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
-    .populate("lineItem[0]")
 
     .exec(function(err, estimate) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimate);
       }

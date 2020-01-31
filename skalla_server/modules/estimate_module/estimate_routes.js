@@ -6,10 +6,10 @@ const loginController = require("../user_module/loginController");
 
 //get all  draft estimates information for a given developer
 router.get(
-  "/draft-estimates/:requestedId",
-  //loginController.CheckToken,
+  "/request-estimates/:requestedId",
+  loginController.CheckToken,
 
-  estimateController.estimateDraftList
+  estimateController.estimateRequestList
 );
 
 //getting a single estimate request information for a single developer
@@ -24,7 +24,7 @@ router.get(
 // updating a single estimate request information for a single developer
 router.put(
   "/update-estimateRequest/:requestId/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
 
   estimateController.EstimateRequestUpdateEstimated
 );
