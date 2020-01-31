@@ -41,7 +41,7 @@ export default {
             const taskDescription = response.data.taskDescription
             const projectManager = response.data.projectManager
             const status = response.data.status
-            const dateCreated = response.data.dateCreate
+            const dateCreated = response.data.dateCreated
             return{
                     project,
                     developer,
@@ -61,31 +61,35 @@ export default {
         .post(url + 'create-estimate', newEstimate)
         .then(response =>{
             response.data
-            const task = response.data.task
-            const research = response.data.research
-            const planning = response.data.planning
-            const development = response.data.development
-            const testing = response.data.testing
-            const stabilization = response.data.stabilization
-            const certainty = response.data.certainty
-            const sumHours = response.data.sumHours
-            const adjustedSumHours = response.data.adjustedSumHours
-            const comments = response.data.comments
+            let addedEstimate = response.data
+            // const task = response.data.task
+            // const research = response.data.research
+            // const planning = response.data.planning
+            // const development = response.data.development
+            // const testing = response.data.testing
+            // const stabilization = response.data.stabilization
+            // const certainty = response.data.certainty
+            // const sumHours = response.data.sumHours
+            // const adjustedSumHours = response.data.adjustedSumHours
+            // const comments = response.data.comments
+            console.log(addedEstimate)
+            
 
-            const estimation ={
-                task,
-                research,
-                planning,
-                development,
-                testing,
-                stabilization,
-                certainty,
-                sumHours,
-                adjustedSumHours,
-                comments
-            }
+            // const estimation ={
+            //     task,
+            //     research,
+            //     planning,
+            //     development,
+            //     testing,
+            //     stabilization,
+            //     certainty,
+            //     sumHours,
+            //     adjustedSumHours,
+            //     comments
+            // }
             return {
-                estimation
+                // estimation
+                addedEstimate
             }
         })
     }
