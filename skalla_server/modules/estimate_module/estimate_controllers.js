@@ -85,13 +85,13 @@ exports.estimatesList = function(req, res, next) {
 //editng an estimate
 exports.editingEstimate = function(req, res) {
   Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body, function(
-    next,
+    error,
     estimate
   ) {
     if (estimate !== null) {
       res.json(estimate);
     } else {
-      res.send(next);
+      res.send(error);
     }
   });
 };
@@ -145,11 +145,11 @@ exports.changingStatusToEstimated = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId, developer: req.params.requestedId },
     { status: "Estimated" },
-    function(next, estimate) {
+    function(error, estimate) {
       if (estimate !== null) {
         res.json(estimate);
       } else {
-        res.send(next);
+        res.send(error);
       }
     }
   );
