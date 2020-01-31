@@ -17,14 +17,11 @@
             <select
               class="custom-select"
               id="inputGroupSelect01"
-              v-model="estimate.selectedProject"
-            >
+              v-model="estimate.selectedProject">
               <option value="" disabled>Please select a project</option>
-              <option
-                v-for="project in projects"
-                v-bind:value="{ id: project._id, name: project.name }"
-                >{{ project.name }}</option
-              >
+              <option v-for="project in projects"
+                v-bind:value="{ id: project._id, name: project.name }">{{ project.name }}
+              </option>
             </select>
           </base-input>
         </div>
@@ -38,13 +35,11 @@
             alternative
             class="mb-3"
             placeholder="Add developer here..."
-            :class="{ 'has-error': submitting && invalidDeveloper }"
-          >
+            :class="{ 'has-error': submitting && invalidDeveloper }">
             <select
               class="custom-select"
               id="inputGroupSelect01"
-              v-model="estimate.selectedDeveloper"
-            >
+              v-model="estimate.selectedDeveloper">
               <option value="" disabled>Please select a developer</option>
               <option
                 v-for="developer in developers"

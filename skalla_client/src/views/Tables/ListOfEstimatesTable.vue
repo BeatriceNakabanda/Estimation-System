@@ -279,15 +279,15 @@ export default {
       return format(new Date(dateCreated), 'dd/MM/yyy')
     },
     // add new Estimate method
-            async addEstimate(){
-            this.clearForm()
-            this.submitting = true
+    async addEstimate(){
+    this.clearForm()
+    this.submitting = true
                 // validating empty inputs
-            if(this.invalidProjectName || this.invalidDueDate  || this.invalidTitle || this.invalidTaskDescription)
-            {
-                this.error = true
-                return
-            }
+        if(this.invalidProjectName || this.invalidDueDate  || this.invalidTitle || this.invalidTaskDescription)
+        {
+            this.error = true
+            return
+        }
         let createdEstimate = this.submitting = true
         if(createdEstimate){
             let newEstimate = {
@@ -302,7 +302,7 @@ export default {
         // console.log(newEstimate)
         const response = await AuthService.addEstimate(newEstimate);
         console.log(response)
-        
+       
         this.estimates.push({
           project: response.project,
           developer: response.developer,
