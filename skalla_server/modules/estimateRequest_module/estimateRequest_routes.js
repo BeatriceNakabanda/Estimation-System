@@ -8,7 +8,7 @@ const loginController = require("../user_module/loginController");
 //get all estimates
 router.get(
   "/estimate-requests/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateRequestController.estimateRequestList
 );
 //getting draft estimates
@@ -39,7 +39,7 @@ router.put(
 //create estimate
 router.post(
   "/estimate-request",
-  //loginController.CheckToken,
+  loginController.CheckToken,
 
   estimateRequestController.createEstimateRequest
 );
@@ -47,7 +47,7 @@ router.post(
 //get single estimate request
 router.get(
   "/estimate-request/:requestId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateRequestController.singleEstimateRequest
 );
 
