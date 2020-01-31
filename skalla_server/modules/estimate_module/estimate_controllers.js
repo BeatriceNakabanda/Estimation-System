@@ -57,7 +57,7 @@ exports.createEstimate = async function(req, res) {
 };
 
 //getting all estimates
-//Person.findById(user1._id).populate("stories stories.creator"}).exec(function(err, doc)
+
 exports.estimatesList = function(req, res) {
   Estimate.find({
     developer: req.params.requestedId
