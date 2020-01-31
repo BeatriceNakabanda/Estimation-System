@@ -8,7 +8,7 @@ mongoose.set("useFindAndModify", false);
 
 //getting a project,project manager according to developer id when pending and draft
 //for pending and drafts
-exports.estimateRequestList = function(req, res, next) {
+exports.estimateRequestList = function(req, res) {
   EstimateRequest.find({
     developer: req.params.requestedId,
     status: "Submitted"
@@ -43,16 +43,7 @@ exports.estimatedList = function(req, res, next) {
     });
 };
 //creating an estimate
-exports.createEstimatex = function(req, res) {
-  const newEstimate = new Estimate(req.body);
-  newEstimate.save(function(error, estimate) {
-    if (error) {
-      res.send(error);
-    } else {
-      res.json(estimate);
-    }
-  });
-};
+
 //create estimate
 exports.createEstimate = async function(req, res) {
   const newEstimate = new Estimate(req.body);
@@ -111,8 +102,7 @@ exports.singleEstimate = function(req, res, next) {
 //getting pending draft estimates
 exports.estimateDraftList = function(req, res, next) {
   Estimate.find({
-    developer: req.params.requestedId,
-    status: "Draft"
+    developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
