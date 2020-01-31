@@ -58,7 +58,7 @@ exports.createEstimate = async function(req, res) {
   const newEstimate = new Estimate(req.body);
   try {
     const createdEstimate = await newEstimate.save(newEstimate);
-    console.log("hello");
+
     res.send(createdEstimate);
   } catch (error) {
     res.send(e);
@@ -66,11 +66,13 @@ exports.createEstimate = async function(req, res) {
 };
 
 //getting all estimates
+//Person.findById(user1._id).populate("stories stories.creator"}).exec(function(err, doc)
 exports.estimatesList = function(req, res, next) {
   Estimate.find({
     developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
+    .populate("lineItem[0]")
 
     .exec(function(err, estimate) {
       if (err) {
@@ -83,21 +85,22 @@ exports.estimatesList = function(req, res, next) {
 //editng an estimate
 exports.editingEstimate = function(req, res) {
   Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body, function(
-    next,
+    error,
     estimate
   ) {
     if (estimate !== null) {
       res.json(estimate);
     } else {
-      res.send(next);
+      res.send(error);
     }
   });
 };
 
 //get a single estimate
 exports.singleEstimate = function(req, res, next) {
-  estimate
-    .findById({ _id: req.params.requestId })
+  Estimate.findById({ _id: req.params.requestId })
+
+    .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
         return next(err);
@@ -107,10 +110,10 @@ exports.singleEstimate = function(req, res, next) {
     });
 };
 //getting pending draft estimates
-exports.estimatePendingList = function(req, res, next) {
+exports.estimateDraftList = function(req, res, next) {
   Estimate.find({
     developer: req.params.requestedId,
-    status: "Pending"
+    status: "Draft"
   })
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
@@ -142,11 +145,11 @@ exports.changingStatusToEstimated = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId, developer: req.params.requestedId },
     { status: "Estimated" },
-    function(next, estimate) {
+    function(error, estimate) {
       if (estimate !== null) {
         res.json(estimate);
       } else {
-        res.send(next);
+        res.send(error);
       }
     }
   );
@@ -195,13 +198,13 @@ exports.EstimateRequestUpdateEstimated = function(req, res, next) {
 
 //update a single estimate
 exports.updateEstimate = function(req, res, next) {
-  estimate
-    .findByIdAndUpdate({ _id: req.params.requestId }, req.body)
-    .exec(function(err, estimate) {
+  Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body).exec(
+    function(err, estimate) {
       if (err) {
         return next(err);
       } else if (estimate !== null) {
         res.json(estimate);
       }
-    });
+    }
+  );
 };
