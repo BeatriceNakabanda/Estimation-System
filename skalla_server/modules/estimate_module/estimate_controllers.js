@@ -53,16 +53,16 @@ exports.createEstimate = async function(req, res) {
     res.send(createdEstimate);
   } catch (error) {
     res.send(e);
-  }
+  
 };
-
+// getting estimates from developer selected by project manager
 exports.listOfEstimateRequest = async function(req, res) {
   try {
     const request = await EstimateRequest.find({
       _id: req.params.requestId,
       projectManager: req.params.projectManagerId
     })
-      // .populate({ path: "developer", select: "name-_id" })
+
       .populate({ path: "projectManager", select: "name-_id" })
       .exec();
 

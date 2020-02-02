@@ -31,7 +31,7 @@ exports.Estimatedlist = function(req, res, next) {
 
     .exec(function(err, estimateRequest) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimateRequest);
       }
@@ -74,16 +74,14 @@ exports.estimateRequestList = function(req, res, next) {
     projectManager: req.params.requestedId,
     status: { $in: ["Estimated", "Submitted"] }
   })
-  
-    .populate({ path: "estimateRequestId", select: "title" })
+
     .populate({ path: "projectManager", select: "name-_id" })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "developer", select: "name-_id" })
-    .populate({ path: "estimateRequestId", select: "dateCreated" })
- 
+
     .exec(function(err, estimateRequest) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimateRequest);
       }
@@ -112,7 +110,7 @@ exports.createEstimateRequest = async function(req, res) {
 };
 
 //get single estimate request
-exports.singleEstimateRequest = function(req, res, next) {
+exports.singleEstimateRequest = function(req, res) {
   EstimateRequest.findById({ _id: req.params.requestId })
     .populate({ path: "project", select: "name-_id" })
     .populate({ path: "projectManager", select: "name-_id" })
@@ -120,7 +118,7 @@ exports.singleEstimateRequest = function(req, res, next) {
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimateRequest) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimateRequest);
       }
@@ -132,11 +130,11 @@ exports.updateEstimateRequest = function(req, res) {
   EstimateRequest.findByIdAndUpdate(
     { _id: req.params.requestId },
     req.body,
-    function(next, estimateRequest) {
+    function(err, estimateRequest) {
       if (estimateRequest !== null) {
         res.json(estimateRequest);
       } else {
-        res.send(next);
+        res.send(err);
       }
     }
   );
