@@ -7,22 +7,21 @@ const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
 //getting a project,project manager according to developer id when pending and draft
-//for pending and drafts
-exports.estimateRequestList = function(req, res) {
-  EstimateRequest.find({
-    developer: req.params.requestedId,
-    status: "Submitted"
-  })
-    .populate({ path: "project", select: "name-_id" })
-    .populate({ path: "projectManager", select: "name-_id" })
-    .populate({ path: "developer", select: "name-_id" })
-    .exec(function(err, estimate) {
-      if (err) {
-        return next(err);
-      } else {
-        res.json(estimate);
-      }
-    });
+
+exports.estimateRequestList = async function(req, res) {
+  try {
+    const estimaterequest = await EstimateRequest.find({
+      developer: req.params.requestedId,
+      status: "Submitted"
+    })
+      .populate({ path: "project", select: "name-_id" })
+      .populate({ path: "projectManager", select: "name-_id" })
+      .populate({ path: "developer", select: "name-_id" })
+      .exec();
+    res.send(estimaterequest);
+  } catch (e) {
+    return e;
+  }
 };
 
 //getting when a developer estimates and sends back to project manager
@@ -42,6 +41,7 @@ exports.estimatedList = function(req, res, next) {
       }
     });
 };
+
 //creating an estimate
 
 //create estimate
@@ -53,7 +53,7 @@ exports.createEstimate = async function(req, res) {
     res.send(createdEstimate);
   } catch (error) {
     res.send(e);
-  
+  }
 };
 // getting estimates from developer selected by project manager
 exports.listOfEstimateRequest = async function(req, res) {
@@ -122,21 +122,21 @@ exports.singleEstimate = function(req, res, next) {
     });
 };
 //getting pending draft estimates
-exports.estimateDraftList = function(req, res, next) {
+exports.estimateDraftList = function(req, res) {
   Estimate.find({
     developer: req.params.requestedId
   })
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimate);
       }
     });
 };
 //getting submitted  estimates
-exports.estimatesubmittedList = function(req, res, next) {
+exports.estimatesubmittedList = function(req, res) {
   Estimate.find({
     developer: req.params.requestedId,
     status: "Submitted"
@@ -144,7 +144,7 @@ exports.estimatesubmittedList = function(req, res, next) {
     .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimate);
       }
@@ -184,7 +184,7 @@ exports.UniqueEstimateRequest = function(req, res) {
     });
 };
 //finding an estimate request and updating it according to developer
-exports.EstimateRequestUpdateEstimated = function(req, res, next) {
+exports.EstimateRequestUpdateEstimated = function(req, res) {
   var time = new Date().getTime();
   var date = new Date(time);
   today = date.toString();
@@ -195,27 +195,25 @@ exports.EstimateRequestUpdateEstimated = function(req, res, next) {
       developer: req.params.requestedId
     },
     { status: "Estimated", dueDate: today }
-    //dueDate: Date.now
-    //var n = d.getMonth();
   ).exec(function(err, estimate) {
     if (err) {
-      return next(err);
+      return err;
     } else {
       res.json(estimate);
-      console.log(today);
     }
   });
 };
 
 //update a single estimate
-exports.updateEstimate = function(req, res, next) {
-  Estimate.findByIdAndUpdate({ _id: req.params.requestId }, req.body).exec(
-    function(err, estimate) {
-      if (err) {
-        return next(err);
-      } else if (estimate !== null) {
-        res.json(estimate);
-      }
-    }
-  );
+
+exports.updateEstimate = async function(req, res) {
+  try {
+    const estimate = await Estimate.findByIdAndUpdate(
+      { _id: req.params.requestId },
+      req.body
+    ).exec();
+    res.send(estimate);
+  } catch (e) {
+    return e;
+  }
 };
