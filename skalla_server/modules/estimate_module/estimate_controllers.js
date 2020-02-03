@@ -74,8 +74,8 @@ exports.listOfEstimateRequest = async function(req, res) {
 
     const estimates = await Estimate.find(
       {
-        developer: request[0].developer
-        //estimateRequestID: "5e304eb18dcfd506ee3e9e13"
+        developer: request[0].developer,
+        EstimateRequest: req.params.requestId
       }
       // estimateRequestID
     )
