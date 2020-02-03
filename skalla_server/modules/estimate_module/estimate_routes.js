@@ -22,7 +22,7 @@ router.get(
 
 router.get(
   "/Unique-estimate/:requestId/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.UniqueEstimateRequest
 );
 
