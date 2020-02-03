@@ -47,7 +47,7 @@ router.post(
 //get single estimate request
 router.get(
   "/estimate-request/:requestId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
   estimateRequestController.singleEstimateRequest
 );
 

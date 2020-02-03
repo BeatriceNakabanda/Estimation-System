@@ -2,6 +2,7 @@
 
 const Estimate = require("./estimate_model");
 const EstimateRequest = require("../estimateRequest_module/estimateRequest_model");
+const EstimateRequestController = require("../estimateRequest_module/estimateRequest_controllers");
 
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
@@ -26,7 +27,7 @@ exports.estimateRequestList = async function(req, res) {
 
 //getting when a developer estimates and sends back to project manager
 //for Submitted
-exports.estimatedList = function(req, res, next) {
+exports.estimatedList = function(req, res) {
   EstimateRequest.find({
     developer: req.params.requestedId,
     status: "Estimated"
@@ -35,7 +36,7 @@ exports.estimatedList = function(req, res, next) {
     .populate({ path: "projectManager", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
-        return next(err);
+        return err;
       } else {
         res.json(estimate);
       }
@@ -46,13 +47,21 @@ exports.estimatedList = function(req, res, next) {
 
 //create estimate
 exports.createEstimate = async function(req, res) {
-  const newEstimate = new Estimate(req.body);
+  try {
+    response = await EstimateRequest.findById({ _id: req.params.requestId });
+    console.log(response);
+  } catch (e) {
+    return e;
+  }
+  Object.assign(req.body, { EstimateRequest: response._id });
+  var newEstimate = new Estimate(req.body);
+
   try {
     const createdEstimate = await newEstimate.save(newEstimate);
 
     res.send(createdEstimate);
   } catch (error) {
-    res.send(e);
+    res.send(error);
   }
 };
 // getting estimates from developer selected by project manager
@@ -61,18 +70,19 @@ exports.listOfEstimateRequest = async function(req, res) {
     const request = await EstimateRequest.find({
       _id: req.params.requestId,
       projectManager: req.params.projectManagerId
-    })
+    });
 
-      .populate({ path: "projectManager", select: "name-_id" })
-      .exec();
-
-    const estimates = await Estimate.find({
-      developer: request[0].developer
-    })
+    const estimates = await Estimate.find(
+      {
+        developer: request[0].developer
+        //estimateRequestID: "5e304eb18dcfd506ee3e9e13"
+      }
+      // estimateRequestID
+    )
       .populate({ path: "developer", select: "name-_id" })
       .exec();
+
     res.send(estimates);
-    // res.send(request);
   } catch (error) {
     res.send(error);
   }
