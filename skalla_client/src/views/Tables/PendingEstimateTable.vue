@@ -292,6 +292,7 @@ import { format } from 'date-fns'
          submitting: false,
          error: false,
          success: false,
+         format,
          estimateData : {
            task: '',
            research: 0,
