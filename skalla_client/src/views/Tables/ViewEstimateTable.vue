@@ -28,7 +28,7 @@
             <div class="col details align-self-start" > 
               <p>{{estimate.project.name}}</p>
               <p>{{estimate.projectManager.name}}</p>
-              <p>{{estimate.dateCreated}}</p>
+              <p>{{formatDate(estimate.dateCreated)}}</p>
               <p>{{estimate.dueDate}}</p>
               <p>{{estimate.taskDescription}}</p>
             </div>
@@ -105,7 +105,8 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "axios"
+import { format } from "date-fns" 
 
   export default {
     name: 'estimates-table',
@@ -129,16 +130,13 @@ import axios from "axios";
             taskDescription: "",
             title: ""
           }
-          
-          // title: ""
-         
-            // project: '',
-            // dateCreated: '',
-            // dueDate: '',
-            // taskDescription: '',
-        
  
       }
+    },
+    methods: {
+      formatDate: function(dateCreated){
+          return format(new Date(dateCreated), 'dd-MM-yyy')
+            },
     },
     //fetches estimate when the component is created
     async created(){

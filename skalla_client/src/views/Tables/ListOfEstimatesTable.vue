@@ -24,9 +24,7 @@
                                             class="mb-3"
                                             placeholder="Add project here..." 
                                             :class="{ 'has-error': submitting && invalidProjectName } " 
-                                            
-                                            @keypress="clearForm"
-                                          >
+                                            @keypress="clearForm">
                                             <select class="custom-select" id="inputGroupSelect01" v-model="estimate.selectedProject">
                                             <option value="" disabled>Please select a project</option>
                                             <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
@@ -245,10 +243,10 @@ export default {
     // automatically computed properties(functions) to validate form inputs 
     computed: {
         invalidProjectName(){
-            return this.estimate.project === ''
+            return this.estimate.selectedProject === ''
         },
         invalidDeveloper(){
-            return this.estimate.developers === ''
+            return this.estimate.selectedDeveloper === ''
         },
         invalidDueDate(){
             return this.estimate.dueDate === ''
