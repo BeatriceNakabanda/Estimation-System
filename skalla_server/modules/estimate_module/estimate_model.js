@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 //estimate schema
 const estimateSchema = new Schema({
   submittedDate: { type: Date, default: Date.now },
+  EstimateRequest: String,
+
   developer: { type: Schema.ObjectId, ref: "User", required: true },
   //estimateRequest: { type: Schema.ObjectId, ref: "EstimateRequest" },
   totalSum: Number,
