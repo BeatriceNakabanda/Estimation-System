@@ -68,7 +68,7 @@ exports.changingEstimated = function(req, res) {
     }
   );
 };
-
+//requesting estimates with status "Estimated", "Submitted"
 exports.estimateRequestList = function(req, res, next) {
   EstimateRequest.find({
     projectManager: req.params.requestedId,
@@ -91,6 +91,7 @@ exports.estimateRequestList = function(req, res, next) {
 //create estimate request
 
 exports.createEstimateRequest = async function(req, res) {
+  Object.assign(req.body, { DateEstimated: "" });
   const estimateRequest = new EstimateRequest(req.body);
 
   try {
