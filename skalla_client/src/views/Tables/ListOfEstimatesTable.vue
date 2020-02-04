@@ -24,9 +24,7 @@
                                             class="mb-3"
                                             placeholder="Add project here..." 
                                             :class="{ 'has-error': submitting && invalidProjectName } " 
-                                            
-                                            @keypress="clearForm"
-                                          >
+                                            @keypress="clearForm">
                                             <select class="custom-select" id="inputGroupSelect01" v-model="estimate.selectedProject">
                                             <option value="" disabled>Please select a project</option>
                                             <option v-for="project in projects" v-bind:value="{id: project._id, name: project.name}">{{project.name}}</option>
@@ -50,11 +48,6 @@
                                                 <option  v-for="developer in developers" v-bind:value="{id: developer._id, name: developer.name}"> {{developer.name}}</option>
                                             </select>
                                 </base-input>
-                                <!-- <p>id: {{selectedProject.id}}</p>
-                                <p>name: {{selectedProject.name}}</p>
-                                <p>id: {{selectedDeveloper.id}}</p>
-                                <p>name: {{selectedDeveloper.name}}</p> -->
-
                                 </div>
                                 </div>
                                 <div class="row">
@@ -242,39 +235,38 @@ export default {
       
     };
   },
-    // automatically computed properties(functions) to validate form inputs 
-    computed: {
-        invalidProjectName(){
-            return this.estimate.project === ''
-        },
-        invalidDeveloper(){
-            return this.estimate.developers === ''
-        },
-        invalidDueDate(){
-            return this.estimate.dueDate === ''
-        },
-        invalidTitle(){
-            return this.estimate.title === ''
-        },
-        invalidTaskDescription(){
-            return this.estimate.taskDescription === ''
-        }
-    },
-    async created(){
-      try{
-       
-        const response = await axios.get(`http://localhost:8081/api/projects`)
-        const resp = await axios.get(`http://localhost:8081/api/users/developers` )
-        this.projects = response.data;
-        this.developers = resp.data;
-      }catch(e){
-        console.error(e)
-        
+  // automatically computed properties(functions) to validate form inputs 
+  computed: {
+      invalidProjectName(){
+          return this.estimate.selectedProject === ''
+      },
+      invalidDeveloper(){
+          return this.estimate.selectedDeveloper === ''
+      },
+      invalidDueDate(){
+          return this.estimate.dueDate === ''
+      },
+      invalidTitle(){
+          return this.estimate.title === ''
+      },
+      invalidTaskDescription(){
+          return this.estimate.taskDescription === ''
       }
-    },
+  },
+  async created(){
+    try{
+      
+      const response = await axios.get(`http://localhost:8081/api/projects`)
+      const resp = await axios.get(`http://localhost:8081/api/users/developers` )
+      this.projects = response.data;
+      this.developers = resp.data;
+    }catch(e){
+      console.error(e)
+      
+    }
+  },
     
   methods: {
-
     formatDate: function(dateCreated){
       return format(new Date(dateCreated), 'dd/MM/yyy')
     },
@@ -314,10 +306,9 @@ export default {
         })
         
         }
-         
-            this.success = true
-            this.error = false
-            this.submitting = false 
+        this.success = true
+        this.error = false
+        this.submitting = false 
                          
         },
         // Save as draft method

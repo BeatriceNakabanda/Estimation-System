@@ -11,33 +11,39 @@ router.get(
 
   estimateController.estimateRequestList
 );
+router.get(
+  "/get/:requestId/:projectManagerId",
+  //loginController.CheckToken,
+
+  estimateController.listOfEstimateRequest
+);
 
 //getting a single estimate request information for a single developer
 
 router.get(
   "/Unique-estimate/:requestId/:requestedId",
   loginController.CheckToken,
-
   estimateController.UniqueEstimateRequest
 );
 
 // updating a single estimate request information for a single developer
 router.put(
-  "/update-estimateRequest/:requestId/:requestedId",
+  "/update-estimateRequest/:requestId",
   loginController.CheckToken,
 
   estimateController.EstimateRequestUpdateEstimated
 );
-//get all estimated  estimates information
+
+//get all estimated  estimates for a developer
 router.get(
-  "/estimated-estimates/:requestedId",
+  "/estimated-estimates/:requestId",
   loginController.CheckToken,
   estimateController.estimatedList
 );
 
 //create a single estimate
 router.post(
-  "/create-estimate",
+  "/create-estimate/:requestId",
   loginController.CheckToken,
   estimateController.createEstimate
 );
