@@ -261,7 +261,7 @@
         </div>
         <div class="col text-right">
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit" @click="handleSubmitEstimate">Submit</base-button>
         </div>
       </div>
    </div>
@@ -441,6 +441,12 @@ import { format } from 'date-fns'
           })
           
 
+      },
+      //Sending estimates added to project manager by developer
+      async handleSubmitEstimate(){
+        // console.log(this.estimationData)
+        const response = await axios.put(`http://localhost:8081/api/update-estimateRequest/` + this.$route.params.id, this.estimationData)
+        console.log(response)
       }
     },
     //fetches estimate when the component is created
