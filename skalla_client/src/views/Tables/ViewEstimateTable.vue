@@ -48,7 +48,7 @@
         <td class="table-head" scope="col"><b>Development</b></td>
         <td class="table-head" scope="col"><b>Testing</b></td>
         <td class="table-head" scope="col"><b>Stablization</b></td>
-        <td class="table-head" scope="col"><b>Certainity</b></td>
+        <td class="table-head" scope="col"><b>Certainty</b></td>
         <td class="table-head" scope="col"><b>Sum Hours (SH)</b></td>
         <td class="table-head" scope="col"><b>Adjusted SH</b></td>
         <td class="table-head" scope="col">
@@ -60,15 +60,15 @@
   </thead>
   <tbody v-for="estimation in estimated" :key="estimation._id">
     <tr>
-      <td scope="row">{{estimation.subTask}}</td>
+      <td scope="row">{{estimation.task}}</td>
       <td>{{estimation.research}}</td>
       <td>{{estimation.planning}}</td>
       <td>{{estimation.development}}</td>
       <td>{{estimation.testing}}</td>
       <td>{{estimation.stabilization}}</td>
-      <td>{{estimation.certainity}}</td>
-      <td>{{estimation.sumHours}}</td>
-      <td>{{estimation.adjustedSumHours}}</td>
+      <td>{{estimation.certainty}}</td>
+      <td>{{estimation.sum}}</td>
+      <td>{{estimation.adjustedSum}}</td>
       <!-- <td></td> -->
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -85,7 +85,7 @@
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
-      <td colspan="10">{{estimate.comments}}</td>
+      <td colspan="10">{{estimation.comments}}</td>
     </tr>
   </tbody>
   <tr>
