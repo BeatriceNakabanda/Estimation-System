@@ -36,7 +36,11 @@ router.get(
 // updating a single estimate request information for a single developer
 router.put(
   "/update-estimateRequest/:requestId",
+<<<<<<< HEAD
   //loginController.CheckToken,
+=======
+  loginController.CheckToken,
+>>>>>>> 99432d9bbdc33891d9fb4e549c54f2897a69d5fb
 
   estimateController.EstimateRequestUpdateEstimated
 );

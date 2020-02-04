@@ -261,7 +261,7 @@
         </div>
         <div class="col text-right">
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit" @click="handleSubmitEstimate">Submit</base-button>
         </div>
       </div>
    </div>
@@ -304,6 +304,7 @@ import { format } from 'date-fns'
            sum: 0,
            adjustedSum: 0,
            comments: '',
+           totalSum: 0
           },
           estimationData: [],
 
@@ -357,11 +358,13 @@ import { format } from 'date-fns'
         }else{
           return (parseInt(this.estimateData.research) + parseInt(this.estimateData.planning) + parseInt(this.estimateData.development) + parseInt(this.estimateData.testing) + parseInt(this.estimateData.stabilization)).toFixed(2);
         }
-        
       },
       calculatedAdjustedSumHours: function(){
         return (parseInt(this.calculatedSumHours) * (1 + (1 - parseInt(this.estimateData.certainty) / 100))).toFixed(2)
       },
+      // calculatedTotalResearch: function(){
+      //   return estimateData.research
+      // },
       invalidTask(){
         return this.estimateData.task === ''
       },
@@ -389,6 +392,10 @@ import { format } from 'date-fns'
        formatDate: function(dateCreated){
           return format(new Date(dateCreated), 'dd-MM-yyy')
             },
+        //calculate total time for research
+        // totalResearchTime(){
+
+        // },
       
       async addEstimate(){
         this.submitting = true
@@ -409,30 +416,37 @@ import { format } from 'date-fns'
             certainty: this.estimateData.certainty,
             sum,
             adjustedSum,
-            comments: this.estimateData.comment,
-            
+            comments: this.estimateData.comment, 
         }
         console.log(sum)
         console.log(adjustedSum)
         this.success=true
-          const response = await AuthService.addEstimation(newEstimate)
+          // const response = await AuthService.addEstimation(newEstimate)
           // console.log(newEstimate)
           // console.log(response.addedEstimate.submittedDate)
+          const response = await axios.post(`http://localhost:8081/api/create-estimate/` + this.$route.params.id, newEstimate)
+          console.log(response)
 
           this.estimationData.push({
-            task: response.task,
-            research: response.research,
-            planning: response.planning,
-            development: response.development,
-            testing: response.testing,
-            stabilization: response.stabilization,
-            certainty: response.certainty,
-            comments: response.comments,
-            sumHours: response.sumHours,
-            adjustedSumHours: response.adjustedSumHours
+            task: response.data.task,
+            research: response.data.research,
+            planning: response.data.planning,
+            development: response.data.development,
+            testing: response.data.testing,
+            stabilization: response.data.stabilization,
+            certainty: response.data.certainty,
+            comments: response.data.comments,
+            sumHours: response.data.sumHours,
+            adjustedSumHours: response.data.adjustedSumHours
           })
           
 
+      },
+      //Sending estimates added to project manager by developer
+      async handleSubmitEstimate(){
+        // console.log(this.estimationData)
+        const response = await axios.put(`http://localhost:8081/api/update-estimateRequest/` + this.$route.params.id, this.estimationData)
+        console.log(response)
       }
     },
     //fetches estimate when the component is created
@@ -441,11 +455,29 @@ import { format } from 'date-fns'
         const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
         this.estimate = res.data; 
         // console.log(res.data )
+        
 
-        const loggedInDeveloper = this.$store.getters.getUser.id;
-        const response = await axios.get(`http://localhost:8081/api/get-all-estimates/` + loggedInDeveloper)
+
+        // const loggedInDeveloper = this.$store.getters.getUser.id;
+        // const response = await axios.get(`http://localhost:8081/api/get-all-estimates/` + loggedInDeveloper)
+        const projectManagerId = res.data.projectManager._id
+        // console.log(projectManagerId)
+        const response = await axios.get(`http://localhost:8081/api/get/` + this.$route.params.id + `/` + projectManagerId)
+
         this.estimationData = response.data
-        // console.log(response)
+        
+        // console.log(response.data.length)
+        // console.log(response.data[0].research)
+        // const totalResearchTime = response.data[0].research + response.data[1].research
+        // console.log(totalResearchTime)
+        // let totalResearchTime
+        // for(var i=0; i<response.data.length; i++){
+  
+        //   totalResearchTime = response.data[i].research
+        // }
+        // console.log(totalResearchTime)
+        
+        
         
       } catch(e){
         console.error(e)

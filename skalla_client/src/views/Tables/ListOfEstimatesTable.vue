@@ -142,7 +142,7 @@
            
           </td>
           <td class="dateEstimated">
-            {{row.dateEstimated}}
+            {{row.DateEstimated}}
           </td>
           <td>
             <!-- <badge class="badge-dot mr-4" :type="row.statusType">
