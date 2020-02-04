@@ -143,9 +143,12 @@ import { format } from "date-fns"
       try {
         // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
         const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
-
         this.estimate = res.data; 
-        console.log(res)
+        //get estimate added by developer
+        const response = await axios.get(`http://localhost:8081/api/estimated-estimates/` + this.$route.params.id)
+        this.estimated = response.data
+        // console.log(res)
+        console.log(response.data)
       } catch(e){
         console.error(e)
       }

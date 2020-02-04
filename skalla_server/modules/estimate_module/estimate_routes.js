@@ -35,7 +35,7 @@ router.put(
 );
 //get all estimated  estimates information
 router.get(
-  "/estimated-estimates/:requestedId",
+  "/estimated-estimates/:requestId",
   loginController.CheckToken,
   estimateController.estimatedList
 );
