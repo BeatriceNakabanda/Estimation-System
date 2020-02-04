@@ -34,17 +34,16 @@
           <td class="project">
             {{row.project.name}}
           </td>
-          <td class="date-created">
-            {{formatDate(row.dateCreated)}}
-          </td>
-          
-          
           <td class="project-manager">
             {{row.projectManager.name}}
           </td> 
+          <td class="date-created">
+            {{formatDateCreated(row.dateCreated)}}
+          </td>
+          
           <td >
             <span class="action-icons">
-              <router-link  to="#" id="view">
+              <router-link :to="`/view-submitted-estimate/${row._id}`" id="view">
                 <i class="rounded-circle fa fa-eye fa-1x" id="my-icons" aria-hidden="true"></i>
               </router-link>
             </span>
@@ -84,7 +83,7 @@ import { format } from 'date-fns'
       }
     },
     methods: {
-      formatDate: function(dateCreated){
+      formatDateCreated: function(dateCreated){
         return format(new Date(dateCreated), 'dd-MM-yyy')
     },
     },
