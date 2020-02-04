@@ -84,7 +84,7 @@
     },
     methods: {
         formatDate: function(date){
-        return format(new Date(date), 'dd/MM/yyy')
+        return format(new Date(date), 'dd-MM-yyy')
       }
     }
   }
