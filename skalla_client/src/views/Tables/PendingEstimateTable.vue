@@ -468,14 +468,15 @@ import { format } from 'date-fns'
         
         // console.log(response.data.length)
         // console.log(response.data[0].research)
-        // const totalResearchTime = response.data[0].research + response.data[1].research
-        // console.log(totalResearchTime)
+        let n = response.data.length - 1
+        const totalResearchTime = response.data[0].research + response.data[n].research + response.data[n++].research 
+        console.log(totalResearchTime)
         // let totalResearchTime = 1
         // for(var i=0; i<response.data.length; i++){
   
         //   totalResearchTime = response.data[i].research
         // }
-        console.log(response.data)
+        // console.log(response.data)
         
         
         
