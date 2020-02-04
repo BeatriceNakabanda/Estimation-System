@@ -2,7 +2,6 @@
 
 const Estimate = require("./estimate_model");
 const EstimateRequest = require("../estimateRequest_module/estimateRequest_model");
-const EstimateRequestController = require("../estimateRequest_module/estimateRequest_controllers");
 
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
@@ -194,24 +193,24 @@ exports.UniqueEstimateRequest = function(req, res) {
     });
 };
 //finding an estimate request and updating it according to developer
-exports.EstimateRequestUpdateEstimated = function(req, res) {
+exports.EstimateRequestUpdateEstimated = async function(req, res) {
   var time = new Date().getTime();
   var date = new Date(time);
   today = date.toString();
+  try {
+    const response = await EstimateRequest.findByIdAndUpdate(
+      {
+        _id: req.params.requestId,
+        developer: req.params.requestedId
+      },
+      { status: "Estimated", DateEstimated: today }
+    ).exec();
 
-  EstimateRequest.findByIdAndUpdate(
-    {
-      _id: req.params.requestId,
-      developer: req.params.requestedId
-    },
-    { status: "Estimated", dueDate: today }
-  ).exec(function(err, estimate) {
-    if (err) {
-      return err;
-    } else {
-      res.json(estimate);
-    }
-  });
+    res.json(response);
+    console.log(response);
+  } catch (e) {
+    return e;
+  }
 };
 
 //update a single estimate
