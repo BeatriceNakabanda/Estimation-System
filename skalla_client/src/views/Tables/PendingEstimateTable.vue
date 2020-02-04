@@ -104,7 +104,7 @@
 </tr>
 <tr>
   <td colspan="12" class="text-right">
-    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Row</base-button>
+    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Task</base-button>
     <modal :show.sync="modal" id="modal">
       <template slot="header">
           <h3 class="modal-title" id="exampleModalLabel">New Task</h3>
@@ -260,7 +260,7 @@
           <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
+          <!-- <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button> -->
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit" @click="handleSubmitEstimate">Submit</base-button>
         </div>
       </div>
@@ -468,14 +468,15 @@ import { format } from 'date-fns'
         
         // console.log(response.data.length)
         // console.log(response.data[0].research)
-        // const totalResearchTime = response.data[0].research + response.data[1].research
-        // console.log(totalResearchTime)
-        // let totalResearchTime
+        let n = response.data.length - 1
+        const totalResearchTime = response.data[0].research + response.data[n].research + response.data[n++].research 
+        console.log(totalResearchTime)
+        // let totalResearchTime = 1
         // for(var i=0; i<response.data.length; i++){
   
         //   totalResearchTime = response.data[i].research
         // }
-        // console.log(totalResearchTime)
+        // console.log(response.data)
         
         
         
