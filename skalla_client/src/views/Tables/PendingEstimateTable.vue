@@ -27,7 +27,7 @@
             <div class="col details align-self-start">
             <p>{{estimate.project.name}}</p>
             <p>{{estimate.projectManager.name}}</p>
-            <p>{{ estimate.dateCreated }}</p>
+            <p>{{formatDate(estimate.dateCreated)}}</p>
             <p>{{estimate.dueDate}}</p>
             <p>{{estimate.taskDescription}}</p>
             </div>
@@ -44,7 +44,7 @@
           <td class="table-head" scope="col"><b>Development</b></td>
           <td class="table-head" scope="col"><b>Testing</b></td>
           <td class="table-head" scope="col"><b>Stablization</b></td>
-          <td class="table-head" scope="col"><b>Certainity</b></td>
+          <td class="table-head" scope="col"><b>Certainty</b></td>
           <!-- <td class="table-head" scope="col"><b>Sum Hours</b></td>
           <td class="table-head" scope="col"><b>Adjusted Sum Hours</b></td> -->
           <td class="table-head" scope="col">
@@ -58,7 +58,7 @@
           <td class="table-head" scope="col"><b></b></td> 
       </tr>
     </thead>
-  <!-- <tbody v-for="estimationInfo in estimationData" :key="estimationInfo.id"> -->
+  <tbody v-for="estimationInfo in estimationData" :key="estimationInfo.id">
     <tr>
       <td scope="row">{{estimationInfo.task}}</td>
       <td>{{estimationInfo.research}}</td>
@@ -66,9 +66,9 @@
       <td>{{estimationInfo.development}}</td>
       <td>{{estimationInfo.testing}}</td>
       <td>{{estimationInfo.stabilization}}</td>
-      <td>{{estimationInfo.certainity}}</td>
-      <td>{{estimationInfo.sumHours}}</td>
-      <td>{{estimationInfo.adjustedSumHours}}</td>
+      <td>{{estimationInfo.certainty}}</td>
+      <!-- <td>{{estimationInfo.sumHours}}</td>
+      <td>{{estimationInfo.adjustedSumHours}}</td> -->
       <td></td>
       <td class="text-right pl-4">
         <span class="action-icons">
@@ -214,11 +214,9 @@
               <base-input alternative
                       class=""
                       placeholder="0.00hrs"
-                      :class="{ 'has-error': submitting && invalidCertainty } " 
-
-                      >
+                      :class="{ 'has-error': submitting && invalidCertainty } ">
                       <select class="custom-select" id="inputGroupSelect01" v-model="estimateData.certainty">
-                        <option value="" disabled>60</option>
+                        <option disabled value="">Please select</option>
                         <option v-for="certntyValue in certainty" :key="certntyValue.id">{{certntyValue.certaintyValue}}</option>
                         </select>
             </base-input>
@@ -273,7 +271,7 @@
 // import AddTaskForm from '../Forms/AddTaskForm'
 import AuthService from '../../services/AuthService'
 import axios from "axios";
-// import { format } from 'date-fns'
+import { format } from 'date-fns'
 
   export default {
     name: 'pending-table',
@@ -294,6 +292,7 @@ import axios from "axios";
          submitting: false,
          error: false,
          success: false,
+         format,
          estimateData : {
            task: '',
            research: 0,
@@ -387,9 +386,9 @@ import axios from "axios";
       
     },
     methods: {
-        /* estimateatDate: function(date){
-        return format(new Date(date), 'dd-MM-yyy')
-      } */
+       formatDate: function(dateCreated){
+          return format(new Date(dateCreated), 'dd-MM-yyy')
+            },
       
       async addEstimate(){
         this.submitting = true
@@ -401,29 +400,37 @@ import axios from "axios";
         let adjustedSum = this.calculatedAdjustedSumHours
         let newEstimate ={
             developer: this.$store.getters.getUser.id,
-            lineItem: [
-              {task: this.estimateData.task},
-              {research: this.estimateData.research},
-              {planning: this.estimateData.planning},
-              {development: this.estimateData.development},
-              {testing: this.estimateData.testing},
-              {stabilization: this.estimateData.stabilization},
-              {certainty: this.estimateData.certainty},
-              {sum},
-              {adjustedSum},
-              {comments: this.estimateData.comment},
-            ]
+            task: this.estimateData.task,
+            research: this.estimateData.research,
+            planning: this.estimateData.planning,
+            development: this.estimateData.development,
+            testing: this.estimateData.testing,
+            stabilization: this.estimateData.stabilization,
+            certainty: this.estimateData.certainty,
+            sum,
+            adjustedSum,
+            comments: this.estimateData.comment,
+            
         }
         console.log(sum)
         console.log(adjustedSum)
         this.success=true
           const response = await AuthService.addEstimation(newEstimate)
-          console.log(newEstimate)
-          console.log(response)
+          // console.log(newEstimate)
+          // console.log(response.addedEstimate.submittedDate)
 
-          // this.estimationData.push({
-
-          // })
+          this.estimationData.push({
+            task: response.task,
+            research: response.research,
+            planning: response.planning,
+            development: response.development,
+            testing: response.testing,
+            stabilization: response.stabilization,
+            certainty: response.certainty,
+            comments: response.comments,
+            sumHours: response.sumHours,
+            adjustedSumHours: response.adjustedSumHours
+          })
           
 
       }
@@ -433,10 +440,11 @@ import axios from "axios";
       try {
         const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
         this.estimate = res.data; 
+        // console.log(res.data )
 
-        // const loggedInDeveloper = this.$store.getters.getUser.id;
-        // const response = await axios.get(`http://localhost:8081/api/get-all-estimates/` + loggedInDeveloper)
-        // this.estimationData = response.data
+        const loggedInDeveloper = this.$store.getters.getUser.id;
+        const response = await axios.get(`http://localhost:8081/api/get-all-estimates/` + loggedInDeveloper)
+        this.estimationData = response.data
         // console.log(response)
         
       } catch(e){

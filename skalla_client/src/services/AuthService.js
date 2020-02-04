@@ -61,35 +61,29 @@ export default {
         .post(url + 'create-estimate', newEstimate)
         .then(response =>{
             response.data
-            let addedEstimate = response.data
-            // const task = response.data.task
-            // const research = response.data.research
-            // const planning = response.data.planning
-            // const development = response.data.development
-            // const testing = response.data.testing
-            // const stabilization = response.data.stabilization
-            // const certainty = response.data.certainty
-            // const sumHours = response.data.sumHours
-            // const adjustedSumHours = response.data.adjustedSumHours
-            // const comments = response.data.comments
-            console.log(addedEstimate)
-            
-
-            // const estimation ={
-            //     task,
-            //     research,
-            //     planning,
-            //     development,
-            //     testing,
-            //     stabilization,
-            //     certainty,
-            //     sumHours,
-            //     adjustedSumHours,
-            //     comments
-            // }
+            // let addedEstimate = response.data
+            const task = response.data.task
+            const research = response.data.research
+            const planning = response.data.planning
+            const development = response.data.development
+            const testing = response.data.testing
+            const stabilization = response.data.stabilization
+            const certainty = response.data.certainty
+            const sumHours = response.data.sum
+            const adjustedSumHours = response.data.adjustedSum
+            const comments = response.data.comments
+            // console.log(addedEstimate)
             return {
-                // estimation
-                addedEstimate
+                task,
+                research,
+                planning,
+                development,
+                testing,
+                stabilization,
+                certainty,
+                sumHours,
+                adjustedSumHours,
+                comments
             }
         })
     }
