@@ -28,7 +28,7 @@ router.get(
 
 // updating a single estimate request information for a single developer
 router.put(
-  "/update-estimateRequest/:requestId/:requestedId",
+  "/update-estimateRequest/:requestId",
   loginController.CheckToken,
 
   estimateController.EstimateRequestUpdateEstimated
