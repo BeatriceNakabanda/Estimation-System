@@ -27,12 +27,11 @@ exports.estimateRequestList = async function(req, res) {
 //getting when a developer estimates and sends back to project manager
 //for Submitted
 exports.estimatedList = function(req, res) {
-  EstimateRequest.find({
-    developer: req.params.requestedId,
-    status: "Estimated"
+  Estimate.find({
+    EstimateRequest: req.params.requestId
   })
-    .populate({ path: "project", select: "name-_id" })
-    .populate({ path: "projectManager", select: "name-_id" })
+
+    .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
         return err;
