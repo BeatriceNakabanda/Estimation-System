@@ -114,6 +114,15 @@ export default new Router({
             import(/* webpackChunkName: "demo" */ "./views/PendingEstimate.vue")
         },
         {
+          path: "/view-submitted-estimate/:id",
+          name: "Submitted Estimate",
+          // route level code-splitting
+          // this generates a separate chunk (about.[hash].js) for this route
+          // which is lazy-loaded when the route is visited.
+          component: () =>
+            import(/* webpackChunkName: "demo" */ "./views/SubmittedEstimate.vue")
+        },
+        {
           path: "/drafts",
           name: "Draft Estimates",
           component: () =>

@@ -69,19 +69,7 @@
       <td>{{estimation.certainty}}</td>
       <td>{{estimation.sum}}</td>
       <td>{{estimation.adjustedSum}}</td>
-      <!-- <td></td> -->
-      <td class="text-right pl-4">
-        <span class="action-icons">
-          <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons"></i>
-          </router-link>
-        </span>
-        <span class="action-icons">
-          <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true" id="my-icons"></i>
-          </router-link>
-        </span>
-      </td>
+     <td></td>
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
