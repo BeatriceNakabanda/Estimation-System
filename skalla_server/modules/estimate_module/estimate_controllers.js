@@ -23,7 +23,23 @@ exports.estimateRequestList = async function(req, res) {
     return e;
   }
 };
+//getting a project,project manager according to developer id when pending and draft
 
+exports.estimateRequestListEstimated = async function(req, res) {
+  try {
+    const estimaterequest = await EstimateRequest.find({
+      developer: req.params.requestedId,
+      status: "Estimated"
+    })
+      .populate({ path: "project", select: "name-_id" })
+      .populate({ path: "projectManager", select: "name-_id" })
+
+      .exec();
+    res.send(estimaterequest);
+  } catch (e) {
+    return e;
+  }
+};
 //getting when a developer estimates and sends back to project manager
 //for Submitted
 exports.estimatedList = function(req, res) {
@@ -199,8 +215,7 @@ exports.EstimateRequestUpdateEstimated = async function(req, res) {
   try {
     const response = await EstimateRequest.findByIdAndUpdate(
       {
-        _id: req.params.requestId,
-        developer: req.params.requestedId
+        _id: req.params.requestId
       },
       { status: "Estimated", DateEstimated: today }
     ).exec();
