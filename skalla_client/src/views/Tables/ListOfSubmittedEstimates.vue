@@ -11,12 +11,12 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'" 
                   tbody-classes="list"
-                  :data="tableData" id="left">
-        <template  slot="columns"  >
-          <th class="bgcolor">Date Created</th>
+                  :data="submittedEstimate" id="left">
+        <template  slot="columns">
           <th class="bgcolor">Title</th>
           <th class="bgcolor">Project</th>
           <th class="bgcolor">Project Manager</th>
+          <th class="bgcolor">Date Created</th>
           <th class="bgcolor">Action</th>
         </template>
           <template class="table-row" slot-scope="{row} ">
@@ -28,20 +28,20 @@
               </div>
             </div>
           </td> -->
-          <td class="date-created">
-            {{row.dateCreated}}
-          </td>
-          
           <td class="title">
             {{row.title}}
           </td>
           <td class="project">
-            {{row.project}}
+            {{row.project.name}}
           </td>
+          <td class="date-created">
+            {{formatDate(row.dateCreated)}}
+          </td>
+          
+          
           <td class="project-manager">
-            {{row.projectManager}}
-          </td>
-         
+            {{row.projectManager.name}}
+          </td> 
           <td >
             <span class="action-icons">
               <router-link  to="#" id="view">
@@ -68,6 +68,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import { format } from 'date-fns' 
   export default {
     name: 'drafts-estimates-table',
     props: {
@@ -78,40 +80,25 @@
     },
     data() {
       return {
-        tableData: [
-          {
-            id: 1,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Refactory',
-            projectManager: 'David Pereira',
-          },
-          {
-            id: 2,
-            dateCreated: '20-09-2018',
-            title: 'login',
-            project: 'Xente',
-            projectManager: 'David Pereira',
-           
-          },
-          {
-           id: 3,
-            dateCreated: '31-02-2019',
-            title: 'Navbar',
-            project: 'Refactory',
-            projectManager: 'David Pereira',
-          },
-          {
-            id: 4,
-            dateCreated: '17-07-2018',
-            title: 'Dashboard',
-            project: 'Xente',
-            projectManager: 'Cindy',
-           
-          },
-         
-        ]
+        submittedEstimate:[]
       }
+    },
+    methods: {
+      formatDate: function(dateCreated){
+        return format(new Date(dateCreated), 'dd-MM-yyy')
+    },
+    },
+    async created() {
+      try {
+      // Getting the id of the loggedInDeveloper and showing submitted estimates specific to them
+      const loggedInDeveloper= this.$store.getters.getUser.id;
+      const res = await axios.get( `http://localhost:8081/api/request-estimated/` + loggedInDeveloper );
+      this.submittedEstimate = res.data;
+
+      console.log(this.submittedEstimate);
+    } catch (e) {
+      console.error(e)
+    }
     }
   }
 </script>
