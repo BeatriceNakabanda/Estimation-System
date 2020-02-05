@@ -64,11 +64,7 @@ exports.createEstimate = async function(req, res) {
   try {
     response = await EstimateRequest.findById({ _id: req.params.requestId });
 
-    Object.assign(
-      req.body,
-      { EstimateRequest: response._id },
-      { DateEstimated: "" }
-    );
+    Object.assign(req.body, { EstimateRequest: response._id });
     var newEstimate = new Estimate(req.body);
 
     const createdEstimate = await newEstimate.save(newEstimate);
@@ -145,6 +141,44 @@ exports.EstimateRequestUpdateEstimated = async function(req, res) {
 
     res.json(TheRequest);
     console.log(response);
+  } catch (e) {
+    return e;
+  }
+};
+//updating an estimate requests total
+exports.EstimateRequestUpdateEstimateTotal = async function(req, res) {
+  try {
+    response = await EstimateRequest.findById({ _id: req.params.requestId });
+    const estimates = await Estimate.find({
+      EstimateRequest: response._id
+    });
+
+    for (var count = 0; count < estimates.length; count++) {
+      response.ResearchTotal =
+        response.ResearchTotal + estimates[count].research;
+
+      response.PlanningTotal += estimates[count].planning;
+      response.DevelopmentTotal += estimates[count].development;
+      response.testingTotal += estimates[count].testing;
+      response.stabilizationTotal += estimates[count].stabilization;
+      response.certainityAverage =
+        estimates[count].certainty / estimates.length;
+    }
+    const TheRequest = await EstimateRequest.findByIdAndUpdate(
+      {
+        _id: req.params.requestId
+      },
+      {
+        ResearchTotal: response.ResearchTotal,
+        PlanningTotal: response.PlanningTotal,
+        DevelopmentTotal: response.DevelopmentTotal,
+        testingTotal: response.testingTotal,
+        stabilizationTotal: response.stabilizationTotal,
+        certaintyAverage: response.certainityAverage
+      }
+    ).exec();
+
+    res.json(TheRequest);
   } catch (e) {
     return e;
   }
