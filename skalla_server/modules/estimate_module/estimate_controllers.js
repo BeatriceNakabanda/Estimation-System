@@ -2,7 +2,6 @@
 
 const Estimate = require("./estimate_model");
 const EstimateRequest = require("../estimateRequest_module/estimateRequest_model");
-const EstimateRequestController = require("../estimateRequest_module/estimateRequest_controllers");
 
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
@@ -24,16 +23,31 @@ exports.estimateRequestList = async function(req, res) {
     return e;
   }
 };
+//getting a project,project manager according to developer id when pending and draft
 
+exports.estimateRequestListEstimated = async function(req, res) {
+  try {
+    const estimaterequest = await EstimateRequest.find({
+      developer: req.params.requestedId,
+      status: "Estimated"
+    })
+      .populate({ path: "project", select: "name-_id" })
+      .populate({ path: "projectManager", select: "name-_id" })
+
+      .exec();
+    res.send(estimaterequest);
+  } catch (e) {
+    return e;
+  }
+};
 //getting when a developer estimates and sends back to project manager
 //for Submitted
 exports.estimatedList = function(req, res) {
-  EstimateRequest.find({
-    developer: req.params.requestedId,
-    status: "Estimated"
+  Estimate.find({
+    EstimateRequest: req.params.requestId
   })
-    .populate({ path: "project", select: "name-_id" })
-    .populate({ path: "projectManager", select: "name-_id" })
+
+    .populate({ path: "developer", select: "name-_id" })
     .exec(function(err, estimate) {
       if (err) {
         return err;
@@ -74,8 +88,8 @@ exports.listOfEstimateRequest = async function(req, res) {
 
     const estimates = await Estimate.find(
       {
-        developer: request[0].developer,
-        EstimateRequest: req.params.requestId
+        EstimateRequest: req.params.requestId,
+        developer: request[0].developer
       }
       // estimateRequestID
     )
@@ -194,24 +208,23 @@ exports.UniqueEstimateRequest = function(req, res) {
     });
 };
 //finding an estimate request and updating it according to developer
-exports.EstimateRequestUpdateEstimated = function(req, res) {
+exports.EstimateRequestUpdateEstimated = async function(req, res) {
   var time = new Date().getTime();
   var date = new Date(time);
   today = date.toString();
+  try {
+    const response = await EstimateRequest.findByIdAndUpdate(
+      {
+        _id: req.params.requestId
+      },
+      { status: "Estimated", DateEstimated: today }
+    ).exec();
 
-  EstimateRequest.findByIdAndUpdate(
-    {
-      _id: req.params.requestId,
-      developer: req.params.requestedId
-    },
-    { status: "Estimated", dueDate: today }
-  ).exec(function(err, estimate) {
-    if (err) {
-      return err;
-    } else {
-      res.json(estimate);
-    }
-  });
+    res.json(response);
+    console.log(response);
+  } catch (e) {
+    return e;
+  }
 };
 
 //update a single estimate

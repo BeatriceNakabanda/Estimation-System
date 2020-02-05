@@ -138,11 +138,11 @@
             {{row.developer.name}}
           </td>
           <td class="dateCreated">
-            {{ formatDate(row.dateCreated) }}
+            {{ formatDateCreated(row.dateCreated) }}
            
           </td>
           <td class="dateEstimated">
-            {{row.dateEstimated}}
+            {{formatDateEstimated(row.DateEstimated)}}
           </td>
           <td>
             <!-- <badge class="badge-dot mr-4" :type="row.statusType">
@@ -267,8 +267,11 @@ export default {
   },
     
   methods: {
-    formatDate: function(dateCreated){
-      return format(new Date(dateCreated), 'dd/MM/yyy')
+    formatDateCreated: function(dateCreated){
+      return format(new Date(dateCreated), 'dd-MM-yyy')
+    },
+    formatDateEstimated: function(DateEstimated){
+      return format(new Date(DateEstimated), 'dd-MM-yyy')
     },
     // add new Estimate method
     async addEstimate(){

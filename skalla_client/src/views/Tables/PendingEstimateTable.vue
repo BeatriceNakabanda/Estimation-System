@@ -67,9 +67,11 @@
       <td>{{estimationInfo.testing}}</td>
       <td>{{estimationInfo.stabilization}}</td>
       <td>{{estimationInfo.certainty}}</td>
+
       <!-- <td>{{estimationInfo.sumHours}}</td>
       <td>{{estimationInfo.adjustedSumHours}}</td> -->
       <td></td>
+      
       <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
@@ -82,6 +84,8 @@
           </router-link>
         </span>
       </td>
+      <td></td>
+      <td></td>
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
@@ -104,7 +108,7 @@
 </tr>
 <tr>
   <td colspan="12" class="text-right">
-    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Row</base-button>
+    <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Task</base-button>
     <modal :show.sync="modal" id="modal">
       <template slot="header">
           <h3 class="modal-title" id="exampleModalLabel">New Task</h3>
@@ -260,8 +264,8 @@
           <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button>
-          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit">Submit</base-button>
+          <!-- <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button> -->
+          <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit" @click="handleSubmitEstimate">Submit</base-button>
         </div>
       </div>
    </div>
@@ -441,6 +445,12 @@ import { format } from 'date-fns'
           })
           
 
+      },
+      //Sending estimates added to project manager by developer
+      async handleSubmitEstimate(){
+        // console.log(this.estimationData)
+        const response = await axios.put(`http://localhost:8081/api/update-estimateRequest/` + this.$route.params.id, this.estimationData)
+        console.log(response)
       }
     },
     //fetches estimate when the component is created

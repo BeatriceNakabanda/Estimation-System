@@ -48,7 +48,7 @@
         <td class="table-head" scope="col"><b>Development</b></td>
         <td class="table-head" scope="col"><b>Testing</b></td>
         <td class="table-head" scope="col"><b>Stablization</b></td>
-        <td class="table-head" scope="col"><b>Certainity</b></td>
+        <td class="table-head" scope="col"><b>Certainty</b></td>
         <td class="table-head" scope="col"><b>Sum Hours (SH)</b></td>
         <td class="table-head" scope="col"><b>Adjusted SH</b></td>
         <td class="table-head" scope="col">
@@ -60,32 +60,20 @@
   </thead>
   <tbody v-for="estimation in estimated" :key="estimation._id">
     <tr>
-      <td scope="row">{{estimation.subTask}}</td>
+      <td scope="row">{{estimation.task}}</td>
       <td>{{estimation.research}}</td>
       <td>{{estimation.planning}}</td>
       <td>{{estimation.development}}</td>
       <td>{{estimation.testing}}</td>
       <td>{{estimation.stabilization}}</td>
-      <td>{{estimation.certainity}}</td>
-      <td>{{estimation.sumHours}}</td>
-      <td>{{estimation.adjustedSumHours}}</td>
-      <!-- <td></td> -->
-      <td class="text-right pl-4">
-        <span class="action-icons">
-          <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-pen" aria-hidden="true" id="my-icons"></i>
-          </router-link>
-        </span>
-        <span class="action-icons">
-          <router-link  to="/" id="view">
-            <i class="rounded-circle fas fa-trash-alt fa-1x" aria-hidden="true" id="my-icons"></i>
-          </router-link>
-        </span>
-      </td>
+      <td>{{estimation.certainty}}</td>
+      <td>{{estimation.sum}}</td>
+      <td>{{estimation.adjustedSum}}</td>
+     <td></td>
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
-      <td colspan="10">{{estimate.comments}}</td>
+      <td colspan="10">{{estimation.comments}}</td>
     </tr>
   </tbody>
   <tr>
@@ -143,9 +131,12 @@ import { format } from "date-fns"
       try {
         // const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
         const res = await axios.get(`http://localhost:8081/api/estimate-request/` + this.$route.params.id)
-
         this.estimate = res.data; 
-        console.log(res)
+        //get estimate added by developer
+        const response = await axios.get(`http://localhost:8081/api/estimated-estimates/` + this.$route.params.id)
+        this.estimated = response.data
+        // console.log(res)
+        console.log(response.data)
       } catch(e){
         console.error(e)
       }
