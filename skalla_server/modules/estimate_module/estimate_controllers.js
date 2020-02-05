@@ -105,7 +105,11 @@ exports.listOfEstimateRequest = async function(req, res) {
   }
 };
 //updating estimate request with the totals
-exports.updatingTotal = async function(req, res) {
+
+exports.EstimateRequestUpdateEstimated = async function(req, res) {
+  var time = new Date().getTime();
+  var date = new Date(time);
+  today = date.toString();
   try {
     response = await EstimateRequest.findById({ _id: req.params.requestId });
     const estimates = await Estimate.find({
@@ -123,11 +127,13 @@ exports.updatingTotal = async function(req, res) {
       response.certainityAverage =
         estimates[count].certainty / estimates.length;
     }
-
     const TheRequest = await EstimateRequest.findByIdAndUpdate(
-      { _id: req.params.requestId },
-
       {
+        _id: req.params.requestId
+      },
+      {
+        status: "Estimated",
+        DateEstimated: today,
         ResearchTotal: response.ResearchTotal,
         PlanningTotal: response.PlanningTotal,
         DevelopmentTotal: response.DevelopmentTotal,
@@ -137,9 +143,10 @@ exports.updatingTotal = async function(req, res) {
       }
     ).exec();
 
-    res.send(TheRequest);
+    res.json(TheRequest);
+    console.log(response);
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
@@ -249,24 +256,6 @@ exports.UniqueEstimateRequest = function(req, res) {
     });
 };
 //finding an estimate request and updating it according to developer
-exports.EstimateRequestUpdateEstimated = async function(req, res) {
-  var time = new Date().getTime();
-  var date = new Date(time);
-  today = date.toString();
-  try {
-    const response = await EstimateRequest.findByIdAndUpdate(
-      {
-        _id: req.params.requestId
-      },
-      { status: "Estimated", DateEstimated: today }
-    ).exec();
-
-    res.json(response);
-    console.log(response);
-  } catch (e) {
-    return e;
-  }
-};
 
 //update a single estimate
 
