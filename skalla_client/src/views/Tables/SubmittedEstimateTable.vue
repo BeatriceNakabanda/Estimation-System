@@ -84,11 +84,11 @@
   <tr>
   <th scope="col">Total</th>
   <th scope="col">{{estimate.ResearchTotal}}</th>
-  <th scope="col">{{}}</th>
-  <th scope="col"></th>
-  <th scope="col"></th>
-  <th scope="col"></th>
-  <th scope="col"></th>
+  <th scope="col">{{estimate.PlanningTotal}}</th>
+  <th scope="col">{{estimate.DevelopmentTotal}}</th>
+  <th scope="col">{{estimate.testingTotal}}</th>
+  <th scope="col">{{estimate.stabilizationTotal}}</th>
+  <th scope="col">{{(estimate.certaintyAverage).toFixed(2)}}</th>
   <th scope="col"></th>
   <th scope="col"></th>
   <th></th>

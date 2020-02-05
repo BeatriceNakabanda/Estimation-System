@@ -78,7 +78,7 @@
   </tbody>
   <tr>
   <th scope="col">Total</th>
-  <th scope="col">2.00hrs</th>
+  <th scope="col">{{estimate.ResearchTotal}}</th>
   <th scope="col">4.00hrs</th>
   <th scope="col">4.00hrs</th>
   <th scope="col">4.00hrs</th>
