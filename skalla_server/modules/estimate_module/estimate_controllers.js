@@ -63,14 +63,14 @@ exports.estimatedList = function(req, res) {
 exports.createEstimate = async function(req, res) {
   try {
     response = await EstimateRequest.findById({ _id: req.params.requestId });
-    console.log(response);
-  } catch (e) {
-    return e;
-  }
-  Object.assign(req.body, { EstimateRequest: response._id });
-  var newEstimate = new Estimate(req.body);
 
-  try {
+    Object.assign(
+      req.body,
+      { EstimateRequest: response._id },
+      { DateEstimated: "" }
+    );
+    var newEstimate = new Estimate(req.body);
+
     const createdEstimate = await newEstimate.save(newEstimate);
 
     res.send(createdEstimate);
@@ -96,9 +96,50 @@ exports.listOfEstimateRequest = async function(req, res) {
       .populate({ path: "developer", select: "name-_id" })
       .exec();
 
+    //res.send(estimates);
+
     res.send(estimates);
+    //res.send(request);
   } catch (error) {
     res.send(error);
+  }
+};
+//updating estimate request with the totals
+exports.updatingTotal = async function(req, res) {
+  try {
+    response = await EstimateRequest.findById({ _id: req.params.requestId });
+    const estimates = await Estimate.find({
+      EstimateRequest: response._id
+    });
+
+    for (var count = 0; count < estimates.length; count++) {
+      response.ResearchTotal =
+        response.ResearchTotal + estimates[count].research;
+
+      response.PlanningTotal += estimates[count].planning;
+      response.DevelopmentTotal += estimates[count].development;
+      response.testingTotal += estimates[count].testing;
+      response.stabilizationTotal += estimates[count].stabilization;
+      response.certainityAverage =
+        estimates[count].certainty / estimates.length;
+    }
+
+    const TheRequest = await EstimateRequest.findByIdAndUpdate(
+      { _id: req.params.requestId },
+
+      {
+        ResearchTotal: response.ResearchTotal,
+        PlanningTotal: response.PlanningTotal,
+        DevelopmentTotal: response.DevelopmentTotal,
+        testingTotal: response.testingTotal,
+        stabilizationTotal: response.stabilizationTotal,
+        certaintyAverage: response.certainityAverage
+      }
+    ).exec();
+
+    res.send(TheRequest);
+  } catch (e) {
+    console.log(e);
   }
 };
 
