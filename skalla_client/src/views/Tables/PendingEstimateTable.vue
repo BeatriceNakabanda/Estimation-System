@@ -444,8 +444,8 @@ import { format } from 'date-fns'
             adjustedSumHours: response.data.adjustedSumHours
           })
 
-          // const resp = await axios.put(`http://localhost:8081/api/update-getTotal/` + this.$route.params.id)
-          // console.log(resp)
+          const resp = await axios.put(`http://localhost:8081/api/update-getTotal/` + this.$route.params.id)
+          console.log(resp)
 
           
 
