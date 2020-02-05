@@ -469,22 +469,7 @@ import { format } from 'date-fns'
         const response = await axios.get(`http://localhost:8081/api/get/` + this.$route.params.id + `/` + projectManagerId)
 
         this.estimationData = response.data
-        
-        // console.log(response.data.length)
-        // console.log(response.data[0].research)
-        // let n = response.data.length - 1
-        // const totalResearchTime = response.data[0].research + response.data[n].research + response.data[n++].research 
-        // console.log(totalResearchTime)
-        // let totalResearchTime 
-        // for(var i=0; i<response.data.length; i++){
-  
-          // totalResearchTime = response.data[i].research
-          // totalResearchTime = 
-
-
-        // }
         console.log(response.data)
-        
         
         
       } catch(e){
