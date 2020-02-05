@@ -67,9 +67,11 @@
       <td>{{estimationInfo.testing}}</td>
       <td>{{estimationInfo.stabilization}}</td>
       <td>{{estimationInfo.certainty}}</td>
+
       <!-- <td>{{estimationInfo.sumHours}}</td>
       <td>{{estimationInfo.adjustedSumHours}}</td> -->
       <td></td>
+      
       <td class="text-right pl-4">
         <span class="action-icons">
           <router-link  to="/" id="view">
@@ -82,6 +84,8 @@
           </router-link>
         </span>
       </td>
+      <td></td>
+      <td></td>
     </tr>
     <tr v-show="isShowing">
       <th><b>Comment:</b></th>
@@ -468,15 +472,18 @@ import { format } from 'date-fns'
         
         // console.log(response.data.length)
         // console.log(response.data[0].research)
-        let n = response.data.length - 1
-        const totalResearchTime = response.data[0].research + response.data[n].research + response.data[n++].research 
-        console.log(totalResearchTime)
-        // let totalResearchTime = 1
+        // let n = response.data.length - 1
+        // const totalResearchTime = response.data[0].research + response.data[n].research + response.data[n++].research 
+        // console.log(totalResearchTime)
+        // let totalResearchTime 
         // for(var i=0; i<response.data.length; i++){
   
-        //   totalResearchTime = response.data[i].research
+          // totalResearchTime = response.data[i].research
+          // totalResearchTime = 
+
+
         // }
-        // console.log(response.data)
+        console.log(response.data)
         
         
         
