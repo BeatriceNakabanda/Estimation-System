@@ -93,24 +93,18 @@ exports.estimateRequestList = function(req, res, next) {
 
 exports.createEstimateRequest = async function(req, res) {
   try {
-    response = await Estimate.findById({ _id: req.params.requestId });
-    // console.log(response);
-  } catch (e) {
-    return e;
-  }
-  Object.assign(
-    req.body,
-    { DateEstimated: "" },
-    { ResearchTotal: 0 },
-    { PlanningTotal: 0 },
-    { DevelopmentTotal: 0 },
-    { testingTotal: 0 },
-    { stabilizationTotal: 0 },
-    { certaintyAverage: 0.0 }
-  );
-  const estimateRequest = new EstimateRequest(req.body);
+    Object.assign(
+      req.body,
+      { DateEstimated: "" },
+      { ResearchTotal: 0 },
+      { PlanningTotal: 0 },
+      { DevelopmentTotal: 0 },
+      { testingTotal: 0 },
+      { stabilizationTotal: 0 },
+      { certaintyAverage: 0 }
+    );
+    const estimateRequest = new EstimateRequest(req.body);
 
-  try {
     const createdEstimateRequest = await estimateRequest.save(estimateRequest);
 
     const project = await projectmodel.findById(estimateRequest.project);
