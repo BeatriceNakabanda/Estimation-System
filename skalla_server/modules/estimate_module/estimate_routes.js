@@ -19,12 +19,7 @@ router.get(
   estimateController.estimateRequestListEstimated
 );
 //getting all totals for estimates
-router.put(
-  "/update-getTotals/:requestId",
-  loginController.CheckToken,
 
-  estimateController.updatingTotal
-);
 router.get(
   "/get/:requestId/:projectManagerId",
   loginController.CheckToken,
