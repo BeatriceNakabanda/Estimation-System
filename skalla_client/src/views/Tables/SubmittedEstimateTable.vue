@@ -84,7 +84,7 @@
   <tr>
   <th scope="col">Total</th>
   <th scope="col">{{estimate.ResearchTotal}}</th>
-  <th scope="col">{{estimate}}</th>
+  <th scope="col">{{}}</th>
   <th scope="col"></th>
   <th scope="col"></th>
   <th scope="col"></th>
