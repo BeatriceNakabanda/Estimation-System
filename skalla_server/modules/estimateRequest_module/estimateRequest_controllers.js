@@ -1,5 +1,6 @@
 //requiring dependencies
 const EstimateRequest = require("./estimateRequest_model");
+const Estimate = require("../estimate_module/estimate_model");
 const projectmodel = require("../project_module/project_model");
 const developermodel = require("../user_module/user_model");
 const mongoose = require("mongoose");
@@ -91,7 +92,22 @@ exports.estimateRequestList = function(req, res, next) {
 //create estimate request
 
 exports.createEstimateRequest = async function(req, res) {
-  Object.assign(req.body, { DateEstimated: "" });
+  try {
+    response = await Estimate.findById({ _id: req.params.requestId });
+    // console.log(response);
+  } catch (e) {
+    return e;
+  }
+  Object.assign(
+    req.body,
+    { DateEstimated: "" },
+    { ResearchTotal: 0 },
+    { PlanningTotal: 0 },
+    { DevelopmentTotal: 0 },
+    { testingTotal: 0 },
+    { stabilizationTotal: 0 },
+    { certaintyAverage: 0.0 }
+  );
   const estimateRequest = new EstimateRequest(req.body);
 
   try {

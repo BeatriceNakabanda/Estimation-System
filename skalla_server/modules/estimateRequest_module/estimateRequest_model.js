@@ -11,9 +11,15 @@ const EstimateRequestSchema = new Schema({
   dueDate: { type: String },
   DateEstimated: { type: Date, default: Date.now },
   taskDescription: { type: String },
+  ResearchTotal: Number,
+  PlanningTotal: Number,
+  DevelopmentTotal: Number,
+  testingTotal: Number,
+  stabilizationTotal: Number,
+  certaintyAverage: Number,
   status: {
     type: String,
-    enum: ["Draft", "Submitted", "Estimated", "In Progress"]
+    enum: ["Draft", "Submitted", "Estimated"]
   },
   dateCreated: { type: Date, default: Date.now }
 });

@@ -19,7 +19,13 @@ const estimateSchema = new Schema({
   certainty: Number,
   sum: Number,
   adjustedSum: Number,
-  comments: String
+  comments: String,
+  ResearchTotal: Number,
+  PlanningTotal: Number,
+  DevelopmentTotal: Number,
+  testingTotal: Number,
+  stabilizationTotal: Number,
+  certaintyAverage: Number
 
   // lineItem: [lineItemSchema]
 });
