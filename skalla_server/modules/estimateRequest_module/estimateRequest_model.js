@@ -17,6 +17,8 @@ const EstimateRequestSchema = new Schema({
   testingTotal: Number,
   stabilizationTotal: Number,
   certaintyAverage: Number,
+  SumTotal: Number,
+  AdjustedTotal: Number,
   status: {
     type: String,
     enum: ["Draft", "Submitted", "Estimated"]
