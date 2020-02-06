@@ -39,7 +39,7 @@ router.put(
 //create estimate
 router.post(
   "/estimate-request",
-  //loginController.CheckToken,
+  loginController.CheckToken,
 
   estimateRequestController.createEstimateRequest
 );

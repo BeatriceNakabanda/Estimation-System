@@ -65,7 +65,7 @@ router.post(
 //getting all to estimates
 router.get(
   "/get-all-estimates/:requestedId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
   estimateController.estimatesList
 );
 
