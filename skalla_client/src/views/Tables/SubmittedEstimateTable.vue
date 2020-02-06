@@ -53,8 +53,7 @@
               <i v-on:click="isShowing = !isShowing" class="fas fa-comments" id="comments"></i>
             </span>
           </td>
-          <td class="table-head"  scope="col"></td>
-          <td class="table-head" scope="col"></td>
+          
           <td class="table-head" scope="col"><b></b></td> 
       </tr>
     </thead>
@@ -67,12 +66,11 @@
       <td>{{estimationInfo.testing}}</td>
       <td>{{estimationInfo.stabilization}}</td>
       <td>{{estimationInfo.certainty}}</td>
+      <td></td>
+      <td></td>
       <!-- <td>{{estimationInfo.sumHours}}</td>
       <td>{{estimationInfo.adjustedSumHours}}</td> -->
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      
 
   
     </tr>
@@ -83,16 +81,16 @@
   </tbody>
   <tr>
   <th scope="col">Total</th>
-  <th scope="col">{{estimate.ResearchTotal}}</th>
-  <th scope="col">{{estimate.PlanningTotal}}</th>
-  <th scope="col">{{estimate.DevelopmentTotal}}</th>
-  <th scope="col">{{estimate.testingTotal}}</th>
-  <th scope="col">{{estimate.stabilizationTotal}}</th>
-  <th scope="col">{{(estimate.certaintyAverage).toFixed(2)}}</th>
-  <th scope="col"></th>
-  <th scope="col"></th>
+  <th scope="col">{{(estimate.ResearchTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.PlanningTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.DevelopmentTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.testingTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.stabilizationTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.certaintyAverage).toFixed(0)}}%</th>
   <th></th>
   <th></th>
+
+  
 
 </tr>
 

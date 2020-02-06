@@ -92,7 +92,7 @@
       <td colspan="10">{{estimationInfo.comments}}</td>
     </tr>
   </tbody>
-  <tr>
+  <!-- <tr>
   <th scope="col">Total</th>
   <th scope="col"></th>
   <th scope="col"></th>
@@ -105,7 +105,7 @@
   <th></th>
   <th></th>
 
-</tr>
+</tr> -->
 <tr>
   <td colspan="12" class="text-right">
     <base-button type="primary" size="sm" class="shadow-none spacing btn-md mb-2" @click="modal = true">Add Task</base-button>
@@ -259,7 +259,7 @@
 </table>
 </div>   
    <div class="card-footer">
-      <div class="row  ">
+      <div class="row">
         <div class="col text-left">
           <base-button size="sm" class="shadow-none spacing btn-lg px-5" id="cancel">Cancel</base-button>
         </div>
@@ -267,6 +267,16 @@
           <!-- <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-4" id="save-draft">Save as draft</base-button> -->
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit" @click="handleSubmitEstimate">Submit</base-button>
         </div>
+      </div>
+      <div class="row text-center">
+        
+        <p v-if="error && submitting" class="error-message">
+                ❗Unsuccessful
+            </p>
+            <p v-if="success" class="success-message">
+                ✅ Successfully sent
+            </p>
+      
       </div>
    </div>
   </div>
@@ -455,6 +465,10 @@ import { format } from 'date-fns'
         // console.log(this.estimationData)
         const response = await axios.put(`http://localhost:8081/api/update-estimateRequest/` + this.$route.params.id, this.estimationData)
         console.log(response)
+
+        this.success = true
+        this.error = false
+        
       }
     },
     //fetches estimate when the component is created
@@ -649,6 +663,6 @@ iframe {
   }
   .success-message {
     color: #32a95d;
-    text-align: left;
+    text-align: center;
   }
 </style>
