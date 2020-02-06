@@ -86,7 +86,7 @@
   <th scope="col">{{(estimate.DevelopmentTotal).toFixed(2)}}hrs</th>
   <th scope="col">{{(estimate.testingTotal).toFixed(2)}}hrs</th>
   <th scope="col">{{(estimate.stabilizationTotal).toFixed(2)}}hrs</th>
-  <th scope="col">{{(estimate.certaintyAverage).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.certaintyAverage).toFixed(0)}}%</th>
   <th></th>
   <th></th>
 
