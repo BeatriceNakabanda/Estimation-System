@@ -78,12 +78,12 @@
   </tbody>
   <tr>
   <th scope="col">Total</th>
-  <th scope="col">{{estimate.ResearchTotal}}</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">4.00hrs</th>
-  <th scope="col">90%</th>
+  <th scope="col">{{(estimate.ResearchTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.PlanningTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.DevelopmentTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.testingTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.stabilizationTotal).toFixed(2)}}hrs</th>
+  <th scope="col">{{(estimate.certaintyAverage).toFixed(2)}}hrs</th>
   <th scope="col">18.00hrs</th>
   <th scope="col">19.80hrs</th>
   <th></th>
