@@ -134,26 +134,27 @@ exports.EstimateRequestUpdateEstimateTotal = async function(req, res) {
       EstimateRequest: req.params.requestId
     });
 
-    response.ResearchTotal = 0;
-    response.PlanningTotal = 0;
-    response.DevelopmentTotal = 0;
-    response.testingTotal = 0;
-    response.stabilizationTotal = 0;
-    response.SumTotal = 0;
-    response.AdjustedTotal = 0;
-    response.certaintyAverage = 0;
+    var PlanningTotal = 0;
+    var DevelopmentTotal = 0;
+    var testingTotal = 0;
+    var stabilizationTotal = 0;
+    var SumTotal = 0;
+    var AdjustedTotal = 0;
+    var certaintyAverage = 0;
 
-    for (count = 0; list <= estimates.length; list++) {
-      response.ResearchTotal += estimates[count].research;
-      response.PlanningTotal += estimates[count].planning;
-      response.DevelopmentTotal += estimates[count].development;
-      response.testingTotal += estimates[count].testing;
-      response.stabilizationTotal += estimates[count].stabilization;
-      response.SumTotal += estimates[count].sum;
-      response.AdjustedTotal += estimates[count].adjustedSum;
-      response.certaintyAverage = estimates[count].certainty / estimates.length;
-      console.log();
+    var ResearchTotal = 0;
+
+    for (count = 0; count < estimates.length; count++) {
+      ResearchTotal = ResearchTotal + estimates[count].research;
+      PlanningTotal += estimates[count].planning;
+      DevelopmentTotal += estimates[count].development;
+      testingTotal += estimates[count].testing;
+      stabilizationTotal += estimates[count].stabilization;
+      SumTotal += estimates[count].sum;
+      AdjustedTotal += estimates[count].adjustedSum;
+      certaintyAverage = estimates[count].certainty / estimates.length;
     }
+
     //console.log(response);
 
     const TheRequest = await EstimateRequest.findByIdAndUpdate(
@@ -161,21 +162,21 @@ exports.EstimateRequestUpdateEstimateTotal = async function(req, res) {
         _id: req.params.requestId
       },
       {
-        ResearchTotal: response.ResearchTotal,
-        PlanningTotal: response.PlanningTotal,
-        DevelopmentTotal: response.DevelopmentTotal,
-        testingTotal: response.testingTotal,
-        stabilizationTotal: response.stabilizationTotal,
-        certaintyAverage: response.certaintyAverage,
-        SumTotal: response.SumTotal,
-        AdjustedTotal: response.AdjustedTotal
+        ResearchTotal: ResearchTotal,
+        PlanningTotal: PlanningTotal,
+        DevelopmentTotal: DevelopmentTotal,
+        testingTotal: testingTotal,
+        stabilizationTotal: stabilizationTotal,
+        certaintyAverage: certaintyAverage,
+        SumTotal: SumTotal,
+        AdjustedTotal: AdjustedTotal
       }
     ).exec();
     console.log(TheRequest);
 
     res.json(TheRequest);
   } catch (e) {
-    return e;
+    console.log(e);
   }
 };
 

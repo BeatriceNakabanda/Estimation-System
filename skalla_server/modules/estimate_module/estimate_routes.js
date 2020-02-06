@@ -21,7 +21,7 @@ router.get(
 //getting all totals for estimates
 router.put(
   "/update-getTotal/:requestId",
-  loginController.CheckToken,
+  //loginController.CheckToken,
 
   estimateController.EstimateRequestUpdateEstimateTotal
 );
