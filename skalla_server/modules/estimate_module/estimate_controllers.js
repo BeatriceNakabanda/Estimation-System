@@ -143,6 +143,11 @@ exports.EstimateRequestUpdateEstimateTotal = async function(req, res) {
       response.DevelopmentTotal += estimates[count].development;
       response.testingTotal += estimates[count].testing;
       response.stabilizationTotal += estimates[count].stabilization;
+      response.adjustedTotal += estimates[count].testing;
+      response.timeTotal += estimates[count];
+      response.SumTotal += estimates[count].sum;
+      response.AdjustedTotal += estimates[count].adjustedSum;
+
       response.certaintyAverage = estimates[count].certainty / estimates.length;
     }
     //console.log(response);
