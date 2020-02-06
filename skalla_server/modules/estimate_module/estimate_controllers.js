@@ -129,25 +129,30 @@ exports.EstimateRequestUpdateEstimated = async function(req, res) {
 //updating an estimate requests total
 exports.EstimateRequestUpdateEstimateTotal = async function(req, res) {
   try {
-    response = await EstimateRequest.findById({ _id: req.params.requestId });
+    //response = await EstimateRequest.findById({ _id: req.params.requestId });
     const estimates = await Estimate.find({
-      EstimateRequest: response._id
+      EstimateRequest: req.params.requestId
     });
 
-    // response.ResearchTotal = 0;
-    for (var list = 1; list <= estimates.length; list++) {
-      var count = list - 1;
+    response.ResearchTotal = 0;
+    response.PlanningTotal = 0;
+    response.DevelopmentTotal = 0;
+    response.testingTotal = 0;
+    response.stabilizationTotal = 0;
+    response.SumTotal = 0;
+    response.AdjustedTotal = 0;
+    response.certaintyAverage = 0;
 
+    for (count = 0; list <= estimates.length; list++) {
       response.ResearchTotal += estimates[count].research;
       response.PlanningTotal += estimates[count].planning;
       response.DevelopmentTotal += estimates[count].development;
       response.testingTotal += estimates[count].testing;
       response.stabilizationTotal += estimates[count].stabilization;
-
       response.SumTotal += estimates[count].sum;
       response.AdjustedTotal += estimates[count].adjustedSum;
-
       response.certaintyAverage = estimates[count].certainty / estimates.length;
+      console.log();
     }
     //console.log(response);
 
