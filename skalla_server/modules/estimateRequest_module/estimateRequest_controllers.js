@@ -93,16 +93,13 @@ exports.estimateRequestList = function(req, res, next) {
 
 exports.createEstimateRequest = async function(req, res) {
   try {
-    Object.assign(
-      req.body,
-      { DateEstimated: "" },
-      { ResearchTotal: 0 },
-      { PlanningTotal: 0 },
-      { DevelopmentTotal: 0 },
-      { testingTotal: 0 },
-      { stabilizationTotal: 0 },
-      { certaintyAverage: 0 }
-    );
+    Object.assign(req.body, { DateEstimated: "" ,
+    ResearchTotal: 0,
+    PlanningTotal: 0,
+    DevelopmentTotal: 0,
+    testingTotal: 0,
+    stabilizationTotal: 0,
+    certaintyAverage: 0});
     const estimateRequest = new EstimateRequest(req.body);
 
     const createdEstimateRequest = await estimateRequest.save(estimateRequest);
