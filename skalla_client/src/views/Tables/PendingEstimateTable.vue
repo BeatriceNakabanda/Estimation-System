@@ -268,7 +268,7 @@
           <base-button type="primary" size="sm" class="shadow-none spacing btn-lg px-5" id="submit" @click="handleSubmitEstimate">Submit</base-button>
         </div>
       </div>
-      <div class="row text-center">
+      <!-- <div class="row text-center">
         
         <p v-if="error && submitting" class="error-message">
                 ❗Unsuccessful
@@ -277,7 +277,7 @@
                 ✅ Successfully sent
             </p>
       
-      </div>
+      </div> -->
    </div>
   </div>
 </template>
