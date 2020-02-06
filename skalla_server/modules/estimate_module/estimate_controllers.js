@@ -161,7 +161,9 @@ exports.EstimateRequestUpdateEstimateTotal = async function(req, res) {
         DevelopmentTotal: response.DevelopmentTotal,
         testingTotal: response.testingTotal,
         stabilizationTotal: response.stabilizationTotal,
-        certaintyAverage: response.certaintyAverage
+        certaintyAverage: response.certaintyAverage,
+        SumTotal: response.SumTotal,
+        AdjustedTotal: response.AdjustedTotal
       }
     ).exec();
     console.log(TheRequest);
