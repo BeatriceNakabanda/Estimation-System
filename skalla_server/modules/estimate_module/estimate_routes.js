@@ -21,7 +21,7 @@ router.get(
 //getting all totals for estimates
 router.put(
   "/update-getTotal/:requestId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
 
   estimateController.EstimateRequestUpdateEstimateTotal
 );
@@ -59,13 +59,13 @@ router.get(
 //create a single estimate
 router.post(
   "/create-estimate/:requestId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.createEstimate
 );
 //getting all to estimates
 router.get(
   "/get-all-estimates/:requestedId",
-  //loginController.CheckToken,
+  loginController.CheckToken,
   estimateController.estimatesList
 );
 
