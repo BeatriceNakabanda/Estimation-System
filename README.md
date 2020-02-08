@@ -37,7 +37,7 @@ Install npm dependencies
 ### Run the express server only
 ```$ npm start```
 
-### To run the App in development :factory:
+### To run the App in development 
 Build the project with ```npm run serve```
 
 ## How to contribute
