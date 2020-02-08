@@ -15,7 +15,7 @@ Take the
 following steps to set up the application on your local machine.
 Clone the project repo to your preferred location using https://github.com/EmmellaBeatrice/Estimation-System.git
 
-Install npm dependencies
+### Install npm dependencies
 
 ```$ npm install```
 
@@ -53,7 +53,7 @@ feature works
 
 ## Contributors
 
-●  [Beatrice Nakabanda](https://github.com/EmmellaBeatrice) 
+●  [Beatrice Nakabanda](https://github.com/EmmellaBeatrice/) 
 
 ●  [Kimbugwe Ronnie](https://github.com/kimbugweronnie)
 
