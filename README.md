@@ -53,7 +53,7 @@ feature works
 
 ## Contributors
 
-●  [Beatrice Nakabanda](https://github.com/EmmellaBeatrice) 
+●  [Beatrice Nakabanda](https://github.com/EmmellaBeatrice/?target=_blank) 
 
 ●  [Kimbugwe Ronnie](https://github.com/kimbugweronnie)
 
