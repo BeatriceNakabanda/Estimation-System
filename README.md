@@ -1,6 +1,6 @@
 # Skalla Estimation System
 
-This is an in-house web based application developed as an effort to improve estimation time for the various projects handled at Laboremus Uganda, where the developers, the Project manager, and the consultants can provide their estimations for a particular Project. The various users of the application are expected to view the various estimations made on the application. 
+This is an in-house web based application developed as an effort to improve estimation time for the various projects handled at Laboremus Uganda, where the Developers, the Project managers, and the Consultants can provide their estimations for a particular Project. The various users of the application are expected to view the various estimations made on the application. 
 
 ## Technologies used :gear:
 - Vue JS
