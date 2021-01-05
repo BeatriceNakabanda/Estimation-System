@@ -10,7 +10,7 @@
     "app": "concurrently \"npm run serve\" \"cd ../skalla_server && npm start\""
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "bootstrap": "4.3.1",
     "bootstrap-vue": "2.0.0-rc.15",
     "chart.js": "2.8.0",
